@@ -1,15 +1,27 @@
 using System.Collections.Generic;
+
+//using System.Drawing;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SpriteSelection : MonoBehaviour
 {
     [SerializeField] private Color _color;
     [SerializeField] private int brushSize = 10;
 
+    public UnityEvent OnPaintStart = new();
+
+    public Color CurrentColor
+    {
+        get { return _color; }
+        set
+        {
+            _color = value;
+        }
+    }
+
     private Touch _touch;
-
     private SpriteRenderer _currentSpriteRenderer;
-
     private Collider2D _selectedCollider;
     private List<Collider2D> _colliders;
     private Dictionary<int, Texture2D> _originalTextures = new();
@@ -31,11 +43,12 @@ public class SpriteSelection : MonoBehaviour
         {
             _touch = Input.GetTouch(0);
 
-            switch(_touch.phase)
+            switch (_touch.phase)
             {
                 case TouchPhase.Began:
                     {
                         RaycastSprites();
+                        OnPaintStart.Invoke();
                         break;
                     }
                 case TouchPhase.Moved:
@@ -44,6 +57,8 @@ public class SpriteSelection : MonoBehaviour
                         break;
                     }
             }
+        }
+
 
             //if(_touch.phase == TouchPhase.Ended)
             //{
@@ -60,8 +75,8 @@ public class SpriteSelection : MonoBehaviour
             //        }
             //    }
             //} 
+            
         }
-    }
 
     private void RaycastSprite()
     {
@@ -110,9 +125,9 @@ public class SpriteSelection : MonoBehaviour
 
         _selectedCollider = hits[topIndex].collider;
         _currentSpriteRenderer = _selectedCollider.GetComponent<SpriteRenderer>();
-            
+
         int SpriteIndex = _currentSpriteRenderer.transform.GetSiblingIndex();
-        if(!_originalTextures.ContainsKey(SpriteIndex))
+        if (!_originalTextures.ContainsKey(SpriteIndex))
         {
             _originalTextures.Add(SpriteIndex, _currentSpriteRenderer.sprite.texture);
         }
@@ -151,10 +166,39 @@ public class SpriteSelection : MonoBehaviour
         Texture2D originalTexture = _originalTextures[key];
 
         // Create a new writable texture with the same dimensions as the original
-        Texture2D tex = new Texture2D(sprite.texture.width, sprite.texture.height);
+        Texture2D tex = new Texture2D(sprite.texture.width, sprite.texture.height, sprite.texture.format, sprite.texture.mipmapCount, true);
+        //Debug.Log("sprite mipmaps: " + sprite.texture.mipmapCount);
+        //Debug.Log("tex mipmaps: " + tex.mipmapCount);           
         Graphics.CopyTexture(sprite.texture, tex);
 
-        // Paint on the texture within the brush size
+        // Square
+
+        //// Paint on the texture within the brush size
+        //for (int x = -brushSize / 2; x < brushSize / 2; x++)
+        //{
+        //    for (int y = -brushSize / 2; y < brushSize / 2; y++)
+        //    {
+        //        int pixelX = x + (int)texturePoint.x;
+        //        int pixelY = y + (int)texturePoint.y;
+
+        //        // Ensure the pixel is within the texture bounds - SQUARE SHAPE
+        //        if (pixelX >= 0 && pixelX < tex.width && pixelY >= 0 && pixelY < tex.height)
+        //        {
+        //            // Get the color at the pixel and modify its alpha
+        //            Color pixelColor = _color; // Replace with your desired color
+        //            pixelColor.a = sprite.texture.GetPixel(pixelX, pixelY).a;
+
+        //            pixelColor *= originalTexture.GetPixel(pixelX, pixelY);
+
+        //            Color32 color = new Color(pixelColor.r, pixelColor.g, pixelColor.b, pixelColor.a);
+        //            // Set the new color on the texture
+        //            tex.SetPixel(pixelX, pixelY, pixelColor);
+        //        }
+        //    }
+        //}
+
+        // Circle
+
         for (int x = -brushSize / 2; x < brushSize / 2; x++)
         {
             for (int y = -brushSize / 2; y < brushSize / 2; y++)
@@ -162,27 +206,48 @@ public class SpriteSelection : MonoBehaviour
                 int pixelX = x + (int)texturePoint.x;
                 int pixelY = y + (int)texturePoint.y;
 
-                // Ensure the pixel is within the texture bounds
-                if (pixelX >= 0 && pixelX < tex.width && pixelY >= 0 && pixelY < tex.height)
-                {
-                    // Get the color at the pixel and modify its alpha
-                    Color pixelColor = _color; // Replace with your desired color
-                    pixelColor.a = sprite.texture.GetPixel(pixelX, pixelY).a;
+                Vector2 pixelPoint = new Vector2(pixelX, pixelY);
 
-                    pixelColor *= originalTexture.GetPixel(pixelX, pixelY);
+                if (Vector2.Distance(pixelPoint, texturePoint) > brushSize / 2)
+                    continue;
 
-                    Color32 color = new Color(pixelColor.r, pixelColor.g, pixelColor.b, pixelColor.a);
-                    // Set the new color on the texture
-                    tex.SetPixel(pixelX, pixelY, pixelColor);
-                }
+                Color pixelColor = _color;
+                pixelColor.a = sprite.texture.GetPixel(pixelX, pixelY).a;
+
+                pixelColor *= originalTexture.GetPixel(pixelX, pixelY);
+
+                tex.SetPixel(pixelX, pixelY, pixelColor);
             }
         }
+
+        // Rounded Smooth Brush
+        //for (int x = -brushSize / 2; x < brushSize / 2; x++)
+        //{
+        //    for (int y = -brushSize / 2; y < brushSize / 2; y++)
+        //    {
+        //        int pixelX = x + (int)texturePoint.x;
+        //        int pixelY = y + (int)texturePoint.y;
+
+        //        float squaredRadius = x * x + y * y;
+        //        float factor = Mathf.Exp(-squaredRadius / brushSize);
+
+        //        Color previousColor = sprite.texture.GetPixel(pixelX, pixelY);
+        //        Color pixelColor = Color.Lerp(previousColor, _color, factor);
+
+        //        // Keep the transparency
+        //        pixelColor.a = previousColor.a;
+
+        //        pixelColor *= originalTexture.GetPixel(pixelX, pixelY);
+
+        //        tex.SetPixel(pixelX, pixelY, pixelColor);
+        //    } 
+        //}
 
         // Apply changes to the texture
         tex.Apply();
 
         // Create a new sprite from the modified texture and assign it back to the SpriteRenderer
-        Sprite newSprite = Sprite.Create(tex, sprite.rect, Vector2.one/ 2, sprite.pixelsPerUnit);
+        Sprite newSprite = Sprite.Create(tex, sprite.rect, Vector2.one / 2, sprite.pixelsPerUnit);
         spriteRenderer.sprite = newSprite;
     }
 

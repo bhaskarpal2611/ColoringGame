@@ -77,6 +77,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -89,6 +90,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -101,6 +103,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -113,6 +116,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -339,16 +343,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Snail_4: -1702778139
       Snail_0: 1660188520
-      Snail_5: 1488216972
-      Snail_2: -581591667
-      Snail_8: -1235463271
-      Snail_6: 163944902
-      Snail_9: 1852734300
       Snail_1: 1635661344
-      Snail_7: -779633720
+      Snail_2: -581591667
       Snail_3: 2114448332
+      Snail_4: -1702778139
+      Snail_5: 1488216972
+      Snail_6: 163944902
+      Snail_7: -779633720
+      Snail_8: -1235463271
+      Snail_9: 1852734300
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
