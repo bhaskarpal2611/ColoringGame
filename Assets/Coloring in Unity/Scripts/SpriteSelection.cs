@@ -2,14 +2,12 @@ using System.Collections.Generic;
 
 //using System.Drawing;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class SpriteSelection : MonoBehaviour
 {
     [SerializeField] private Color _color;
     [SerializeField] private int brushSize = 10;
-
-    public UnityEvent OnPaintStart = new();
+    [SerializeField] private Vector3 _parentScale;
 
     public Color CurrentColor
     {
@@ -48,7 +46,6 @@ public class SpriteSelection : MonoBehaviour
                 case TouchPhase.Began:
                     {
                         RaycastSprites();
-                        OnPaintStart.Invoke();
                         break;
                     }
                 case TouchPhase.Moved:
@@ -59,24 +56,25 @@ public class SpriteSelection : MonoBehaviour
             }
         }
 
+        // Coloring - by enabling and disabling only first touched collider
 
-            //if(_touch.phase == TouchPhase.Ended)
-            //{
-            //    Debug.Log("chk");
-            //    foreach (Collider2D collider in _colliders)
-            //    {
-            //        if (_selectedCollider != collider)
-            //        {
-            //            collider.enabled = false;
-            //        }
-            //        else
-            //        {
-            //            collider.enabled = true;
-            //        }
-            //    }
-            //} 
-            
-        }
+        //if(_touch.phase == TouchPhase.Ended)
+        //{
+        //    Debug.Log("chk");
+        //    foreach (Collider2D collider in _colliders)
+        //    {
+        //        if (_selectedCollider != collider)
+        //        {
+        //            collider.enabled = false;
+        //        }
+        //        else
+        //        {
+        //            collider.enabled = true;
+        //        }
+        //    }
+        //} 
+
+    }
 
     private void RaycastSprite()
     {
@@ -94,24 +92,14 @@ public class SpriteSelection : MonoBehaviour
         Vector2 origin = Camera.main.ScreenToWorldPoint(_touch.position);
 
         RaycastHit2D[] hits = Physics2D.RaycastAll(origin, Vector2.zero);
+        if (hits.Length <= 0) return;
 
-        if (hits.Length <= 0)
-        {
-            //for(int i = 0; i < _colliders.Count; i++)
-            //{
-            //    _colliders[i].enabled = true;
-            //}           
-            return;
-
-        }
+        // select top-most sprite renderer
         int maxSortingLayer = -1000;
         int topIndex = -1;
-
         for (int i = 0; i < hits.Length; i++)
         {
-            SpriteRenderer sr = hits[i].collider.GetComponent<SpriteRenderer>();
-
-            if (sr == null)
+            if (!hits[i].collider.TryGetComponent<SpriteRenderer>(out SpriteRenderer sr))
             {
                 continue;
             }
@@ -251,23 +239,59 @@ public class SpriteSelection : MonoBehaviour
         spriteRenderer.sprite = newSprite;
     }
 
+    // private Vector2 WorldToTexturePoint(SpriteRenderer sr, Vector2 worldPos)
+    // {
+    //     Vector2 texturePoint = sr.transform.InverseTransformPoint(worldPos);
+
+    //     // Position between -5 and 5
+    //     texturePoint.x /= sr.bounds.size.x;
+    //     texturePoint.y /= sr.bounds.size.y;
+
+    //     // Position between 0 & 1
+    //     texturePoint += Vector2.one / 2;
+
+    //     // Offset in Texture space
+    //     texturePoint.x *= sr.sprite.rect.width;
+    //     texturePoint.y *= sr.sprite.rect.height;
+    //     // Position in Texture Space
+    //     texturePoint.x += sr.sprite.rect.x;
+    //     texturePoint.y += sr.sprite.rect.y;
+
+    //     return texturePoint;
+    // }
     private Vector2 WorldToTexturePoint(SpriteRenderer sr, Vector2 worldPos)
     {
-        Vector2 texturePoint = sr.transform.InverseTransformPoint(worldPos);
+        // Convert world position to local space (relative to the SpriteRenderer)
+        Vector2 localPoint = sr.transform.InverseTransformPoint(worldPos);
 
-        // Position between -5 and 5
-        texturePoint.x /= sr.bounds.size.x;
-        texturePoint.y /= sr.bounds.size.y;
+        // // Adjust for the sprite's pivot (pivot is in the range 0 to 1, adjust to local coordinate)
+        // Vector2 pivotOffset = new Vector2(
+        //     (sr.sprite.pivot.x / sr.sprite.rect.width) - 0.5f,
+        //     (sr.sprite.pivot.y / sr.sprite.rect.height) - 0.5f
+        // );
+        // localPoint -= new Vector2(
+        //     pivotOffset.x * sr.bounds.size.x,
+        //     pivotOffset.y * sr.bounds.size.y
+        // );
 
-        // Position between 0 & 1
-        texturePoint += Vector2.one / 2;
+        // Adjust for the SpriteRenderer's scale
+        localPoint.x /= sr.transform.localScale.x;
+        localPoint.y /= sr.transform.localScale.y;
 
-        // Offset in Texture space
-        texturePoint.x *= sr.sprite.rect.width;
-        texturePoint.y *= sr.sprite.rect.height;
-        // Position in Texture Space
-        texturePoint.x += sr.sprite.rect.x;
-        texturePoint.y += sr.sprite.rect.y;
+        // Normalize the local point to [0,1] range
+        Vector2 normalizedPoint = new Vector2(
+            (localPoint.x / sr.bounds.size.x) + 0.5f,
+            (localPoint.y / sr.bounds.size.y) + 0.5f
+        );
+
+        // Convert normalized coordinates to texture coordinates
+        Vector2 texturePoint = new Vector2(
+            normalizedPoint.x * sr.sprite.rect.width,
+            normalizedPoint.y * sr.sprite.rect.height
+        );
+
+        // Offset by the sprite's position in the texture atlas
+        texturePoint += new Vector2(sr.sprite.rect.x, sr.sprite.rect.y);
 
         return texturePoint;
     }
