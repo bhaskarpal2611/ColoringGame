@@ -22,10 +22,18 @@ public class SpriteSelection : MonoBehaviour
     private SpriteRenderer _currentSpriteRenderer;
     private Collider2D _selectedCollider;
     private List<Collider2D> _colliders;
+
     private Dictionary<int, Texture2D> _originalTextures = new();
+    private Dictionary<int, Texture2D> _editedTextures = new();
+    private Dictionary<int, Texture2D> _renderTextures = new();
+
+    private Camera _mainCamera;
 
     private void Start()
     {
+
+        _mainCamera = Camera.main;
+
         // get all colliders
         //_colliders = new List<Collider2D>();
         //for (int i = 0; i < transform.childCount; i++)
@@ -78,7 +86,7 @@ public class SpriteSelection : MonoBehaviour
 
     private void RaycastSprite()
     {
-        Vector2 origin = Camera.main.ScreenToWorldPoint(_touch.position);
+        Vector2 origin = _mainCamera.ScreenToWorldPoint(_touch.position);
 
         RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down);
 
@@ -89,7 +97,7 @@ public class SpriteSelection : MonoBehaviour
 
     private void RaycastSprites()
     {
-        Vector2 origin = Camera.main.ScreenToWorldPoint(_touch.position);
+        Vector2 origin = _mainCamera.ScreenToWorldPoint(_touch.position);
 
         RaycastHit2D[] hits = Physics2D.RaycastAll(origin, Vector2.zero);
         if (hits.Length <= 0) return;
@@ -114,10 +122,29 @@ public class SpriteSelection : MonoBehaviour
         _selectedCollider = hits[topIndex].collider;
         _currentSpriteRenderer = _selectedCollider.GetComponent<SpriteRenderer>();
 
+        //// get sprite dimensions
+        //Debug.Log($"{_currentSpriteRenderer.name}.rect: {_currentSpriteRenderer.sprite.rect}");
+        //Debug.Log($"{_currentSpriteRenderer.name}.textureRect: {_currentSpriteRenderer.sprite.textureRect}");
+        //Debug.Log($"{_currentSpriteRenderer.name}.bounds: {_currentSpriteRenderer.sprite.bounds.size}");
+        //Debug.Log($"{_currentSpriteRenderer.name}: {_currentSpriteRenderer.sprite.bounds.size.y}");
+
+        //Vector3 spriteScreenSize = _mainCamera.WorldToScreenPoint(_currentSpriteRenderer.bounds.max) - _mainCamera.WorldToScreenPoint(_currentSpriteRenderer.bounds.min);
+
+        //Debug.Log("x: " + spriteScreenSize.x);
+        //Debug.Log("y: " + spriteScreenSize.y);   
+
         int SpriteIndex = _currentSpriteRenderer.transform.GetSiblingIndex();
+        int width = _currentSpriteRenderer.sprite.texture.width;
+        int height = _currentSpriteRenderer.sprite.texture.height;
+        int mipCount = _currentSpriteRenderer.sprite.texture.mipmapCount;
+        TextureFormat textureFormat = _currentSpriteRenderer.sprite.texture.format;
+
+
+
         if (!_originalTextures.ContainsKey(SpriteIndex))
         {
             _originalTextures.Add(SpriteIndex, _currentSpriteRenderer.sprite.texture);
+            _editedTextures.Add(SpriteIndex, new Texture2D(width, height, textureFormat, mipCount, false));
         }
 
         ColorSpriteAtPosition(_selectedCollider, hits[topIndex].point);
@@ -154,10 +181,14 @@ public class SpriteSelection : MonoBehaviour
         Texture2D originalTexture = _originalTextures[key];
 
         // Create a new writable texture with the same dimensions as the original
-        Texture2D tex = new Texture2D(sprite.texture.width, sprite.texture.height, sprite.texture.format, sprite.texture.mipmapCount, true);
+        Texture2D tex = _editedTextures[key];
+
+
         //Debug.Log("sprite mipmaps: " + sprite.texture.mipmapCount);
-        //Debug.Log("tex mipmaps: " + tex.mipmapCount);           
-        Graphics.CopyTexture(sprite.texture, tex);
+        //Debug.Log("tex mipmaps: " + tex.mipmapCount);
+
+        if (sprite.texture != tex)
+            Graphics.CopyTexture(sprite.texture, tex);
 
         // Square
 
