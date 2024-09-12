@@ -6,8 +6,7 @@ using UnityEngine;
 public class SpriteSelection : MonoBehaviour
 {
     [SerializeField] private Color _color;
-    [SerializeField] private int brushSize = 10;
-    [SerializeField] private Vector3 _parentScale;
+    [SerializeField] private int _brushSize = 10;
 
     public Color CurrentColor
     {
@@ -145,6 +144,8 @@ public class SpriteSelection : MonoBehaviour
         {
             _originalTextures.Add(SpriteIndex, _currentSpriteRenderer.sprite.texture);
             _editedTextures.Add(SpriteIndex, new Texture2D(width, height, textureFormat, mipCount, false));
+            _renderTextures.Add(SpriteIndex, new Texture2D(width, height, textureFormat, mipCount, false));
+            
         }
 
         ColorSpriteAtPosition(_selectedCollider, hits[topIndex].point);
@@ -218,28 +219,6 @@ public class SpriteSelection : MonoBehaviour
 
         // Circle
 
-        for (int x = -brushSize / 2; x < brushSize / 2; x++)
-        {
-            for (int y = -brushSize / 2; y < brushSize / 2; y++)
-            {
-                int pixelX = x + (int)texturePoint.x;
-                int pixelY = y + (int)texturePoint.y;
-
-                Vector2 pixelPoint = new Vector2(pixelX, pixelY);
-
-                if (Vector2.Distance(pixelPoint, texturePoint) > brushSize / 2)
-                    continue;
-
-                Color pixelColor = _color;
-                pixelColor.a = sprite.texture.GetPixel(pixelX, pixelY).a;
-
-                pixelColor *= originalTexture.GetPixel(pixelX, pixelY);
-
-                tex.SetPixel(pixelX, pixelY, pixelColor);
-            }
-        }
-
-        // Rounded Smooth Brush
         //for (int x = -brushSize / 2; x < brushSize / 2; x++)
         //{
         //    for (int y = -brushSize / 2; y < brushSize / 2; y++)
@@ -247,20 +226,42 @@ public class SpriteSelection : MonoBehaviour
         //        int pixelX = x + (int)texturePoint.x;
         //        int pixelY = y + (int)texturePoint.y;
 
-        //        float squaredRadius = x * x + y * y;
-        //        float factor = Mathf.Exp(-squaredRadius / brushSize);
+        //        Vector2 pixelPoint = new Vector2(pixelX, pixelY);
 
-        //        Color previousColor = sprite.texture.GetPixel(pixelX, pixelY);
-        //        Color pixelColor = Color.Lerp(previousColor, _color, factor);
+        //        if (Vector2.Distance(pixelPoint, texturePoint) > brushSize / 2)
+        //            continue;
 
-        //        // Keep the transparency
-        //        pixelColor.a = previousColor.a;
+        //        Color pixelColor = _color;
+        //        pixelColor.a = sprite.texture.GetPixel(pixelX, pixelY).a;
 
         //        pixelColor *= originalTexture.GetPixel(pixelX, pixelY);
 
         //        tex.SetPixel(pixelX, pixelY, pixelColor);
-        //    } 
+        //    }
         //}
+
+        // Rounded Smooth Brush
+        for (int x = -_brushSize / 2; x < _brushSize / 2; x++)
+        {
+            for (int y = -_brushSize / 2; y < _brushSize / 2; y++)
+            {
+                int pixelX = x + (int)texturePoint.x;
+                int pixelY = y + (int)texturePoint.y;
+
+                float squaredRadius = x * x + y * y;
+                float factor = Mathf.Exp(-squaredRadius / _brushSize);
+
+                Color previousColor = sprite.texture.GetPixel(pixelX, pixelY);
+                Color pixelColor = Color.Lerp(previousColor, CurrentColor, factor);
+
+                // Keep the transparency
+                pixelColor.a = previousColor.a;
+
+                pixelColor *= originalTexture.GetPixel(pixelX, pixelY);
+
+                tex.SetPixel(pixelX, pixelY, pixelColor);
+            }
+        }
 
         // Apply changes to the texture
         tex.Apply();

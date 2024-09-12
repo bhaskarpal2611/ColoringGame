@@ -11,7 +11,7 @@ namespace ColoringGame.UI
 
         [SerializeField] private UI_PencilItem _pencilPrefab;
 
-        [SerializeField] private SpriteSelection _spriteSelectionHandler;
+        [SerializeField] private GPU_SpriteColoring _spriteSelectionHandler;
 
         private void Start()
         {
