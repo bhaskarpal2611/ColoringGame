@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_Color_TestCopy
-  m_Shader: {fileID: -6465566751694194690, guid: 1d53a10df2700b64983d5f7648b43ee1, type: 3}
+  m_Name: Shader Graphs_Paint_Texture
+  m_Shader: {fileID: -6465566751694194690, guid: 29cf0bb9260a95e46852c302d2ec2a7f, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -23,15 +23,19 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BrushTextures:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Original:
-        m_Texture: {fileID: 2800000, guid: 708eb6f1d19ed6a4e9c5ef68909efd29, type: 3}
+        m_Texture: {fileID: 2800000, guid: d2b62025e7ad95c4487cb4966f1196bd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_eb910b58392340fc8245f26290b9d267_Texture_1_Texture2D:
+    - _SampleTexture2D_2a4b813245e740f2aa8ab466137de91c_Texture_1_Texture2D:
         m_Texture: {fileID: 2800000, guid: 5d92c58cf84f79348b9a74a259cf152a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -49,16 +53,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BrushSize: 0.001
-    - _BrushSize_02: 0.1
-    - _BrushSize_03: 0.75
+    - _BrushSize: 0.075
+    - _Index: 0
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 0}
-    - _TexturePoint: {r: 0, g: 0, b: 0, a: 0}
-    - _UVPosition: {r: 0.73893416, g: 0.81021523, b: 0, a: 0}
-    - _UV_Test: {r: 0.43, g: 0.78, b: 0, a: 0}
+    - _BrushColor: {r: 0.2606123, g: 0.36286572, b: 0.93962264, a: 1}
+    - _UVPOS: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _UVPosition: {r: 0.3876547, g: 0.7689837, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &7938525543825502345
+--- !u!114 &1142825748591275896
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

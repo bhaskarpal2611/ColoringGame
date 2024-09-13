@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GPU_SpriteColoring : MonoBehaviour
+public class GPU_SpriteColoring_Textures : MonoBehaviour
 {
     [SerializeField] private Color _color;
     [SerializeField, Range(0f, 2f)] private float _brushSize = 0.1f;
     [SerializeField] private Material _brushMaterial;
-    //[SerializeField] private Texture2D[] _textures;
 
     public Color CurrentColor
     {
@@ -32,7 +31,7 @@ public class GPU_SpriteColoring : MonoBehaviour
 
     private void Start()
     {
-        //Application.targetFrameRate = 60;
+        Application.targetFrameRate = 60;
         _mainCamera = Camera.main;
     }
 
@@ -144,7 +143,7 @@ public class GPU_SpriteColoring : MonoBehaviour
         _brushMaterial.SetColor("_BrushColor", CurrentColor);
         _brushMaterial.SetFloat("_BrushSize", _brushSize);
         _brushMaterial.SetVector("_UVPosition", texturePoint / sprite.texture.width);
-        Debug.Log("UVPOS: " + sprite.texture.width);
+
 
         RenderTexture rt = _renderTextures[key];
 
