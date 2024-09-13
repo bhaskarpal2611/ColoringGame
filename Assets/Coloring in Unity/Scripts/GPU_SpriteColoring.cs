@@ -6,7 +6,8 @@ public class GPU_SpriteColoring : MonoBehaviour
     [SerializeField] private Color _color;
     [SerializeField, Range(0f, 2f)] private float _brushSize = 0.1f;
     [SerializeField] private Material _brushMaterial;
-    //[SerializeField] private Texture2D[] _textures;
+    [SerializeField] private int _brushTextureIndex = 0;
+    [SerializeField] private Texture2D[] _textures;
 
     public Color CurrentColor
     {
@@ -32,7 +33,7 @@ public class GPU_SpriteColoring : MonoBehaviour
 
     private void Start()
     {
-        //Application.targetFrameRate = 60;
+        Application.targetFrameRate = 60;
         _mainCamera = Camera.main;
     }
 
@@ -70,7 +71,7 @@ public class GPU_SpriteColoring : MonoBehaviour
         int topIndex = -1;
         for (int i = 0; i < hits.Length; i++)
         {
-            if (!hits[i].collider.TryGetComponent<SpriteRenderer>(out SpriteRenderer sr))
+            if (!hits[i].collider.TryGetComponent(out SpriteRenderer sr))
             {
                 continue;
             }
@@ -139,6 +140,9 @@ public class GPU_SpriteColoring : MonoBehaviour
         if (sprite.texture != tex)
             Graphics.CopyTexture(sprite.texture, tex);
 
+        _brushMaterial.SetFloat("_Index", _brushTextureIndex);
+        _brushMaterial.SetTexture("_BrushTexture", _textures[_brushTextureIndex]);
+
         _brushMaterial.SetTexture("_MainTex", tex);
         _brushMaterial.SetTexture("_Original", originalTexture);
         _brushMaterial.SetColor("_BrushColor", CurrentColor);
@@ -153,6 +157,7 @@ public class GPU_SpriteColoring : MonoBehaviour
         Graphics.CopyTexture(rt, tex);
 
         // takes approx 10ms on first click - Sprite.Create function
+        // , dictionary to resolve this
 
         if (!_sprites.ContainsKey(key))
         {

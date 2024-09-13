@@ -2248,6 +2248,10 @@ MonoBehaviour:
   _color: {r: 1, g: 1, b: 1, a: 0}
   _brushSize: 0.075
   _brushMaterial: {fileID: 2100000, guid: 9fa95e0eb0acaef4e99e1f9080a27e58, type: 2}
+  _brushTextureIndex: 0
+  _textures:
+  - {fileID: 2800000, guid: 5d92c58cf84f79348b9a74a259cf152a, type: 3}
+  - {fileID: 2800000, guid: f8cda21ebc652b544bfe471465c7d66b, type: 3}
 --- !u!1 &4360574503794146874
 GameObject:
   m_ObjectHideFlags: 0
