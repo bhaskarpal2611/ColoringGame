@@ -291,6 +291,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1000013357413722, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -462,6 +466,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: ColoringGame_SwipingFullColor_GPU
       objectReference: {fileID: 0}
+    - target: {fileID: 4357500802090873068, guid: c71e7914d9aa956428b799e32d39e26d, type: 3}
+      propertyPath: _color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4357500802090873068, guid: c71e7914d9aa956428b799e32d39e26d, type: 3}
+      propertyPath: _color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4357500802090873068, guid: c71e7914d9aa956428b799e32d39e26d, type: 3}
+      propertyPath: _color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4357500802090873068, guid: c71e7914d9aa956428b799e32d39e26d, type: 3}
+      propertyPath: _brushSize
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4357500802090873068, guid: c71e7914d9aa956428b799e32d39e26d, type: 3}
+      propertyPath: _brushMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 45089ec84ebf2ef489338964f997c64e, type: 2}
     - target: {fileID: 5594787252194190791, guid: c71e7914d9aa956428b799e32d39e26d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

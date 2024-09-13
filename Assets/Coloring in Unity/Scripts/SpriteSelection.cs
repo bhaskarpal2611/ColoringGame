@@ -249,7 +249,7 @@ public class SpriteSelection : MonoBehaviour
                 int pixelY = y + (int)texturePoint.y;
 
                 float squaredRadius = x * x + y * y;
-                float factor = Mathf.Exp(-squaredRadius / _brushSize);
+                float factor = Mathf.Exp(-squaredRadius / _brushSize);  
 
                 Color previousColor = sprite.texture.GetPixel(pixelX, pixelY);
                 Color pixelColor = Color.Lerp(previousColor, CurrentColor, factor);

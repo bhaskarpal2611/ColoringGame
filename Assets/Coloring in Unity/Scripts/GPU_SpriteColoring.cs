@@ -141,8 +141,9 @@ public class GPU_SpriteColoring : MonoBehaviour
         _brushMaterial.SetTexture("_MainTex", tex);
         _brushMaterial.SetTexture("_Original", originalTexture);
         _brushMaterial.SetColor("_Color", CurrentColor);
-        _brushMaterial.SetFloat("_BrushSize", _brushSize);
+        _brushMaterial.SetFloat("_BrushSize_02", _brushSize);
         _brushMaterial.SetVector("_UVPosition", texturePoint / sprite.texture.width);
+        Debug.Log("UVPOS: " + sprite.texture.width);
 
         RenderTexture rt = _renderTextures[key];
 
