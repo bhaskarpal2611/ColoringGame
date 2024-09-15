@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class GPU_SpriteColoring : MonoBehaviour
+public class GPU_SpriteColoring : MonoBehaviour, IDragHandler, IBeginDragHandler
 {
     [SerializeField] private Transform _spritesParent;
     [SerializeField] private Color _color;
@@ -63,26 +64,36 @@ public class GPU_SpriteColoring : MonoBehaviour
         _brushMaterial = new Material(_paintTextureMaterial);
     }
 
-    private void Update()
-    {
-        if (Input.touchCount > 0)
-        {
-            _touch = Input.GetTouch(0);
+    // private void Update()
+    // {
+    //     if (Input.touchCount > 0)
+    //     {
+    //         _touch = Input.GetTouch(0);
 
-            switch (_touch.phase)
-            {
-                case TouchPhase.Began:
-                    {
-                        RaycastSprites();
-                        break;
-                    }
-                case TouchPhase.Moved:
-                    {
-                        RaycastCurrentSprite();
-                        break;
-                    }
-            }
-        }
+    //         switch (_touch.phase)
+    //         {
+    //             case TouchPhase.Began:
+    //                 {
+    //                     RaycastSprites();
+    //                     break;
+    //                 }
+    //             case TouchPhase.Moved:
+    //                 {
+    //                     RaycastCurrentSprite();
+    //                     break;
+    //                 }
+    //         }
+    //     }
+    // }
+
+    public void OnBeginDrag(PointerEventData pointerEventData)
+    {
+        RaycastSprites(pointerEventData.position);
+    }
+
+    public void OnDrag(PointerEventData pointerEventData)
+    {
+        RaycastCurrentSprite(pointerEventData.position);
     }
 
     private void InitializeLevel()
@@ -120,9 +131,9 @@ public class GPU_SpriteColoring : MonoBehaviour
         tempRenderTexture.Release();
     }
 
-    private void RaycastSprites()
+    private void RaycastSprites(Vector2 touchPosition)
     {
-        Vector2 origin = _mainCamera.ScreenToWorldPoint(_touch.position);
+        Vector2 origin = _mainCamera.ScreenToWorldPoint(touchPosition);
 
         _hits = Physics2D.RaycastAll(origin, Vector2.zero);
         if (_hits.Length <= 0) return;
@@ -146,11 +157,11 @@ public class GPU_SpriteColoring : MonoBehaviour
         ColorSpriteAtPosition(_hits[topIndex].point);
     }
 
-    private void RaycastCurrentSprite()
+    private void RaycastCurrentSprite(Vector2 touchPosition)
     {
         if (!_currentSpriteRenderer) return;
 
-        Vector2 origin = _mainCamera.ScreenToWorldPoint(_touch.position);
+        Vector2 origin = _mainCamera.ScreenToWorldPoint(touchPosition);
 
         ColorSpriteAtPosition(origin);
     }
