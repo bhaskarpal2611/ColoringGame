@@ -3,9 +3,12 @@ using UnityEngine;
 
 public class GPU_SpriteColoring : MonoBehaviour
 {
+    [SerializeField] private Transform _spritesParent;
     [SerializeField] private Color _color;
+    [SerializeField] private int _maxColliderTouched = 10;
     [SerializeField, Range(0f, 2f)] private float _brushSize = 0.1f;
-    [SerializeField] private Material _brushMaterial;
+    [SerializeField] private Material _paintTextureMaterial;
+    [SerializeField] private Material _eraseMaterial;
     [SerializeField] private int _brushTextureIndex = 0;
     [SerializeField] private Texture2D[] _textures;
 
@@ -18,23 +21,46 @@ public class GPU_SpriteColoring : MonoBehaviour
         }
     }
 
+    public int BrushTextureIndex
+    {
+        get { return _brushTextureIndex; }
+        set
+        {
+            _brushTextureIndex = value;
+            _brushMaterial.SetTexture("_BrushTexture", _textures[_brushTextureIndex]);
+        }
+    }
+
+    private Material _brushMaterial;
+
+    private Camera _mainCamera;
     private Touch _touch;
     private SpriteRenderer _currentSpriteRenderer;
-    private Collider2D _selectedCollider;
-
-    //private List<Collider2D> _colliders;
-
+    private RaycastHit2D[] _hits;
     private Dictionary<int, Texture2D> _originalTextures = new();
     private Dictionary<int, Texture2D> _editedTextures = new();
     private Dictionary<int, RenderTexture> _renderTextures = new();
     private Dictionary<int, Sprite> _sprites = new();
 
-    private Camera _mainCamera;
+    public void SetPaintMode()
+    {
+        _brushMaterial = _paintTextureMaterial;
+    }
+    public void SetEraseMode()
+    {
+        _brushMaterial = _eraseMaterial;
+    }
+
 
     private void Start()
     {
         Application.targetFrameRate = 60;
         _mainCamera = Camera.main;
+
+        _hits = new RaycastHit2D[_maxColliderTouched];
+
+        InitializeLevel();
+        _brushMaterial = new Material(_paintTextureMaterial);
     }
 
     private void Update()
@@ -59,19 +85,53 @@ public class GPU_SpriteColoring : MonoBehaviour
         }
     }
 
+    private void InitializeLevel()
+    {
+        foreach (Transform sprite in _spritesParent)
+        {
+            SpriteRenderer spriteRenderer = sprite.GetComponent<SpriteRenderer>();
+            int spriteIndex = spriteRenderer.transform.GetSiblingIndex();
+            int width = spriteRenderer.sprite.texture.width;
+            int height = spriteRenderer.sprite.texture.height;
+            int mipCount = spriteRenderer.sprite.texture.mipmapCount;
+            TextureFormat textureFormat = spriteRenderer.sprite.texture.format;
+
+            _originalTextures.Add(spriteIndex, spriteRenderer.sprite.texture);
+            _editedTextures.Add(spriteIndex, new Texture2D(width, height, textureFormat, mipCount, false));
+
+            RenderTexture rt = new RenderTexture(width, height, 0, RenderTextureFormat.ARGB32, mipCount);
+            rt.useMipMap = true;
+
+            _renderTextures.Add(spriteIndex, rt);
+        }
+
+        // Pre-warm shaders by performing dummy Graphics.Blit operations
+        // Create a temporary render texture for dummy blit
+        RenderTexture tempRenderTexture = new RenderTexture(Screen.width, Screen.height, 0);
+        // Pre-warm the erase mode
+        SetEraseMode();
+        Graphics.Blit(tempRenderTexture, tempRenderTexture, _brushMaterial);
+
+        // Pre-warm the paint mode
+        SetPaintMode();
+        Graphics.Blit(tempRenderTexture, tempRenderTexture, _brushMaterial);
+
+        // Release the temporary render texture
+        tempRenderTexture.Release();
+    }
+
     private void RaycastSprites()
     {
         Vector2 origin = _mainCamera.ScreenToWorldPoint(_touch.position);
 
-        RaycastHit2D[] hits = Physics2D.RaycastAll(origin, Vector2.zero);
-        if (hits.Length <= 0) return;
+        _hits = Physics2D.RaycastAll(origin, Vector2.zero);
+        if (_hits.Length <= 0) return;
 
         // select top-most sprite renderer
-        int maxSortingLayer = -1000;
-        int topIndex = -1;
-        for (int i = 0; i < hits.Length; i++)
+        int maxSortingLayer = -1000, topIndex = -1;
+        for (int i = 0; i < _hits.Length; i++)
         {
-            if (!hits[i].collider.TryGetComponent(out SpriteRenderer sr))
+            if (!_hits[i].collider.TryGetComponent(out SpriteRenderer sr))
             {
                 continue;
             }
@@ -80,176 +140,76 @@ public class GPU_SpriteColoring : MonoBehaviour
             {
                 maxSortingLayer = sortingOrder;
                 topIndex = i;
+                _currentSpriteRenderer = sr;
             }
         }
-
-        _selectedCollider = hits[topIndex].collider;
-        _currentSpriteRenderer = _selectedCollider.GetComponent<SpriteRenderer>();
-
-        int SpriteIndex = _currentSpriteRenderer.transform.GetSiblingIndex();
-        int width = _currentSpriteRenderer.sprite.texture.width;
-        int height = _currentSpriteRenderer.sprite.texture.height;
-        int mipCount = _currentSpriteRenderer.sprite.texture.mipmapCount;
-        TextureFormat textureFormat = _currentSpriteRenderer.sprite.texture.format;
-
-        if (!_originalTextures.ContainsKey(SpriteIndex))
-        {
-            _originalTextures.Add(SpriteIndex, _currentSpriteRenderer.sprite.texture);
-            _editedTextures.Add(SpriteIndex, new Texture2D(width, height, textureFormat, mipCount, false));
-
-            RenderTexture rt = new RenderTexture(width, height, 0, RenderTextureFormat.ARGB32, mipCount);
-            rt.useMipMap = true;
-            _renderTextures.Add(SpriteIndex, rt);
-        }
-
-        ColorSpriteAtPosition(_selectedCollider, hits[topIndex].point);
+        ColorSpriteAtPosition(_hits[topIndex].point);
     }
+
     private void RaycastCurrentSprite()
     {
+        if (!_currentSpriteRenderer) return;
+
         Vector2 origin = _mainCamera.ScreenToWorldPoint(_touch.position);
-        RaycastHit2D[] hits = Physics2D.RaycastAll(origin, Vector2.zero);
-        if (hits.Length <= 0) return;
-        for (int i = 0; i < hits.Length; i++)
-        {
-            if (!hits[i].collider.TryGetComponent(out SpriteRenderer spriteRenderer)) continue;
-            if (spriteRenderer == _currentSpriteRenderer)
-            {
-                ColorSpriteAtPosition(hits[i].collider, hits[i].point);
-                break;
-            }
-        }
+
+        ColorSpriteAtPosition(origin);
     }
-    private void ColorSpriteAtPosition(Collider2D collider, Vector2 hitPoint)
+    private void ColorSpriteAtPosition(Vector2 hitPoint)
     {
-        // Get the SpriteRenderer component from the collider
-        SpriteRenderer spriteRenderer = collider.GetComponent<SpriteRenderer>();
-        if (spriteRenderer == null) return;
+        if (_currentSpriteRenderer == null) return;
 
         // Convert our hitPoint (World Space) to a texture point
-        Vector2 texturePoint = WorldToTexturePoint(spriteRenderer, hitPoint);
+        Vector2 texturePoint = WorldToTexturePoint(hitPoint);
 
         // Get the sprite and its texture
-        Sprite sprite = spriteRenderer.sprite;
+        Sprite sprite = _currentSpriteRenderer.sprite;
 
         int key = _currentSpriteRenderer.transform.GetSiblingIndex();
-        Texture2D originalTexture = _originalTextures[key];
 
-        // Create a new writable texture with the same dimensions as the original
-        Texture2D tex = _editedTextures[key];
+        if (sprite.texture != _editedTextures[key])
+            Graphics.CopyTexture(sprite.texture, _editedTextures[key]);
 
-        if (sprite.texture != tex)
-            Graphics.CopyTexture(sprite.texture, tex);
-
-        _brushMaterial.SetFloat("_Index", _brushTextureIndex);
+        // change brush texture
         _brushMaterial.SetTexture("_BrushTexture", _textures[_brushTextureIndex]);
 
-        _brushMaterial.SetTexture("_MainTex", tex);
-        _brushMaterial.SetTexture("_Original", originalTexture);
+        _brushMaterial.SetVector("_UVPosition", texturePoint / sprite.texture.width);
         _brushMaterial.SetColor("_BrushColor", CurrentColor);
         _brushMaterial.SetFloat("_BrushSize", _brushSize);
-        _brushMaterial.SetVector("_UVPosition", texturePoint / sprite.texture.width);
-        Debug.Log("UVPOS: " + sprite.texture.width);
+        _brushMaterial.SetTexture("_MainTex", _editedTextures[key]);
+        _brushMaterial.SetTexture("_Original", _originalTextures[key]);
 
-        RenderTexture rt = _renderTextures[key];
-
-        Graphics.Blit(tex, rt, _brushMaterial);
-
-        Graphics.CopyTexture(rt, tex);
-
-        // takes approx 10ms on first click - Sprite.Create function
-        // , dictionary to resolve this
+        // RenderTexture rt = _renderTextures[key];
+        Graphics.Blit(_editedTextures[key], _renderTextures[key], _brushMaterial);
+        Graphics.CopyTexture(_renderTextures[key], _editedTextures[key]);
 
         if (!_sprites.ContainsKey(key))
         {
             // Create a new sprite from the modified texture
-            Sprite newSprite = Sprite.Create(tex, sprite.rect, Vector2.one / 2, sprite.pixelsPerUnit);
+            Sprite newSprite = Sprite.Create(_editedTextures[key], sprite.rect, Vector2.one / 2, sprite.pixelsPerUnit);
             // Add to dictionary
             _sprites.Add(key, newSprite);
         }
-            spriteRenderer.sprite = _sprites[key];
+        _currentSpriteRenderer.sprite = _sprites[key];
     }
 
-    private Vector2 WorldToTexturePoint(SpriteRenderer sr, Vector2 worldPos)
+    private Vector2 WorldToTexturePoint(Vector2 worldPos)
     {
-        Vector2 texturePoint = sr.transform.InverseTransformPoint(worldPos);
+        Vector2 texturePoint = _currentSpriteRenderer.transform.InverseTransformPoint(worldPos);
 
         // Position between -5 and 5
-        texturePoint.x /= sr.bounds.size.x;
-        texturePoint.y /= sr.bounds.size.y;
+        texturePoint.x /= _currentSpriteRenderer.bounds.size.x;
+        texturePoint.y /= _currentSpriteRenderer.bounds.size.y;
 
         // Position between 0 & 1
         texturePoint += Vector2.one / 2;
 
         // Offset in Texture space
-        texturePoint.x *= sr.sprite.rect.width;
-        texturePoint.y *= sr.sprite.rect.height;
+        texturePoint.x *= _currentSpriteRenderer.sprite.rect.width;
+        texturePoint.y *= _currentSpriteRenderer.sprite.rect.height;
         // Position in Texture Space
-        texturePoint.x += sr.sprite.rect.x;
-        texturePoint.y += sr.sprite.rect.y;
+        texturePoint.x += _currentSpriteRenderer.sprite.rect.x;
+        texturePoint.y += _currentSpriteRenderer.sprite.rect.y;
 
         return texturePoint;
     }
-
-    //private Vector2 WorldToTexturePoint(SpriteRenderer sr, Vector2 worldPos)
-    //{
-    //    // Convert world position to local space (relative to the SpriteRenderer)
-    //    Vector2 localPoint = sr.transform.InverseTransformPoint(worldPos);
-
-    //    // // Adjust for the sprite's pivot (pivot is in the range 0 to 1, adjust to local coordinate)
-    //    // Vector2 pivotOffset = new Vector2(
-    //    //     (sr.sprite.pivot.x / sr.sprite.rect.width) - 0.5f,
-    //    //     (sr.sprite.pivot.y / sr.sprite.rect.height) - 0.5f
-    //    // );
-    //    // localPoint -= new Vector2(
-    //    //     pivotOffset.x * sr.bounds.size.x,
-    //    //     pivotOffset.y * sr.bounds.size.y
-    //    // );
-
-    //    // Adjust for the SpriteRenderer's scale
-    //    localPoint.x /= sr.transform.localScale.x;
-    //    localPoint.y /= sr.transform.localScale.y;
-
-    //    // Normalize the local point to [0,1] range
-    //    Vector2 normalizedPoint = new Vector2(
-    //        (localPoint.x / sr.bounds.size.x) + 0.5f,
-    //        (localPoint.y / sr.bounds.size.y) + 0.5f
-    //    );
-
-    //    // Convert normalized coordinates to texture coordinates
-    //    Vector2 texturePoint = new Vector2(
-    //        normalizedPoint.x * sr.sprite.rect.width,
-    //        normalizedPoint.y * sr.sprite.rect.height
-    //    );
-
-    //    // Offset by the sprite's position in the texture atlas
-    //    texturePoint += new Vector2(sr.sprite.rect.x, sr.sprite.rect.y);
-
-    //    return texturePoint;
-    //}
-
-    //private void ColorSprite(SpriteRenderer spriteRenderer)
-    //{
-    //    Sprite sprite = spriteRenderer.sprite;
-    //    Texture2D texture = new Texture2D(sprite.texture.width, sprite.texture.height);
-
-    //    for (int x = 0; x < texture.width; x++)
-    //    {
-    //        for (int y = 0; y < texture.height; y++)
-    //        {
-    //            // 1 for black , 0 for white
-    //            Color pixelColor = _color;
-    //            Color spritePixel = sprite.texture.GetPixel(x, y);
-    //            pixelColor.a = spritePixel.a;
-
-    //            pixelColor *= spritePixel;
-
-    //            texture.SetPixel(x, y, pixelColor);
-    //        }
-    //    }
-
-    //    texture.Apply();
-
-    //    Sprite newSprite = Sprite.Create(texture, sprite.rect, new Vector2(0.5f, 0.5f), sprite.pixelsPerUnit);
-    //    spriteRenderer.sprite = newSprite;
-    //}
 }

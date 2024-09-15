@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_Paint_Texture
-  m_Shader: {fileID: -6465566751694194690, guid: 29cf0bb9260a95e46852c302d2ec2a7f, type: 3}
+  m_Name: Shader Graphs_Erase_Texture
+  m_Shader: {fileID: -6465566751694194690, guid: 3a5ccd8487994b9c3bba6e0a7a8efe04, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -24,15 +24,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BrushShape:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: d1aa885f0296904438c09dfe7f6405d1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BrushTexture:
         m_Texture: {fileID: 2800000, guid: 5d92c58cf84f79348b9a74a259cf152a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _BrushTextures:
-        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -65,10 +61,9 @@ Material:
     - _Index: 0
     m_Colors:
     - _BrushColor: {r: 1, g: 1, b: 1, a: 0}
-    - _UVPOS: {r: 0.5, g: 0.5, b: 0, a: 0}
-    - _UVPosition: {r: 0.7583487, g: 0.19452742, b: 0, a: 0}
+    - _UVPosition: {r: 0.9260818, g: 0.023688436, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &1142825748591275896
+--- !u!114 &2701828022713740066
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
