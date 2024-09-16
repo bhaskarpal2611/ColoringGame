@@ -3758,6 +3758,75 @@ PolygonCollider2D:
       - {x: 0.29999998, y: 0.07}
       - {x: 0.14999999, y: 0.17}
   m_UseDelaunayMesh: 0
+--- !u!1001 &1427388436
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1755597867807528997, guid: 02cff49f7457db243b8b7be76dd5c732, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755597867807528997, guid: 02cff49f7457db243b8b7be76dd5c732, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755597867807528997, guid: 02cff49f7457db243b8b7be76dd5c732, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755597867807528997, guid: 02cff49f7457db243b8b7be76dd5c732, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755597867807528997, guid: 02cff49f7457db243b8b7be76dd5c732, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755597867807528997, guid: 02cff49f7457db243b8b7be76dd5c732, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755597867807528997, guid: 02cff49f7457db243b8b7be76dd5c732, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755597867807528997, guid: 02cff49f7457db243b8b7be76dd5c732, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755597867807528997, guid: 02cff49f7457db243b8b7be76dd5c732, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755597867807528997, guid: 02cff49f7457db243b8b7be76dd5c732, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2721173455752787687, guid: 02cff49f7457db243b8b7be76dd5c732, type: 3}
+      propertyPath: m_Name
+      value: ColoringGame_PaintTextures_GPU (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2721173455752787687, guid: 02cff49f7457db243b8b7be76dd5c732, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7168735748573834199, guid: 02cff49f7457db243b8b7be76dd5c732, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7168735748573834199, guid: 02cff49f7457db243b8b7be76dd5c732, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -707.4298
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 02cff49f7457db243b8b7be76dd5c732, type: 3}
 --- !u!1 &1483221285
 GameObject:
   m_ObjectHideFlags: 0
@@ -8531,8 +8600,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spritesParent: {fileID: 7269855561279013024}
-  _brushColor: {r: 1, g: 1, b: 1, a: 1}
   _maxColliderTouched: 10
+  _brushColor: {r: 1, g: 1, b: 1, a: 1}
   _brushSize: 0.05
   _paintByColorMaterial: {fileID: 2100000, guid: 98200b73fd7bffb42aedcdd9c8583a8e, type: 2}
   _paintTextureMaterial: {fileID: 2100000, guid: 9fa95e0eb0acaef4e99e1f9080a27e58, type: 2}
@@ -8942,3 +9011,4 @@ SceneRoots:
   - {fileID: 189588713}
   - {fileID: 339401346}
   - {fileID: 5616782944541440724}
+  - {fileID: 1427388436}

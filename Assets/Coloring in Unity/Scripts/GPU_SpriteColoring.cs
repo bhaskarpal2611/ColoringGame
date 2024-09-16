@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class GPU_SpriteColoring : MonoBehaviour, IDragHandler, IPointerDownHandler, IEndDragHandler
+public class GPU_SpriteColoring : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] private Transform _spritesParent;
     [SerializeField] private Color _brushColor;
@@ -46,6 +46,7 @@ public class GPU_SpriteColoring : MonoBehaviour, IDragHandler, IPointerDownHandl
     private Camera _mainCamera;
     private Touch _touch;
     private SpriteRenderer _currentSpriteRenderer;
+    private Collider2D _currentCollider;
 
     private RaycastHit2D[] _hits;
     private Dictionary<int, Texture2D> _originalTextures = new();
@@ -56,7 +57,6 @@ public class GPU_SpriteColoring : MonoBehaviour, IDragHandler, IPointerDownHandl
     private void Start()
     {
         _mainCamera = Camera.main;
-
         //Application.targetFrameRate = 60;
         _hits = new RaycastHit2D[_maxColliderTouched];
         InitializeLevel();
@@ -69,14 +69,17 @@ public class GPU_SpriteColoring : MonoBehaviour, IDragHandler, IPointerDownHandl
         _firstTouch = true;
         RaycastSprites(pointerEventData.position);
     }
+    public void OnPointerUp(PointerEventData pointerEventData)
+    {
+        _isDragging = false;
+        _currentCollider.enabled = true;
+        _currentCollider = null;
+        _currentSpriteRenderer = null;
+    }
 
     public void OnDrag(PointerEventData pointerEventData)
     {
         RaycastCurrentSprite(pointerEventData.position);
-    }
-    public void OnEndDrag(PointerEventData pointerEventData)
-    {
-        _isDragging = false;
     }
 
     public void SetPaintMode() => _brushMaterial = _paintTextureMaterial;
@@ -166,6 +169,8 @@ public class GPU_SpriteColoring : MonoBehaviour, IDragHandler, IPointerDownHandl
                 _currentSpriteRenderer = sr;
             }
         }
+        _currentCollider = _currentSpriteRenderer.GetComponent<Collider2D>();
+        _currentCollider.enabled = false;
         ColorSpriteAtPosition(_hits[topIndex].point);
     }
 
@@ -176,10 +181,10 @@ public class GPU_SpriteColoring : MonoBehaviour, IDragHandler, IPointerDownHandl
         Vector2 origin = _mainCamera.ScreenToWorldPoint(touchPosition);
 
         if (_isDragging)
-            CollectPoints(origin);
+            DrawLines(origin);
     }
 
-    private void CollectPoints(Vector2 currentHitPoint)
+    private void DrawLines(Vector2 currentHitPoint)
     {
         if (_currentSpriteRenderer == null) return;
 
@@ -194,14 +199,21 @@ public class GPU_SpriteColoring : MonoBehaviour, IDragHandler, IPointerDownHandl
 
         // If the distance is large, interpolate points between them
         int steps = Mathf.CeilToInt(distance / (_brushSize * 0.5f)); // Adjust the step size based on brush size
-
+        // Debug.Log("steps: " + steps);
+        int currentSteps = 0;
+        int blitThreshold = 10;
         for (int i = 0; i <= steps; i++)
         {
-            // Interpolate between the last and current position
-            Vector2 interpolatedPoint = Vector2.Lerp(_lastTouchPosition, currentHitPoint, i / (float)steps);
+            currentSteps++;
+            if (currentSteps >= blitThreshold)
+            {
+                currentSteps = 0;
+                // Interpolate between the last and current position
+                Vector2 interpolatedPoint = Vector2.Lerp(_lastTouchPosition, currentHitPoint, i / (float)steps);
 
-            // Convert interpolated point to texture coordinates and paint
-            ColorSpriteAtPosition(interpolatedPoint);
+                // Convert interpolated point to texture coordinates and paint
+                ColorSpriteAtPosition(interpolatedPoint);
+            }
         }
 
         _lastTouchPosition = currentHitPoint;
