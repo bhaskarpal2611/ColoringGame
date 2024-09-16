@@ -20,8 +20,6 @@ public class GPU_SpriteColoring_Textures : MonoBehaviour
     private SpriteRenderer _currentSpriteRenderer;
     private Collider2D _selectedCollider;
 
-    //private List<Collider2D> _colliders;
-
     private Dictionary<int, Texture2D> _originalTextures = new();
     private Dictionary<int, Texture2D> _editedTextures = new();
     private Dictionary<int, RenderTexture> _renderTextures = new();

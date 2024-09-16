@@ -1,24 +1,27 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class GPU_SpriteColoring : MonoBehaviour, IDragHandler, IBeginDragHandler
+public class GPU_SpriteColoring : MonoBehaviour, IDragHandler, IPointerDownHandler, IEndDragHandler
 {
     [SerializeField] private Transform _spritesParent;
-    [SerializeField] private Color _color;
+    [SerializeField] private Color _brushColor;
     [SerializeField] private int _maxColliderTouched = 10;
     [SerializeField, Range(0f, 2f)] private float _brushSize = 0.1f;
+    [SerializeField] private Material _paintByColorMaterial;
     [SerializeField] private Material _paintTextureMaterial;
     [SerializeField] private Material _eraseMaterial;
     [SerializeField] private int _brushTextureIndex = 0;
     [SerializeField] private Texture2D[] _textures;
 
-    public Color CurrentColor
+    public Color CurrentBrushColor
     {
-        get { return _color; }
+        get { return _brushColor; }
         set
         {
-            _color = value;
+            _brushColor = value;
+            _brushMaterial.SetColor("_BrushColor", CurrentBrushColor);
         }
     }
 
@@ -33,67 +36,63 @@ public class GPU_SpriteColoring : MonoBehaviour, IDragHandler, IBeginDragHandler
     }
 
     private Material _brushMaterial;
+    private Coroutine _initializeRoutine;
+    private bool _isDragging;
+
+    private Vector2 _lastTouchPosition;
+    private bool _firstTouch = true;
+
 
     private Camera _mainCamera;
     private Touch _touch;
     private SpriteRenderer _currentSpriteRenderer;
+
     private RaycastHit2D[] _hits;
     private Dictionary<int, Texture2D> _originalTextures = new();
     private Dictionary<int, Texture2D> _editedTextures = new();
     private Dictionary<int, RenderTexture> _renderTextures = new();
     private Dictionary<int, Sprite> _sprites = new();
 
-    public void SetPaintMode()
-    {
-        _brushMaterial = _paintTextureMaterial;
-    }
-    public void SetEraseMode()
-    {
-        _brushMaterial = _eraseMaterial;
-    }
-
-
     private void Start()
     {
-        Application.targetFrameRate = 60;
         _mainCamera = Camera.main;
 
+        //Application.targetFrameRate = 60;
         _hits = new RaycastHit2D[_maxColliderTouched];
-
         InitializeLevel();
         _brushMaterial = new Material(_paintTextureMaterial);
     }
 
-    // private void Update()
-    // {
-    //     if (Input.touchCount > 0)
-    //     {
-    //         _touch = Input.GetTouch(0);
-
-    //         switch (_touch.phase)
-    //         {
-    //             case TouchPhase.Began:
-    //                 {
-    //                     RaycastSprites();
-    //                     break;
-    //                 }
-    //             case TouchPhase.Moved:
-    //                 {
-    //                     RaycastCurrentSprite();
-    //                     break;
-    //                 }
-    //         }
-    //     }
-    // }
-
-    public void OnBeginDrag(PointerEventData pointerEventData)
+    public void OnPointerDown(PointerEventData pointerEventData)
     {
+        _isDragging = true;
+        _firstTouch = true;
         RaycastSprites(pointerEventData.position);
     }
 
     public void OnDrag(PointerEventData pointerEventData)
     {
         RaycastCurrentSprite(pointerEventData.position);
+    }
+    public void OnEndDrag(PointerEventData pointerEventData)
+    {
+        _isDragging = false;
+    }
+
+    public void SetPaintMode() => _brushMaterial = _paintTextureMaterial;
+    public void SetEraseMode() => _brushMaterial = _eraseMaterial;
+    public void SetPaintColorMode() => _brushMaterial = _paintByColorMaterial;
+    public void SetBrushScale(float value)
+    {
+        _brushSize = value;
+        _brushMaterial.SetFloat("_BrushSize", _brushSize);
+    }
+
+    public void SetBrushTexture(int index)
+    {
+        SetPaintMode();
+        _brushTextureIndex = index;
+        _brushMaterial.SetTexture("_BrushTexture", _textures[_brushTextureIndex]);
     }
 
     private void InitializeLevel()
@@ -114,21 +113,34 @@ public class GPU_SpriteColoring : MonoBehaviour, IDragHandler, IBeginDragHandler
             rt.useMipMap = true;
 
             _renderTextures.Add(spriteIndex, rt);
+
+            //yield return null;
         }
 
-        // Pre-warm shaders by performing dummy Graphics.Blit operations
-        // Create a temporary render texture for dummy blit
+        // Pre-warm shaders
         RenderTexture tempRenderTexture = new RenderTexture(Screen.width, Screen.height, 0);
+        RenderTexture tempDestinationTexture = new RenderTexture(Screen.width, Screen.height, 0);
+
+        // Store the current active RenderTexture
+        RenderTexture previousActiveRT = RenderTexture.active;
+
         // Pre-warm the erase mode
         SetEraseMode();
-        Graphics.Blit(tempRenderTexture, tempRenderTexture, _brushMaterial);
+        Graphics.Blit(tempRenderTexture, tempDestinationTexture, _brushMaterial);
 
         // Pre-warm the paint mode
         SetPaintMode();
-        Graphics.Blit(tempRenderTexture, tempRenderTexture, _brushMaterial);
+        Graphics.Blit(tempRenderTexture, tempDestinationTexture, _brushMaterial);
+
+        // pre-warm paint color mode
+        SetPaintColorMode();
+        Graphics.Blit(tempRenderTexture, tempDestinationTexture, _brushMaterial);
+
+        RenderTexture.active = previousActiveRT;
 
         // Release the temporary render texture
         tempRenderTexture.Release();
+        tempDestinationTexture.Release();
     }
 
     private void RaycastSprites(Vector2 touchPosition)
@@ -163,8 +175,38 @@ public class GPU_SpriteColoring : MonoBehaviour, IDragHandler, IBeginDragHandler
 
         Vector2 origin = _mainCamera.ScreenToWorldPoint(touchPosition);
 
-        ColorSpriteAtPosition(origin);
+        if (_isDragging)
+            CollectPoints(origin);
     }
+
+    private void CollectPoints(Vector2 currentHitPoint)
+    {
+        if (_currentSpriteRenderer == null) return;
+
+        if (_firstTouch)
+        {
+            _lastTouchPosition = currentHitPoint;
+            _firstTouch = false;
+        }
+
+        // Get the distance between last and current positions
+        float distance = Vector2.Distance(_lastTouchPosition, currentHitPoint);
+
+        // If the distance is large, interpolate points between them
+        int steps = Mathf.CeilToInt(distance / (_brushSize * 0.5f)); // Adjust the step size based on brush size
+
+        for (int i = 0; i <= steps; i++)
+        {
+            // Interpolate between the last and current position
+            Vector2 interpolatedPoint = Vector2.Lerp(_lastTouchPosition, currentHitPoint, i / (float)steps);
+
+            // Convert interpolated point to texture coordinates and paint
+            ColorSpriteAtPosition(interpolatedPoint);
+        }
+
+        _lastTouchPosition = currentHitPoint;
+    }
+
     private void ColorSpriteAtPosition(Vector2 hitPoint)
     {
         if (_currentSpriteRenderer == null) return;
@@ -180,16 +222,11 @@ public class GPU_SpriteColoring : MonoBehaviour, IDragHandler, IBeginDragHandler
         if (sprite.texture != _editedTextures[key])
             Graphics.CopyTexture(sprite.texture, _editedTextures[key]);
 
-        // change brush texture
-        _brushMaterial.SetTexture("_BrushTexture", _textures[_brushTextureIndex]);
-
+        // edit brush material common values
         _brushMaterial.SetVector("_UVPosition", texturePoint / sprite.texture.width);
-        _brushMaterial.SetColor("_BrushColor", CurrentColor);
-        _brushMaterial.SetFloat("_BrushSize", _brushSize);
         _brushMaterial.SetTexture("_MainTex", _editedTextures[key]);
         _brushMaterial.SetTexture("_Original", _originalTextures[key]);
 
-        // RenderTexture rt = _renderTextures[key];
         Graphics.Blit(_editedTextures[key], _renderTextures[key], _brushMaterial);
         Graphics.CopyTexture(_renderTextures[key], _editedTextures[key]);
 

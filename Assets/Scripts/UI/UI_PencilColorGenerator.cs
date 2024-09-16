@@ -26,7 +26,7 @@ namespace ColoringGame.UI
                 pencil.Button.onClick.AddListener(() =>
                 {
                     Debug.Log("color: " + color);
-                    _spriteSelectionHandler.CurrentColor = color;
+                    _spriteSelectionHandler.CurrentBrushColor = color;
                 });
             }
         }
