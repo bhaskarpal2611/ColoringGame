@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 1216286916678819905}
   - component: {fileID: 3259880521661741889}
   m_Layer: 0
-  m_Name: PencilButton_Image
+  m_Name: PencilButton_Image_VerticalScrolling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

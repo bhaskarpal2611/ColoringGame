@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class GPU_SpriteColoring : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
+public class GPU_SpriteColoring : MonoBehaviour
 {
     [SerializeField] private Transform _spritesParent;
     [SerializeField] private Color _brushColor;
@@ -42,7 +42,6 @@ public class GPU_SpriteColoring : MonoBehaviour, IDragHandler, IPointerDownHandl
     private Vector2 _lastTouchPosition;
     private bool _firstTouch = true;
 
-
     private Camera _mainCamera;
     private Touch _touch;
     private SpriteRenderer _currentSpriteRenderer;
@@ -57,30 +56,68 @@ public class GPU_SpriteColoring : MonoBehaviour, IDragHandler, IPointerDownHandl
     private void Start()
     {
         _mainCamera = Camera.main;
-        //Application.targetFrameRate = 60;
+        Application.targetFrameRate = 60;
         _hits = new RaycastHit2D[_maxColliderTouched];
         InitializeLevel();
         _brushMaterial = new Material(_paintTextureMaterial);
     }
 
-    public void OnPointerDown(PointerEventData pointerEventData)
+    private void Update()
     {
-        _isDragging = true;
-        _firstTouch = true;
-        RaycastSprites(pointerEventData.position);
-    }
-    public void OnPointerUp(PointerEventData pointerEventData)
-    {
-        _isDragging = false;
-        _currentCollider.enabled = true;
-        _currentCollider = null;
-        _currentSpriteRenderer = null;
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            switch (touch.phase)
+            {
+                case TouchPhase.Began:
+                    {
+                        _isDragging = true;
+                        _firstTouch = true;
+                        RaycastSprites(touch.position);
+                        break;
+                    }
+                case TouchPhase.Moved:
+                    {
+                        RaycastCurrentSprite(touch.position);
+                        break;
+                    }
+
+                case TouchPhase.Ended:
+                    {
+                        _isDragging = false;
+                        if (_currentCollider != null)
+                        {
+                            _currentCollider.enabled = true;
+                            _currentCollider = null;
+                        }
+                        _currentSpriteRenderer = null;
+                        break;
+                    }
+            }
+
+        }
+
     }
 
-    public void OnDrag(PointerEventData pointerEventData)
-    {
-        RaycastCurrentSprite(pointerEventData.position);
-    }
+    //public void OnPointerDown(PointerEventData pointerEventData)
+    //{
+    //    _isDragging = true;
+    //    _firstTouch = true;
+    //    RaycastSprites(pointerEventData.position);
+    //}
+    //public void OnPointerUp(PointerEventData pointerEventData)
+    //{
+    //    _isDragging = false;
+    //    _currentCollider.enabled = true;
+    //    _currentCollider = null;
+    //    _currentSpriteRenderer = null;
+    //}
+
+    //public void OnDrag(PointerEventData pointerEventData)
+    //{
+    //    RaycastCurrentSprite(pointerEventData.position);
+    //}
 
     public void SetPaintMode() => _brushMaterial = _paintTextureMaterial;
     public void SetEraseMode() => _brushMaterial = _eraseMaterial;
@@ -100,9 +137,9 @@ public class GPU_SpriteColoring : MonoBehaviour, IDragHandler, IPointerDownHandl
 
     private void InitializeLevel()
     {
-        foreach (Transform sprite in _spritesParent)
+        foreach (Transform spriteTransform in _spritesParent)
         {
-            SpriteRenderer spriteRenderer = sprite.GetComponent<SpriteRenderer>();
+            SpriteRenderer spriteRenderer = spriteTransform.GetComponent<SpriteRenderer>();
             int spriteIndex = spriteRenderer.transform.GetSiblingIndex();
             int width = spriteRenderer.sprite.texture.width;
             int height = spriteRenderer.sprite.texture.height;
@@ -116,6 +153,15 @@ public class GPU_SpriteColoring : MonoBehaviour, IDragHandler, IPointerDownHandl
             rt.useMipMap = true;
 
             _renderTextures.Add(spriteIndex, rt);
+
+            // add sprites as well
+            Graphics.CopyTexture(_originalTextures[spriteIndex], _editedTextures[spriteIndex]);
+
+            // Create a new sprite from the modified texture
+            Sprite newSprite = Sprite.Create(_editedTextures[spriteIndex], spriteRenderer.sprite.rect, Vector2.one / 2, spriteRenderer.sprite.pixelsPerUnit);
+            // Add to dictionary
+            _sprites.Add(spriteIndex, newSprite);
+            spriteRenderer.sprite = newSprite;
 
             //yield return null;
         }
@@ -181,6 +227,7 @@ public class GPU_SpriteColoring : MonoBehaviour, IDragHandler, IPointerDownHandl
         Vector2 origin = _mainCamera.ScreenToWorldPoint(touchPosition);
 
         if (_isDragging)
+            //ColorSpriteAtPosition(origin);
             DrawLines(origin);
     }
 
@@ -198,8 +245,7 @@ public class GPU_SpriteColoring : MonoBehaviour, IDragHandler, IPointerDownHandl
         float distance = Vector2.Distance(_lastTouchPosition, currentHitPoint);
 
         // If the distance is large, interpolate points between them
-        int steps = Mathf.CeilToInt(distance / (_brushSize * 0.5f)); // Adjust the step size based on brush size
-        // Debug.Log("steps: " + steps);
+        int steps = Mathf.CeilToInt(distance / (_brushSize * 0.75f)); // Adjust the step size based on brush size
         int currentSteps = 0;
         int blitThreshold = 10;
         for (int i = 0; i <= steps; i++)
@@ -210,7 +256,6 @@ public class GPU_SpriteColoring : MonoBehaviour, IDragHandler, IPointerDownHandl
                 currentSteps = 0;
                 // Interpolate between the last and current position
                 Vector2 interpolatedPoint = Vector2.Lerp(_lastTouchPosition, currentHitPoint, i / (float)steps);
-
                 // Convert interpolated point to texture coordinates and paint
                 ColorSpriteAtPosition(interpolatedPoint);
             }
@@ -244,6 +289,8 @@ public class GPU_SpriteColoring : MonoBehaviour, IDragHandler, IPointerDownHandl
 
         if (!_sprites.ContainsKey(key))
         {
+            Debug.LogError("Should not be reaching this line");
+
             // Create a new sprite from the modified texture
             Sprite newSprite = Sprite.Create(_editedTextures[key], sprite.rect, Vector2.one / 2, sprite.pixelsPerUnit);
             // Add to dictionary
