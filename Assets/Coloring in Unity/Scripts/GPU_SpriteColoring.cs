@@ -145,25 +145,25 @@ public class GPU_SpriteColoring : MonoBehaviour
             int height = spriteRenderer.sprite.texture.height;
             int mipCount = spriteRenderer.sprite.texture.mipmapCount;
             TextureFormat textureFormat = spriteRenderer.sprite.texture.format;
-
             _originalTextures.Add(spriteIndex, spriteRenderer.sprite.texture);
-            _editedTextures.Add(spriteIndex, new Texture2D(width, height, textureFormat, mipCount, false));
+            _editedTextures.Add(spriteIndex, CreateUncompressedCopy(spriteRenderer.sprite.texture));
 
-            RenderTexture rt = new RenderTexture(width, height, 0, RenderTextureFormat.ARGB32, mipCount);
-            rt.useMipMap = true;
+            RenderTexture rt = new RenderTexture(width, height, 0, RenderTextureFormat.ARGB32);
+            rt.useMipMap = false; // Explicitly disable mipmaps
+            rt.autoGenerateMips = false; // Disable automatic mipmap generation
 
             _renderTextures.Add(spriteIndex, rt);
 
-            // add sprites as well
-            Graphics.CopyTexture(_originalTextures[spriteIndex], _editedTextures[spriteIndex]);
+            // // // add sprites as well
+            // Graphics.CopyTexture(_originalTextures[spriteIndex], _editedTextures[spriteIndex]);
 
-            // Create a new sprite from the modified texture
-            Sprite newSprite = Sprite.Create(_editedTextures[spriteIndex], spriteRenderer.sprite.rect, Vector2.one / 2, spriteRenderer.sprite.pixelsPerUnit);
-            // Add to dictionary
-            _sprites.Add(spriteIndex, newSprite);
-            spriteRenderer.sprite = newSprite;
+            // // // Create a new sprite from the modified texture
+            // Sprite newSprite = Sprite.Create(_editedTextures[spriteIndex], spriteRenderer.sprite.rect, Vector2.one / 2, spriteRenderer.sprite.pixelsPerUnit);
+            // // // Add to dictionary
+            // _sprites.Add(spriteIndex, newSprite);
+            // spriteRenderer.sprite = newSprite;
 
-            //yield return null;
+            // yield return null;
         }
 
         // Pre-warm shaders
@@ -218,6 +218,18 @@ public class GPU_SpriteColoring : MonoBehaviour
         _currentCollider = _currentSpriteRenderer.GetComponent<Collider2D>();
         _currentCollider.enabled = false;
         ColorSpriteAtPosition(_hits[topIndex].point);
+    }
+    private Texture2D CreateUncompressedCopy(Texture2D compressedTexture)
+    {
+        // Create a new uncompressed texture of the same size
+        Texture2D uncompressedTexture = new Texture2D(compressedTexture.width, compressedTexture.height, TextureFormat.RGBA32, 1, false);
+
+        // Copy pixel data from the compressed texture to the uncompressed one
+        Color[] pixels = compressedTexture.GetPixels();
+        uncompressedTexture.SetPixels(pixels);
+        uncompressedTexture.Apply();
+
+        return uncompressedTexture;
     }
 
     private void RaycastCurrentSprite(Vector2 touchPosition)
@@ -277,19 +289,21 @@ public class GPU_SpriteColoring : MonoBehaviour
         int key = _currentSpriteRenderer.transform.GetSiblingIndex();
 
         if (sprite.texture != _editedTextures[key])
-            Graphics.CopyTexture(sprite.texture, _editedTextures[key]);
+            // Graphics.CopyTexture(sprite.texture, _editedTextures[key]);
 
+            Debug.Log("mipCount: " + sprite.texture.mipmapCount);
         // edit brush material common values
         _brushMaterial.SetVector("_UVPosition", texturePoint / sprite.texture.width);
         _brushMaterial.SetTexture("_MainTex", _editedTextures[key]);
         _brushMaterial.SetTexture("_Original", _originalTextures[key]);
+
 
         Graphics.Blit(_editedTextures[key], _renderTextures[key], _brushMaterial);
         Graphics.CopyTexture(_renderTextures[key], _editedTextures[key]);
 
         if (!_sprites.ContainsKey(key))
         {
-            Debug.LogError("Should not be reaching this line");
+            // Debug.LogError("Should not be reaching this line");
 
             // Create a new sprite from the modified texture
             Sprite newSprite = Sprite.Create(_editedTextures[key], sprite.rect, Vector2.one / 2, sprite.pixelsPerUnit);
