@@ -13,19 +13,7 @@
             "m_Id": "3fb020c4b3ba4edbaf9a3efc7917f585"
         },
         {
-            "m_Id": "d1bc2c1a1f8d4c8bb9a4bc004a3aba8c"
-        },
-        {
             "m_Id": "6fd2bd3ee1304f80a693ba668840390e"
-        },
-        {
-            "m_Id": "152a2f6020614150ab6b540af97571a9"
-        },
-        {
-            "m_Id": "8ccd628f09194ebda64ad750b7c9dc65"
-        },
-        {
-            "m_Id": "51baea816a7042858ac9e4a4766c8b38"
         }
     ],
     "m_Keywords": [],
@@ -491,34 +479,6 @@
     },
     "m_Property": {
         "m_Id": "6fd2bd3ee1304f80a693ba668840390e"
-    }
-}
-
-{
-    "m_SGVersion": 1,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
-    "m_ObjectId": "152a2f6020614150ab6b540af97571a9",
-    "m_Guid": {
-        "m_GuidSerialized": "29fc0810-b439-4a7e-b154-ce1f45ec1299"
-    },
-    "m_Name": "_Index",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "_Index",
-    "m_DefaultReferenceName": "_Index",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": 0.0,
-    "m_FloatType": 2,
-    "m_RangeValues": {
-        "x": 0.0,
-        "y": 1.0
     }
 }
 
@@ -1007,19 +967,7 @@
             "m_Id": "3fb020c4b3ba4edbaf9a3efc7917f585"
         },
         {
-            "m_Id": "d1bc2c1a1f8d4c8bb9a4bc004a3aba8c"
-        },
-        {
             "m_Id": "6fd2bd3ee1304f80a693ba668840390e"
-        },
-        {
-            "m_Id": "152a2f6020614150ab6b540af97571a9"
-        },
-        {
-            "m_Id": "8ccd628f09194ebda64ad750b7c9dc65"
-        },
-        {
-            "m_Id": "51baea816a7042858ac9e4a4766c8b38"
         }
     ]
 }
@@ -1072,36 +1020,6 @@
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.Texture2DShaderProperty",
-    "m_ObjectId": "51baea816a7042858ac9e4a4766c8b38",
-    "m_Guid": {
-        "m_GuidSerialized": "5699bc2d-3067-4ac9-96ea-70a0afdcabe6"
-    },
-    "m_Name": "_BrushShape",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "_BrushShape",
-    "m_DefaultReferenceName": "_BrushShape",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"d1aa885f0296904438c09dfe7f6405d1\",\"type\":3}}",
-        "m_Guid": ""
-    },
-    "isMainTexture": false,
-    "useTilingAndOffset": false,
-    "m_Modifiable": true,
-    "m_DefaultType": 0
 }
 
 {
@@ -1545,36 +1463,6 @@
     "m_ShaderOutputName": "Sampler",
     "m_StageCapability": 3,
     "m_BareResource": false
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.Texture2DShaderProperty",
-    "m_ObjectId": "8ccd628f09194ebda64ad750b7c9dc65",
-    "m_Guid": {
-        "m_GuidSerialized": "3f183098-bf7c-404b-909a-b4af6ae6766e"
-    },
-    "m_Name": "_BrushTexture",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "_BrushTexture",
-    "m_DefaultReferenceName": "_BrushTexture",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"5d92c58cf84f79348b9a74a259cf152a\",\"type\":3}}",
-        "m_Guid": ""
-    },
-    "isMainTexture": false,
-    "useTilingAndOffset": false,
-    "m_Modifiable": true,
-    "m_DefaultType": 0
 }
 
 {
@@ -2114,36 +2002,6 @@
     "m_ShaderOutputName": "Out",
     "m_StageCapability": 3,
     "m_BareResource": false
-}
-
-{
-    "m_SGVersion": 3,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.ColorShaderProperty",
-    "m_ObjectId": "d1bc2c1a1f8d4c8bb9a4bc004a3aba8c",
-    "m_Guid": {
-        "m_GuidSerialized": "6b21a8b5-7639-4777-9dee-174ad1069ff9"
-    },
-    "m_Name": "_BrushColor",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "_BrushColor",
-    "m_DefaultReferenceName": "_BrushColor",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": {
-        "r": 1.0,
-        "g": 0.0,
-        "b": 0.0,
-        "a": 0.0
-    },
-    "isMainColor": false,
-    "m_ColorMode": 0
 }
 
 {

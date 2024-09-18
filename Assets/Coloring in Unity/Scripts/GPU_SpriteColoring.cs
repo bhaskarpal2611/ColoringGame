@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class GPU_SpriteColoring : MonoBehaviour
 {
     [SerializeField] private Transform _spritesParent;
-    [SerializeField] private Color _brushColor;
+    [SerializeField] private Color _brushColor = Color.green;
     [SerializeField] private int _maxColliderTouched = 10;
     [SerializeField, Range(0f, 2f)] private float _brushSize = 0.1f;
     [SerializeField] private Material _paintByColorMaterial;
@@ -36,7 +36,7 @@ public class GPU_SpriteColoring : MonoBehaviour
     }
 
     private Material _brushMaterial;
-    private Coroutine _initializeRoutine;
+    private Coroutine _drawLineRoutine;
     private bool _isDragging;
 
     private Vector2 _lastTouchPosition;
@@ -59,7 +59,8 @@ public class GPU_SpriteColoring : MonoBehaviour
         Application.targetFrameRate = 60;
         _hits = new RaycastHit2D[_maxColliderTouched];
         InitializeLevel();
-        _brushMaterial = new Material(_paintTextureMaterial);
+        _brushMaterial = new Material(_paintByColorMaterial);
+        _brushMaterial.SetFloat("_BrushSize", _brushSize);
     }
 
     private void Update()
@@ -95,33 +96,30 @@ public class GPU_SpriteColoring : MonoBehaviour
                         break;
                     }
             }
-
         }
-
     }
 
-    //public void OnPointerDown(PointerEventData pointerEventData)
-    //{
-    //    _isDragging = true;
-    //    _firstTouch = true;
-    //    RaycastSprites(pointerEventData.position);
-    //}
-    //public void OnPointerUp(PointerEventData pointerEventData)
-    //{
-    //    _isDragging = false;
-    //    _currentCollider.enabled = true;
-    //    _currentCollider = null;
-    //    _currentSpriteRenderer = null;
-    //}
+    public void SetPaintTextureMode()
+    {
+        _brushMaterial = _paintTextureMaterial;
+        _brushMaterial.SetColor("_BrushColor", CurrentBrushColor);
+        _brushMaterial.SetFloat("_BrushSize", _brushSize);
+    }
 
-    //public void OnDrag(PointerEventData pointerEventData)
-    //{
-    //    RaycastCurrentSprite(pointerEventData.position);
-    //}
+    public void SetEraseMode()
+    {
+        _brushMaterial = _eraseMaterial;
+        _brushMaterial.SetColor("_BrushColor", CurrentBrushColor);
+        _brushMaterial.SetFloat("_BrushSize", _brushSize);
+    }
 
-    public void SetPaintMode() => _brushMaterial = _paintTextureMaterial;
-    public void SetEraseMode() => _brushMaterial = _eraseMaterial;
-    public void SetPaintColorMode() => _brushMaterial = _paintByColorMaterial;
+    public void SetPaintColorMode()
+    {
+        _brushMaterial = _paintByColorMaterial;
+        _brushMaterial.SetColor("_BrushColor", CurrentBrushColor);
+        _brushMaterial.SetFloat("_BrushSize", _brushSize);
+    }
+
     public void SetBrushScale(float value)
     {
         _brushSize = value;
@@ -130,7 +128,7 @@ public class GPU_SpriteColoring : MonoBehaviour
 
     public void SetBrushTexture(int index)
     {
-        SetPaintMode();
+        SetPaintTextureMode();
         _brushTextureIndex = index;
         _brushMaterial.SetTexture("_BrushTexture", _textures[_brushTextureIndex]);
     }
@@ -145,10 +143,12 @@ public class GPU_SpriteColoring : MonoBehaviour
             int height = spriteRenderer.sprite.texture.height;
             int mipCount = spriteRenderer.sprite.texture.mipmapCount;
             TextureFormat textureFormat = spriteRenderer.sprite.texture.format;
-            _originalTextures.Add(spriteIndex, spriteRenderer.sprite.texture);
-            _editedTextures.Add(spriteIndex, CreateUncompressedCopy(spriteRenderer.sprite.texture));
 
-            RenderTexture rt = new RenderTexture(width, height, 0, RenderTextureFormat.ARGB32);
+            _originalTextures.Add(spriteIndex, spriteRenderer.sprite.texture);
+            _editedTextures.Add(spriteIndex, new Texture2D(width, height, textureFormat, mipCount, false));
+            //_editedTextures.Add(spriteIndex, CreateUncompressedCopy(spriteRenderer.sprite.texture));
+            Debug.Log("mipcount: " + mipCount);
+            RenderTexture rt = new RenderTexture(width, height, 0, RenderTextureFormat.ARGB32, mipCount);
             rt.useMipMap = false; // Explicitly disable mipmaps
             rt.autoGenerateMips = false; // Disable automatic mipmap generation
 
@@ -178,7 +178,7 @@ public class GPU_SpriteColoring : MonoBehaviour
         Graphics.Blit(tempRenderTexture, tempDestinationTexture, _brushMaterial);
 
         // Pre-warm the paint mode
-        SetPaintMode();
+        SetPaintTextureMode();
         Graphics.Blit(tempRenderTexture, tempDestinationTexture, _brushMaterial);
 
         // pre-warm paint color mode
@@ -219,6 +219,8 @@ public class GPU_SpriteColoring : MonoBehaviour
         _currentCollider.enabled = false;
         ColorSpriteAtPosition(_hits[topIndex].point);
     }
+
+
     private Texture2D CreateUncompressedCopy(Texture2D compressedTexture)
     {
         // Create a new uncompressed texture of the same size
@@ -239,14 +241,13 @@ public class GPU_SpriteColoring : MonoBehaviour
         Vector2 origin = _mainCamera.ScreenToWorldPoint(touchPosition);
 
         if (_isDragging)
-            //ColorSpriteAtPosition(origin);
+        {
             DrawLines(origin);
+        }
     }
 
     private void DrawLines(Vector2 currentHitPoint)
     {
-        if (_currentSpriteRenderer == null) return;
-
         if (_firstTouch)
         {
             _lastTouchPosition = currentHitPoint;
@@ -272,7 +273,6 @@ public class GPU_SpriteColoring : MonoBehaviour
                 ColorSpriteAtPosition(interpolatedPoint);
             }
         }
-
         _lastTouchPosition = currentHitPoint;
     }
 
@@ -289,22 +289,18 @@ public class GPU_SpriteColoring : MonoBehaviour
         int key = _currentSpriteRenderer.transform.GetSiblingIndex();
 
         if (sprite.texture != _editedTextures[key])
-            // Graphics.CopyTexture(sprite.texture, _editedTextures[key]);
+             Graphics.CopyTexture(sprite.texture, _editedTextures[key]);
 
-            Debug.Log("mipCount: " + sprite.texture.mipmapCount);
         // edit brush material common values
         _brushMaterial.SetVector("_UVPosition", texturePoint / sprite.texture.width);
         _brushMaterial.SetTexture("_MainTex", _editedTextures[key]);
         _brushMaterial.SetTexture("_Original", _originalTextures[key]);
-
 
         Graphics.Blit(_editedTextures[key], _renderTextures[key], _brushMaterial);
         Graphics.CopyTexture(_renderTextures[key], _editedTextures[key]);
 
         if (!_sprites.ContainsKey(key))
         {
-            // Debug.LogError("Should not be reaching this line");
-
             // Create a new sprite from the modified texture
             Sprite newSprite = Sprite.Create(_editedTextures[key], sprite.rect, Vector2.one / 2, sprite.pixelsPerUnit);
             // Add to dictionary
@@ -327,6 +323,7 @@ public class GPU_SpriteColoring : MonoBehaviour
         // Offset in Texture space
         texturePoint.x *= _currentSpriteRenderer.sprite.rect.width;
         texturePoint.y *= _currentSpriteRenderer.sprite.rect.height;
+
         // Position in Texture Space
         texturePoint.x += _currentSpriteRenderer.sprite.rect.x;
         texturePoint.y += _currentSpriteRenderer.sprite.rect.y;
