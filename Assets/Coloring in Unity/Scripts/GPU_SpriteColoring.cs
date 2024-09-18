@@ -15,6 +15,8 @@ public class GPU_SpriteColoring : MonoBehaviour
     [SerializeField] private int _brushTextureIndex = 0;
     [SerializeField] private Texture2D[] _textures;
 
+    public SpriteRenderer TestSprite;
+
     public Color CurrentBrushColor
     {
         get { return _brushColor; }
@@ -48,9 +50,10 @@ public class GPU_SpriteColoring : MonoBehaviour
     private Collider2D _currentCollider;
 
     private RaycastHit2D[] _hits;
-    private Dictionary<int, Texture2D> _originalTextures = new();
+    // private Dictionary<int, Texture2D> _originalTextures = new();
     private Dictionary<int, Texture2D> _editedTextures = new();
     private Dictionary<int, RenderTexture> _renderTextures = new();
+    private Dictionary<int, Sprite> _originalSprites = new();
     private Dictionary<int, Sprite> _sprites = new();
 
     private void Start()
@@ -61,6 +64,10 @@ public class GPU_SpriteColoring : MonoBehaviour
         InitializeLevel();
         _brushMaterial = new Material(_paintByColorMaterial);
         _brushMaterial.SetFloat("_BrushSize", _brushSize);
+
+
+        Debug.Log("height: " + TestSprite.sprite.texture.height);
+        Debug.Log("width: " + TestSprite.sprite.texture.width);
     }
 
     private void Update()
@@ -98,6 +105,28 @@ public class GPU_SpriteColoring : MonoBehaviour
             }
         }
     }
+    private void OnDestroy()
+    {
+        // Release RenderTextures
+        foreach (var rt in _renderTextures.Values)
+        {
+            rt.Release();
+        }
+        _renderTextures.Clear();
+
+        foreach (var texture in _editedTextures.Values)
+        {
+            if (texture != null)
+            {
+                Destroy(texture);
+            }
+        }
+        _editedTextures.Clear();
+
+        // Clear the remaining dictionaries
+        _sprites.Clear();
+    }
+
 
     public void SetPaintTextureMode()
     {
@@ -139,23 +168,22 @@ public class GPU_SpriteColoring : MonoBehaviour
         {
             SpriteRenderer spriteRenderer = spriteTransform.GetComponent<SpriteRenderer>();
             int spriteIndex = spriteRenderer.transform.GetSiblingIndex();
-            int width = spriteRenderer.sprite.texture.width;
-            int height = spriteRenderer.sprite.texture.height;
-            int mipCount = spriteRenderer.sprite.texture.mipmapCount;
-            TextureFormat textureFormat = spriteRenderer.sprite.texture.format;
 
-            _originalTextures.Add(spriteIndex, spriteRenderer.sprite.texture);
+            Sprite originalSprite = spriteRenderer.sprite;
+            int width = originalSprite.texture.width;
+            int height = originalSprite.texture.height;
+            int mipCount = originalSprite.texture.mipmapCount;
+            TextureFormat textureFormat = originalSprite.texture.format;
+
+            _originalSprites.Add(spriteIndex, originalSprite);
             _editedTextures.Add(spriteIndex, new Texture2D(width, height, textureFormat, mipCount, false));
             //_editedTextures.Add(spriteIndex, CreateUncompressedCopy(spriteRenderer.sprite.texture));
-            Debug.Log("mipcount: " + mipCount);
             RenderTexture rt = new RenderTexture(width, height, 0, RenderTextureFormat.ARGB32, mipCount);
             rt.useMipMap = false; // Explicitly disable mipmaps
             rt.autoGenerateMips = false; // Disable automatic mipmap generation
 
             _renderTextures.Add(spriteIndex, rt);
 
-            // // // add sprites as well
-            // Graphics.CopyTexture(_originalTextures[spriteIndex], _editedTextures[spriteIndex]);
 
             // // // Create a new sprite from the modified texture
             // Sprite newSprite = Sprite.Create(_editedTextures[spriteIndex], spriteRenderer.sprite.rect, Vector2.one / 2, spriteRenderer.sprite.pixelsPerUnit);
@@ -191,6 +219,43 @@ public class GPU_SpriteColoring : MonoBehaviour
         tempRenderTexture.Release();
         tempDestinationTexture.Release();
     }
+    public void ClearPainting()
+    {
+        // Restore original textures to the edited textures
+        int count = _spritesParent.childCount;
+        for (int i = 0; i < count; i++)
+        {
+            Sprite originalSprite = _originalSprites[i];
+            Texture2D originalTexture = originalSprite.texture;
+
+            // Ensure the edited texture exists and matches the original texture's format
+            if (_editedTextures.TryGetValue(i, out Texture2D editedTexture))
+            {
+                Graphics.CopyTexture(originalTexture, editedTexture);
+            }
+
+            // Optionally, if you want to update the sprite immediately:
+            if (_sprites.TryGetValue(i, out Sprite sprite))
+            {
+                // Create a new sprite from the restored texture
+                _sprites[i] = Sprite.Create(editedTexture, sprite.rect, Vector2.one / 2, sprite.pixelsPerUnit);
+            }
+        }
+
+        // Reapply the sprites to the SpriteRenderers
+        foreach (Transform spriteTransform in _spritesParent)
+        {
+            SpriteRenderer spriteRenderer = spriteTransform.GetComponent<SpriteRenderer>();
+            int spriteIndex = spriteRenderer.transform.GetSiblingIndex();
+            if (_sprites.TryGetValue(spriteIndex, out Sprite newSprite))
+            {
+                spriteRenderer.sprite = newSprite;
+            }
+        }
+    }
+
+
+
 
     private void RaycastSprites(Vector2 touchPosition)
     {
@@ -289,12 +354,12 @@ public class GPU_SpriteColoring : MonoBehaviour
         int key = _currentSpriteRenderer.transform.GetSiblingIndex();
 
         if (sprite.texture != _editedTextures[key])
-             Graphics.CopyTexture(sprite.texture, _editedTextures[key]);
+            Graphics.CopyTexture(sprite.texture, _editedTextures[key]);
 
         // edit brush material common values
         _brushMaterial.SetVector("_UVPosition", texturePoint / sprite.texture.width);
         _brushMaterial.SetTexture("_MainTex", _editedTextures[key]);
-        _brushMaterial.SetTexture("_Original", _originalTextures[key]);
+        _brushMaterial.SetTexture("_Original", _originalSprites[key].texture);
 
         Graphics.Blit(_editedTextures[key], _renderTextures[key], _brushMaterial);
         Graphics.CopyTexture(_renderTextures[key], _editedTextures[key]);

@@ -61,12 +61,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BrushSize: 0.1
+    - _BrushSize: 0.05
     - _Index: 0
     m_Colors:
     - _BrushColor: {r: 0, g: 1, b: 0, a: 1}
     - _UVPOS: {r: 0.5, g: 0.5, b: 0, a: 0}
-    - _UVPosition: {r: 0.6098678, g: 0.749854, b: 0, a: 0}
+    - _UVPosition: {r: 0.5212362, g: 0.7125413, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1142825748591275896
 MonoBehaviour:
