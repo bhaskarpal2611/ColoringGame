@@ -6140,7 +6140,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1257450072}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8100986678138197015}
+        m_TargetAssemblyTypeName: GPU_SpriteColoring, Assembly-CSharp
+        m_MethodName: PerformUndo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1257450072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10878,7 +10890,7 @@ MonoBehaviour:
   _textures:
   - {fileID: 2800000, guid: 5d92c58cf84f79348b9a74a259cf152a, type: 3}
   - {fileID: 2800000, guid: f8cda21ebc652b544bfe471465c7d66b, type: 3}
-  TestSprite: {fileID: 0}
+  _texture: {fileID: 0}
 --- !u!1 &8543456500545981209
 GameObject:
   m_ObjectHideFlags: 0

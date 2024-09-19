@@ -1,5 +1,8 @@
+using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GPU_SpriteColoring : MonoBehaviour
 {
@@ -12,6 +15,11 @@ public class GPU_SpriteColoring : MonoBehaviour
     [SerializeField] private Material _eraseMaterial;
     [SerializeField] private int _brushTextureIndex = 0;
     [SerializeField] private Texture2D[] _textures;
+
+    public Sprite _testSprite;
+    public List<UndoData> _test = new();
+
+    private Stack<UndoData> lastEditedTextures = new();
 
     public Color CurrentBrushColor
     {
@@ -41,7 +49,6 @@ public class GPU_SpriteColoring : MonoBehaviour
     private Camera _mainCamera;
     private SpriteRenderer _currentSpriteRenderer;
     private Collider2D _currentCollider;
-
     private readonly RaycastHit2D[] _hits;
     private readonly Dictionary<int, Texture2D> _editedTextures = new Dictionary<int, Texture2D>();
     private readonly Dictionary<int, RenderTexture> _renderTextures = new Dictionary<int, RenderTexture>();
@@ -59,14 +66,13 @@ public class GPU_SpriteColoring : MonoBehaviour
     {
         _hits = new RaycastHit2D[_maxColliderTouched];
     }
-
     private void Start()
     {
         _mainCamera = Camera.main;
         Application.targetFrameRate = 60;
         InitializeLevel();
-        _brushMaterial = new Material(_paintByColorMaterial);
         _brushMaterial.SetFloat(BrushSizeProperty, _brushSize);
+
     }
 
     private void Update()
@@ -124,6 +130,9 @@ public class GPU_SpriteColoring : MonoBehaviour
     {
         RestoreOriginalTextures();
         ReapplySpritesToRenderers();
+
+        // also clear undo stack
+        lastEditedTextures.Clear();
     }
 
     private void InitializeLevel()
@@ -260,6 +269,15 @@ public class GPU_SpriteColoring : MonoBehaviour
         {
             Sprite newSprite = Sprite.Create(_editedTextures[key], sprite.rect, Vector2.one / 2, sprite.pixelsPerUnit);
             _sprites.Add(key, newSprite);
+
+            // create original clean version of the sprite
+            Texture2D newTex = new(_originalSprites[key].texture.width, _originalSprites[key].texture.height, TextureFormat.RGBA32, 1, false);
+
+            Graphics.CopyTexture(_originalSprites[key].texture, newTex);
+            Sprite test = Sprite.Create(newTex, _currentSpriteRenderer.sprite.rect, new(0.5f, 0.5f), _currentSpriteRenderer.sprite.pixelsPerUnit);
+
+            UndoData undoData = new UndoData(key, newTex, test.rect, test.pixelsPerUnit);
+            lastEditedTextures.Push(undoData);
         }
         _currentSpriteRenderer.sprite = _sprites[key];
     }
@@ -274,19 +292,53 @@ public class GPU_SpriteColoring : MonoBehaviour
             (texturePoint.x / spriteSize.x + 0.5f) * spriteRect.width + spriteRect.x,
             (texturePoint.y / spriteSize.y + 0.5f) * spriteRect.height + spriteRect.y
         );
-
         return texturePoint;
     }
 
     private void EndDrag()
     {
-        _isDragging = false;
-        if (_currentCollider != null)
+        if (_currentSpriteRenderer)
         {
-            _currentCollider.enabled = true;
-            _currentCollider = null;
+            _isDragging = false;
+
+            int index = _currentSpriteRenderer.transform.GetSiblingIndex();
+            if(lastEditedTextures.Count == 0)
+            {
+                // create original clean version of the sprite
+                Texture2D cleanTex = new(_originalSprites[index].texture.width, _originalSprites[index].texture.height, TextureFormat.RGBA32, 1, false);
+
+                Graphics.CopyTexture(_originalSprites[index].texture, cleanTex);
+                Sprite test = Sprite.Create(cleanTex, _currentSpriteRenderer.sprite.rect, new(0.5f, 0.5f), _currentSpriteRenderer.sprite.pixelsPerUnit);
+
+                UndoData cleanData = new UndoData(index, cleanTex, test.rect, test.pixelsPerUnit);
+                lastEditedTextures.Push(cleanData);
+            }
+
+            Texture2D newTex = new(_editedTextures[index].width, _editedTextures[index].height, TextureFormat.RGBA32, 1, false);
+            Graphics.CopyTexture(_editedTextures[index], newTex);
+
+            UndoData undoData = new UndoData(index, newTex, _currentSpriteRenderer.sprite.rect, _currentSpriteRenderer.sprite.pixelsPerUnit);
+
+            lastEditedTextures.Push(undoData);
+
+            if (_currentCollider != null)
+            {
+                _currentCollider.enabled = true;
+                _currentCollider = null;
+            }
+            _currentSpriteRenderer = null;
         }
-        _currentSpriteRenderer = null;
+    }
+    public void PerformUndo()
+    {
+        if (lastEditedTextures.Count > 0)
+        {
+            UndoData undoData = lastEditedTextures.Pop();
+            Sprite newSprite = Sprite.Create(undoData.Texture, undoData.Rect, new(0.5f, 0.5f), undoData.PPU);
+            _testSprite = newSprite;
+            _sprites[undoData.Index] = newSprite;
+            _spritesParent.GetChild(undoData.Index).GetComponent<SpriteRenderer>().sprite = newSprite;
+        }
     }
 
     private void CleanupResources()
@@ -309,7 +361,6 @@ public class GPU_SpriteColoring : MonoBehaviour
         _sprites.Clear();
         _originalSprites.Clear();
     }
-
     private void RestoreOriginalTextures()
     {
         foreach (var kvp in _originalSprites)
@@ -329,7 +380,6 @@ public class GPU_SpriteColoring : MonoBehaviour
             }
         }
     }
-
     private void ReapplySpritesToRenderers()
     {
         foreach (Transform spriteTransform in _spritesParent)
@@ -340,6 +390,23 @@ public class GPU_SpriteColoring : MonoBehaviour
             {
                 spriteRenderer.sprite = newSprite;
             }
+        }
+    }
+
+    [Serializable]
+    public struct UndoData
+    {
+        public int Index;
+        public Texture2D Texture;
+        public Rect Rect;
+        public float PPU;
+
+        public UndoData(int index, Texture2D texture, Rect rect, float ppu)
+        {
+            Index = index;
+            Texture = texture;
+            Rect = rect;
+            PPU = ppu;
         }
     }
 }
