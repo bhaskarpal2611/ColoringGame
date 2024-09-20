@@ -70,7 +70,7 @@ public class GPU_SpriteColoring : MonoBehaviour
     {
         _mainCamera = Camera.main;
         Application.targetFrameRate = 60;
-        InitializeLevel();
+        PreWarmShaders();
         _brushMaterial.SetFloat(BrushSizeProperty, _brushSize);
 
     }
@@ -135,14 +135,12 @@ public class GPU_SpriteColoring : MonoBehaviour
         lastEditedTextures.Clear();
     }
 
-    private void InitializeLevel()
+    public void InitializeLevel()
     {
-        foreach (Transform spriteTransform in _spritesParent)
+        foreach (Transform spriteTransform in _spritesParent.GetChild(0).GetChild(0))
         {
             InitializeSprite(spriteTransform.GetComponent<SpriteRenderer>());
         }
-
-        PreWarmShaders();
     }
 
     private void InitializeSprite(SpriteRenderer spriteRenderer)

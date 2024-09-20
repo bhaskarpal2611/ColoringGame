@@ -1,14 +1,12 @@
 using UnityEngine;
 using DG.Tweening;
-using UnityEngine.UIElements;
 using UnityEngine.UI;
 
-namespace ColoringGame.UI
+namespace ColorSwipeGame.UI
 {
     public class UI_PencilColorGenerator : MonoBehaviour
     {
         [SerializeField] private Color[] _colors;
-
         [SerializeField] private UI_PencilItem _pencilPrefab;
         [SerializeField] private UI_PencilItem _texturedPencilPrefab;
         [SerializeField] private UI_PencilItem _texturedPencilType2Prefab;
@@ -70,8 +68,10 @@ namespace ColoringGame.UI
                 Color color = _colors[i];
                 color.a = 1f;
                 pencil.PickColor(color);
+               
                 pencil.Button.onClick.AddListener(() =>
-                {   
+                {
+                    _spriteSelectionHandler.SetPaintColorMode();
                     _spriteSelectionHandler.CurrentBrushColor = color;
                 });
             }
@@ -86,6 +86,7 @@ namespace ColoringGame.UI
                 pencil.PickColor(color);
                 pencil.Button.onClick.AddListener(() =>
                 {
+                    _spriteSelectionHandler.SetBrushTexture(0);
                     _spriteSelectionHandler.CurrentBrushColor = color;
                 });
             }
@@ -100,6 +101,7 @@ namespace ColoringGame.UI
                 pencil.PickColor(color);
                 pencil.Button.onClick.AddListener(() =>
                 {
+                    _spriteSelectionHandler.SetBrushTexture(1);
                     _spriteSelectionHandler.CurrentBrushColor = color;
                 });
             }

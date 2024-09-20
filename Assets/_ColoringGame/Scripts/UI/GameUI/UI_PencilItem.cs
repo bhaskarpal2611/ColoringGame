@@ -1,9 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ColoringGame.UI
+namespace ColorSwipeGame.UI
 {
-
     public class UI_PencilItem : MonoBehaviour
     {
         [SerializeField] Image[] _pencilPieces;
@@ -11,7 +10,7 @@ namespace ColoringGame.UI
 
         public Button Button { get { return _button; } } 
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             Button.onClick.RemoveAllListeners();
         }

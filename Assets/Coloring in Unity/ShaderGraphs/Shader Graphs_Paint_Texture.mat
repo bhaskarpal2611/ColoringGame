@@ -64,9 +64,9 @@ Material:
     - _BrushSize: 0.05
     - _Index: 0
     m_Colors:
-    - _BrushColor: {r: 0, g: 1, b: 0, a: 1}
+    - _BrushColor: {r: 0, g: 0, b: 0, a: 0}
     - _UVPOS: {r: 0.5, g: 0.5, b: 0, a: 0}
-    - _UVPosition: {r: 0.18221433, g: 0.41244575, b: 0, a: 0}
+    - _UVPosition: {r: 0.4597719, g: 0.48147526, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1142825748591275896
 MonoBehaviour:
