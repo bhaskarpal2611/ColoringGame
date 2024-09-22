@@ -250,7 +250,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8100986678138197015}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ColorSwipeGame.GPU_SpriteColoring, Assembly-CSharp
         m_MethodName: SetBrushTexture
         m_Mode: 3
@@ -262,7 +262,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8100986678138197015}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ColorSwipeGame.GPU_SpriteColoring, Assembly-CSharp
         m_MethodName: SetDefaultColorForTexturePainting
         m_Mode: 1
@@ -821,7 +821,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8100986678138197015}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ColorSwipeGame.GPU_SpriteColoring, Assembly-CSharp
         m_MethodName: SetPaintColorMode
         m_Mode: 1
@@ -833,7 +833,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8100986678138197015}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ColorSwipeGame.GPU_SpriteColoring, Assembly-CSharp
         m_MethodName: SetDefaultColorForColorPainting
         m_Mode: 1
@@ -901,7 +901,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 177638, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11439282, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_MatchWidthOrHeight
@@ -916,6 +916,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11496292, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
+      propertyPath: m_toggleModeAlt
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11496292, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_fpsModuleState
       value: 0
       objectReference: {fileID: 0}
@@ -924,8 +928,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11496292, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
+      propertyPath: m_toggleActiveAlt
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11496292, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_audioModuleState
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11496292, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
+      propertyPath: m_fpsTextUpdateRate
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11496292, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
+      propertyPath: m_ramTextUpdateRate
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11496292, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_fpsGraphResolution
@@ -969,11 +985,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22415034, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1775
+      value: -32
       objectReference: {fileID: 0}
     - target: {fileID: 22415034, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -12
+      value: -214
       objectReference: {fileID: 0}
     - target: {fileID: 22430418, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -993,11 +1009,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22431670, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1764
+      value: -34
       objectReference: {fileID: 0}
     - target: {fileID: 22431670, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -786
+      value: -16
       objectReference: {fileID: 0}
     - target: {fileID: 22432596, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1843,7 +1859,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8100986678138197015}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ColorSwipeGame.GPU_SpriteColoring, Assembly-CSharp
         m_MethodName: SetBrushTexture
         m_Mode: 3
@@ -1855,7 +1871,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8100986678138197015}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ColorSwipeGame.GPU_SpriteColoring, Assembly-CSharp
         m_MethodName: SetDefaultColorForTexturePainting
         m_Mode: 1
@@ -2291,7 +2307,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8100986678138197015}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ColorSwipeGame.GPU_SpriteColoring, Assembly-CSharp
         m_MethodName: PerformUndo
         m_Mode: 1
@@ -2993,7 +3009,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8100986678138197015}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ColorSwipeGame.GPU_SpriteColoring, Assembly-CSharp
         m_MethodName: ClearPainting
         m_Mode: 1
@@ -3300,7 +3316,6 @@ MonoBehaviour:
   _levels: {fileID: 11400000, guid: 55a9e952404c5d346b2a4aad8232ef2f, type: 2}
   _levelParent: {fileID: 4820031844533456078}
   _selectionSceneCanvas: {fileID: 3663624211818795837}
-  _spriteColoringController: {fileID: 8100986678138197015}
 --- !u!1001 &1644902709
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3485,7 +3500,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8100986678138197015}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ColorSwipeGame.GPU_SpriteColoring, Assembly-CSharp
         m_MethodName: TakePhoto
         m_Mode: 3
@@ -3617,7 +3632,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8100986678138197015}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ColorSwipeGame.GPU_SpriteColoring, Assembly-CSharp
         m_MethodName: SetEraseMode
         m_Mode: 1
@@ -3774,6 +3789,7 @@ GameObject:
   - component: {fileID: 1933882439}
   - component: {fileID: 1933882438}
   - component: {fileID: 1933882436}
+  - component: {fileID: 1933882440}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -3793,9 +3809,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RenderShadows: 1
-  m_RequiresDepthTextureOption: 2
-  m_RequiresOpaqueTextureOption: 2
+  m_RenderShadows: 0
+  m_RequiresDepthTextureOption: 0
+  m_RequiresOpaqueTextureOption: 0
   m_CameraType: 0
   m_Cameras: []
   m_RendererIndex: -1
@@ -3884,13 +3900,72 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1933882435}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5616782944541440724}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1933882440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1933882435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc56f158070570752876b31f6919e4bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cameraRT: {fileID: 8400000, guid: f2b3c3b9fe933414f8b18b7e6b3d3e30, type: 2}
+--- !u!1 &1955107643
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1955107644}
+  - component: {fileID: 1955107645}
+  m_Layer: 0
+  m_Name: Touch_Input_Handler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1955107644
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955107643}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1955107645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955107643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d53a0e5cad10d6f46b60d8c4431be6e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDistance: 5
+  maxFrequency: 0.02
 --- !u!222 &22728838143313039
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6265,7 +6340,7 @@ GameObject:
   - component: {fileID: 3927962760264665354}
   - component: {fileID: 5949502284815608495}
   m_Layer: 5
-  m_Name: UICanvas
+  m_Name: Selection_Scene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6541,7 +6616,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4820031844533456078}
   m_Layer: 0
-  m_Name: Paint_Area
+  m_Name: Sprites_Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6662,7 +6737,7 @@ MonoBehaviour:
   _texturedPencilType2Prefab: {fileID: 5129456631983249692, guid: 2a69bde439be1bb45b983f18a0875c06, type: 3}
   _pencilParent: {fileID: 1153562194}
   _scrollViewReference: {fileID: 3551448251384342190}
-  _spriteSelectionHandler: {fileID: 8100986678138197015}
+  _spriteSelectionHandler: {fileID: 0}
   _targetPositionUp: {fileID: 1437985787}
   _targetPositionBottom: {fileID: 471197293}
 --- !u!114 &4596762129108034073
@@ -7549,6 +7624,7 @@ Transform:
   m_Children:
   - {fileID: 4820031844533456078}
   - {fileID: 7851929570058414974}
+  - {fileID: 1933882439}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!222 &5632270416292613055
@@ -8274,6 +8350,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: ColorSwipeGame.SelectionSceneManager, Assembly-CSharp
         m_MethodName: LoadLevel
         m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8100986678138197016}
+        m_TargetAssemblyTypeName: ColorSwipeGame.PaintService, Assembly-CSharp
+        m_MethodName: OnLevelLoad
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -9232,15 +9320,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5616782944541440724}
-  - component: {fileID: 8100986678138197015}
+  - component: {fileID: 8100986678138197016}
   m_Layer: 0
-  m_Name: ColoringGame_PaintTextures_GPU
+  m_Name: Game_Scene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &8100986678138197015
+--- !u!114 &8100986678138197016
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9249,23 +9337,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 8100986678138197014}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71b17c8deb6ecdd49b4c454cbe1e669e, type: 3}
+  m_Script: {fileID: 11500000, guid: ffed2f39f8dd34df39d13406860da61d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _spritesContainer: {fileID: 4820031844533456078}
-  _defaultBrushColor: {r: 0, g: 1, b: 0, a: 1}
-  _maxColliderTouched: 10
-  _brushSize: 0.05
-  _paintByColorMaterial: {fileID: 2100000, guid: 98200b73fd7bffb42aedcdd9c8583a8e, type: 2}
-  _paintTextureMaterial: {fileID: 2100000, guid: 9fa95e0eb0acaef4e99e1f9080a27e58, type: 2}
-  _eraseMaterial: {fileID: 2100000, guid: b2b40c12324959739a0829d0f8f75eef, type: 2}
-  _brushTextureIndex: 0
   _textures:
   - {fileID: 2800000, guid: 5d92c58cf84f79348b9a74a259cf152a, type: 3}
   - {fileID: 2800000, guid: f8cda21ebc652b544bfe471465c7d66b, type: 3}
   _cameraRT: {fileID: 8400000, guid: f2b3c3b9fe933414f8b18b7e6b3d3e30, type: 2}
-  _testSprite: {fileID: 0}
-  _test: []
+  _inputHandler: {fileID: 1955107645}
+  _maxHitColliders: 5
+  _brushSize: 5
+  _brushScaleFactor: 0.01
+  _defaultBrushColor: {r: 0, g: 1, b: 0, a: 1}
+  _customMaterials:
+  - {fileID: 2100000, guid: 98200b73fd7bffb42aedcdd9c8583a8e, type: 2}
+  - {fileID: 2100000, guid: b2b40c12324959739a0829d0f8f75eef, type: 2}
+  - {fileID: 2100000, guid: 9fa95e0eb0acaef4e99e1f9080a27e58, type: 2}
 --- !u!1 &8214585287191498457
 GameObject:
   m_ObjectHideFlags: 0
@@ -9428,6 +9516,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8100986678138197016}
+        m_TargetAssemblyTypeName: ColorSwipeGame.PaintService, Assembly-CSharp
+        m_MethodName: OnLevelLoad
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -9844,12 +9944,12 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 189588713}
   - {fileID: 339401346}
-  - {fileID: 5616782944541440724}
-  - {fileID: 1616809396}
+  - {fileID: 1841718713}
   - {fileID: 1046436206128321462}
   - {fileID: 1127304900}
-  - {fileID: 1933882439}
-  - {fileID: 1841718713}
+  - {fileID: 5616782944541440724}
+  - {fileID: 1955107644}
+  - {fileID: 1616809396}
   - {fileID: 985682488}
   - {fileID: 53747458}
   - {fileID: 715165485}

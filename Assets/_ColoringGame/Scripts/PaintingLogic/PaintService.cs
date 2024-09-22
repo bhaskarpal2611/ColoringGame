@@ -1,0 +1,122 @@
+using UnityEngine;
+using System;
+
+namespace ColorSwipeGame
+{
+    public class PaintService : MonoBehaviour
+    {
+        [SerializeField] private Transform _spritesContainer;
+        [SerializeField] private Texture2D[] _textures;
+        [SerializeField] private RenderTexture _cameraRT;
+        [SerializeField] private InputHandler _inputHandler;
+
+        [Header("Brush Settings")]
+        [SerializeField] private int _maxHitColliders = 10;
+        [SerializeField, Range(0f, 5f)] private int _brushSize = 1;
+        [SerializeField, Range(0.01f, 0.001f)] private float _brushScaleFactor = 0.01f;
+        [SerializeField] private Color _defaultBrushColor = Color.white;
+        [SerializeField, Tooltip("Fill in order: PaintColor, then erase and then texturePaint")]
+        private Material[] _customMaterials;
+
+        private PaintController _paintController;
+        private Camera _mainCamera;
+
+        private void Awake()
+        {
+            _mainCamera = Camera.main;
+            Application.targetFrameRate = 60;
+
+            InitPaintData newData = new InitPaintData(_maxHitColliders, _brushSize * _brushScaleFactor, _defaultBrushColor, _customMaterials, _textures);
+            _paintController = new PaintController(newData);
+
+            if (_inputHandler == null)
+            {
+                _inputHandler = GetComponent<InputHandler>();
+                if (_inputHandler == null)
+                {
+                    Debug.LogError("InputHandler not found. Please assign it in the inspector or add it to this GameObject.");
+                    return;
+                }
+            }
+
+            _inputHandler.OnBeginDrag += BeginDrag;
+            _inputHandler.OnDragging += OnDrag;
+            _inputHandler.OnDragEnd += EndDrag;
+        }
+
+        private void OnDestroy()
+        {
+            if (_inputHandler != null)
+            {
+                _inputHandler.OnBeginDrag -= BeginDrag;
+                _inputHandler.OnDragging -= OnDrag;
+                _inputHandler.OnDragEnd -= EndDrag;
+            }
+
+            _paintController?.ClearMemory();
+        }
+
+        public void OnLevelLoad()
+        {
+            _paintController.InitializeLevel(_spritesContainer.GetChild(0).GetChild(0));
+        }
+
+        private void BeginDrag(Vector2 touchPosition)
+        {
+            Vector2 worldPosition = _mainCamera.ScreenToWorldPoint(touchPosition);
+            _paintController.BeginDrag(worldPosition);
+        }
+
+        private void OnDrag(Vector2 touchPosition)
+        {
+            Vector2 worldPosition = _mainCamera.ScreenToWorldPoint(touchPosition);
+            _paintController.ContinueDrag(worldPosition);
+        }
+
+        private void EndDrag()
+        {
+            _paintController.EndDrag();
+        }
+
+        // Public methods for other scripts to interact with PaintController
+        public void SetBrushColor(Color color) => _paintController.CurrentBrushColor = color;
+        public void SetBrushSize(float size) => _paintController.SetBrushScale(size * _brushScaleFactor);
+        public void SetBrushTexture(int index) => _paintController.SetBrushTexture(index);
+        public void SetPaintMode(PaintMode mode)
+        {
+            switch (mode)
+            {
+                case PaintMode.Color:
+                    _paintController.SetPaintColorMode();
+                    break;
+                case PaintMode.Texture:
+                    _paintController.SetPaintTextureMode();
+                    break;
+                case PaintMode.Erase:
+                    _paintController.SetEraseMode();
+                    break;
+            }
+        }
+        public void ClearPainting() => _paintController.ClearPainting();
+        public void Undo() => _paintController.PerformUndo();
+    }
+
+    [System.Serializable]
+    public struct InitPaintData
+    {
+        public int MaxHitColliders;
+        public float BrushSize;
+        public Color DefaultBrushColor;
+        public Material[] BrushMaterials;
+        public Texture2D[] Textures;
+
+        public InitPaintData(int maxHitColliders, float brushSize, Color defaultBrushColor, Material[] brushMaterials, Texture2D[] textures)
+        {
+            MaxHitColliders = maxHitColliders;
+            BrushSize = brushSize;
+            DefaultBrushColor = defaultBrushColor;
+            BrushMaterials = brushMaterials;
+            Textures = textures;
+        }
+    }
+}
