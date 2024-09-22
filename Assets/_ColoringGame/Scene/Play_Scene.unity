@@ -250,22 +250,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ColorSwipeGame.GPU_SpriteColoring, Assembly-CSharp
-        m_MethodName: SetBrushTexture
+      - m_Target: {fileID: 8100986678138197016}
+        m_TargetAssemblyTypeName: ColorSwipeGame.PaintService, Assembly-CSharp
+        m_MethodName: SetDefaultTextureMode
         m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ColorSwipeGame.GPU_SpriteColoring, Assembly-CSharp
-        m_MethodName: SetDefaultColorForTexturePainting
-        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -530,15 +518,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GPU_SpriteColoring, Assembly-CSharp
-        m_MethodName: SetBrushScale
+      - m_Target: {fileID: 8100986678138197016}
+        m_TargetAssemblyTypeName: ColorSwipeGame.PaintService, Assembly-CSharp
+        m_MethodName: SetBrushSize
         m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0.015
+          m_FloatArgument: 1
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -821,21 +809,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ColorSwipeGame.GPU_SpriteColoring, Assembly-CSharp
-        m_MethodName: SetPaintColorMode
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ColorSwipeGame.GPU_SpriteColoring, Assembly-CSharp
-        m_MethodName: SetDefaultColorForColorPainting
+      - m_Target: {fileID: 8100986678138197016}
+        m_TargetAssemblyTypeName: ColorSwipeGame.PaintService, Assembly-CSharp
+        m_MethodName: SetDefaultColorMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1859,22 +1835,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ColorSwipeGame.GPU_SpriteColoring, Assembly-CSharp
-        m_MethodName: SetBrushTexture
+      - m_Target: {fileID: 8100986678138197016}
+        m_TargetAssemblyTypeName: ColorSwipeGame.PaintService, Assembly-CSharp
+        m_MethodName: SetDefaultTextureMode
         m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ColorSwipeGame.GPU_SpriteColoring, Assembly-CSharp
-        m_MethodName: SetDefaultColorForTexturePainting
-        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2307,9 +2271,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ColorSwipeGame.GPU_SpriteColoring, Assembly-CSharp
-        m_MethodName: PerformUndo
+      - m_Target: {fileID: 8100986678138197016}
+        m_TargetAssemblyTypeName: ColorSwipeGame.PaintService, Assembly-CSharp
+        m_MethodName: Undo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2471,15 +2435,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GPU_SpriteColoring, Assembly-CSharp
-        m_MethodName: SetBrushScale
+      - m_Target: {fileID: 8100986678138197016}
+        m_TargetAssemblyTypeName: ColorSwipeGame.PaintService, Assembly-CSharp
+        m_MethodName: SetBrushSize
         m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0.03
+          m_FloatArgument: 3
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -2828,7 +2792,7 @@ GameObject:
   - component: {fileID: 1488403048}
   - component: {fileID: 1488403047}
   m_Layer: 5
-  m_Name: ErasingTool_Panel
+  m_Name: Tool_Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3009,8 +2973,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ColorSwipeGame.GPU_SpriteColoring, Assembly-CSharp
+      - m_Target: {fileID: 8100986678138197016}
+        m_TargetAssemblyTypeName: ColorSwipeGame.PaintService, Assembly-CSharp
         m_MethodName: ClearPainting
         m_Mode: 1
         m_Arguments:
@@ -3219,15 +3183,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GPU_SpriteColoring, Assembly-CSharp
-        m_MethodName: SetBrushScale
+      - m_Target: {fileID: 8100986678138197016}
+        m_TargetAssemblyTypeName: ColorSwipeGame.PaintService, Assembly-CSharp
+        m_MethodName: SetBrushSize
         m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0.045
+          m_FloatArgument: 5
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -3500,8 +3464,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ColorSwipeGame.GPU_SpriteColoring, Assembly-CSharp
+      - m_Target: {fileID: 1933882440}
+        m_TargetAssemblyTypeName: ColorSwipeGame.CaptureCameraRender, Assembly-CSharp
         m_MethodName: TakePhoto
         m_Mode: 3
         m_Arguments:
@@ -3632,9 +3596,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ColorSwipeGame.GPU_SpriteColoring, Assembly-CSharp
-        m_MethodName: SetEraseMode
+      - m_Target: {fileID: 8100986678138197016}
+        m_TargetAssemblyTypeName: ColorSwipeGame.PaintService, Assembly-CSharp
+        m_MethodName: SetErase
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6706,7 +6670,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4919075511271533154}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9af4e2e12d854a48bd04ccb2256dc88, type: 3}
   m_Name: 
@@ -6737,7 +6701,7 @@ MonoBehaviour:
   _texturedPencilType2Prefab: {fileID: 5129456631983249692, guid: 2a69bde439be1bb45b983f18a0875c06, type: 3}
   _pencilParent: {fileID: 1153562194}
   _scrollViewReference: {fileID: 3551448251384342190}
-  _spriteSelectionHandler: {fileID: 0}
+  _paintService: {fileID: 8100986678138197016}
   _targetPositionUp: {fileID: 1437985787}
   _targetPositionBottom: {fileID: 471197293}
 --- !u!114 &4596762129108034073
@@ -7799,6 +7763,7 @@ GameObject:
   - component: {fileID: 7518248467140361101}
   - component: {fileID: 7663598794245461464}
   - component: {fileID: 7782629899868623176}
+  - component: {fileID: 7782629899868623177}
   m_Layer: 5
   m_Name: PaintingToolSelection_Panel
   m_TagString: Untagged
@@ -9045,6 +9010,47 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7782629899868623177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5775548716887498786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9af4e2e12d854a48bd04ccb2256dc88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colors:
+  - {r: 0, g: 1, b: 0.07569122, a: 0}
+  - {r: 1, g: 0.0056602955, b: 0.0056602955, a: 0}
+  - {r: 1, g: 0, b: 0.8447895, a: 0}
+  - {r: 0.36915076, g: 0.5320754, b: 0.2479672, a: 0}
+  - {r: 0.97735846, g: 0.46286213, b: 0.7800172, a: 0}
+  - {r: 0.4339623, g: 0.20551796, b: 0.3508917, a: 0}
+  - {r: 0.9245283, g: 0.43784258, b: 0.7378541, a: 0}
+  - {r: 0.19874391, g: 0.08214305, b: 0.5245282, a: 0}
+  - {r: 0.3571876, g: 0.55045056, b: 0.83396226, a: 0}
+  - {r: 0.2606123, g: 0.36286572, b: 0.93962264, a: 0}
+  - {r: 0.2606123, g: 0.36286572, b: 0.93962264, a: 0}
+  - {r: 0.2606123, g: 0.36286572, b: 0.93962264, a: 0}
+  - {r: 0.2606123, g: 0.36286572, b: 0.93962264, a: 0}
+  - {r: 0.2606123, g: 0.36286572, b: 0.93962264, a: 0}
+  - {r: 0.2606123, g: 0.36286572, b: 0.93962264, a: 0}
+  - {r: 0.2606123, g: 0.36286572, b: 0.93962264, a: 0}
+  - {r: 0.2606123, g: 0.36286572, b: 0.93962264, a: 0}
+  - {r: 0.2606123, g: 0.36286572, b: 0.93962264, a: 0}
+  - {r: 0.2606123, g: 0.36286572, b: 0.93962264, a: 0}
+  - {r: 0.2606123, g: 0.36286572, b: 0.93962264, a: 0}
+  _pencilPrefab: {fileID: 8318182452356523512, guid: 6c1178aa7ac375047a9f15e99052b990, type: 3}
+  _texturedPencilPrefab: {fileID: 794366537689773729, guid: a780d14426cc1d243b46f9e8261acffd, type: 3}
+  _texturedPencilType2Prefab: {fileID: 5129456631983249692, guid: 2a69bde439be1bb45b983f18a0875c06, type: 3}
+  _pencilParent: {fileID: 1153562194}
+  _scrollViewReference: {fileID: 3551448251384342190}
+  _paintService: {fileID: 8100986678138197016}
+  _targetPositionUp: {fileID: 1437985787}
+  _targetPositionBottom: {fileID: 471197293}
 --- !u!223 &7787153502089473280
 Canvas:
   m_ObjectHideFlags: 0
@@ -9344,10 +9350,9 @@ MonoBehaviour:
   _textures:
   - {fileID: 2800000, guid: 5d92c58cf84f79348b9a74a259cf152a, type: 3}
   - {fileID: 2800000, guid: f8cda21ebc652b544bfe471465c7d66b, type: 3}
-  _cameraRT: {fileID: 8400000, guid: f2b3c3b9fe933414f8b18b7e6b3d3e30, type: 2}
   _inputHandler: {fileID: 1955107645}
-  _maxHitColliders: 5
-  _brushSize: 5
+  _maxHitColliders: 8
+  _brushSize: 3
   _brushScaleFactor: 0.01
   _defaultBrushColor: {r: 0, g: 1, b: 0, a: 1}
   _customMaterials:

@@ -3,16 +3,14 @@ using System.Collections.Generic;
 
 namespace ColorSwipeGame
 {
+    // old
     public class PaintController
     {
         private InitPaintData _paintData;
         private Stack<UndoData> _lastEditedTextures = new();
-        private Color _brushColor;
         private Material _brushMaterial;
         private Vector2 _lastTouchPosition;
-        private bool _isDragging;
         private bool _firstTouch = true;
-
         private Transform _spritesParent;
         private SpriteRenderer _currentSpriteRenderer;
         private Collider2D _currentCollider;
@@ -20,7 +18,6 @@ namespace ColorSwipeGame
         private RaycastHit2D[] _hits;
         private List<bool> _isEdited = new();
         private Dictionary<int, Texture2D> _editedTextures = new Dictionary<int, Texture2D>();
-        // private Dictionary<int, RenderTexture> _renderTextures = new Dictionary<int, RenderTexture>();
         private Dictionary<int, Sprite> _originalSprites = new Dictionary<int, Sprite>();
         private Dictionary<int, Sprite> _sprites = new Dictionary<int, Sprite>();
 
@@ -32,21 +29,19 @@ namespace ColorSwipeGame
         private readonly int OriginalProperty = Shader.PropertyToID("_Original");
 
 
-        // Use object pooling for temporary RenderTextures
-        private readonly Stack<RenderTexture> _renderTexturePool = new Stack<RenderTexture>(2);
-
         // CONSTRUCTOR
         public PaintController(InitPaintData paintData)
         {
             _paintData = paintData;
             _hits = new RaycastHit2D[paintData.MaxHitColliders];
             PreWarmShaders();
-            SetDefaultBrush();
+            SetDefaultColor();
+
+            // _currentRenderTex = new RenderTexture(2048, 2048, 0, RenderTextureFormat.ARGB32);
         }
 
         public void BeginDrag(Vector2 worldPosition)
         {
-            _isDragging = true;
             _firstTouch = true;
             RaycastSprites(worldPosition);
         }
@@ -54,17 +49,11 @@ namespace ColorSwipeGame
         public void ContinueDrag(Vector2 worldPosition)
         {
             if (!_currentSpriteRenderer) return;
-
-            if (_isDragging)
-            {
-                DrawLines(worldPosition);
-            }
+            DrawLines(worldPosition);
         }
 
         public void EndDrag()
         {
-            _isDragging = false;
-
             if (_currentSpriteRenderer)
             {
                 if (_currentCollider != null)
@@ -81,42 +70,46 @@ namespace ColorSwipeGame
             CleanupResources();
         }
 
-        private void SetDefaultBrush()
+        public void SetDefaultColor()
         {
-            SetPaintColorMode();
+            SetColorMode();
             _brushMaterial.SetColor(BrushColorProperty, _paintData.DefaultBrushColor);
             _brushMaterial.SetFloat(BrushSizeProperty, _paintData.BrushSize);
         }
 
-        private void SetPaintMode(Material material)
+        public void SetColor(Color color)
         {
-            _brushMaterial = material;
-            _brushMaterial.SetColor(BrushColorProperty, CurrentBrushColor);
+            CurrentBrushColor = color;
+            SetColorMode();
+        }
+
+        public void SetTexture(int index, Color color)
+        {
+            BrushTextureIndex = index;
+            CurrentBrushColor = color;
+            SetTextureMode();
+        }
+
+        public void SetErase() => SetEraseMode();
+
+        public void SetDefaultTexture(int index)
+        {
+            SetTextureMode();
+            BrushTextureIndex = index;
+            _brushMaterial.SetColor(BrushColorProperty, Color.white);
             _brushMaterial.SetFloat(BrushSizeProperty, _paintData.BrushSize);
-        }
-
-        public void SetDefaultColorForColorPainting()
-        {
-            CurrentBrushColor = _paintData.DefaultBrushColor;
-        }
-
-        public void SetDefaultColorForTexturePainting()
-        {
-            CurrentBrushColor = Color.white;
         }
 
         // Properties
         public Color CurrentBrushColor
         {
-            get => _brushColor;
+            get => _paintData.DefaultBrushColor;
             set
             {
-                _brushColor = value;
-                _brushMaterial.SetColor(BrushColorProperty, _brushColor);
+                _paintData.DefaultBrushColor = value;
+                _brushMaterial.SetColor(BrushColorProperty, _paintData.DefaultBrushColor);
             }
         }
-
-        public float BrushSize { get; set; }
 
         public int BrushTextureIndex
         {
@@ -128,27 +121,16 @@ namespace ColorSwipeGame
             }
         }
 
-        public void SetPaintTextureMode() => SetPaintMode(_paintData.BrushMaterials[(int)PaintMode.Color]);
-        public void SetEraseMode() => SetPaintMode(_paintData.BrushMaterials[(int)PaintMode.Erase]);
-        public void SetPaintColorMode() => SetPaintMode(_paintData.BrushMaterials[(int)PaintMode.Texture]);
-
         public void SetBrushScale(float value)
         {
             _paintData.BrushSize = value;
             _brushMaterial.SetFloat(BrushSizeProperty, _paintData.BrushSize);
         }
 
-        public void SetBrushTexture(int index)
-        {
-            SetPaintTextureMode();
-            BrushTextureIndex = index;
-            _brushMaterial.SetTexture(BrushTextureProperty, _paintData.Textures[_brushTextureIndex]);
-        }
-
         public void ClearPainting()
         {
             RestoreOriginalTextures();
-            ReapplySpritesToRenderers();
+            // ReapplySpritesToRenderers();
 
             // also clear undo stack
             _lastEditedTextures.Clear();
@@ -170,13 +152,25 @@ namespace ColorSwipeGame
 
         public void InitializeLevel(Transform spritesParent)
         {
-            foreach (Transform spriteTransform in spritesParent)
+            _spritesParent = spritesParent;
+            foreach (Transform spriteTransform in _spritesParent)
             {
                 InitializeSprite(spriteTransform.GetComponent<SpriteRenderer>());
             }
         }
 
         /* PRIVATE METHODS */
+
+        private void SetColorMode() => SetPaintMode(_paintData.BrushMaterials[(int)PaintMode.Color]);
+        private void SetEraseMode() => SetPaintMode(_paintData.BrushMaterials[(int)PaintMode.Erase]);
+        private void SetTextureMode() => SetPaintMode(_paintData.BrushMaterials[(int)PaintMode.Texture]);
+
+        private void SetPaintMode(Material material)
+        {
+            _brushMaterial = material;
+            _brushMaterial.SetColor(BrushColorProperty, CurrentBrushColor);
+            _brushMaterial.SetFloat(BrushSizeProperty, _paintData.BrushSize);
+        }
 
         private void InitializeSprite(SpriteRenderer spriteRenderer)
         {
@@ -294,10 +288,14 @@ namespace ColorSwipeGame
             _brushMaterial.SetTexture(MainTexProperty, editedTexture);
             _brushMaterial.SetTexture(OriginalProperty, _originalSprites[key].texture);
 
-            RenderTexture renderTexture = GetRenderTextureFromPool(editedTexture.width, editedTexture.height);
+            RenderTexture renderTexture = RenderTexture.GetTemporary(editedTexture.width, editedTexture.height, 0, RenderTextureFormat.ARGB32);
+
             Graphics.Blit(editedTexture, renderTexture, _brushMaterial);
             Graphics.CopyTexture(renderTexture, editedTexture);
-            ReturnRenderTextureToPool(renderTexture);
+
+            // ReturnRenderTextureToPool(renderTexture);
+            renderTexture.DiscardContents();
+            RenderTexture.ReleaseTemporary(renderTexture);
 
             if (!_sprites.TryGetValue(key, out Sprite _))
             {
@@ -311,23 +309,25 @@ namespace ColorSwipeGame
             _currentSpriteRenderer.sprite = _sprites[key];
         }
 
-        private RenderTexture GetRenderTextureFromPool(int width, int height)
-        {
-            if (_renderTexturePool.Count > 0)
-            {
-                RenderTexture rt = _renderTexturePool.Pop();
-                if (rt.width == width && rt.height == height)
-                    return rt;
-                else
-                    rt.Release();
-            }
-            return new RenderTexture(width, height, 0, RenderTextureFormat.ARGB32);
-        }
 
-        private void ReturnRenderTextureToPool(RenderTexture rt)
-        {
-            _renderTexturePool.Push(rt);
-        }
+        // POOL - GET and RETURN
+        // private RenderTexture GetRenderTextureFromPool(int width, int height)
+        // {
+        //     if (_renderTexturePool.Count > 0)
+        //     {
+        //         RenderTexture rt = _renderTexturePool.Pop();
+        //         if (rt.width == width && rt.height == height)
+        //             return rt;
+        //         else
+        //             rt.Release();
+        //     }
+        //     return new RenderTexture(width, height, 0, RenderTextureFormat.ARGB32);
+        // }
+
+        // private void ReturnRenderTextureToPool(RenderTexture rt)
+        // {
+        //     _renderTexturePool.Push(rt);
+        // }
 
         private Vector2 WorldToTexturePoint(Vector2 worldPos)
         {
@@ -343,29 +343,7 @@ namespace ColorSwipeGame
         }
 
 
-        // UNDO _ FUNCTION
-
-        // very heavy - per call taking 64 mb
-        private bool IsTextureEmpty(Texture2D texture)
-        {
-            if (texture == null || texture.width == 0 || texture.height == 0)
-            {
-                return true;
-            }
-
-            // Check if all pixels are transparent (assuming RGBA32 format)
-            Color[] pixels = texture.GetPixels();
-            foreach (var pixel in pixels)
-            {
-                if (pixel.a == 1) // If any pixel is not fully transparent
-                {
-                    return false;
-                }
-            }
-
-            return true; // All pixels are transparent
-        }
-
+        // Save State - UNDO _ FUNCTION
         private void SaveCurrentTextureState()
         {
             int index = _currentSpriteRenderer.transform.GetSiblingIndex();
@@ -374,20 +352,13 @@ namespace ColorSwipeGame
             {
                 Texture2D newTex = new(_editedTextures[index].width, _editedTextures[index].height, TextureFormat.RGBA32, 1, false);
                 Graphics.CopyTexture(_editedTextures[index], newTex);
-                UndoData undoData = new UndoData(index, newTex, _currentSpriteRenderer.sprite.rect, _currentSpriteRenderer.sprite.pixelsPerUnit);
-                _lastEditedTextures.Push(undoData);
+                _lastEditedTextures.Push(new UndoData(index, newTex, _currentSpriteRenderer.sprite.rect, _currentSpriteRenderer.sprite.pixelsPerUnit));
             }
         }
 
         // CLEAR _ Function
         private void CleanupResources()
         {
-            // foreach (var rt in _renderTextures.Values)
-            // {
-            //     rt.Release();
-            // }
-            // _renderTextures.Clear();
-
             foreach (var texture in _editedTextures.Values)
             {
                 if (texture != null)
@@ -421,6 +392,7 @@ namespace ColorSwipeGame
         }
         private void ReapplySpritesToRenderers()
         {
+            Debug.Log(_spritesParent);
             foreach (Transform spriteTransform in _spritesParent)
             {
                 SpriteRenderer spriteRenderer = spriteTransform.GetComponent<SpriteRenderer>();

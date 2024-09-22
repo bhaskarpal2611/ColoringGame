@@ -13,7 +13,7 @@ namespace ColorSwipeGame.UI
         [SerializeField] private RectTransform _pencilParent;
         public ScrollRect _scrollViewReference;
 
-        [SerializeField] private GPU_SpriteColoring _spriteSelectionHandler;
+        [SerializeField] private PaintService _paintService;
         [SerializeField] private RectTransform _targetPositionUp;
         [SerializeField] private RectTransform _targetPositionBottom;
 
@@ -45,7 +45,7 @@ namespace ColorSwipeGame.UI
 
         public void OnPencilSelection(int index)
         {
-            if(_prevIndex == index) return;
+            if (_prevIndex == index) return;
 
             _scrollViewReference.content = _pencilParent.GetChild(index) as RectTransform;
 
@@ -56,7 +56,7 @@ namespace ColorSwipeGame.UI
                 _pencilParent.GetChild(_prevIndex).gameObject.SetActive(false);
                 _pencilParent.GetChild(index).gameObject.SetActive(true);
                 _prevIndex = index;
-                MoveUpPens();                
+                MoveUpPens();
             });
         }
 
@@ -67,12 +67,11 @@ namespace ColorSwipeGame.UI
                 UI_PencilItem pencil = Instantiate(_pencilPrefab, _pencilParent.GetChild(0));
                 Color color = _colors[i];
                 color.a = 1f;
-                pencil.PickColor(color);
-               
+                pencil.SetColorOnPencil(color);
+
                 pencil.Button.onClick.AddListener(() =>
                 {
-                    _spriteSelectionHandler.SetPaintColorMode();
-                    _spriteSelectionHandler.CurrentBrushColor = color;
+                    _paintService.SetColor(color);
                 });
             }
         }
@@ -83,11 +82,10 @@ namespace ColorSwipeGame.UI
                 UI_PencilItem pencil = Instantiate(_texturedPencilPrefab, _pencilParent.GetChild(1));
                 Color color = _colors[i];
                 color.a = 1f;
-                pencil.PickColor(color);
+                pencil.SetColorOnPencil(color);
                 pencil.Button.onClick.AddListener(() =>
                 {
-                    _spriteSelectionHandler.SetBrushTexture(0);
-                    _spriteSelectionHandler.CurrentBrushColor = color;
+                    _paintService.SetTexture(0, color);
                 });
             }
         }
@@ -98,11 +96,10 @@ namespace ColorSwipeGame.UI
                 UI_PencilItem pencil = Instantiate(_texturedPencilType2Prefab, _pencilParent.GetChild(2));
                 Color color = _colors[i];
                 color.a = 1f;
-                pencil.PickColor(color);
+                pencil.SetColorOnPencil(color);
                 pencil.Button.onClick.AddListener(() =>
                 {
-                    _spriteSelectionHandler.SetBrushTexture(1);
-                    _spriteSelectionHandler.CurrentBrushColor = color;
+                    _paintService.SetTexture(1, color);
                 });
             }
         }

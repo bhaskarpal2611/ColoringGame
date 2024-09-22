@@ -8,14 +8,14 @@ namespace ColorSwipeGame.UI
         [SerializeField] Image[] _pencilPieces;
         [SerializeField] Button _button;
 
-        public Button Button { get { return _button; } } 
+        public Button Button { get { return _button; } }
 
         private void OnDestroy()
         {
             Button.onClick.RemoveAllListeners();
         }
 
-        public void PickColor(Color color)
+        public void SetColorOnPencil(Color color)
         {
             for (int i = 0; i < _pencilPieces.Length; i++)
             {

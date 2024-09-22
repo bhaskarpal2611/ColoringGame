@@ -7,7 +7,6 @@ namespace ColorSwipeGame
     {
         [SerializeField] private Transform _spritesContainer;
         [SerializeField] private Texture2D[] _textures;
-        [SerializeField] private RenderTexture _cameraRT;
         [SerializeField] private InputHandler _inputHandler;
 
         [Header("Brush Settings")]
@@ -79,26 +78,21 @@ namespace ColorSwipeGame
         }
 
         // Public methods for other scripts to interact with PaintController
-        public void SetBrushColor(Color color) => _paintController.CurrentBrushColor = color;
         public void SetBrushSize(float size) => _paintController.SetBrushScale(size * _brushScaleFactor);
-        public void SetBrushTexture(int index) => _paintController.SetBrushTexture(index);
-        public void SetPaintMode(PaintMode mode)
-        {
-            switch (mode)
-            {
-                case PaintMode.Color:
-                    _paintController.SetPaintColorMode();
-                    break;
-                case PaintMode.Texture:
-                    _paintController.SetPaintTextureMode();
-                    break;
-                case PaintMode.Erase:
-                    _paintController.SetEraseMode();
-                    break;
-            }
-        }
+
+        // on main pen selection or erase button
+        public void SetDefaultColorMode() => _paintController.SetDefaultColor();
+        public void SetDefaultTextureMode(int index) => _paintController.SetDefaultTexture(index);
+        public void SetErase() => _paintController.SetErase();
+
+        // on individual pens
+        public void SetColor(Color color) => _paintController.SetColor(color);
+        public void SetTexture(int index, Color color) => _paintController.SetTexture(index, color);
+
         public void ClearPainting() => _paintController.ClearPainting();
         public void Undo() => _paintController.PerformUndo();
+
+        // public void OnBackButtonPressed() => _paintController.ClearMemory();
     }
 
     [System.Serializable]

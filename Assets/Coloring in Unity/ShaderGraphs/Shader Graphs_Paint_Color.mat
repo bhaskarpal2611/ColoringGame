@@ -58,9 +58,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BrushSize: 0.049999997
+    - _BrushSize: 0.03
     m_Colors:
-    - _BrushColor: {r: 0, g: 0, b: 0, a: 0}
+    - _BrushColor: {r: 0, g: 1, b: 0, a: 1}
     - _Color: {r: 0.4606501, g: 0.7207546, b: 0.18902797, a: 0}
-    - _UVPosition: {r: 0.46321848, g: 0.8700004, b: 0, a: 0}
+    - _UVPosition: {r: 0.4361241, g: 1.0540482, b: 0, a: 0}
   m_BuildTextureStacks: []
