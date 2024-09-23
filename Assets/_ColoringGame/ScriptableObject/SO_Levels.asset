@@ -12,31 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d7c21c55a233a0429c81e171ec75746, type: 3}
   m_Name: SO_Levels
   m_EditorClassIdentifier: 
-  levels:
+  LevelData:
   - levelIndex: 0
-    levelPrefab: {fileID: 2460442869233561013, guid: a805462e80cb065418871d2b641a472d, type: 3}
+    levelPrefab: {fileID: 1967041107805472303, guid: 228b87b615240734bbc2126aef9e3c76, type: 3}
     isLevelCompleted: 0
   - levelIndex: 1
-    levelPrefab: {fileID: 1297199473006019427, guid: fcfdc3b386215c0498b7570c3bc20265, type: 3}
+    levelPrefab: {fileID: 2460442869233561013, guid: a805462e80cb065418871d2b641a472d, type: 3}
     isLevelCompleted: 0
   - levelIndex: 2
-    levelPrefab: {fileID: 4429773294001562870, guid: 243f93c4e40efe14eb17c541480d7f88, type: 3}
+    levelPrefab: {fileID: 1297199473006019427, guid: fcfdc3b386215c0498b7570c3bc20265, type: 3}
     isLevelCompleted: 0
   - levelIndex: 3
-    levelPrefab: {fileID: 404216453300770895, guid: 8b7b88da2ecefbc41a0b4071f801518f, type: 3}
+    levelPrefab: {fileID: 7559283923001293542, guid: 97075ba594af9a941bf93bd2c40884aa, type: 3}
     isLevelCompleted: 0
   - levelIndex: 4
-    levelPrefab: {fileID: 646319494229189181, guid: d8082a4557d85024884a898c4fcf00fe, type: 3}
+    levelPrefab: {fileID: 404216453300770895, guid: 8b7b88da2ecefbc41a0b4071f801518f, type: 3}
     isLevelCompleted: 0
   - levelIndex: 5
     levelPrefab: {fileID: 1947265809199597286, guid: 21b9d7c506e329f458460289b845dbb8, type: 3}
     isLevelCompleted: 0
   - levelIndex: 6
-    levelPrefab: {fileID: 1967041107805472303, guid: 228b87b615240734bbc2126aef9e3c76, type: 3}
-    isLevelCompleted: 0
-  - levelIndex: 7
     levelPrefab: {fileID: 9167756834360458280, guid: a62d15eaa304f144da8b98cc4cc2a1b6, type: 3}
     isLevelCompleted: 0
+  - levelIndex: 7
+    levelPrefab: {fileID: 646319494229189181, guid: d8082a4557d85024884a898c4fcf00fe, type: 3}
+    isLevelCompleted: 0
   - levelIndex: 8
-    levelPrefab: {fileID: 7559283923001293542, guid: 97075ba594af9a941bf93bd2c40884aa, type: 3}
+    levelPrefab: {fileID: 4429773294001562870, guid: 243f93c4e40efe14eb17c541480d7f88, type: 3}
     isLevelCompleted: 0

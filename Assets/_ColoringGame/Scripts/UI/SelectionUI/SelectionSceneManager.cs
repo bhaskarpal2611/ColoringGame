@@ -7,13 +7,15 @@ namespace ColorSwipeGame
         [SerializeField] private LevelDataSO _levels;
         [SerializeField] private Transform _levelParent;
         [SerializeField] private GameObject _selectionSceneCanvas;
+        [SerializeField] private ReferenceImageLoader _referenceImageLoader;
 
         private GameObject _currentLevel;
 
         public void LoadLevel(int index)
         {
+            _referenceImageLoader.SetReferenceImage(index);
             _selectionSceneCanvas.SetActive(false);
-            _currentLevel = Instantiate(_levels.levels[index].levelPrefab, _levelParent);
+            _currentLevel = Instantiate(_levels.GetLevelPrefab(index), _levelParent);
         }
 
         public void GoBackToSelectionScene()
