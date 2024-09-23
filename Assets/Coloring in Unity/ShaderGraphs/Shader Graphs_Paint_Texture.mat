@@ -64,7 +64,7 @@ Material:
     - _BrushSize: 0.03
     - _Index: 0
     m_Colors:
-    - _BrushColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BrushColor: {r: 0, g: 1, b: 0, a: 1}
     - _UVPOS: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _UVPosition: {r: 0.3275986, g: 0.9372646, b: 0, a: 0}
   m_BuildTextureStacks: []
