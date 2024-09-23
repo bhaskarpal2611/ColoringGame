@@ -3,20 +3,22 @@ using System.Collections.Generic;
 
 namespace ColorSwipeGame
 {
-    // old
     public class PaintController
     {
         private InitPaintData _paintData;
-        private Stack<UndoData> _lastEditedTextures = new();
         private Material _brushMaterial;
         private Vector2 _lastTouchPosition;
         private bool _firstTouch = true;
+        private bool _isDragging = false;
+        private RenderTexture _currentRT;
         private Transform _spritesParent;
         private SpriteRenderer _currentSpriteRenderer;
         private Collider2D _currentCollider;
         private int _brushTextureIndex;
+
         private RaycastHit2D[] _hits;
         private List<bool> _isEdited = new();
+        private Stack<UndoData> _lastEditedTextures = new();
         private Dictionary<int, Texture2D> _editedTextures = new Dictionary<int, Texture2D>();
         private Dictionary<int, Sprite> _originalSprites = new Dictionary<int, Sprite>();
         private Dictionary<int, Sprite> _sprites = new Dictionary<int, Sprite>();
@@ -28,7 +30,6 @@ namespace ColorSwipeGame
         private readonly int MainTexProperty = Shader.PropertyToID("_MainTex");
         private readonly int OriginalProperty = Shader.PropertyToID("_Original");
 
-
         // CONSTRUCTOR
         public PaintController(InitPaintData paintData)
         {
@@ -36,24 +37,25 @@ namespace ColorSwipeGame
             _hits = new RaycastHit2D[paintData.MaxHitColliders];
             PreWarmShaders();
             SetDefaultColor();
-
-            // _currentRenderTex = new RenderTexture(2048, 2048, 0, RenderTextureFormat.ARGB32);
         }
 
         public void BeginDrag(Vector2 worldPosition)
         {
             _firstTouch = true;
+            //_currentRT = new RenderTexture(2048, 2048, 0, RenderTextureFormat.ARGB32);
             RaycastSprites(worldPosition);
         }
 
         public void ContinueDrag(Vector2 worldPosition)
         {
             if (!_currentSpriteRenderer) return;
+            _isDragging = true;
             DrawLines(worldPosition);
         }
 
         public void EndDrag()
         {
+            _isDragging = false;
             if (_currentSpriteRenderer)
             {
                 if (_currentCollider != null)
@@ -62,6 +64,12 @@ namespace ColorSwipeGame
                     _currentCollider = null;
                 }
                 _currentSpriteRenderer = null;
+            }
+
+            if (_currentRT)
+            {
+                _currentRT.DiscardContents();
+                RenderTexture.ReleaseTemporary(_currentRT);
             }
         }
 
@@ -130,7 +138,7 @@ namespace ColorSwipeGame
         public void ClearPainting()
         {
             RestoreOriginalTextures();
-            // ReapplySpritesToRenderers();
+            ReapplySpritesToRenderers();
 
             // also clear undo stack
             _lastEditedTextures.Clear();
@@ -181,11 +189,11 @@ namespace ColorSwipeGame
             _originalSprites.Add(spriteIndex, originalSprite);
             _isEdited.Add(false);
             _editedTextures.Add(spriteIndex, new Texture2D(originalTexture.width, originalTexture.height, originalTexture.format, originalTexture.mipmapCount, false));
-            // _renderTextures.Add(spriteIndex, new RenderTexture(originalTexture.width, originalTexture.height, 0, RenderTextureFormat.ARGB32, originalTexture.mipmapCount)
-            // {
-            //     useMipMap = false,
-            //     autoGenerateMips = false
-            // });
+            //_renderTextures.Add(spriteIndex, new RenderTexture(originalTexture.width, originalTexture.height, 0, RenderTextureFormat.ARGB32, originalTexture.mipmapCount)
+            //{
+            //    useMipMap = false,
+            //    autoGenerateMips = false
+            //});
         }
 
         private void PreWarmShaders()
@@ -274,37 +282,47 @@ namespace ColorSwipeGame
             Sprite sprite = _currentSpriteRenderer.sprite;
             int key = _currentSpriteRenderer.transform.GetSiblingIndex();
 
-            if (!_editedTextures.TryGetValue(key, out Texture2D editedTexture))
+            //if (!_editedTextures.TryGetValue(key, out Texture2D editedTexture))
+            //{
+            //    editedTexture = new Texture2D(sprite.texture.width, sprite.texture.height, TextureFormat.RGBA32, false);
+            //    _editedTextures[key] = editedTexture;
+            //    _isEdited[key] = true;
+            //}
+
+            if (!_isEdited[key])
             {
-                editedTexture = new Texture2D(sprite.texture.width, sprite.texture.height, TextureFormat.RGBA32, false);
-                _editedTextures[key] = editedTexture;
+                Graphics.CopyTexture(sprite.texture, _editedTextures[key]);
                 _isEdited[key] = true;
             }
 
-            if (sprite.texture != editedTexture)
-                Graphics.CopyTexture(sprite.texture, editedTexture);
+            //if (sprite.texture != _editedTextures[key])
+            //    Graphics.CopyTexture(sprite.texture, _editedTextures[key]);
 
             _brushMaterial.SetVector(UVPositionProperty, texturePoint / sprite.texture.width);
-            _brushMaterial.SetTexture(MainTexProperty, editedTexture);
+            _brushMaterial.SetTexture(MainTexProperty, _editedTextures[key]);
             _brushMaterial.SetTexture(OriginalProperty, _originalSprites[key].texture);
 
-            RenderTexture renderTexture = RenderTexture.GetTemporary(editedTexture.width, editedTexture.height, 0, RenderTextureFormat.ARGB32);
+            if (!_isDragging)
+            {
+                _currentRT = RenderTexture.GetTemporary(_editedTextures[key].width, _editedTextures[key].height, 0, RenderTextureFormat.ARGB32);
+                RenderTexture.active = _currentRT;
+                GL.Clear(true, true, Color.clear);
+                RenderTexture.active = null;
+            }
 
-            Graphics.Blit(editedTexture, renderTexture, _brushMaterial);
-            Graphics.CopyTexture(renderTexture, editedTexture);
+            Graphics.Blit(_editedTextures[key], _currentRT, _brushMaterial);
+            Graphics.CopyTexture(_currentRT, _editedTextures[key]);
 
             // ReturnRenderTextureToPool(renderTexture);
-            renderTexture.DiscardContents();
-            RenderTexture.ReleaseTemporary(renderTexture);
 
             if (!_sprites.TryGetValue(key, out Sprite _))
             {
-                Sprite newSprite = Sprite.Create(editedTexture, sprite.rect, Vector2.one / 2, sprite.pixelsPerUnit);
+                Sprite newSprite = Sprite.Create(_editedTextures[key], sprite.rect, Vector2.one / 2, sprite.pixelsPerUnit);
                 _sprites.Add(key, newSprite);
 
-                // Create original clean version of the sprite
-                Texture2D newTex = new Texture2D(_originalSprites[key].texture.width, _originalSprites[key].texture.height, TextureFormat.RGBA32, false);
-                Graphics.CopyTexture(_originalSprites[key].texture, newTex);
+                //// Create original clean version of the sprite
+                //Texture2D newTex = new Texture2D(_originalSprites[key].texture.width, _originalSprites[key].texture.height, TextureFormat.RGBA32, false);
+                //Graphics.CopyTexture(_originalSprites[key].texture, newTex);
             }
             _currentSpriteRenderer.sprite = _sprites[key];
         }
@@ -359,6 +377,13 @@ namespace ColorSwipeGame
         // CLEAR _ Function
         private void CleanupResources()
         {
+            //foreach (var rt in _renderTextures.Values)
+            //{
+            //    rt.DiscardContents();
+            //    rt.Release();
+            //} 
+            //_renderTextures.Clear();
+
             foreach (var texture in _editedTextures.Values)
             {
                 if (texture != null)
@@ -367,7 +392,6 @@ namespace ColorSwipeGame
                 }
             }
             _editedTextures.Clear();
-
             _sprites.Clear();
             _originalSprites.Clear();
         }
@@ -392,7 +416,6 @@ namespace ColorSwipeGame
         }
         private void ReapplySpritesToRenderers()
         {
-            Debug.Log(_spritesParent);
             foreach (Transform spriteTransform in _spritesParent)
             {
                 SpriteRenderer spriteRenderer = spriteTransform.GetComponent<SpriteRenderer>();

@@ -1660,7 +1660,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1778836071271879085}
   m_Layer: 0
-  m_Name: Level_Two
+  m_Name: Level_02_ELEPHANT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

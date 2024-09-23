@@ -92,7 +92,7 @@ namespace ColorSwipeGame
         public void ClearPainting() => _paintController.ClearPainting();
         public void Undo() => _paintController.PerformUndo();
 
-        // public void OnBackButtonPressed() => _paintController.ClearMemory();
+        public void OnBackButtonPressed() => _paintController.ClearMemory();
     }
 
     [System.Serializable]

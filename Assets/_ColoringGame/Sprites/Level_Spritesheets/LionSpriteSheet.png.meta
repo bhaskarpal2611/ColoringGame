@@ -71,7 +71,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -97,12 +97,12 @@ TextureImporter:
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 0
+    overridden: 1
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
@@ -375,48 +375,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LionSpriteSheet_24
-      rect:
-        serializedVersion: 2
-        x: 775
-        y: 1028
-        width: 385
-        height: 79
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4a2f5e7a2ecae3748a40841eaa1a9a4c
-      internalID: 506473268
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LionSpriteSheet_25
-      rect:
-        serializedVersion: 2
-        x: 744
-        y: 812
-        width: 439
-        height: 138
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7455fde70da5ee44ba5987571a6942b1
-      internalID: -384890955
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: LionSpriteSheet_26
       rect:
         serializedVersion: 2
@@ -475,6 +433,90 @@ TextureImporter:
       bones: []
       spriteID: adf5a9fa9e4d6ea419e93464bc020184
       internalID: -537487075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LionSpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 775
+        y: 1028
+        width: 80
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b746bb7aa7d7e84db285a3d2d3e5557
+      internalID: -60288577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LionSpriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 1079
+        y: 1028
+        width: 81
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d284cb1e5a21b98489709a1a1fb998eb
+      internalID: 1564766356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LionSpriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 1044
+        y: 812
+        width: 139
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e5876f5c7ab4bd45a031208ee6db11e
+      internalID: 970850560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LionSpriteSheet_8
+      rect:
+        serializedVersion: 2
+        x: 744
+        y: 812
+        width: 140
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a23755dfaa1414a459e99e6708de780d
+      internalID: -684199382
       vertices: []
       indices: 
       edges: []
