@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6e6f59fee7ca1f9ffb3a777af54657e0
+guid: 3b3a723c4bec3d24a94bfde4bbcdc324
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,12 +97,12 @@ TextureImporter:
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 47
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 1
+    overridden: 0
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Category_0
+      name: CategorySubButton_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 4
-        width: 782
-        height: 1533
+        x: 82
+        y: 91
+        width: 3
+        height: 1
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,113 +137,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 887f248379f6a97259fd82bccaeb9a55
-      internalID: 1677215106
+      spriteID: 7b60e9492a87dbf42b45203339e8118b
+      internalID: 73875496
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Category_1
+      name: CategorySubButton_1
       rect:
         serializedVersion: 2
-        x: 1120
-        y: 915
-        width: 81
-        height: 81
+        x: 0
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 17, y: 17, z: 17, w: 17}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 62df87a7923ca6e868173330213f77b1
-      internalID: 1528409835
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Category_2
-      rect:
-        serializedVersion: 2
-        x: 1062
-        y: 739
-        width: 222
-        height: 149
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 79cab56aef040fe77a5b3d6ecc528924
-      internalID: 1330955186
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Category_3
-      rect:
-        serializedVersion: 2
-        x: 1107
-        y: 582
-        width: 69
-        height: 79
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c160cd9396647d5c9bba4deba6f41ed3
-      internalID: -2017503118
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Category_4
-      rect:
-        serializedVersion: 2
-        x: 1095
-        y: 379
-        width: 84
-        height: 94
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c2244d4e1d4bf4b92a949d08c8cd477b
-      internalID: 1245046307
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Category_5
-      rect:
-        serializedVersion: 2
-        x: 1106
-        y: 193
-        width: 85
-        height: 78
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c6d27f1ffb6e8f71bbb242d5f6c05ac4
-      internalID: 1474075715
+      spriteID: 4c1001a5ac8353647bf21f436f68e235
+      internalID: 1051711787
       vertices: []
       indices: 
       edges: []
@@ -259,13 +175,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Category_0: 1677215106
-      Category_1: 1528409835
-      Category_2: 1330955186
-      Category_3: -2017503118
-      Category_4: 1245046307
-      Category_5: 1474075715
-      Category_6: -1917188119
+      CategorySubButton_0: 73875496
+      CategorySubButton_1: 1051711787
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

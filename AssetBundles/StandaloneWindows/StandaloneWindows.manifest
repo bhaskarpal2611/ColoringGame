@@ -1,7 +1,7 @@
 ManifestFileVersion: 0
-CRC: 4098530485
+CRC: 608985556
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: fingercolouring
+      Name: colorswipe
       Dependencies: {}

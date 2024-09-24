@@ -1,7 +1,10 @@
 fileFormatVersion: 2
-guid: 6e6f59fee7ca1f9ffb3a777af54657e0
+guid: a7060abc12d8f224da01b3e83e0a0bde
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -5177388603050735206
+    second: 9-Sliced
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -45,11 +48,11 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 256
+  spriteBorder: {x: 64, y: 64, z: 64, w: 64}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -65,7 +68,7 @@ TextureImporter:
   ignorePngGamma: 0
   applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -97,12 +100,25 @@ TextureImporter:
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 47
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 1
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
@@ -123,133 +139,68 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Category_0
+      name: 9-Sliced
       rect:
         serializedVersion: 2
-        x: 2
-        y: 4
-        width: 782
-        height: 1533
+        x: 0
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 64, y: 64, z: 64, w: 64}
       outline: []
-      physicsShape: []
-      tessellationDetail: 0
+      physicsShape:
+      - - {x: 126, y: 73}
+        - {x: 120, y: 92}
+        - {x: 108, y: 108}
+        - {x: 92, y: 120}
+        - {x: 73, y: 126}
+        - {x: -73, y: 126}
+        - {x: -92, y: 120}
+        - {x: -108, y: 108}
+        - {x: -120, y: 92}
+        - {x: -126, y: 73}
+        - {x: -126, y: -73}
+        - {x: -120, y: -92}
+        - {x: -108, y: -108}
+        - {x: -92, y: -120}
+        - {x: -73, y: -126}
+        - {x: 73, y: -126}
+        - {x: 92, y: -120}
+        - {x: 108, y: -108}
+        - {x: 120, y: -92}
+        - {x: 126, y: -73}
+      tessellationDetail: 0.2
       bones: []
-      spriteID: 887f248379f6a97259fd82bccaeb9a55
-      internalID: 1677215106
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Category_1
-      rect:
-        serializedVersion: 2
-        x: 1120
-        y: 915
-        width: 81
-        height: 81
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 62df87a7923ca6e868173330213f77b1
-      internalID: 1528409835
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Category_2
-      rect:
-        serializedVersion: 2
-        x: 1062
-        y: 739
-        width: 222
-        height: 149
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 79cab56aef040fe77a5b3d6ecc528924
-      internalID: 1330955186
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Category_3
-      rect:
-        serializedVersion: 2
-        x: 1107
-        y: 582
-        width: 69
-        height: 79
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c160cd9396647d5c9bba4deba6f41ed3
-      internalID: -2017503118
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Category_4
-      rect:
-        serializedVersion: 2
-        x: 1095
-        y: 379
-        width: 84
-        height: 94
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c2244d4e1d4bf4b92a949d08c8cd477b
-      internalID: 1245046307
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Category_5
-      rect:
-        serializedVersion: 2
-        x: 1106
-        y: 193
-        width: 85
-        height: 78
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c6d27f1ffb6e8f71bbb242d5f6c05ac4
-      internalID: 1474075715
+      spriteID: a99410b1f783628b0800000000000000
+      internalID: -5177388603050735206
       vertices: []
       indices: 
       edges: []
       weights: []
     outline: []
-    physicsShape: []
+    physicsShape:
+    - - {x: 126, y: 73}
+      - {x: 120, y: 92}
+      - {x: 108, y: 108}
+      - {x: 92, y: 120}
+      - {x: 73, y: 126}
+      - {x: -73, y: 126}
+      - {x: -92, y: 120}
+      - {x: -108, y: 108}
+      - {x: -120, y: 92}
+      - {x: -126, y: 73}
+      - {x: -126, y: -73}
+      - {x: -120, y: -92}
+      - {x: -108, y: -108}
+      - {x: -92, y: -120}
+      - {x: -73, y: -126}
+      - {x: 73, y: -126}
+      - {x: 92, y: -120}
+      - {x: 108, y: -108}
+      - {x: 120, y: -92}
+      - {x: 126, y: -73}
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
@@ -259,13 +210,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Category_0: 1677215106
-      Category_1: 1528409835
-      Category_2: 1330955186
-      Category_3: -2017503118
-      Category_4: 1245046307
-      Category_5: 1474075715
-      Category_6: -1917188119
+      9-Sliced: -5177388603050735206
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

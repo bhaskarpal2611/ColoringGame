@@ -17,6 +17,11 @@ namespace ColorSwipeGame.UI
         [SerializeField] private RectTransform _targetPositionUp;
         [SerializeField] private RectTransform _targetPositionBottom;
 
+
+
+        private float XPOS_LEFT = 900f;
+        private float XPOS_RIGHT = -300f;
+
         private int _prevIndex;
 
         private void Start()
@@ -24,24 +29,36 @@ namespace ColorSwipeGame.UI
             GeneratePencils();
             GenerateTexturedPens();
             GenerateSecondTexturedPens();
+            MoveLeft();
 
             // Default active and color
             _pencilParent.GetChild(0).gameObject.SetActive(true);
-            MoveUpPens();
         }
 
-        public void MoveDownPens()
+        public void MoveRight()
         {
-            _pencilParent.DOAnchorPos(_targetPositionBottom.anchoredPosition, 1f).SetEase(Ease.OutQuad);
+            // Tween to the right (e.g., to 300 on the X-axis in 1 second)
+            _pencilParent.DOAnchorPosX(XPOS_LEFT, .75f);
         }
 
-        public void MoveUpPens()
+        public void MoveLeft()
         {
-            _pencilParent.DOAnchorPos(_targetPositionUp.anchoredPosition, 1f).SetEase(Ease.OutBack).OnComplete(() =>
-            {
-                // can enable pens button if disabled
-            });
+            // Tween to the left (e.g., to -300 on the X-axis in 1 second)
+            _pencilParent.DOAnchorPosX(XPOS_RIGHT, .75f);
         }
+
+        //public void MoveDownPens()
+        //{
+        //    _pencilParent.DOAnchorPos(_targetPositionBottom.anchoredPosition, 1f).SetEase(Ease.OutQuad);
+        //}
+
+        //public void MoveUpPens()
+        //{
+        //    _pencilParent.DOAnchorPos(_targetPositionUp.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+        //    {
+        //        // can enable pens button if disabled
+        //    });
+        //}
 
         public void OnPencilSelection(int index)
         {
@@ -49,14 +66,16 @@ namespace ColorSwipeGame.UI
 
             _scrollViewReference.content = _pencilParent.GetChild(index) as RectTransform;
 
-            // move down current pens.
-            _pencilParent.DOAnchorPos(_targetPositionBottom.anchoredPosition, 1f).SetEase(Ease.OutQuad).SetDelay(0.25f).OnComplete(() =>
+            // move right current pens.
+            // then move left the new pens selected
+
+            Debug.Log("chk");
+            _pencilParent.DOAnchorPosX(XPOS_LEFT, .75f).SetEase(Ease.OutQuad).SetDelay(0.15f).OnComplete(() =>
             {
-                // set inactive prevIndex item, set active current index one
                 _pencilParent.GetChild(_prevIndex).gameObject.SetActive(false);
                 _pencilParent.GetChild(index).gameObject.SetActive(true);
                 _prevIndex = index;
-                MoveUpPens();
+                MoveLeft();
             });
         }
 
@@ -77,6 +96,7 @@ namespace ColorSwipeGame.UI
         }
         private void GenerateTexturedPens()
         {
+            Debug.Log($"colorLen: {_colors.Length}");
             for (int i = 0; i < _colors.Length; i++)
             {
                 UI_PencilItem pencil = Instantiate(_texturedPencilPrefab, _pencilParent.GetChild(1));

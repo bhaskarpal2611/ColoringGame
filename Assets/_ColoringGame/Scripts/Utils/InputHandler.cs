@@ -23,7 +23,6 @@ namespace ColorSwipeGame
             if (Input.touchCount <= 0) return;
 
             _touch = Input.GetTouch(0);
-
             switch (_touch.phase)
             {
                 case TouchPhase.Began:

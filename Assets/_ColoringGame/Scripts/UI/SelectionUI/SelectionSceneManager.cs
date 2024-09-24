@@ -1,4 +1,6 @@
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace ColorSwipeGame
 {
@@ -9,13 +11,22 @@ namespace ColorSwipeGame
         [SerializeField] private GameObject _selectionSceneCanvas;
         [SerializeField] private ReferenceImageLoader _referenceImageLoader;
 
+        [SerializeField] private float _levelLoadTimeDelay = 0.25f;
+
         private GameObject _currentLevel;
+
+
+        public UnityEvent OnLevelLoaded = new();
 
         public void LoadLevel(int index)
         {
             _referenceImageLoader.SetReferenceImage(index);
             _selectionSceneCanvas.SetActive(false);
             _currentLevel = Instantiate(_levels.GetLevelPrefab(index), _levelParent);
+            transform.DOMove(transform.position, _levelLoadTimeDelay).OnComplete(() =>
+            {
+                OnLevelLoaded.Invoke();
+            });
         }
 
         public void GoBackToSelectionScene()

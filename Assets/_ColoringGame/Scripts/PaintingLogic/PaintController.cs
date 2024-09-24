@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.U2D;
 
 namespace ColorSwipeGame
 {
@@ -80,9 +81,9 @@ namespace ColorSwipeGame
 
         public void SetDefaultColor()
         {
-            SetColorMode();
             _brushMaterial.SetColor(BrushColorProperty, _paintData.DefaultBrushColor);
             _brushMaterial.SetFloat(BrushSizeProperty, _paintData.BrushSize);
+            SetColorMode();
         }
 
         public void SetColor(Color color)
@@ -189,6 +190,9 @@ namespace ColorSwipeGame
             _originalSprites.Add(spriteIndex, originalSprite);
             _isEdited.Add(false);
             _editedTextures.Add(spriteIndex, new Texture2D(originalTexture.width, originalTexture.height, originalTexture.format, originalTexture.mipmapCount, false));
+
+            Graphics.CopyTexture(originalTexture, _editedTextures[spriteIndex]);
+
             //_renderTextures.Add(spriteIndex, new RenderTexture(originalTexture.width, originalTexture.height, 0, RenderTextureFormat.ARGB32, originalTexture.mipmapCount)
             //{
             //    useMipMap = false,
