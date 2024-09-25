@@ -166,8 +166,6 @@ namespace ColorSwipeGame.UI
             {
                 if (i == index)
                 {
-                    // call selected
-                    Debug.Log("chk");
                     ColoredPens[i].OnPenSelected();
                     CurrentSelectedPen_1 = i;
                 }
