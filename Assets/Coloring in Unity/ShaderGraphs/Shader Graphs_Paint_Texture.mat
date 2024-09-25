@@ -28,7 +28,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BrushTexture:
-        m_Texture: {fileID: 2800000, guid: f8cda21ebc652b544bfe471465c7d66b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5d92c58cf84f79348b9a74a259cf152a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BrushTextures:
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Original:
-        m_Texture: {fileID: 2800000, guid: e1a473693e1a99143996ae1672815b95, type: 3}
+        m_Texture: {fileID: 2800000, guid: 04ff0a6e25590d440a7d7ce30fad62a8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_2a4b813245e740f2aa8ab466137de91c_Texture_1_Texture2D:
@@ -64,9 +64,9 @@ Material:
     - _BrushSize: 0.03
     - _Index: 0
     m_Colors:
-    - _BrushColor: {r: 0, g: 1, b: 0, a: 1}
+    - _BrushColor: {r: 0.7686275, g: 0.14509805, b: 0.854902, a: 1}
     - _UVPOS: {r: 0.5, g: 0.5, b: 0, a: 0}
-    - _UVPosition: {r: 0.44507396, g: 0.09260919, b: 0, a: 0}
+    - _UVPosition: {r: 0.7129791, g: 0.1432433, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1142825748591275896
 MonoBehaviour:

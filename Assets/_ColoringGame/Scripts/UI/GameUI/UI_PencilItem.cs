@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,9 @@ namespace ColorSwipeGame.UI
         [SerializeField] Button _button;
 
         public Button Button { get { return _button; } }
+
+        private const float XPOS_SELECTED_PEN = -75f;
+
 
         private void OnDestroy()
         {
@@ -22,5 +26,8 @@ namespace ColorSwipeGame.UI
                 _pencilPieces[i].color = color;
             }
         }
+
+        public void OnPenSelected() => transform.GetChild(0).DOLocalMoveX(XPOS_SELECTED_PEN, 0.5f);
+        public void UnselectedPen() => transform.GetChild(0).DOLocalMoveX(0f, 0.5f);
     }
 }

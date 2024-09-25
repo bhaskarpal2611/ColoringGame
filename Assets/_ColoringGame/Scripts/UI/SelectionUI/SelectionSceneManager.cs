@@ -12,9 +12,13 @@ namespace ColorSwipeGame
         [SerializeField] private ReferenceImageLoader _referenceImageLoader;
 
         [SerializeField] private float _levelLoadTimeDelay = 0.25f;
-
         private GameObject _currentLevel;
 
+
+        private void Start()
+        {
+            Debug.Log(CalculateScreenAspectRatio());
+        }
 
         public UnityEvent OnLevelLoaded = new();
 
@@ -33,6 +37,13 @@ namespace ColorSwipeGame
         {
             _selectionSceneCanvas.SetActive(true);
             Destroy(_currentLevel);
+        }
+
+        public float CalculateScreenAspectRatio()
+        {
+            float width = (float)Screen.width;
+            float height = (float)Screen.height;
+            return width / height;
         }
     }
 
