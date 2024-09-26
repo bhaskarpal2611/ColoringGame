@@ -8,6 +8,8 @@ namespace ColorSwipeGame
         [SerializeField] private Transform _spritesContainer;
         [SerializeField] private Texture2D[] _textures;
         [SerializeField] private InputHandler _inputHandler;
+        [SerializeField] private PenSelectionHandler _penPanelHandler;
+        [SerializeField] private AudioManager _audioHandler;
 
         [Header("Brush Settings")]
         [SerializeField] private int _maxHitColliders = 10;
@@ -26,7 +28,7 @@ namespace ColorSwipeGame
             Application.targetFrameRate = 60;
 
             InitPaintData newData = new InitPaintData(_maxHitColliders, _brushSize * _brushScaleFactor, _defaultBrushColor, _customMaterials, _textures);
-            _paintController = new PaintController(newData);
+            _paintController = new PaintController(newData, _penPanelHandler, _audioHandler);
 
             if (_inputHandler == null)
             {
@@ -37,21 +39,26 @@ namespace ColorSwipeGame
                     return;
                 }
             }
+        }
 
+        private void OnEnable()
+        {
             _inputHandler.OnBeginDrag += BeginDrag;
             _inputHandler.OnDragging += OnDrag;
             _inputHandler.OnDragEnd += EndDrag;
+            _inputHandler.OnDragStationary += OnDragStationary;
+        }
+        private void OnDisable()
+        {
+            _inputHandler.OnBeginDrag -= BeginDrag;
+            _inputHandler.OnDragging -= OnDrag;
+            _inputHandler.OnDragEnd -= EndDrag;
+            _inputHandler.OnDragStationary -= OnDragStationary;
+
         }
 
         private void OnDestroy()
         {
-            if (_inputHandler != null)
-            {
-                _inputHandler.OnBeginDrag -= BeginDrag;
-                _inputHandler.OnDragging -= OnDrag;
-                _inputHandler.OnDragEnd -= EndDrag;
-            }
-
             _paintController?.ClearMemory();
         }
 
@@ -72,13 +79,18 @@ namespace ColorSwipeGame
             _paintController.ContinueDrag(worldPosition);
         }
 
+        private void OnDragStationary()
+        {
+            //_audioHandler.StopPaintingSound();
+        }
+
         private void EndDrag()
         {
             _paintController.EndDrag();
         }
 
         // Public methods for other scripts to interact with PaintController
-        public void SetBrushSize(float size) => _paintController.SetBrushScale(size * _brushScaleFactor);
+        public void SetBrushSize(int size) => _paintController.SetBrushScale(size * _brushScaleFactor);
 
         // on main pen selection or erase button
         public void SetDefaultColorMode() => _paintController.SetDefaultColor();
@@ -90,7 +102,6 @@ namespace ColorSwipeGame
         public void SetTexture(int index, Color color) => _paintController.SetTexture(index, color);
 
         public void ClearPainting() => _paintController.ClearPainting();
-        public void Undo() => _paintController.PerformUndo();
 
         public void OnBackButtonPressed() => _paintController.ClearMemory();
     }

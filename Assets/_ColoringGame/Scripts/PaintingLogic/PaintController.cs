@@ -1,29 +1,32 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.U2D;
 
 namespace ColorSwipeGame
 {
     public class PaintController
     {
-        private InitPaintData _paintData;
-        private Material _brushMaterial;
-        private Vector2 _lastTouchPosition;
+        private int _brushTextureIndex;
         private bool _firstTouch = true;
         private bool _isDragging = false;
-        private RenderTexture _currentRT;
+        private Vector2 _lastTouchPosition;
+
+        private Material _brushMaterial;
         private Transform _spritesParent;
         private SpriteRenderer _currentSpriteRenderer;
         private Collider2D _currentCollider;
-        private int _brushTextureIndex;
+        private RenderTexture _currentRT;
 
-        private RaycastHit2D[] _hits;
+        private InitPaintData _paintData;
+        private PenSelectionHandler _penSelectionHandler;
+        private AudioManager _audioHandler;
+
         private List<bool> _isEdited = new();
-        private Stack<UndoData> _lastEditedTextures = new();
         private Dictionary<int, Texture2D> _editedTextures = new Dictionary<int, Texture2D>();
         private Dictionary<int, Sprite> _originalSprites = new Dictionary<int, Sprite>();
         private Dictionary<int, Sprite> _sprites = new Dictionary<int, Sprite>();
 
+        private const int BLIT_THRESHOLD = 10;
+        private readonly RaycastHit2D[] _hits;
         private readonly int BrushColorProperty = Shader.PropertyToID("_BrushColor");
         private readonly int BrushSizeProperty = Shader.PropertyToID("_BrushSize");
         private readonly int BrushTextureProperty = Shader.PropertyToID("_BrushTexture");
@@ -32,10 +35,12 @@ namespace ColorSwipeGame
         private readonly int OriginalProperty = Shader.PropertyToID("_Original");
 
         // CONSTRUCTOR
-        public PaintController(InitPaintData paintData)
+        public PaintController(InitPaintData paintData, PenSelectionHandler penPanelHandler, AudioManager audioMan)
         {
             _paintData = paintData;
             _hits = new RaycastHit2D[paintData.MaxHitColliders];
+            _penSelectionHandler = penPanelHandler;
+            _audioHandler = audioMan;
             PreWarmShaders();
             SetDefaultColor();
         }
@@ -52,11 +57,13 @@ namespace ColorSwipeGame
             if (!_currentSpriteRenderer) return;
             _isDragging = true;
             DrawLines(worldPosition);
+            _audioHandler.PlayPaintingSound();
         }
 
         public void EndDrag()
         {
             _isDragging = false;
+            _audioHandler.StopPaintingSound();
             if (_currentSpriteRenderer)
             {
                 if (_currentCollider != null)
@@ -139,24 +146,6 @@ namespace ColorSwipeGame
         public void ClearPainting()
         {
             RestoreOriginalTextures();
-            ReapplySpritesToRenderers();
-
-            // also clear undo stack
-            _lastEditedTextures.Clear();
-        }
-
-        public void PerformUndo()
-        {
-            if (_lastEditedTextures.Count > 0)
-            {
-                UndoData undoData = _lastEditedTextures.Pop();
-                Graphics.CopyTexture(undoData.Texture, _editedTextures[undoData.Index]);
-                Sprite newSprite = Sprite.Create(_editedTextures[undoData.Index], undoData.Rect, new(0.5f, 0.5f), undoData.PPU);
-                _sprites[undoData.Index] = newSprite;
-                // Ensure that the currentSpriteRenderer is updated to the sprite that was just restored
-                _currentSpriteRenderer = _spritesParent.GetChild(undoData.Index).GetComponent<SpriteRenderer>();
-                _currentSpriteRenderer.sprite = newSprite;
-            }
         }
 
         public void InitializeLevel(Transform spritesParent)
@@ -192,12 +181,6 @@ namespace ColorSwipeGame
             _editedTextures.Add(spriteIndex, new Texture2D(originalTexture.width, originalTexture.height, originalTexture.format, originalTexture.mipmapCount, false));
 
             Graphics.CopyTexture(originalTexture, _editedTextures[spriteIndex]);
-
-            //_renderTextures.Add(spriteIndex, new RenderTexture(originalTexture.width, originalTexture.height, 0, RenderTextureFormat.ARGB32, originalTexture.mipmapCount)
-            //{
-            //    useMipMap = false,
-            //    autoGenerateMips = false
-            //});
         }
 
         private void PreWarmShaders()
@@ -248,7 +231,6 @@ namespace ColorSwipeGame
             _currentCollider.enabled = false;
 
             SaveCurrentTextureState();
-
             ColorSpriteAtPosition(_hits[topIndex].point);
         }
 
@@ -258,17 +240,19 @@ namespace ColorSwipeGame
             {
                 _lastTouchPosition = currentTouchPosition;
                 _firstTouch = false;
+
+                // 1f is waitTime for delay in hiding panel
+                _penSelectionHandler.HideMainPanel(.5f);
             }
 
             float distance = Vector2.Distance(_lastTouchPosition, currentTouchPosition);
             int steps = Mathf.CeilToInt(distance / (_paintData.BrushSize * 0.5f));
             int currentSteps = 0;
-            const int blitThreshold = 10;
 
             for (int i = 0; i <= steps; i++)
             {
                 currentSteps++;
-                if (currentSteps >= blitThreshold)
+                if (currentSteps >= BLIT_THRESHOLD)
                 {
                     currentSteps = 0;
                     Vector2 interpolatedPoint = Vector2.Lerp(_lastTouchPosition, currentTouchPosition, i / (float)steps);
@@ -276,6 +260,7 @@ namespace ColorSwipeGame
                 }
             }
             _lastTouchPosition = currentTouchPosition;
+
         }
 
         private void ColorSpriteAtPosition(Vector2 worldPosition)
@@ -286,21 +271,11 @@ namespace ColorSwipeGame
             Sprite sprite = _currentSpriteRenderer.sprite;
             int key = _currentSpriteRenderer.transform.GetSiblingIndex();
 
-            //if (!_editedTextures.TryGetValue(key, out Texture2D editedTexture))
-            //{
-            //    editedTexture = new Texture2D(sprite.texture.width, sprite.texture.height, TextureFormat.RGBA32, false);
-            //    _editedTextures[key] = editedTexture;
-            //    _isEdited[key] = true;
-            //}
-
             if (!_isEdited[key])
             {
                 Graphics.CopyTexture(sprite.texture, _editedTextures[key]);
                 _isEdited[key] = true;
             }
-
-            //if (sprite.texture != _editedTextures[key])
-            //    Graphics.CopyTexture(sprite.texture, _editedTextures[key]);
 
             _brushMaterial.SetVector(UVPositionProperty, texturePoint / sprite.texture.width);
             _brushMaterial.SetTexture(MainTexProperty, _editedTextures[key]);
@@ -317,39 +292,13 @@ namespace ColorSwipeGame
             Graphics.Blit(_editedTextures[key], _currentRT, _brushMaterial);
             Graphics.CopyTexture(_currentRT, _editedTextures[key]);
 
-            // ReturnRenderTextureToPool(renderTexture);
-
             if (!_sprites.TryGetValue(key, out Sprite _))
             {
                 Sprite newSprite = Sprite.Create(_editedTextures[key], sprite.rect, Vector2.one / 2, sprite.pixelsPerUnit);
                 _sprites.Add(key, newSprite);
-
-                //// Create original clean version of the sprite
-                //Texture2D newTex = new Texture2D(_originalSprites[key].texture.width, _originalSprites[key].texture.height, TextureFormat.RGBA32, false);
-                //Graphics.CopyTexture(_originalSprites[key].texture, newTex);
             }
             _currentSpriteRenderer.sprite = _sprites[key];
         }
-
-
-        // POOL - GET and RETURN
-        // private RenderTexture GetRenderTextureFromPool(int width, int height)
-        // {
-        //     if (_renderTexturePool.Count > 0)
-        //     {
-        //         RenderTexture rt = _renderTexturePool.Pop();
-        //         if (rt.width == width && rt.height == height)
-        //             return rt;
-        //         else
-        //             rt.Release();
-        //     }
-        //     return new RenderTexture(width, height, 0, RenderTextureFormat.ARGB32);
-        // }
-
-        // private void ReturnRenderTextureToPool(RenderTexture rt)
-        // {
-        //     _renderTexturePool.Push(rt);
-        // }
 
         private Vector2 WorldToTexturePoint(Vector2 worldPos)
         {
@@ -357,11 +306,10 @@ namespace ColorSwipeGame
             Vector2 spriteSize = _currentSpriteRenderer.bounds.size;
             Rect spriteRect = _currentSpriteRenderer.sprite.rect;
 
-            texturePoint = new Vector2(
+            return new Vector2(
                 (texturePoint.x / spriteSize.x + 0.5f) * spriteRect.width + spriteRect.x,
                 (texturePoint.y / spriteSize.y + 0.5f) * spriteRect.height + spriteRect.y
             );
-            return texturePoint;
         }
 
 
@@ -374,20 +322,12 @@ namespace ColorSwipeGame
             {
                 Texture2D newTex = new(_editedTextures[index].width, _editedTextures[index].height, TextureFormat.RGBA32, 1, false);
                 Graphics.CopyTexture(_editedTextures[index], newTex);
-                _lastEditedTextures.Push(new UndoData(index, newTex, _currentSpriteRenderer.sprite.rect, _currentSpriteRenderer.sprite.pixelsPerUnit));
             }
         }
 
         // CLEAR _ Function
         private void CleanupResources()
         {
-            //foreach (var rt in _renderTextures.Values)
-            //{
-            //    rt.DiscardContents();
-            //    rt.Release();
-            //} 
-            //_renderTextures.Clear();
-
             foreach (var texture in _editedTextures.Values)
             {
                 if (texture != null)
@@ -418,34 +358,17 @@ namespace ColorSwipeGame
                 }
             }
         }
-        private void ReapplySpritesToRenderers()
-        {
-            foreach (Transform spriteTransform in _spritesParent)
-            {
-                SpriteRenderer spriteRenderer = spriteTransform.GetComponent<SpriteRenderer>();
-                int spriteIndex = spriteRenderer.transform.GetSiblingIndex();
-                if (_sprites.TryGetValue(spriteIndex, out Sprite newSprite))
-                {
-                    spriteRenderer.sprite = newSprite;
-                }
-            }
-        }
-    }
-
-    [System.Serializable]
-    public struct UndoData
-    {
-        public int Index;
-        public Texture2D Texture;
-        public Rect Rect;
-        public float PPU;
-
-        public UndoData(int index, Texture2D texture, Rect rect, float ppu)
-        {
-            Index = index;
-            Texture = texture;
-            Rect = rect;
-            PPU = ppu;
-        }
+        //private void ReapplySpritesToRenderers()
+        //{
+        //    foreach (Transform spriteTransform in _spritesParent)
+        //    {
+        //        SpriteRenderer spriteRenderer = spriteTransform.GetComponent<SpriteRenderer>();
+        //        int spriteIndex = spriteRenderer.transform.GetSiblingIndex();
+        //        if (_sprites.TryGetValue(spriteIndex, out Sprite newSprite))
+        //        {
+        //            spriteRenderer.sprite = newSprite;
+        //        }
+        //    }
+        //}
     }
 }

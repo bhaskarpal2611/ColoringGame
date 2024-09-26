@@ -10,15 +10,12 @@ namespace ColorSwipeGame
         [SerializeField] private Transform _levelParent;
         [SerializeField] private GameObject _selectionSceneCanvas;
         [SerializeField] private ReferenceImageLoader _referenceImageLoader;
-
+        [SerializeField] private LeftPanelController _leftPanelHandler;
+        [SerializeField] private PenSelectionHandler _penSelectionHandler;
         [SerializeField] private float _levelLoadTimeDelay = 0.25f;
+
         private GameObject _currentLevel;
-
-
-        private void Start()
-        {
-            Debug.Log(CalculateScreenAspectRatio());
-        }
+        private bool _firstTimeLoaded = false;
 
         public UnityEvent OnLevelLoaded = new();
 
@@ -27,7 +24,14 @@ namespace ColorSwipeGame
             _referenceImageLoader.SetReferenceImage(index);
             _selectionSceneCanvas.SetActive(false);
             _currentLevel = Instantiate(_levels.GetLevelPrefab(index), _levelParent);
-            transform.DOMove(transform.position, _levelLoadTimeDelay).OnComplete(() =>
+            _leftPanelHandler.ShowPanelAtStart();
+
+            if (_firstTimeLoaded)
+            {
+                _penSelectionHandler.ShowPanelAtStart();
+                _firstTimeLoaded = true;
+            }
+                transform.DOMove(transform.position, _levelLoadTimeDelay).OnComplete(() =>
             {
                 OnLevelLoaded.Invoke();
             });
@@ -41,8 +45,8 @@ namespace ColorSwipeGame
 
         public float CalculateScreenAspectRatio()
         {
-            float width = (float)Screen.width;
-            float height = (float)Screen.height;
+            float width = Screen.width;
+            float height = Screen.height;
             return width / height;
         }
     }

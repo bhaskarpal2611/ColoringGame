@@ -13,7 +13,7 @@ namespace ColorSwipeGame.UI
         [SerializeField] private RectTransform _pencilParent;
         [SerializeField] private ScrollRect _scrollViewReference;
         [SerializeField] private PaintService _paintService;
-        [SerializeField] private PenSelection_ButtonClicker _mainMenuHandler;
+        [SerializeField] private PenSelectionHandler _mainMenuHandler;
 
         private const float XPOS_LEFT = 900f;
         private const float XPOS_RIGHT = -300f;

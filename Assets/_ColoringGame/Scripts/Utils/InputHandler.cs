@@ -7,7 +7,7 @@ namespace ColorSwipeGame
     public class InputHandler : MonoBehaviour
     {
         public Action<Vector2> OnBeginDrag, OnDragging;
-        public Action OnDragEnd;
+        public Action OnDragEnd, OnDragStationary;
 
         [SerializeField] private float minDistance = 5f;
         [SerializeField] private float maxFrequency = 0.02f;
@@ -31,6 +31,9 @@ namespace ColorSwipeGame
                     break;
                 case TouchPhase.Moved:
                     HandleMove(_touch.position);
+                    break;
+                case TouchPhase.Stationary:
+                    OnDragStationary?.Invoke();
                     break;
                 case TouchPhase.Ended:
                     OnDragEnd?.Invoke();
