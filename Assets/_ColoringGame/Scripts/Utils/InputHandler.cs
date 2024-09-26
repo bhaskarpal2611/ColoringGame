@@ -10,7 +10,7 @@ namespace ColorSwipeGame
         public Action OnDragEnd, OnDragStationary;
 
         [SerializeField] private float minDistance = 5f;
-        [SerializeField] private float maxFrequency = 0.02f;
+        [SerializeField] private float maxFrequency = 0.2f;
 
         private Touch _touch;
         private Vector2 _lastPosition;
