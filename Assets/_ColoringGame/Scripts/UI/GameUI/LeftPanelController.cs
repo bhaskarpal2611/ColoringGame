@@ -21,7 +21,7 @@ namespace ColorSwipeGame
         }
 
         private const float XPOS_MAX = 0f;
-        private const float XPOS_MIN = -750f;
+        private const float XPOS_MIN = -450f;
 
         public void OpenSidePanel()
         {

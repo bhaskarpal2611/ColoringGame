@@ -99,10 +99,10 @@ namespace ColorSwipeGame
             SetColorMode();
         }
 
-        public void SetTexture(int index, Color color)
+        public void SetTexture(int index)
         {
             BrushTextureIndex = index;
-            CurrentBrushColor = color;
+            CurrentBrushColor = Color.white;
             SetTextureMode();
         }
 
