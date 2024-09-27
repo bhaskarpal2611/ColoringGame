@@ -20,7 +20,6 @@ namespace ColorSwipeGame
             }
         }
 
-
         private readonly float _SelectedValue = 15f;
         private int _selectedIndex = 0;
 
