@@ -8,8 +8,7 @@ namespace ColorSwipeGame.UI
     {
         [SerializeField] private Color[] _colors;
         [SerializeField] private UI_PencilItem _pencilPrefab;
-        [SerializeField] private UI_PencilItem _texturedPencilPrefab;
-        [SerializeField] private UI_PencilItem _texturedPencilType2Prefab;
+        [SerializeField] private UI_TextureItem[] _texturedPencilPrefab;
         [SerializeField] private RectTransform _pencilParent;
         [SerializeField] private ScrollRect _scrollViewReference;
         [SerializeField] private PaintService _paintService;
@@ -18,21 +17,20 @@ namespace ColorSwipeGame.UI
         private const float XPOS_LEFT = 900f;
         private const float XPOS_RIGHT = -300f;
 
-        private int _currentSelectedIndex;
+        private int _currentSelectedIndex = 0;
+        private int _maxLen = 2;
         private UI_PencilItem _currentSelectedPen;
-        public SelectedPenData SelectedPenData;
+        private SelectedPenData SelectedPenData;
 
         private void Start()
         {
             // Default active and color
             _pencilParent.GetChild(0).gameObject.SetActive(true);
-            SelectedPenData = new SelectedPenData(_colors.Length);
+            SelectedPenData = new SelectedPenData(_colors.Length, _texturedPencilPrefab.Length);
 
             GeneratePencils();
             GenerateTexturedPens();
-            GenerateSecondTexturedPens();
             MoveLeft();
-
         }
 
         // Dotween movements
@@ -59,20 +57,32 @@ namespace ColorSwipeGame.UI
             targetTransform.DOScale(targetScale, duration).SetEase(Ease.OutBack);
         }
 
-        public void OnPenCategorySelection(int index)
+        public void OnPenCategorySelection()
         {
-            if (_currentSelectedIndex == index) return;
+            _mainMenuHandler.SwapButton();
 
-            _scrollViewReference.content = _pencilParent.GetChild(index) as RectTransform;
+            int prevIndex = _currentSelectedIndex;
+            _currentSelectedIndex = ++_currentSelectedIndex % _maxLen;
+
+            if(_currentSelectedIndex % 2 != 0)
+            {
+                _paintService.SetDefaultTextureMode();
+            }
+            else
+            {
+                _paintService.SetDefaultColorMode();
+            }
+
+            _scrollViewReference.content = _pencilParent.GetChild(_currentSelectedIndex) as RectTransform;
 
             // move right current pens.
             // then move left the new pens selected
 
             _pencilParent.DOAnchorPosX(XPOS_LEFT, .25f).SetEase(Ease.OutQuad).OnComplete(() =>
             {
-                _pencilParent.GetChild(_currentSelectedIndex).gameObject.SetActive(false);
-                _pencilParent.GetChild(index).gameObject.SetActive(true);
-                _currentSelectedIndex = index;
+                _pencilParent.GetChild(prevIndex).gameObject.SetActive(false);
+                _pencilParent.GetChild(_currentSelectedIndex).gameObject.SetActive(true);
+
                 MoveLeft();
             });
         }
@@ -96,36 +106,14 @@ namespace ColorSwipeGame.UI
         }
         private void GenerateTexturedPens()
         {
-            for (int i = 0; i < _colors.Length; i++)
+            for (int i = 0; i < _texturedPencilPrefab.Length; i++)
             {
-                SelectedPenData.TexturedPens[i] = Instantiate(_texturedPencilPrefab, _pencilParent.GetChild(1));
-                Color color = _colors[i];
-                color.a = 1f;
-                SelectedPenData.TexturedPens[i].SetColorOnPencil(color);
                 int index = i;
+                SelectedPenData.TexturedPens[i] = Instantiate(_texturedPencilPrefab[i], _pencilParent.GetChild(1));
                 SelectedPenData.TexturedPens[i].Button.onClick.AddListener(() =>
                 {
-                    _paintService.SetTexture(0, color);
-                    SelectedPenData.TexturedPens[index].OnPenSelected();
+                    _paintService.SetTexture(index);
                     SelectedPenData.TexPenSelection(index);
-                });
-            }
-        }
-        private void GenerateSecondTexturedPens()
-        {
-            for (int i = 0; i < _colors.Length; i++)
-            {
-                SelectedPenData.SecondTexturedPens[i] = Instantiate(_texturedPencilType2Prefab, _pencilParent.GetChild(2));
-                Color color = _colors[i];
-                color.a = 1f;
-                SelectedPenData.SecondTexturedPens[i].SetColorOnPencil(color);
-                int index = i;
-
-                SelectedPenData.SecondTexturedPens[i].Button.onClick.AddListener(() =>
-                {
-                    _paintService.SetTexture(1, color);
-                    SelectedPenData.SecondTexturedPens[index].OnPenSelected();
-                    SelectedPenData.Tex2PenSelection(index);
                 });
             }
         }
@@ -134,42 +122,36 @@ namespace ColorSwipeGame.UI
     [System.Serializable]
     public struct SelectedPenData
     {
-        // 3 arrays of pens
         public UI_PencilItem[] ColoredPens;
-        public UI_PencilItem[] TexturedPens;
-        public UI_PencilItem[] SecondTexturedPens;
+        public UI_TextureItem[] TexturedPens;
 
-        // 3 indexes to select the current selected ones
-        public int CurrentSelectedPen_1;
-        public int CurrentSelectedPen_2;
-        public int CurrentSelectedPen_3;
+        public int CurrentSelectedColorPen;
+        public int CurrentSelectedTexturePen;
 
         // function to call this pen's OnPenSelected
         // And call Unselected For rest.
 
-        public SelectedPenData(int len)
+        public SelectedPenData(int len1, int len2)
         {
-            CurrentSelectedPen_1 = -1;
-            CurrentSelectedPen_2 = -1;
-            CurrentSelectedPen_3 = -1;
+            CurrentSelectedColorPen = -1;
+            CurrentSelectedTexturePen = -1;
 
-            ColoredPens = new UI_PencilItem[len];
-            TexturedPens = new UI_PencilItem[len];
-            SecondTexturedPens = new UI_PencilItem[len];
+            ColoredPens = new UI_PencilItem[len1];
+            TexturedPens = new UI_TextureItem[len2];
         }
 
         public void ColoredPenSelection(int index)
         {
-            if (CurrentSelectedPen_1 == index) return;
+            if (CurrentSelectedColorPen == index) return;
 
             for (int i = 0; i < ColoredPens.Length; i++)
             {
                 if (i == index)
                 {
                     ColoredPens[i].OnPenSelected();
-                    CurrentSelectedPen_1 = i;
+                    CurrentSelectedColorPen = i;
                 }
-                else 
+                else
                 {
                     ColoredPens[i].UnselectedPen();
                 }
@@ -177,37 +159,20 @@ namespace ColorSwipeGame.UI
         }
         public void TexPenSelection(int index)
         {
-            if (CurrentSelectedPen_2 == index) return;
+            if (CurrentSelectedTexturePen == index) return;
 
             for (int i = 0; i < TexturedPens.Length; i++)
             {
                 if (i == index)
                 {
-                    // call selected
-                    TexturedPens[i].OnPenSelected();
-                    CurrentSelectedPen_2 = i;
-                }
-                else
-                {
-                    TexturedPens[i].UnselectedPen();
-                }
-            }
-        }
-        public void Tex2PenSelection(int index)
-        {
-            if (CurrentSelectedPen_3 == index) return;
+                    // func call for selected from UI_TextureItem
 
-            for (int i = 0; i < SecondTexturedPens.Length; i++)
-            {
-                if (i == index)
-                {
-                    // call selected
-                    SecondTexturedPens[i].OnPenSelected();
-                    CurrentSelectedPen_3 = i;
+
+                    CurrentSelectedTexturePen = i;
                 }
                 else
                 {
-                    SecondTexturedPens[i].UnselectedPen();
+                    TexturedPens[i].UnselectedPen();    
                 }
             }
         }

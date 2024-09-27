@@ -9,54 +9,37 @@ namespace ColorSwipeGame
         [SerializeField] private RectTransform _mainPanel;
         [SerializeField] private float _buttonPopTime = 0.25f;
         [SerializeField] private float _mainPanelSlideTime = 0.25f;
+        [SerializeField] private Transform _swapButton;
 
-        private Button[] _buttons;
+        public void SwapButton()
+        {
+            foreach (Transform tf in _swapButton)
+            {
+                if (tf.gameObject.activeSelf) tf.gameObject.SetActive(false);
+                else tf.gameObject.SetActive(true);
+            }
+        }
+
+
         private readonly float _SelectedValue = 15f;
         private int _selectedIndex = 0;
 
         private readonly float LEFT_POS = 150f;
         private readonly float RIGHT_POS = 450f;
 
-        private void Start()
-        {
-            int i = 0;
-            _buttons = new Button[transform.childCount];
-            foreach (Transform child in transform)
-            {
-                _buttons[i] = child.GetChild(0).GetComponent<Button>();
-                i++;
-            }
-        }
+        // switch from color to tex pen
         public void SelectButton(int index)
         {
-            ShowMainPanel();
 
-            if (index == _selectedIndex) return;
-            int i = 0;
-            foreach (Button button in _buttons)
-            {
-                if (i == index)
-                {
-                    _selectedIndex = i;
-                    button.transform.DOLocalMoveX(-_SelectedValue, _buttonPopTime);
-                    button.transform.DOScale(1.1f, _buttonPopTime).SetEase(Ease.Linear);
-                }
-                else
-                {
-                    button.transform.DOLocalMoveX(_SelectedValue, 0.5f);
-                    button.transform.DOScale(1f, _buttonPopTime).SetEase(Ease.Linear);
-                }
-                i++;
-            }
         }
 
         private void ShowMainPanel()
         {
             _mainPanel.DOAnchorPosX(LEFT_POS, _mainPanelSlideTime);
         }
-        public void HideMainPanel(float waitTime)  
+        public void HideMainPanel(float waitTime)
         {
-            _mainPanel.DOAnchorPosX(RIGHT_POS, _mainPanelSlideTime).SetDelay(waitTime);
+            //_mainPanel.DOAnchorPosX(RIGHT_POS, _mainPanelSlideTime).SetDelay(waitTime);
         }
 
         public void ShowPanelAtStart()

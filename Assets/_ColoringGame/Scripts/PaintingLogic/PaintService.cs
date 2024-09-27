@@ -94,12 +94,12 @@ namespace ColorSwipeGame
 
         // on main pen selection or erase button
         public void SetDefaultColorMode() => _paintController.SetDefaultColor();
-        public void SetDefaultTextureMode(int index) => _paintController.SetDefaultTexture(index);
+        public void SetDefaultTextureMode(int index = 0) => _paintController.SetDefaultTexture(index);
         public void SetErase() => _paintController.SetErase();
 
         // on individual pens
         public void SetColor(Color color) => _paintController.SetColor(color);
-        public void SetTexture(int index, Color color) => _paintController.SetTexture(index, color);
+        public void SetTexture(int index) => _paintController.SetTexture(index);
 
         public void ClearPainting() => _paintController.ClearPainting();
 
