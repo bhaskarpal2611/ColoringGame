@@ -1,0 +1,726 @@
+fileFormatVersion: 2
+guid: e001e617440d48a40acbdc808325c750
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: DinoSpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 421
+        y: 1861
+        width: 992
+        height: 127
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fff8f390b8e1acc43912053df0e23a04
+      internalID: 1683005440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DinoSpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 1544
+        y: 929
+        width: 470
+        height: 1058
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f67a329a70ac184eaaffa6db4f7c73c
+      internalID: 2020622866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DinoSpriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 1672
+        width: 260
+        height: 215
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 892f430476e041f4696e93681373d002
+      internalID: 1337239088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DinoSpriteSheet_7
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 1746
+        width: 158
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72452626a15844245b3e7aec0550c7cd
+      internalID: -1420855384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DinoSpriteSheet_20
+      rect:
+        serializedVersion: 2
+        x: 286
+        y: 1387
+        width: 142
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec3e1d1d1a53a4148941d3cd596c0e04
+      internalID: 1502916162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DinoSpriteSheet_22
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 1326
+        width: 71
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a914974b5a296924496bac891e3f3ba0
+      internalID: -2139054862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DinoSpriteSheet_36
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 712
+        width: 747
+        height: 401
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a462322621973ad4d838f7b072c68564
+      internalID: 1521913054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DinoSpriteSheet_42
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 343
+        width: 231
+        height: 178
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6cba5b357ecc824297c671bb912e380
+      internalID: 844624091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DinoSpriteSheet_43
+      rect:
+        serializedVersion: 2
+        x: 667
+        y: 348
+        width: 219
+        height: 168
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6634cf52dcddb14b962c1482fbcd947
+      internalID: 1048113307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DinoSpriteSheet_44
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 399
+        width: 147
+        height: 221
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2cf96ccc887f0af43b198fc6f17affcf
+      internalID: -959476646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DinoSpriteSheet_45
+      rect:
+        serializedVersion: 2
+        x: 1294
+        y: 382
+        width: 693
+        height: 474
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9aac85f9a82b1934bbf0f9ee8486709c
+      internalID: 1581273408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DinoSpriteSheet_46
+      rect:
+        serializedVersion: 2
+        x: 1816
+        y: 80
+        width: 178
+        height: 282
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eea44a7868ee90e40bc11a5ef651d7d8
+      internalID: 535960079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DinoSpriteSheet_47
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 337
+        width: 73
+        height: 57
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc2fbfe48be166b4ca3a97f6c5a9b4ae
+      internalID: -1023718617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DinoSpriteSheet_48
+      rect:
+        serializedVersion: 2
+        x: 1325
+        y: 299
+        width: 100
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17624df64add396469ca74af433384d4
+      internalID: 1217160963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DinoSpriteSheet_49
+      rect:
+        serializedVersion: 2
+        x: 1605
+        y: 288
+        width: 84
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 810cf14b6cbf7474c9d2d8a2cf07f613
+      internalID: 54527950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DinoSpriteSheet_50
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 24
+        width: 1088
+        height: 263
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91b4ba453c3a1424ca1f12d4be9b0511
+      internalID: 367510929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DinoSpriteSheet_51
+      rect:
+        serializedVersion: 2
+        x: 1828
+        y: 8
+        width: 71
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 506504b1f18680d4382fe8dde1d12833
+      internalID: -723413601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DinoSpriteSheet_52
+      rect:
+        serializedVersion: 2
+        x: 655
+        y: 1392
+        width: 589
+        height: 364
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09fa9446678c32b449a98cf67aa8864d
+      internalID: -1405705835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DinoSpriteSheet_53
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 1071
+        width: 655
+        height: 272
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2eab9db4f39da61498b5a587785e80ac
+      internalID: 767865967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DinoSpriteSheet_55
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 1472
+        width: 113
+        height: 145
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67a444a8dce8b9a44b119c27899481b7
+      internalID: -1773248161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DinoSpriteSheet_56
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 1444
+        width: 214
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6602078bdaf224c4f851a2589b8ca160
+      internalID: -1532603087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DinoSpriteSheet_57
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 1368
+        width: 76
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20785b2e13a9ac74a944bf31b4f235f9
+      internalID: 782971770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DinoSpriteSheet_58
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 1506
+        width: 196
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75e5200359a837d4a89adbc814ca748c
+      internalID: -2080560707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DinoSpriteSheet_59
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 1602
+        width: 170
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d96a800cc9679dd4da0f36cc85b10ac9
+      internalID: -50486204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DinoSpriteSheet_60
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 1907
+        width: 202
+        height: 110
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46376089cb862464987717dd72f60e4d
+      internalID: -1322139222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      DinoSpriteSheet_0: -1168281037
+      DinoSpriteSheet_1: 101154813
+      DinoSpriteSheet_10: 203069496
+      DinoSpriteSheet_11: -2117596851
+      DinoSpriteSheet_12: -1611146051
+      DinoSpriteSheet_13: -979093325
+      DinoSpriteSheet_14: -1211775471
+      DinoSpriteSheet_15: 2072346122
+      DinoSpriteSheet_16: -1747227804
+      DinoSpriteSheet_17: 1482246391
+      DinoSpriteSheet_18: 2103970367
+      DinoSpriteSheet_19: -743009050
+      DinoSpriteSheet_2: 92256201
+      DinoSpriteSheet_20: 1502916162
+      DinoSpriteSheet_21: -1894006533
+      DinoSpriteSheet_22: -2139054862
+      DinoSpriteSheet_23: 921313640
+      DinoSpriteSheet_24: -806332168
+      DinoSpriteSheet_25: -1436828668
+      DinoSpriteSheet_26: -2113185587
+      DinoSpriteSheet_27: -1632788728
+      DinoSpriteSheet_28: 512733866
+      DinoSpriteSheet_29: -901610684
+      DinoSpriteSheet_3: 1683005440
+      DinoSpriteSheet_30: -71522425
+      DinoSpriteSheet_31: -115630447
+      DinoSpriteSheet_32: 931945947
+      DinoSpriteSheet_33: -297411346
+      DinoSpriteSheet_34: 674687349
+      DinoSpriteSheet_35: -761583843
+      DinoSpriteSheet_36: 1521913054
+      DinoSpriteSheet_37: -1995825230
+      DinoSpriteSheet_38: -1173693538
+      DinoSpriteSheet_39: 1423267173
+      DinoSpriteSheet_4: 2020622866
+      DinoSpriteSheet_40: 964396442
+      DinoSpriteSheet_41: -1758012774
+      DinoSpriteSheet_42: 844624091
+      DinoSpriteSheet_43: 1048113307
+      DinoSpriteSheet_44: -959476646
+      DinoSpriteSheet_45: 1581273408
+      DinoSpriteSheet_46: 535960079
+      DinoSpriteSheet_47: -1023718617
+      DinoSpriteSheet_48: 1217160963
+      DinoSpriteSheet_49: 54527950
+      DinoSpriteSheet_5: -769746504
+      DinoSpriteSheet_50: 367510929
+      DinoSpriteSheet_51: -723413601
+      DinoSpriteSheet_52: -1405705835
+      DinoSpriteSheet_53: 767865967
+      DinoSpriteSheet_54: -919351341
+      DinoSpriteSheet_55: -1773248161
+      DinoSpriteSheet_56: -1532603087
+      DinoSpriteSheet_57: 782971770
+      DinoSpriteSheet_58: -2080560707
+      DinoSpriteSheet_59: -50486204
+      DinoSpriteSheet_6: 1337239088
+      DinoSpriteSheet_60: -1322139222
+      DinoSpriteSheet_7: -1420855384
+      DinoSpriteSheet_8: 1311061977
+      DinoSpriteSheet_9: 325380742
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,521 @@
+fileFormatVersion: 2
+guid: 04ff0a6e25590d440a7d7ce30fad62a8
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: FrogSpriteSheet_0
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 1482
+        width: 653
+        height: 487
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 553f7a3b5d54ea64d80d9c2624b82754
+      internalID: -390768473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogSpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 1684
+        width: 611
+        height: 315
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01369410e698220469abe2c49083e578
+      internalID: 1121519737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogSpriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 1701
+        y: 1568
+        width: 59
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a449d6f293298754796b16dea505672c
+      internalID: 639547346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogSpriteSheet_9
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 1239
+        width: 315
+        height: 164
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75c8453f13d77954e80a98ded3d975e2
+      internalID: 180662225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogSpriteSheet_14
+      rect:
+        serializedVersion: 2
+        x: 1488
+        y: 894
+        width: 483
+        height: 345
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f16275142d23c6a429d680f80ed81ff0
+      internalID: 446846515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogSpriteSheet_17
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 924
+        width: 315
+        height: 164
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ebcab39c02ef1b48bebfa3a22549aae
+      internalID: 377332723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogSpriteSheet_21
+      rect:
+        serializedVersion: 2
+        x: 1476
+        y: 483
+        width: 515
+        height: 397
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4260a8bd7b481804bbb03e5cd17d51cb
+      internalID: -57347823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogSpriteSheet_23
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 520
+        width: 315
+        height: 164
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8de1991a2265bed4b9690b0a56ac5bf1
+      internalID: 1441975312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogSpriteSheet_36
+      rect:
+        serializedVersion: 2
+        x: 689
+        y: 235
+        width: 244
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47d4085e181a325438a460ddb76f94ce
+      internalID: 153899457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogSpriteSheet_38
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 1153
+        width: 334
+        height: 252
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bef1dfe40bdc57842b3f87f99db43111
+      internalID: -685986380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogSpriteSheet_39
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 834
+        width: 334
+        height: 252
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 178f53f4eca5bd949bdcd7c4859cf6df
+      internalID: 199622606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogSpriteSheet_40
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 450
+        width: 334
+        height: 252
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dbebe4f4c452e94b977fb596292a7cb
+      internalID: -606584307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogSpriteSheet_41
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 219
+        width: 260
+        height: 134
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89dc4c03d8dfb51478d733fee81a47b0
+      internalID: 840846768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogSpriteSheet_42
+      rect:
+        serializedVersion: 2
+        x: 1487
+        y: 297
+        width: 493
+        height: 99
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0f2b845011c1ce4889ac5d2d4f0a2cc
+      internalID: 1112911300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogSpriteSheet_43
+      rect:
+        serializedVersion: 2
+        x: 1510
+        y: 1819
+        width: 439
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ef56ddca1c243241bcda178eea1a56c
+      internalID: 1458803711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogSpriteSheet_44
+      rect:
+        serializedVersion: 2
+        x: 1557
+        y: 1302
+        width: 355
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a303bbc9f990294cb0be28651a32b64
+      internalID: -189272258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      FrogSpriteSheet_0: -390768473
+      FrogSpriteSheet_1: 1121519737
+      FrogSpriteSheet_10: 116370296
+      FrogSpriteSheet_11: 373256254
+      FrogSpriteSheet_12: -1192898170
+      FrogSpriteSheet_13: -1189740294
+      FrogSpriteSheet_14: 446846515
+      FrogSpriteSheet_15: 1981735537
+      FrogSpriteSheet_16: 2037911408
+      FrogSpriteSheet_17: 377332723
+      FrogSpriteSheet_18: 464324242
+      FrogSpriteSheet_19: -2101209942
+      FrogSpriteSheet_2: 763616669
+      FrogSpriteSheet_20: -1453798741
+      FrogSpriteSheet_21: -57347823
+      FrogSpriteSheet_22: 258090657
+      FrogSpriteSheet_23: 1441975312
+      FrogSpriteSheet_24: 394238145
+      FrogSpriteSheet_25: 318441623
+      FrogSpriteSheet_26: 718432723
+      FrogSpriteSheet_27: 329649827
+      FrogSpriteSheet_28: 1556288494
+      FrogSpriteSheet_29: 1276350240
+      FrogSpriteSheet_3: -58319643
+      FrogSpriteSheet_30: -1679481411
+      FrogSpriteSheet_31: 502241028
+      FrogSpriteSheet_32: 1580142958
+      FrogSpriteSheet_33: 58345508
+      FrogSpriteSheet_34: 261503408
+      FrogSpriteSheet_35: 146268018
+      FrogSpriteSheet_36: 153899457
+      FrogSpriteSheet_37: -435439175
+      FrogSpriteSheet_38: -685986380
+      FrogSpriteSheet_39: 199622606
+      FrogSpriteSheet_4: 1843285588
+      FrogSpriteSheet_40: -606584307
+      FrogSpriteSheet_41: 840846768
+      FrogSpriteSheet_42: 1112911300
+      FrogSpriteSheet_43: 1458803711
+      FrogSpriteSheet_44: -189272258
+      FrogSpriteSheet_5: 1576654319
+      FrogSpriteSheet_6: 639547346
+      FrogSpriteSheet_7: 1608960628
+      FrogSpriteSheet_8: -742677907
+      FrogSpriteSheet_9: 180662225
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

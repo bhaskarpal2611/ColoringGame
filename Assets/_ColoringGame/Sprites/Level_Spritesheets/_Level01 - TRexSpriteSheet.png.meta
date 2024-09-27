@@ -1,0 +1,556 @@
+fileFormatVersion: 2
+guid: e1a473693e1a99143996ae1672815b95
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: T-RexSpriteSheet2.0 - Copy_20
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 1575
+        width: 60
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80e309055a9327e488ea9b92c5e8cc76
+      internalID: -755196367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: T-RexSpriteSheet2.0 - Copy_22
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 1430
+        width: 110
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c278927195e669f49a85da6f24d5a317
+      internalID: -1255488470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: T-RexSpriteSheet2.0 - Copy_23
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 1152
+        width: 425
+        height: 349
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1444aae825b4a843969f2a38d3216f1
+      internalID: -1472929063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: T-RexSpriteSheet2.0 - Copy_24
+      rect:
+        serializedVersion: 2
+        x: 822
+        y: 785
+        width: 750
+        height: 708
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97db9334d4499004e9887865b3fa39c5
+      internalID: -680081563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: T-RexSpriteSheet2.0 - Copy_27
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 1073
+        width: 29
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ec9f4458541a0545b43e6a5c9de9a52
+      internalID: 1881221398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: T-RexSpriteSheet2.0 - Copy_28
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 1068
+        width: 35
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 183848e6a69e4964497badc43529eaae
+      internalID: -496285520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: T-RexSpriteSheet2.0 - Copy_30
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 846
+        width: 166
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a040fe5b5b73494fbfee710c47bfd69
+      internalID: -1806125089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: T-RexSpriteSheet2.0 - Copy_31
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 309
+        width: 623
+        height: 574
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 456f56ab5aaeea24f921eb2f448b5800
+      internalID: -1968548722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: T-RexSpriteSheet2.0 - Copy_32
+      rect:
+        serializedVersion: 2
+        x: 1599
+        y: 513
+        width: 112
+        height: 370
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eee801400c041de4cbd1a9c98cc93854
+      internalID: -519673294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: T-RexSpriteSheet2.0 - Copy_33
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 408
+        width: 249
+        height: 317
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a3fbd797ca1a7443bd29da00cf17fcc
+      internalID: 718534062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: T-RexSpriteSheet2.0 - Copy_34
+      rect:
+        serializedVersion: 2
+        x: 1149
+        y: 431
+        width: 91
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc27dfab75e550b458d4009216ca9aa8
+      internalID: -1022532872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: T-RexSpriteSheet2.0 - Copy_35
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 308
+        width: 89
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e0bc6a288c487142af251da73a7cff9
+      internalID: -872881776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: T-RexSpriteSheet2.0 - Copy_36
+      rect:
+        serializedVersion: 2
+        x: 1539
+        y: 152
+        width: 231
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdff7e1ccf4e4de419be99a474d1b696
+      internalID: -281693555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: T-RexSpriteSheet2.0 - Copy_37
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 11
+        width: 1141
+        height: 252
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 663d39935afb7af4cab5101ae1950726
+      internalID: -763926183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: T-RexSpriteSheet2.0 - Copy_0
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 1558
+        width: 617
+        height: 456
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6612df5fc33f8404ea2052d8e73cc9b6
+      internalID: -1912216310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: T-RexSpriteSheet2.0 - Copy_1
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 1503
+        width: 694
+        height: 502
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15825d8e8ba91fa46849250c0078d4d1
+      internalID: 1829361979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: T-RexSpriteSheet2.0 - Copy_2
+      rect:
+        serializedVersion: 2
+        x: 1717
+        y: 1552
+        width: 322
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eafe233902f178e4f87fa19c14ab265a
+      internalID: 436181756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: T-RexSpriteSheet2.0 - Copy_3
+      rect:
+        serializedVersion: 2
+        x: 1651
+        y: 998
+        width: 363
+        height: 441
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 961d249097c6bb34db379cf3c9f3e70f
+      internalID: -1353468911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      T-RexSpriteSheet2.0 - Copy_0: -1912216310
+      T-RexSpriteSheet2.0 - Copy_1: 1829361979
+      T-RexSpriteSheet2.0 - Copy_10: 1969399928
+      T-RexSpriteSheet2.0 - Copy_11: 1773508138
+      T-RexSpriteSheet2.0 - Copy_12: 1373050598
+      T-RexSpriteSheet2.0 - Copy_13: -1241092128
+      T-RexSpriteSheet2.0 - Copy_14: -1825123162
+      T-RexSpriteSheet2.0 - Copy_15: -1236050635
+      T-RexSpriteSheet2.0 - Copy_16: 317973377
+      T-RexSpriteSheet2.0 - Copy_17: -598097991
+      T-RexSpriteSheet2.0 - Copy_18: -1373009045
+      T-RexSpriteSheet2.0 - Copy_19: 1226071569
+      T-RexSpriteSheet2.0 - Copy_2: 436181756
+      T-RexSpriteSheet2.0 - Copy_20: -755196367
+      T-RexSpriteSheet2.0 - Copy_21: 68025103
+      T-RexSpriteSheet2.0 - Copy_22: -1255488470
+      T-RexSpriteSheet2.0 - Copy_23: -1472929063
+      T-RexSpriteSheet2.0 - Copy_24: -680081563
+      T-RexSpriteSheet2.0 - Copy_25: -17861013
+      T-RexSpriteSheet2.0 - Copy_26: -127966687
+      T-RexSpriteSheet2.0 - Copy_27: 1881221398
+      T-RexSpriteSheet2.0 - Copy_28: -496285520
+      T-RexSpriteSheet2.0 - Copy_29: -1545945657
+      T-RexSpriteSheet2.0 - Copy_3: -1353468911
+      T-RexSpriteSheet2.0 - Copy_30: -1806125089
+      T-RexSpriteSheet2.0 - Copy_31: -1968548722
+      T-RexSpriteSheet2.0 - Copy_32: -519673294
+      T-RexSpriteSheet2.0 - Copy_33: 718534062
+      T-RexSpriteSheet2.0 - Copy_34: -1022532872
+      T-RexSpriteSheet2.0 - Copy_35: -872881776
+      T-RexSpriteSheet2.0 - Copy_36: -281693555
+      T-RexSpriteSheet2.0 - Copy_37: -763926183
+      T-RexSpriteSheet2.0 - Copy_4: -1769797789
+      T-RexSpriteSheet2.0 - Copy_5: 650696545
+      T-RexSpriteSheet2.0 - Copy_6: 1312846821
+      T-RexSpriteSheet2.0 - Copy_7: 1624131542
+      T-RexSpriteSheet2.0 - Copy_8: -1909001044
+      T-RexSpriteSheet2.0 - Copy_9: 1975568677
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
