@@ -7,9 +7,28 @@ namespace ColorSwipeGame
     {
         [SerializeField] private RenderTexture _cameraRT;
 
-        public void TakePhoto(int levelNumber)
+        private int counter = 1;
+
+        public void TakePhoto()
         {
-            SaveRenderTextureToPNG(_cameraRT, Application.dataPath + "/Resources/SavedPhotos/RenderTextureOutput_" + levelNumber + ".png");
+            string filePath = ""; // Declare filePath outside the platform-specific blocks
+
+#if UNITY_EDITOR
+            filePath = Application.dataPath + "/SavedPhotos/SavedPhoto_0" + counter++ + ".png";
+#endif
+#if UNITY_ANDROID
+            string directoryPath = Application.persistentDataPath + "/SavedPhotos";
+
+    // Ensure the directory exists on Android
+    if (!Directory.Exists(directoryPath))
+    {
+        Directory.CreateDirectory(directoryPath);
+    }
+
+    filePath = directoryPath + "/SavedPhoto_0" + counter++ + ".png";
+#endif
+
+            SaveRenderTextureToPNG(_cameraRT, filePath);
         }
 
         private void SaveRenderTextureToPNG(RenderTexture renderTexture, string filePath)
