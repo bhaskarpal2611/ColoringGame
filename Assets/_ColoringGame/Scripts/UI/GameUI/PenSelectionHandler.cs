@@ -1,13 +1,11 @@
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace ColorSwipeGame
 {
     public class PenSelectionHandler : MonoBehaviour
     {
         [SerializeField] private RectTransform _mainPanel;
-        [SerializeField] private float _buttonPopTime = 0.25f;
         [SerializeField] private float _mainPanelSlideTime = 0.25f;
         [SerializeField] private Transform _swapButton;
 
@@ -20,8 +18,6 @@ namespace ColorSwipeGame
             }
         }
 
-        private readonly float _SelectedValue = 15f;
-        private int _selectedIndex = 0;
 
         private readonly float LEFT_POS = 150f;
         private readonly float RIGHT_POS = 450f;

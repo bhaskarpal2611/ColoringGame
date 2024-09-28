@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
@@ -21,7 +19,7 @@ namespace ColorSwipeGame
             }
             else
             {
-                _targetTransform.DOScale(0f, duration).SetEase(Ease.InOutBack);
+                _targetTransform.DOScale(0f, duration).SetEase(Ease.OutSine);
                 _isExpanded = false;
             }
         }

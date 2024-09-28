@@ -6,7 +6,6 @@ namespace ColorSwipeGame
 {
     public class LeftPanelController : MonoBehaviour, IPointerClickHandler
     {
-
         [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private float _sliderTime = 0.25f;
         [SerializeField] private float _startingDelayTime = 0.75f;
@@ -20,7 +19,7 @@ namespace ColorSwipeGame
             else CloseSidePanel();
         }
 
-        private const float XPOS_MAX = 0f;
+        private const float XPOS_MAX = -50f;
         private const float XPOS_MIN = -450f;
 
         public void OpenSidePanel()

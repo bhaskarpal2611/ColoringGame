@@ -1,13 +1,13 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ColorSwipeGame
+namespace ColorSwipeGame.UI
 {
     public class ButtonsHandler : MonoBehaviour
     {
         [SerializeField] private AudioManager _audioManager;
         private Button[] _buttons;
-
 
         private void Start()
         {
@@ -27,5 +27,6 @@ namespace ColorSwipeGame
                 button.onClick.AddListener(_audioManager.PlayClickSound);
             }
         }
+
     }
 }
