@@ -11,7 +11,7 @@ namespace ColorSwipeGame.UI
 
         public Button Button { get { return _button; } }
 
-        private const float XPOS_SELECTED_PEN = -75f;
+        private const float XPOS_SELECTED_PEN = -50f;
 
 
         private void OnDestroy()

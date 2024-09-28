@@ -5,7 +5,7 @@ namespace ColorSwipeGame
 {
     public class PenSelectionHandler : MonoBehaviour
     {
-        [SerializeField] private RectTransform _mainPanel;
+        [SerializeField] private RectTransform _mainPanel;  
         [SerializeField] private float _mainPanelSlideTime = 0.25f;
         [SerializeField] private Transform _swapButton;
 

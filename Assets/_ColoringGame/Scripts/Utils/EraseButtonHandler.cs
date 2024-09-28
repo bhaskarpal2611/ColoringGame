@@ -15,9 +15,11 @@ namespace ColorSwipeGame
             if (!_isOpen)
             {
                 transform.DOLocalMoveX(SLIDE_OUT, 0.25f);
+                _isOpen = true;
             } else
             {
                 transform.DOLocalMoveX(SLIDE_BACK_IN, 0.25f);
+                _isOpen = false;
             }
         }
     
