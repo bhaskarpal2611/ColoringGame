@@ -12,14 +12,14 @@ namespace ColorSwipeGame.UI
         [SerializeField] private RectTransform _pencilParent;
         [SerializeField] private ScrollRect _scrollViewReference;
         [SerializeField] private PaintService _paintService;
-        [SerializeField] private PenSelectionHandler _mainMenuHandler;
+        [SerializeField] private PenSelectionHandler _penSelectionHandler;
+        [SerializeField] private EraseButtonHandler _eraseButtonHandler;
 
-        private const float XPOS_LEFT = 900f;
-        private const float XPOS_RIGHT = -300f;
+        private const float XPOS_LEFT = 0f;
+        private const float XPOS_RIGHT = -360f;
 
         private int _currentSelectedIndex = 0;
-        private int _maxLen = 2;
-        private UI_PencilItem _currentSelectedPen;
+        private int _maxLen = 2; // pen types
         private SelectedPenData SelectedPenData;
 
         private void Start()
@@ -34,7 +34,6 @@ namespace ColorSwipeGame.UI
         }
 
         // Dotween movements
-
         public void MoveRight()
         {
             // Tween to the right (e.g., to 300 on the X-axis in 1 second)
@@ -47,24 +46,15 @@ namespace ColorSwipeGame.UI
             _pencilParent.DOAnchorPosX(XPOS_RIGHT, .25f);
         }
 
-        // Function to scale up (pop open) a UI image or any GameObject
-        public void PopOpen(Transform targetTransform, float targetScale = 1.0f, float duration = 0.3f)
-        {
-            // Start by setting the scale to zero (or any initial scale)
-            targetTransform.localScale = Vector3.zero;
-
-            // Animate the scale to the target scale value
-            targetTransform.DOScale(targetScale, duration).SetEase(Ease.OutBack);
-        }
-
         public void OnPenCategorySelection()
         {
-            _mainMenuHandler.SwapButton();
+            _penSelectionHandler.SwapButton();
+            _eraseButtonHandler.UnselectEraser();
 
             int prevIndex = _currentSelectedIndex;
             _currentSelectedIndex = ++_currentSelectedIndex % _maxLen;
 
-            if(_currentSelectedIndex % 2 != 0)
+            if (_currentSelectedIndex % 2 != 0)
             {
                 _paintService.SetDefaultTextureMode();
             }
@@ -87,6 +77,15 @@ namespace ColorSwipeGame.UI
             });
         }
 
+        public void UnselectAll()
+        {
+            if (SelectedPenData.CurrentSelectedColorPen != -1)
+                SelectedPenData.UnselectCurrentColor();
+
+            if (SelectedPenData.CurrentSelectedTexturePen != -1)
+                SelectedPenData.UnselectCurrentTexture();
+        }
+
         private void GeneratePencils()
         {
             for (int i = 0; i < _colors.Length; i++)
@@ -99,8 +98,8 @@ namespace ColorSwipeGame.UI
                 SelectedPenData.ColoredPens[i].Button.onClick.AddListener(() =>
                 {
                     _paintService.SetColor(color);
-                    SelectedPenData.ColoredPens[index].OnPenSelected();
                     SelectedPenData.ColoredPenSelection(index);
+                    _eraseButtonHandler.UnselectEraser();
                 });
             }
         }
@@ -114,6 +113,7 @@ namespace ColorSwipeGame.UI
                 {
                     _paintService.SetTexture(index);
                     SelectedPenData.TexPenSelection(index);
+                    _eraseButtonHandler.UnselectEraser();
                 });
             }
         }
@@ -140,41 +140,60 @@ namespace ColorSwipeGame.UI
             TexturedPens = new UI_TextureItem[len2];
         }
 
+        public void UnselectCurrentColor()
+        {
+            if (CurrentSelectedColorPen < 0 || CurrentSelectedColorPen >= ColoredPens.Length)
+            {
+                Debug.LogError("Selected index is out of bound");
+                return;
+            }
+            ColoredPens[CurrentSelectedColorPen].UnselectedPen();
+        }
+
+        public void UnselectCurrentTexture()
+        {
+            if (CurrentSelectedTexturePen < 0 || CurrentSelectedTexturePen >= TexturedPens.Length)
+            {
+                Debug.LogError("Index out of bounds");
+                return;
+            }
+
+            TexturedPens[CurrentSelectedTexturePen].UnselectedTexture();
+        }
+
         public void ColoredPenSelection(int index)
         {
+            if (index < 0 || index >= ColoredPens.Length)
+            {
+                Debug.LogError("Index out of bounds");
+                return;
+            }
+
             if (CurrentSelectedColorPen == index) return;
 
-            for (int i = 0; i < ColoredPens.Length; i++)
+            if (CurrentSelectedColorPen != -1)
             {
-                if (i == index)
-                {
-                    ColoredPens[i].OnPenSelected();
-                    CurrentSelectedColorPen = i;
-                }
-                else
-                {
-                    ColoredPens[i].UnselectedPen();
-                }
+                ColoredPens[CurrentSelectedColorPen].UnselectedPen();
             }
+
+            ColoredPens[index].OnPenSelected();
+            CurrentSelectedColorPen = index;
         }
         public void TexPenSelection(int index)
         {
+            if (index < 0 || index >= TexturedPens.Length)
+            {
+                Debug.LogError("Index out of bound");
+                return;
+            }
             if (CurrentSelectedTexturePen == index) return;
 
-            for (int i = 0; i < TexturedPens.Length; i++)
+            if (CurrentSelectedTexturePen != -1)
             {
-                if (i == index)
-                {
-                    // func call for selected from UI_TextureItem
-
-
-                    CurrentSelectedTexturePen = i;
-                }
-                else
-                {
-                    TexturedPens[i].UnselectedPen();    
-                }
+                TexturedPens[CurrentSelectedTexturePen].UnselectedTexture();
             }
+            TexturedPens[index].OnTextureSelected();
+            CurrentSelectedTexturePen = index;
         }
     }
 }

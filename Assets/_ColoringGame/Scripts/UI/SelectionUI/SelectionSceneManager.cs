@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -19,6 +20,20 @@ namespace ColorSwipeGame
 
         public UnityEvent OnLevelLoaded = new();
 
+        private void Start()
+        {
+            Camera camera = Camera.main;
+            float aspectRatio = CalculateScreenAspectRatio();
+            if (aspectRatio > 1.5f)
+            {
+                Camera.main.orthographicSize = 5.76f;
+            }
+            else
+            {
+                Camera.main.orthographicSize = 7.5f;
+            }
+        }
+
         public void LoadLevel(int index)
         {
             _referenceImageLoader.SetReferenceImage(index);
@@ -31,10 +46,10 @@ namespace ColorSwipeGame
                 _penSelectionHandler.ShowPanelAtStart();
                 _firstTimeLoaded = true;
             }
-                transform.DOMove(transform.position, _levelLoadTimeDelay).OnComplete(() =>
-            {
-                OnLevelLoaded.Invoke();
-            });
+            transform.DOMove(transform.position, _levelLoadTimeDelay).OnComplete(() =>
+        {
+            OnLevelLoaded.Invoke();
+        });
         }
 
         public void GoBackToSelectionScene()
