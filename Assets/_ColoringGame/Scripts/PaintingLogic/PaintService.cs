@@ -90,7 +90,7 @@ namespace ColorSwipeGame
         }
 
         // Public methods for other scripts to interact with PaintController
-        public void SetBrushSize(int size) => _paintController.SetBrushScale(size * _brushScaleFactor);
+        public void SetBrushSize(float size) => _paintController.SetBrushScale(size * _brushScaleFactor);
 
         // on main pen selection or erase button
         public void SetDefaultColorMode() => _paintController.SetDefaultColor();

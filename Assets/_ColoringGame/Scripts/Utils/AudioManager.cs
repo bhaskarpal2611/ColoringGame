@@ -21,6 +21,7 @@ public class AudioManager : MonoBehaviour
     }
 
     public void PlayClickSound() => PlaySound(Sounds.ButtonClick);
+    public void PlayCameraButtonSound() => PlaySound(Sounds.CameraShutter);
 
     public void PlayBackgroundMusic()
     {
@@ -101,6 +102,7 @@ public enum Sounds
     BG_MUSIC,
     Interactive,
     PaintBrush,
+    CameraShutter,
 }
 public enum Language
 {

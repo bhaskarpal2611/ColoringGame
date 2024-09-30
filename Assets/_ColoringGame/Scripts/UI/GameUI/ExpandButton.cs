@@ -9,7 +9,7 @@ namespace ColorSwipeGame
         [SerializeField] private float _targetScale = 1.0f;
 
         private bool _isExpanded = false;
-        public void PopOpen(float duration = 0.3f)
+        public void PopOpen(float duration = 0.25f)
         {
             if (!_isExpanded)
             {
@@ -22,6 +22,12 @@ namespace ColorSwipeGame
                 _targetTransform.DOScale(0f, duration).SetEase(Ease.OutSine);
                 _isExpanded = false;
             }
+        }
+
+        public void ForceCloseWindow(float duration = 0.25f)
+        {
+                _targetTransform.DOScale(0f, duration).SetEase(Ease.OutSine);
+                _isExpanded = false;
         }
     }
 }
