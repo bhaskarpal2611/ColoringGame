@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.yasirkula.nativegallery": "https://github.com/yasirkula/UnityNativeGallery.git",
     "com.unity.assetbundlebrowser": "https://github.com/Unity-Technologies/AssetBundles-Browser.git",
     "com.unity.collab-proxy": "2.5.1",
     "com.unity.device-simulator.devices": "1.0.0",

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,8 +28,22 @@ namespace ColorSwipeGame
 
         public void SaveToGallery()
         {
-            string fileName = "ScreenShot_00" + ++counter + ".png";
-            NativeGallery.SaveImageToGallery(_bytes, _albumName, fileName);
+            // string fileName = "ScreenShot_00" + ++counter + ".png";
+            // NativeGallery.SaveImageToGallery(_bytes, _albumName, fileName, (success, path) =>
+            // {
+            //     if (success)
+            //     {
+            //         Debug.Log("saved success");
+            //         Debug.Log(path);
+            //     }
+            //     else
+            //     {
+            //         Debug.Log("failed saving");
+            //     }
+            // });
+
+            string editorPath = Path.Combine(Application.dataPath, "SavedImage.png");
+            File.WriteAllBytes(editorPath, _bytes);
         }
 
         private void SaveRenderTextureToPNG(RenderTexture renderTexture)
@@ -39,20 +54,28 @@ namespace ColorSwipeGame
             texture = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.ARGB32, false);
             RenderTexture.active = renderTexture;
 
-            Graphics.CopyTexture(renderTexture, texture);              
+            // Read pixels from the RenderTexture into the Texture2D
+            texture.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
+            texture.Apply();
+
             RenderTexture.active = null;
 
             // create a sprite from texture
-            _referenceImage.sprite = Sprite.Create(texture, rect, Vector2.one * 0.5f);
+            Sprite sprite = Sprite.Create(texture, rect, Vector2.one * 0.5f);
+            sprite.name = "Saved Image";
+            _referenceImage.sprite = sprite;
             _referenceImage.color = Color.white;
 
-            // Encode texture to PNG
-            _bytes = texture.EncodeToPNG();     
+
+            byte[] bytes = texture.EncodeToPNG();
+            _bytes = new byte[bytes.Length];
+            _bytes = bytes;
+
 
             CameraFlash();
 
             // play camera click sound
-            _audioManager.PlayCameraButtonSound();  
+            _audioManager.PlayCameraButtonSound();
 
             Debug.Log("Saved RenderTexture: ");
         }
