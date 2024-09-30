@@ -37,7 +37,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BrushTexture:
-        m_Texture: {fileID: 2800000, guid: 9ecbbe7f50cb355638ac142ae243aef8, type: 3}
+        m_Texture: {fileID: 2800000, guid: b26f9a0ad03ac662fb624fc3b6bbc537, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -65,5 +65,5 @@ Material:
     - _BrushSize: 0.03
     m_Colors:
     - _BrushColor: {r: 1, g: 1, b: 1, a: 1}
-    - _UVPosition: {r: 1.0310199, g: 0.52200496, b: 0, a: 0}
+    - _UVPosition: {r: 0.46744686, g: 0.28277284, b: 0, a: 0}
   m_BuildTextureStacks: []
