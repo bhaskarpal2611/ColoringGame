@@ -21,18 +21,26 @@ namespace ColorSwipeGame
             else CloseSidePanel();
         }
 
-        private const float XPOS_MAX = 100f;
-        private const float XPOS_MIN = -285f;
+        // now Y-Pos
+        private const float YPOS_MAX = 100f;
+        private const float YPOS_MIN = -240f;
 
         public void OpenSidePanel()
         {
-            _rectTransform.DOAnchorPosY(XPOS_MAX, _sliderTime);
+            _rectTransform.DOAnchorPosY(YPOS_MAX, _sliderTime);
             TogglePanelOpen();
         }
 
         public void CloseSidePanel()
         {
-            _rectTransform.DOAnchorPosY(XPOS_MIN, _sliderTime);
+            _rectTransform.DOAnchorPosY(YPOS_MIN, _sliderTime);
+            TogglePanelOpen();
+            _hintHelper.ForceCloseWindow(0.25f);
+        }
+
+        public void CompleteHidePanel()
+        {
+            _rectTransform.DOAnchorPosY(YPOS_MIN - 100f, _sliderTime);
             TogglePanelOpen();
             _hintHelper.ForceCloseWindow(0.25f);
         }
@@ -40,9 +48,9 @@ namespace ColorSwipeGame
         // opening panel and closing at start of level load
         public void ShowPanelAtStart()
         {
-            _rectTransform.DOAnchorPosY(XPOS_MAX, _sliderTime).SetDelay(_startingDelayTime).OnComplete(() =>
+            _rectTransform.DOAnchorPosY(YPOS_MAX, _sliderTime).SetDelay(_startingDelayTime).OnComplete(() =>
             {
-                _rectTransform.DOAnchorPosY (XPOS_MIN, _sliderTime).SetDelay(_startingDelayTime);
+                _rectTransform.DOAnchorPosY (YPOS_MIN, _sliderTime).SetDelay(_startingDelayTime);
             });
         }
     }

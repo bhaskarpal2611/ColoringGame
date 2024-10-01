@@ -13,6 +13,7 @@ namespace ColorSwipeGame
         [SerializeField] private ReferenceImageLoader _referenceImageLoader;
         [SerializeField] private LeftPanelController _leftPanelHandler;
         [SerializeField] private PenSelectionHandler _penSelectionHandler;
+        [SerializeField] private LevelImageHandler _levelImageHandler;
         [SerializeField] private float _levelLoadTimeDelay = 0.25f;
 
         private GameObject _currentLevel;
@@ -54,6 +55,7 @@ namespace ColorSwipeGame
 
         public void GoBackToSelectionScene()
         {
+            _levelImageHandler.UpdateSprite();
             _selectionSceneCanvas.SetActive(true);
             Destroy(_currentLevel);
         }

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.IO;
 using UnityEngine;
@@ -9,77 +10,130 @@ namespace ColorSwipeGame
     {
         [SerializeField] private RenderTexture _cameraRT;
         [SerializeField] private AudioManager _audioManager;
+        [SerializeField] private LeftPanelController _leftPanelController;
+        [SerializeField] private ExpandButton _bottomLeftPanel;
         [SerializeField] private Image _referenceImage;
         [SerializeField] private Image _flashImage;
         [SerializeField] private string _albumName = "SavedPhotos";
         [SerializeField] private float _flashTimelength = 0.25f;
+        [SerializeField] private Transform _paintToolSelection;
+        [SerializeField] private RectTransform _paintToolPanel;
+        [SerializeField] private Transform _backButton;
+        [SerializeField] private Transform _clearButton;
 
-        private Texture2D texture;
+        private Texture2D _texture;
+        private Rect _rect;
 
         private int counter = 0;
         private float _startTime;
         private bool _flashing;
         private byte[] _bytes;
 
+        private void Start()
+        {
+            InitializeTexture();
+        }
+
         public void TakePhoto()
         {
-            SaveRenderTextureToPNG(_cameraRT);
+            _leftPanelController.CompleteHidePanel();
+            _backButton.DOScale(0f, 0.25f).SetEase(Ease.InOutQuad);
+            _clearButton.DOScale(0f, 0.25f).SetEase(Ease.InOutQuad);
+
+            _paintToolSelection.DOScale(0f, 0.25f).OnComplete(() =>
+            {
+                _paintToolPanel.DOLocalMoveX(1000f, .5f).OnComplete(() =>
+                {
+                    SaveRenderTextureToPNG();
+                    _bottomLeftPanel.PopOpen();
+                });
+            });
         }
 
         public void SaveToGallery()
         {
-            // string fileName = "ScreenShot_00" + ++counter + ".png";
-            // NativeGallery.SaveImageToGallery(_bytes, _albumName, fileName, (success, path) =>
-            // {
-            //     if (success)
-            //     {
-            //         Debug.Log("saved success");
-            //         Debug.Log(path);
-            //     }
-            //     else
-            //     {
-            //         Debug.Log("failed saving");
-            //     }
-            // });
+            #region ANDROID
+#if UNITY_ANDROID
+            string fileName = "ScreenShot_00" + ++counter + ".png";
+            NativeGallery.SaveImageToGallery(_bytes, _albumName, fileName, (success, path) =>
+            {
+                if (success)
+                {
+                    Debug.Log("saved success");
+                    Debug.Log(path);
+                }
+                else
+                {
+                    Debug.Log("failed saving");
+                }
+            });
+#endif
+            #endregion
 
+            #region EDITOR
+#if UNITY_EDITOR
             string editorPath = Path.Combine(Application.dataPath, "SavedImage.png");
             File.WriteAllBytes(editorPath, _bytes);
+#endif
+            #endregion
+
+            ClosePanel();
         }
 
-        private void SaveRenderTextureToPNG(RenderTexture renderTexture)
+        public void ClosePanel()
         {
-            Debug.Log(renderTexture.format);
-            // Create a Texture2D from the RenderTexture
-            Rect rect = new Rect(0, 0, renderTexture.width, renderTexture.height);
-            texture = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.ARGB32, false);
-            RenderTexture.active = renderTexture;
+            _leftPanelController.CloseSidePanel();
+            _bottomLeftPanel.ForceCloseWindow();
+            // move back the panel
+            _backButton.DOScale(1f, 0.25f).SetEase(Ease.InOutQuad);
+            _clearButton.DOScale(1f, 0.25f).SetEase(Ease.InOutQuad);
+
+            _paintToolPanel.DOLocalMoveX(0f, .5f).OnComplete(() =>
+            {
+                _paintToolSelection.DOScale(1f, 0.25f);
+            });
+        }
+
+        public Texture2D SaveTextureCopy()
+        {
+            RenderTexture.active = _cameraRT;
 
             // Read pixels from the RenderTexture into the Texture2D
-            texture.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
-            texture.Apply();
+            _texture.ReadPixels(new Rect(0, 0, _cameraRT.width, _cameraRT.height), 0, 0);
+            _texture.Apply();
+
+            return _texture;
+        }
+
+        private void SaveRenderTextureToPNG()
+        {
+            RenderTexture.active = _cameraRT;
+
+            // Read pixels from the RenderTexture into the Texture2D
+            _texture.ReadPixels(new Rect(0, 0, _cameraRT.width, _cameraRT.height), 0, 0);
+            _texture.Apply();
 
             RenderTexture.active = null;
 
             // create a sprite from texture
-            Sprite sprite = Sprite.Create(texture, rect, Vector2.one * 0.5f);
+            Sprite sprite = Sprite.Create(_texture, _rect, Vector2.one * 0.5f);
             sprite.name = "Saved Image";
             _referenceImage.sprite = sprite;
             _referenceImage.color = Color.white;
 
-
-            byte[] bytes = texture.EncodeToPNG();
-            _bytes = new byte[bytes.Length];
-            _bytes = bytes;
-
+            _bytes = _texture.EncodeToPNG();
 
             CameraFlash();
 
             // play camera click sound
             _audioManager.PlayCameraButtonSound();
-
-            Debug.Log("Saved RenderTexture: ");
         }
 
+        private void InitializeTexture()
+        {
+            _rect = new Rect(0, 0, _cameraRT.width, _cameraRT.height);
+            _texture = new Texture2D(_cameraRT.width, _cameraRT.height, TextureFormat.ARGB32, false);
+        }
 
         private void CameraFlash()
         {

@@ -358,17 +358,5 @@ namespace ColorSwipeGame
                 }
             }
         }
-        //private void ReapplySpritesToRenderers()
-        //{
-        //    foreach (Transform spriteTransform in _spritesParent)
-        //    {
-        //        SpriteRenderer spriteRenderer = spriteTransform.GetComponent<SpriteRenderer>();
-        //        int spriteIndex = spriteRenderer.transform.GetSiblingIndex();
-        //        if (_sprites.TryGetValue(spriteIndex, out Sprite newSprite))
-        //        {
-        //            spriteRenderer.sprite = newSprite;
-        //        }
-        //    }
-        //}
     }
 }

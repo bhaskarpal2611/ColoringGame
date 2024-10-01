@@ -18,8 +18,8 @@ namespace ColorSwipeGame.UI
         [SerializeField] private PenSelectionHandler _penSelectionHandler;
         [SerializeField] private EraseButtonHandler _eraseButtonHandler;
 
-        private const float XPOS_LEFT = 0f;
-        private const float XPOS_RIGHT = -360f;
+        private const float XPOS_RIGHT = 0f;
+        private const float XPOS_LEFT = -360f;
         private const int _maxLen = 2; // pen types
         // Golden ratio conjugate for hue generation
         private const float goldenRatioConjugate = 0.61803398875f;
@@ -73,13 +73,13 @@ namespace ColorSwipeGame.UI
         public void MoveRight()
         {
             // Tween to the right (e.g., to 300 on the X-axis in 1 second)
-            _pencilParent.DOAnchorPosX(XPOS_LEFT, .75f);
+            _pencilParent.DOAnchorPosX(XPOS_RIGHT, .75f);
         }
 
         public void MoveLeft()
         {
             // Tween to the left (e.g., to -300 on the X-axis in 1 second)
-            _pencilParent.DOAnchorPosX(XPOS_RIGHT, .25f);
+            _pencilParent.DOAnchorPosX(XPOS_LEFT, .25f);
         }
 
 
@@ -140,7 +140,7 @@ namespace ColorSwipeGame.UI
             // move right current pens.
             // then move left the new pens selected
 
-            _pencilParent.DOAnchorPosX(XPOS_LEFT, .25f).SetEase(Ease.OutQuad).OnComplete(() =>
+            _pencilParent.DOAnchorPosX(XPOS_RIGHT, .25f).SetEase(Ease.OutQuad).OnComplete(() =>
             {
                 _pencilParent.GetChild(prevIndex).gameObject.SetActive(false);
                 _pencilParent.GetChild(_currentSelectedIndex).gameObject.SetActive(true);
@@ -171,7 +171,7 @@ namespace ColorSwipeGame.UI
             // move right current pens.
             // then move left the new pens selected
 
-            _pencilParent.DOAnchorPosX(XPOS_LEFT, .25f).SetEase(Ease.OutQuad).OnComplete(() =>
+            _pencilParent.DOAnchorPosX(XPOS_RIGHT, .25f).SetEase(Ease.OutQuad).OnComplete(() =>
             {
                 _pencilParent.GetChild(prevIndex).gameObject.SetActive(false);
                 _pencilParent.GetChild(_currentSelectedIndex).gameObject.SetActive(true);

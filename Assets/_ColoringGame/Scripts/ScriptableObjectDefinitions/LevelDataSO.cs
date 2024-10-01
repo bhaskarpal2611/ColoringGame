@@ -12,7 +12,6 @@ public class LevelDataSO : ScriptableObject
             Debug.LogError("Index out of bound");
             return null;
         }
-
         return LevelData[index].levelPrefab;
     }
 }

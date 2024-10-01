@@ -22,6 +22,8 @@ namespace ColorSwipeGame
         private PaintController _paintController;
         private Camera _mainCamera;
 
+        public bool CanPaint { get; set; } = false;
+
         private void Awake()
         {
             _mainCamera = Camera.main;
@@ -69,24 +71,37 @@ namespace ColorSwipeGame
 
         private void BeginDrag(Vector2 touchPosition)
         {
-            Vector2 worldPosition = _mainCamera.ScreenToWorldPoint(touchPosition);
-            _paintController.BeginDrag(worldPosition);
+            if (CanPaint)
+            {
+                Vector2 worldPosition = _mainCamera.ScreenToWorldPoint(touchPosition);
+                _paintController.BeginDrag(worldPosition);
+            }
         }
 
         private void OnDrag(Vector2 touchPosition)
         {
-            Vector2 worldPosition = _mainCamera.ScreenToWorldPoint(touchPosition);
-            _paintController.ContinueDrag(worldPosition);
+            if (CanPaint)
+            {
+                Vector2 worldPosition = _mainCamera.ScreenToWorldPoint(touchPosition);
+                _paintController.ContinueDrag(worldPosition);
+            }
         }
 
         private void OnDragStationary()
         {
+            if(CanPaint)
+            {
+
+            }
             //_audioHandler.StopPaintingSound();
         }
 
         private void EndDrag()
         {
-            _paintController.EndDrag();
+            if (CanPaint)
+            {
+                _paintController.EndDrag();
+            }
         }
 
         // Public methods for other scripts to interact with PaintController
