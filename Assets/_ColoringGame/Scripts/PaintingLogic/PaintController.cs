@@ -24,8 +24,9 @@ namespace ColorSwipeGame
         private Dictionary<int, Texture2D> _editedTextures = new Dictionary<int, Texture2D>();
         private Dictionary<int, Sprite> _originalSprites = new Dictionary<int, Sprite>();
         private Dictionary<int, Sprite> _sprites = new Dictionary<int, Sprite>();
-
-        private const int BLIT_THRESHOLD = 10;
+        private Dictionary<int, Sprite> _savedSprites;
+        private int _currentSRIndex;
+        private const int BLIT_THRESHOLD = 20;
         private readonly RaycastHit2D[] _hits;
         private readonly int BrushColorProperty = Shader.PropertyToID("_BrushColor");
         private readonly int BrushSizeProperty = Shader.PropertyToID("_BrushSize");
@@ -76,6 +77,7 @@ namespace ColorSwipeGame
 
             if (_currentRT)
             {
+                // SaveTextureChanges(_currentRT, _editedTextures[_currentSRIndex]);
                 _currentRT.DiscardContents();
                 RenderTexture.ReleaseTemporary(_currentRT);
             }
@@ -149,6 +151,7 @@ namespace ColorSwipeGame
         public void ClearPainting()
         {
             RestoreOriginalTextures();
+            ReapplySpritesToRenderers();
         }
 
         public Texture2D GetTex()
@@ -163,17 +166,15 @@ namespace ColorSwipeGame
             return Sprite.Create(texture, sr.sprite.rect, Vector2.one * 0.5f);
         }
 
-        public Dictionary<int, Texture2D> GetLastEditState()
+        public Dictionary<int, Sprite> GetLastEditState()
         {
-            Dictionary<int, Texture2D> dictionary = new Dictionary<int, Texture2D>();
-
-
+            Dictionary<int, Sprite> dictionary = new Dictionary<int, Sprite>();
 
             int i = 0;
             foreach (Transform tf in _spritesParent)
             {
                 SpriteRenderer sr = tf.GetComponent<SpriteRenderer>();
-                dictionary[i++] = sr.sprite.texture;
+                dictionary[i++] = sr.sprite;
             }
 
             // foreach (var kvp in _sprites)
@@ -217,6 +218,35 @@ namespace ColorSwipeGame
             _brushMaterial.SetFloat(BrushSizeProperty, _paintData.BrushSize);
         }
 
+        private void SaveTextureChanges(RenderTexture source)
+        {
+            // Create a temporary RenderTexture
+            RenderTexture temp = RenderTexture.GetTemporary(
+                source.width,
+                source.height,
+                0,
+                RenderTextureFormat.ARGB32,
+                RenderTextureReadWrite.Linear
+            );
+
+            // Blit from the source to the temporary RenderTexture
+            Graphics.Blit(source, temp);
+
+            // Set the active RenderTexture to the temporary one
+            RenderTexture previous = RenderTexture.active;
+            RenderTexture.active = temp;
+
+            // Read the pixels from the temporary RenderTexture to the destination Texture2D
+            _savedSprites[_currentSRIndex].texture.ReadPixels(new Rect(0, 0, temp.width, temp.height), 0, 0);
+            _savedSprites[_currentSRIndex].texture.Apply();
+
+            // Restore the previous active RenderTexture
+            RenderTexture.active = previous;
+
+            // Release the temporary RenderTexture
+            RenderTexture.ReleaseTemporary(temp);
+        }
+
         private void InitializeSprite(SpriteRenderer spriteRenderer)
         {
             int spriteIndex = spriteRenderer.transform.GetSiblingIndex();
@@ -227,7 +257,7 @@ namespace ColorSwipeGame
             _isEdited.Add(false);
             _editedTextures.Add(spriteIndex, new Texture2D(originalTexture.width, originalTexture.height, originalTexture.format, originalTexture.mipmapCount, false));
 
-            Graphics.CopyTexture(originalTexture, _editedTextures[spriteIndex]);
+            // Graphics.CopyTexture(originalTexture, _editedTextures[spriteIndex]);
         }
         private void InitializeSprite(SpriteRenderer spriteRenderer, Dictionary<int, Texture2D> editedTextures)
         {
@@ -334,6 +364,7 @@ namespace ColorSwipeGame
             Vector2 texturePoint = WorldToTexturePoint(worldPosition);
             Sprite sprite = _currentSpriteRenderer.sprite;
             int key = _currentSpriteRenderer.transform.GetSiblingIndex();
+            _currentSRIndex = key;
 
             if (!_isEdited[key])
             {
@@ -354,7 +385,10 @@ namespace ColorSwipeGame
             }
 
             Graphics.Blit(_editedTextures[key], _currentRT, _brushMaterial);
+
             Graphics.CopyTexture(_currentRT, _editedTextures[key]);
+            // _editedTextures[key].ReadPixels(new Rect(0, 0, _editedTextures[key].width, _editedTextures[key].height), 0, 0);
+            // _editedTextures[key].Apply();
 
             if (!_sprites.TryGetValue(key, out Sprite _))
             {
@@ -419,6 +453,19 @@ namespace ColorSwipeGame
                 if (_sprites.TryGetValue(index, out Sprite sprite))
                 {
                     _sprites[index] = Sprite.Create(editedTexture, sprite.rect, Vector2.one / 2, sprite.pixelsPerUnit);
+                }
+            }
+        }
+
+        private void ReapplySpritesToRenderers()
+        {
+            foreach (Transform spriteTransform in _spritesParent)
+            {
+                SpriteRenderer spriteRenderer = spriteTransform.GetComponent<SpriteRenderer>();
+                int spriteIndex = spriteRenderer.transform.GetSiblingIndex();
+                if (_sprites.TryGetValue(spriteIndex, out Sprite newSprite))
+                {
+                    spriteRenderer.sprite = newSprite;
                 }
             }
         }

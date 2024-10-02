@@ -37,16 +37,12 @@ public class LevelDataSO : ScriptableObject
     //     LoadTextures(index, editedTextures);
     // }
 
-    public void SaveLevelState(int index, Dictionary<int, Texture2D> editedTextures)
+    public void SaveLevelState(int index, Dictionary<int, Sprite> editedTextures)
     {
         Levels.levelsData[index].CurrentTextures.Clear();
 
         foreach (var kvp in editedTextures)
         {
-            //mod texture first
-
-
-
             string textureFileName = "texture_" + index + "_" + kvp.Key;  // Unique file name
             SaveTextureToFile(kvp.Value, textureFileName);
 
@@ -72,16 +68,16 @@ public class LevelDataSO : ScriptableObject
         }
         return dictionary;
     }
-    public void SaveTextureToFile(Texture2D texture, string fileName)
+    public void SaveTextureToFile(Sprite sprite, string fileName)
     {
-        RenderTexture rt = RenderTexture.GetTemporary(texture.width, texture.height, 0, RenderTextureFormat.ARGB32);
-        RenderTexture.active = rt;
-        GL.Clear(true, true, Color.clear);
-        Graphics.Blit(texture, rt);
-        texture.ReadPixels(new Rect(0, 0, texture.width, texture.height), 0, 0);
-        texture.Apply();
+        // RenderTexture rt = RenderTexture.GetTemporary(sprite.texture.width, sprite.texture.height, 0, RenderTextureFormat.ARGB32);
+        // RenderTexture.active = rt;
+        // GL.Clear(true, true, Color.clear);
+        // Graphics.Blit(sprite.texture, rt);
+        // sprite.texture.ReadPixels(new Rect(0, 0, sprite.texture.width, sprite.texture.height), 0, 0);
+        // sprite.texture.Apply();
 
-        byte[] textureBytes = texture.EncodeToPNG();  // Or use EncodeToJPG for smaller files
+        byte[] textureBytes = sprite.texture.EncodeToPNG();  // Or use EncodeToJPG for smaller files
         string filePath = Path.Combine(Application.persistentDataPath, fileName + ".png");
 
         File.WriteAllBytes(filePath, textureBytes);

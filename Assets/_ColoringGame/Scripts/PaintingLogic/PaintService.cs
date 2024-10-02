@@ -78,7 +78,7 @@ namespace ColorSwipeGame
         {
             _paintController.InitializeLevel(_spritesContainer.GetChild(0).GetChild(0), editedTextures);
         }
-        public Dictionary<int, Texture2D> SaveCurrentState()
+        public Dictionary<int, Sprite> SaveCurrentState()
         {
             _sprite = _paintController.GetSprite();
             _Texture = _paintController.GetTex();
