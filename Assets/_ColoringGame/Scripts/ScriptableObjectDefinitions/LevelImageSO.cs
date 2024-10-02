@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ColorSwipeGame
@@ -10,7 +8,7 @@ namespace ColorSwipeGame
         public LevelImages data;
     }
 
-    [System.Serializable] 
+    [System.Serializable]
     public struct LevelImages
     {
         public Sprite[] LevelSprites;

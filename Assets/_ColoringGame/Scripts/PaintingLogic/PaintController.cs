@@ -79,6 +79,9 @@ namespace ColorSwipeGame
                 _currentRT.DiscardContents();
                 RenderTexture.ReleaseTemporary(_currentRT);
             }
+
+
+            // SaveCurrentTextureState();
         }
 
         public void ClearMemory()
@@ -148,12 +151,48 @@ namespace ColorSwipeGame
             RestoreOriginalTextures();
         }
 
+        public Texture2D GetTex()
+        {
+            return _spritesParent.GetChild(0).GetComponent<SpriteRenderer>().sprite.texture;
+
+        }
+
+        public Dictionary<int, Texture2D> GetLastEditState()
+        {
+            Dictionary<int, Texture2D> dictionary = new Dictionary<int, Texture2D>();
+
+            int i = 0;
+            foreach (Transform tf in _spritesParent)
+            {
+                SpriteRenderer sr = tf.GetComponent<SpriteRenderer>();
+                dictionary[i++] = sr.sprite.texture;
+            }
+
+            // foreach (var kvp in _sprites)
+            // {
+            //     dictionary[kvp.Key] = kvp.Value.texture;
+            // }
+
+            return dictionary;
+            // return new Dictionary<int, Texture2D>(_sprites);
+        }
+
         public void InitializeLevel(Transform spritesParent)
         {
+            Debug.Log("chk 1");
             _spritesParent = spritesParent;
             foreach (Transform spriteTransform in _spritesParent)
             {
                 InitializeSprite(spriteTransform.GetComponent<SpriteRenderer>());
+            }
+        }
+        public void InitializeLevel(Transform spritesParent, Dictionary<int, Texture2D> editedTextures)
+        {
+            Debug.Log("chk 2");
+            _spritesParent = spritesParent;
+            foreach (Transform spriteTransform in _spritesParent)
+            {
+                InitializeSprite(spriteTransform.GetComponent<SpriteRenderer>(), editedTextures);
             }
         }
 
@@ -181,6 +220,24 @@ namespace ColorSwipeGame
             _editedTextures.Add(spriteIndex, new Texture2D(originalTexture.width, originalTexture.height, originalTexture.format, originalTexture.mipmapCount, false));
 
             Graphics.CopyTexture(originalTexture, _editedTextures[spriteIndex]);
+        }
+        private void InitializeSprite(SpriteRenderer spriteRenderer, Dictionary<int, Texture2D> editedTextures)
+        {
+            int spriteIndex = spriteRenderer.transform.GetSiblingIndex();
+
+            Sprite originalSprite = spriteRenderer.sprite;
+            Texture2D originalTexture = originalSprite.texture;
+
+            _originalSprites.Add(spriteIndex, originalSprite);
+            _isEdited.Add(true);
+            _editedTextures = new(editedTextures);
+
+            // Graphics.CopyTexture(originalTexture, _editedTextures[spriteIndex]);
+
+            Sprite newSprite = Sprite.Create(editedTextures[spriteIndex], originalSprite.rect, Vector2.one / 2, originalSprite.pixelsPerUnit);
+            _sprites.Add(spriteIndex, newSprite);
+            spriteRenderer.sprite = newSprite;
+            Debug.Log(spriteRenderer.name);
         }
 
         private void PreWarmShaders()
@@ -230,7 +287,6 @@ namespace ColorSwipeGame
             _currentCollider = _currentSpriteRenderer.GetComponent<Collider2D>();
             _currentCollider.enabled = false;
 
-            SaveCurrentTextureState();
             ColorSpriteAtPosition(_hits[topIndex].point);
         }
 

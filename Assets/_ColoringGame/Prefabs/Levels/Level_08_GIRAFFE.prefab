@@ -371,7 +371,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5240473448973904489}
   m_Layer: 0
-  m_Name: Level_05_GIRAFFE
+  m_Name: Level_08_GIRAFFE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 namespace ColorSwipeGame
 {
@@ -21,6 +22,9 @@ namespace ColorSwipeGame
 
         private PaintController _paintController;
         private Camera _mainCamera;
+
+        // test tex
+        public Texture2D _Texture;
 
         public bool CanPaint { get; set; } = false;
 
@@ -69,6 +73,16 @@ namespace ColorSwipeGame
             _paintController.InitializeLevel(_spritesContainer.GetChild(0).GetChild(0));
         }
 
+        public void OnEditedLevelLoad(Dictionary<int, Texture2D> editedTextures)
+        {
+            _paintController.InitializeLevel(_spritesContainer.GetChild(0).GetChild(0), editedTextures);
+        }
+        public Dictionary<int, Texture2D> SaveCurrentState()
+        {
+            _Texture = _paintController.GetTex();
+            return _paintController.GetLastEditState();
+        }
+
         private void BeginDrag(Vector2 touchPosition)
         {
             if (CanPaint)
@@ -89,7 +103,7 @@ namespace ColorSwipeGame
 
         private void OnDragStationary()
         {
-            if(CanPaint)
+            if (CanPaint)
             {
 
             }
