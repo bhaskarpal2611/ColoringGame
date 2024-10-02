@@ -60,6 +60,6 @@ Material:
     m_Floats:
     - _BrushSize: 0.03
     m_Colors:
-    - _BrushColor: {r: 0, g: 1, b: 0, a: 1}
-    - _UVPosition: {r: 0.79007673, g: 0.7795922, b: 0, a: 0}
+    - _BrushColor: {r: 0, g: 1, b: 0.16408062, a: 1}
+    - _UVPosition: {r: 0.5782186, g: 0.6137115, b: 0, a: 0}
   m_BuildTextureStacks: []

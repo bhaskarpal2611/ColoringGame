@@ -3394,9 +3394,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8100986678138197016}
-        m_TargetAssemblyTypeName: ColorSwipeGame.PaintService, Assembly-CSharp
-        m_MethodName: OnBackButtonPressed
+      - m_Target: {fileID: 8214585287191498458}
+        m_TargetAssemblyTypeName: ColorSwipeGame.LevelImageHandler, Assembly-CSharp
+        m_MethodName: UpdateSprite
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3418,9 +3418,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8214585287191498458}
-        m_TargetAssemblyTypeName: ColorSwipeGame.LevelImageHandler, Assembly-CSharp
-        m_MethodName: UpdateSprite
+      - m_Target: {fileID: 8100986678138197016}
+        m_TargetAssemblyTypeName: ColorSwipeGame.PaintService, Assembly-CSharp
+        m_MethodName: OnBackButtonPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3569,7 +3569,7 @@ GameObject:
   - component: {fileID: 1274314701}
   - component: {fileID: 1274314700}
   m_Layer: 5
-  m_Name: Image
+  m_Name: BG_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4826,7 +4826,7 @@ GameObject:
   - component: {fileID: 1862967207}
   - component: {fileID: 1862967206}
   m_Layer: 5
-  m_Name: ArtBoard
+  m_Name: Art_Board_Scroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8359,6 +8359,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 2c1f668067a2ef142a0f818422891801, type: 2}
   - {fileID: 2100000, guid: 9ecabad1768eeb44f87d70356d164f4f, type: 2}
   - {fileID: 2100000, guid: 91c79add08051f7459b23ed7dd7c22c5, type: 2}
+  _Texture: {fileID: 0}
+  _sprite: {fileID: 0}
 --- !u!1 &8214585287191498457
 GameObject:
   m_ObjectHideFlags: 0

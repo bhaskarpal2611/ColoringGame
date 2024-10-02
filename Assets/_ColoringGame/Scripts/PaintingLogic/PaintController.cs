@@ -154,12 +154,20 @@ namespace ColorSwipeGame
         public Texture2D GetTex()
         {
             return _spritesParent.GetChild(0).GetComponent<SpriteRenderer>().sprite.texture;
+        }
 
+        public Sprite GetSprite()
+        {
+            var sr = _spritesParent.GetChild(0).GetComponent<SpriteRenderer>();
+            var texture = sr.sprite.texture;
+            return Sprite.Create(texture, sr.sprite.rect, Vector2.one * 0.5f);
         }
 
         public Dictionary<int, Texture2D> GetLastEditState()
         {
             Dictionary<int, Texture2D> dictionary = new Dictionary<int, Texture2D>();
+
+
 
             int i = 0;
             foreach (Transform tf in _spritesParent)

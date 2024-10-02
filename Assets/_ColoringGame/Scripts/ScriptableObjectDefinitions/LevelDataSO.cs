@@ -98,7 +98,6 @@ public class LevelDataSO : ScriptableObject
             byte[] fileData = File.ReadAllBytes(filePath);
             Texture2D texture = new Texture2D(2, 2, TextureFormat.ARGB32, false);  // Size doesn't matter here; it will be overridden by LoadImage
             texture.LoadImage(fileData);  // LoadImage auto-resizes the texture dimensions
-            Debug.Log(texture.mipmapCount);
             return texture;
         }
 

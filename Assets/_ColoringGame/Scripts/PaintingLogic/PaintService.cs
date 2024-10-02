@@ -25,6 +25,7 @@ namespace ColorSwipeGame
 
         // test tex
         public Texture2D _Texture;
+        public Sprite _sprite;
 
         public bool CanPaint { get; set; } = false;
 
@@ -79,6 +80,7 @@ namespace ColorSwipeGame
         }
         public Dictionary<int, Texture2D> SaveCurrentState()
         {
+            _sprite = _paintController.GetSprite();
             _Texture = _paintController.GetTex();
             return _paintController.GetLastEditState();
         }
