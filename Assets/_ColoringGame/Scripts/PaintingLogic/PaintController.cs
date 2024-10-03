@@ -266,13 +266,15 @@ namespace ColorSwipeGame
             Texture2D originalTexture = originalSprite.texture;
 
             _originalSprites.Add(spriteIndex, originalSprite);
-            _isEdited.Add(true);
            
             if (editedTextures.ContainsKey(spriteIndex))
             {
+            _isEdited.Add(true);
                 _editedTextures[spriteIndex] = editedTextures[spriteIndex];
             } else
             {
+                _isEdited.Add(false );
+
                 _editedTextures.Add(spriteIndex, new Texture2D(originalTexture.width, originalTexture.height, originalTexture.format, originalTexture.mipmapCount, false));
 
             }
@@ -444,24 +446,41 @@ namespace ColorSwipeGame
             _sprites.Clear();
             _originalSprites.Clear();
         }
+
+
         private void RestoreOriginalTextures()
         {
-            foreach (var kvp in _originalSprites)
+            for (int i = 0; i < _spritesParent.childCount; i++)
             {
-                int index = kvp.Key;
-                Sprite originalSprite = kvp.Value;
-                Texture2D originalTexture = originalSprite.texture;
+                Debug.Log("ada" + GameObject.FindObjectOfType<SelectionSceneManager>().GetSprite()[i].name);
+                Debug.Log("ada" + _spritesParent.GetChild(i).name);
 
-                if (_editedTextures.TryGetValue(index, out Texture2D editedTexture))
-                {
-                    Graphics.CopyTexture(originalTexture, editedTexture);
-                }
+                Sprite sp = GameObject.FindObjectOfType<SelectionSceneManager>().GetSprite()[i];
+                Sprite temp = Sprite.Create(sp.texture, sp.rect, Vector2.one * 0.5f);
 
-                if (_sprites.TryGetValue(index, out Sprite sprite))
-                {
-                    _sprites[index] = Sprite.Create(editedTexture, sprite.rect, Vector2.one / 2, sprite.pixelsPerUnit);
-                }
+                _spritesParent.GetChild(i).GetComponent<SpriteRenderer>().sprite = temp;
+                 
+
             }
+
+
+            //foreach (var kvp in _originalSprites)
+            //{
+            //    int index = kvp.Key;
+            //    Sprite originalSprite = kvp.Value;
+            //    Texture2D originalTexture = originalSprite.texture;
+
+            //    if (_editedTextures.TryGetValue(index, out Texture2D editedTexture))
+            //    {
+            //        Graphics.CopyTexture(originalTexture, editedTexture);
+            //        //GameObject.FindAnyObjectByType<SelectionSceneManager>().SaveLevelState();
+            //    }
+
+            //    if (_sprites.TryGetValue(index, out Sprite sprite))
+            //    {
+            //        _sprites[index] = Sprite.Create(editedTexture, sprite.rect, Vector2.one / 2, sprite.pixelsPerUnit);
+            //    }
+            //}
         }
 
         private void ReapplySpritesToRenderers()

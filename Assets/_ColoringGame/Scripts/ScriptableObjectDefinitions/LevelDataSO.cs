@@ -17,6 +17,8 @@ public class LevelDataSO : ScriptableObject
         return Levels.levelsData[index].LevelPrefab;
     }
 
+    
+
     public bool IsEdited(int index) => Levels.levelsData[index].IsEdited;
 
     public void Reset()
@@ -112,7 +114,7 @@ public class LevelData
     public int LevelIndex;
     public GameObject LevelPrefab;
     public bool IsLevelCompleted = false;
-    //public Sprite[] OriginalSprites;
+    public Sprite[] OriginalSprites;
     public bool IsEdited = false;
 
     public List<TextureData> CurrentTextures;

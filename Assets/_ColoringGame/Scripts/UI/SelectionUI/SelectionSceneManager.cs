@@ -70,11 +70,21 @@ namespace ColorSwipeGame
 
         public void GoBackToSelectionScene()
         {
-            _levels.SaveLevelState(_currentLevelIndex, _paintService.SaveCurrentState());
-
+            SaveLevelState();
             _levelImageHandler.UpdateSprite();
             _selectionSceneCanvas.SetActive(true);
             Destroy(_currentLevel);
+        }
+
+        public Sprite[] GetSprite()
+        {
+            return _levels.Levels.levelsData[0].OriginalSprites;
+        }
+
+        public void SaveLevelState() 
+        {
+            _levels.SaveLevelState(_currentLevelIndex, _paintService.SaveCurrentState());
+
         }
 
         public float CalculateScreenAspectRatio()

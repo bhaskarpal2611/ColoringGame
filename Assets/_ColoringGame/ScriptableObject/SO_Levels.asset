@@ -17,7 +17,7 @@ MonoBehaviour:
     - LevelIndex: 0
       LevelPrefab: {fileID: 1967041107805472303, guid: 228b87b615240734bbc2126aef9e3c76, type: 3}
       IsLevelCompleted: 0
-      IsEdited: 1
+      IsEdited: 0
       CurrentTextures:
       - id: 0
         textureFilePath: texture_0_0
@@ -29,11 +29,10 @@ MonoBehaviour:
         textureFilePath: texture_0_3
       - id: 4
         textureFilePath: texture_0_4
-      _textures: []
     - LevelIndex: 1
       LevelPrefab: {fileID: 2460442869233561013, guid: a805462e80cb065418871d2b641a472d, type: 3}
       IsLevelCompleted: 0
-      IsEdited: 1
+      IsEdited: 0
       CurrentTextures:
       - id: 0
         textureFilePath: texture_1_0
@@ -77,11 +76,10 @@ MonoBehaviour:
         textureFilePath: texture_1_19
       - id: 20
         textureFilePath: texture_1_20
-      _textures: []
     - LevelIndex: 2
       LevelPrefab: {fileID: 1297199473006019427, guid: fcfdc3b386215c0498b7570c3bc20265, type: 3}
       IsLevelCompleted: 0
-      IsEdited: 1
+      IsEdited: 0
       CurrentTextures:
       - id: 0
         textureFilePath: texture_2_0
@@ -135,7 +133,6 @@ MonoBehaviour:
         textureFilePath: texture_2_24
       - id: 25
         textureFilePath: texture_2_25
-      _textures: []
     - LevelIndex: 3
       LevelPrefab: {fileID: 7559283923001293542, guid: 97075ba594af9a941bf93bd2c40884aa, type: 3}
       IsLevelCompleted: 0
@@ -165,7 +162,6 @@ MonoBehaviour:
         textureFilePath: texture_3_10
       - id: 11
         textureFilePath: texture_3_11
-      _textures: []
     - LevelIndex: 4
       LevelPrefab: {fileID: 404216453300770895, guid: 8b7b88da2ecefbc41a0b4071f801518f, type: 3}
       IsLevelCompleted: 0
@@ -191,7 +187,6 @@ MonoBehaviour:
         textureFilePath: texture_4_8
       - id: 9
         textureFilePath: texture_4_9
-      _textures: []
     - LevelIndex: 5
       LevelPrefab: {fileID: 1947265809199597286, guid: 21b9d7c506e329f458460289b845dbb8, type: 3}
       IsLevelCompleted: 0
@@ -235,7 +230,6 @@ MonoBehaviour:
         textureFilePath: texture_5_17
       - id: 18
         textureFilePath: texture_5_18
-      _textures: []
     - LevelIndex: 6
       LevelPrefab: {fileID: 9167756834360458280, guid: a62d15eaa304f144da8b98cc4cc2a1b6, type: 3}
       IsLevelCompleted: 0
@@ -289,7 +283,6 @@ MonoBehaviour:
         textureFilePath: texture_6_22
       - id: 23
         textureFilePath: texture_6_23
-      _textures: []
     - LevelIndex: 7
       LevelPrefab: {fileID: 646319494229189181, guid: d8082a4557d85024884a898c4fcf00fe, type: 3}
       IsLevelCompleted: 0
@@ -343,7 +336,6 @@ MonoBehaviour:
         textureFilePath: texture_7_22
       - id: 23
         textureFilePath: texture_7_23
-      _textures: []
     - LevelIndex: 8
       LevelPrefab: {fileID: 4429773294001562870, guid: 243f93c4e40efe14eb17c541480d7f88, type: 3}
       IsLevelCompleted: 0
@@ -399,4 +391,3 @@ MonoBehaviour:
         textureFilePath: texture_8_23
       - id: 24
         textureFilePath: texture_8_24
-      _textures: []
