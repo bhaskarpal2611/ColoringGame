@@ -74,14 +74,14 @@ namespace ColorSwipeGame
             _paintController.InitializeLevel(_spritesContainer.GetChild(0).GetChild(0));
         }
 
-        public void OnEditedLevelLoad(Dictionary<int, Texture2D> editedTextures)
+        public void OnEditedLevelLoad(LevelTextures levelTextures)
         {
-            _paintController.InitializeLevel(_spritesContainer.GetChild(0).GetChild(0), editedTextures);
+            _paintController.InitializeLevel(_spritesContainer.GetChild(0).GetChild(0), levelTextures);
         }
         public Dictionary<int, Sprite> SaveCurrentState()
         {
-            _sprite = _paintController.GetSprite();
-            _Texture = _paintController.GetTex();
+            //     _sprite = _paintController.GetSprite();
+            //     _Texture = _paintController.GetTex();
             return _paintController.GetLastEditState();
         }
 
