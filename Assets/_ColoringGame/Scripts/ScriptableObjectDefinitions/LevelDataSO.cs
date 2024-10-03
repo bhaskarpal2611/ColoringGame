@@ -7,7 +7,6 @@ public class LevelDataSO : ScriptableObject
 {
     public Levels Levels;
 
-
     public GameObject GetLevelPrefab(int index)
     {
         if (index < 0 || index >= Levels.Length())
@@ -27,15 +26,6 @@ public class LevelDataSO : ScriptableObject
             Levels.levelsData[i].IsEdited = false;
         }
     }
-
-    // public Dictionary<int, Texture2D> GetLevelState(int index) => Levels.levelsData[index].CurrentTextures;
-
-    // public void SaveLevelState(int index, Dictionary<int, Texture2D> editedTextures)
-    // {
-    //     Levels.levelsData[index].CurrentTextures = new Dictionary<int, Texture2D>(editedTextures);
-    //     Levels.levelsData[index].IsEdited = true;
-    //     LoadTextures(index, editedTextures);
-    // }
 
     public void SaveLevelState(int index, Dictionary<int, Sprite> editedTextures)
     {
@@ -70,12 +60,12 @@ public class LevelDataSO : ScriptableObject
     }
     public void SaveTextureToFile(Sprite sprite, string fileName)
     {
-        // RenderTexture rt = RenderTexture.GetTemporary(sprite.texture.width, sprite.texture.height, 0, RenderTextureFormat.ARGB32);
-        // RenderTexture.active = rt;
-        // GL.Clear(true, true, Color.clear);
-        // Graphics.Blit(sprite.texture, rt);
-        // sprite.texture.ReadPixels(new Rect(0, 0, sprite.texture.width, sprite.texture.height), 0, 0);
-        // sprite.texture.Apply();
+         RenderTexture rt = RenderTexture.GetTemporary(sprite.texture.width, sprite.texture.height, 0, RenderTextureFormat.ARGB32);
+        RenderTexture.active = rt;
+        GL.Clear(true, true, Color.clear);
+        Graphics.Blit(sprite.texture, rt);
+        sprite.texture.ReadPixels(new Rect(0, 0, sprite.texture.width, sprite.texture.height), 0, 0);
+        sprite.texture.Apply();
 
         byte[] textureBytes = sprite.texture.EncodeToPNG();  // Or use EncodeToJPG for smaller files
         string filePath = Path.Combine(Application.persistentDataPath, fileName + ".png");
@@ -122,9 +112,8 @@ public class LevelData
     public int LevelIndex;
     public GameObject LevelPrefab;
     public bool IsLevelCompleted = false;
-
+    //public Sprite[] OriginalSprites;
     public bool IsEdited = false;
 
     public List<TextureData> CurrentTextures;
-    public Texture2D[] _textures;
 }

@@ -256,8 +256,7 @@ namespace ColorSwipeGame
             _originalSprites.Add(spriteIndex, originalSprite);
             _isEdited.Add(false);
             _editedTextures.Add(spriteIndex, new Texture2D(originalTexture.width, originalTexture.height, originalTexture.format, originalTexture.mipmapCount, false));
-
-            // Graphics.CopyTexture(originalTexture, _editedTextures[spriteIndex]);
+             //Graphics.CopyTexture(originalTexture, _editedTextures[spriteIndex]);
         }
         private void InitializeSprite(SpriteRenderer spriteRenderer, Dictionary<int, Texture2D> editedTextures)
         {
@@ -268,9 +267,17 @@ namespace ColorSwipeGame
 
             _originalSprites.Add(spriteIndex, originalSprite);
             _isEdited.Add(true);
-            _editedTextures = new(editedTextures);
+           
+            if (editedTextures.ContainsKey(spriteIndex))
+            {
+                _editedTextures[spriteIndex] = editedTextures[spriteIndex];
+            } else
+            {
+                _editedTextures.Add(spriteIndex, new Texture2D(originalTexture.width, originalTexture.height, originalTexture.format, originalTexture.mipmapCount, false));
 
-            // Graphics.CopyTexture(originalTexture, _editedTextures[spriteIndex]);
+            }
+
+             //Graphics.CopyTexture(originalTexture, _editedTextures[spriteIndex]);
 
             Sprite newSprite = Sprite.Create(editedTextures[spriteIndex], originalSprite.rect, Vector2.one / 2, originalSprite.pixelsPerUnit);
             _sprites.Add(spriteIndex, newSprite);
