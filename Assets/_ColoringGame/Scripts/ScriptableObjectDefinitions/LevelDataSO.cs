@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using ColorSwipeGame;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SO/Levels", menuName = "SO/Levels")]
@@ -25,6 +26,17 @@ public class LevelDataSO : ScriptableObject
         {
             Levels.levelsData[i].IsEdited = false;
         }
+    }
+
+    public void SaveEditedImage(SavedImageData savedData)
+    {
+        Debug.Log("fileName: " + savedData.FileName);
+        Levels.levelsData[savedData.Level].SavedImageData = savedData;
+    }
+
+    public string GetEditedImage(int index)
+    {
+        return Levels.levelsData[index].SavedImageData.FileName;
     }
 
     public void SaveLevelState(int index, Dictionary<int, Sprite> editedTextures)
@@ -128,4 +140,6 @@ public class LevelData
     public Sprite[] OriginalSprites;
     public bool IsEdited = false;
     public List<TextureData> CurrentTextures;
+
+    public SavedImageData SavedImageData;
 }

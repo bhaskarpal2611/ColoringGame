@@ -5060,7 +5060,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 682.0001, y: -50}
+  m_AnchoredPosition: {x: 682, y: -50}
   m_SizeDelta: {x: 1000, y: 100}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1904748523
@@ -8452,7 +8452,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sprites: {fileID: 11400000, guid: f9fb320c273950d4b8a3e47fd668fa53, type: 2}
+  _levelData: {fileID: 11400000, guid: 55a9e952404c5d346b2a4aad8232ef2f, type: 2}
   _cameraScreenshotController: {fileID: 1933882440}
+  _Sprite: {fileID: 0}
+  _texture: {fileID: 0}
 --- !u!114 &8283793211545923714
 MonoBehaviour:
   m_ObjectHideFlags: 0

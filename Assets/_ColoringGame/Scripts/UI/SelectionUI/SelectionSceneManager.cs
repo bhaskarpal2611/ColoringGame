@@ -63,7 +63,7 @@ namespace ColorSwipeGame
             transform.DOMove(transform.position, _levelLoadTimeDelay).OnComplete(() =>
         {
 
-            // OnLevelLoaded.Invoke();
+            OnLevelLoaded.Invoke();
         });
         }
 
@@ -71,7 +71,7 @@ namespace ColorSwipeGame
         public void GoBackToSelectionScene()
         {
             SaveLevelState();
-            _levelImageHandler.UpdateSprite();
+            _levelImageHandler.UpdateSprite(_currentLevelIndex);
             _selectionSceneCanvas.SetActive(true);
             Destroy(_currentLevel);
         }
@@ -81,7 +81,7 @@ namespace ColorSwipeGame
             return _levels.Levels.levelsData[0].OriginalSprites;
         }
 
-        public void SaveLevelState() 
+        public void SaveLevelState()
         {
             _levels.SaveLevelState(_currentLevelIndex, _paintService.SaveCurrentState());
 

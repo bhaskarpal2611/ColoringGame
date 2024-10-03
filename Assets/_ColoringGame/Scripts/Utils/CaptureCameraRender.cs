@@ -26,7 +26,6 @@ namespace ColorSwipeGame
 
         private int counter = 0;
         private float _startTime;
-        private bool _flashing;
         private byte[] _bytes;
 
         private void Start()
@@ -44,7 +43,7 @@ namespace ColorSwipeGame
             {
                 _paintToolPanel.DOLocalMoveX(1000f, .5f).OnComplete(() =>
                 {
-                    SaveRenderTextureToPNG();
+                    TakeSnap();
                     _bottomLeftPanel.PopOpen();
                 });
             });
@@ -105,7 +104,31 @@ namespace ColorSwipeGame
             return _texture;
         }
 
-        private void SaveRenderTextureToPNG()
+        public string SaveCopy(int index)
+        {
+            RenderTexture.active = _cameraRT;
+
+            // Read pixels from the RenderTexture into the Texture2D
+            _texture.ReadPixels(new Rect(0, 0, _cameraRT.width, _cameraRT.height), 0, 0);
+            _texture.Apply();
+
+            RenderTexture.active = null;
+
+            // create a sprite from texture
+            Sprite sprite = Sprite.Create(_texture, _rect, Vector2.one * 0.5f);
+            sprite.name = "Saved Image";
+            _referenceImage.sprite = sprite;
+            _referenceImage.color = Color.white;
+
+            _bytes = _texture.EncodeToPNG();
+
+            string fileName = "SavedLevelImage_00" + index;
+            string editorPath = Path.Combine(Application.persistentDataPath, fileName + ".png");
+            File.WriteAllBytes(editorPath, _bytes);
+            return fileName;
+        }
+
+        private void TakeSnap()
         {
             RenderTexture.active = _cameraRT;
 
@@ -173,12 +196,9 @@ namespace ColorSwipeGame
 
                 col.a = Mathf.Lerp(1.0f, 0.0f, perc);
                 _flashImage.color = col;
-                _flashing = true;
 
                 yield return null;
             }
-
-            _flashing = false;
 
             yield break;
         }
