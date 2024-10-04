@@ -34,8 +34,8 @@ namespace ColorSwipeGame
         public void UpdateSprite(int index)
         {
             string fileName = _cameraScreenshotController.SaveCopy(index);
-            SavedImageData savedImageData = new(index, fileName);
-            _levelData.SaveEditedImage(savedImageData);
+            _levelData.SaveEditedImage(index, fileName);
+            _levelData.SaveLevelData(index);
         }
 
         public void LoadSprites()
@@ -49,14 +49,7 @@ namespace ColorSwipeGame
                     string filePath = Path.Combine(Application.persistentDataPath, fileName + ".png");
                     if (File.Exists(filePath))
                     {
-                        byte[] bytes = File.ReadAllBytes(filePath);
-                        Texture2D texture = new Texture2D(2, 2, TextureFormat.ARGB32, false);  // Size doesn't matter here; it will be overridden by LoadImage
-                        texture.LoadImage(bytes);  // LoadImage auto-resizes the texture dimensions
-                        _texture = texture;
-                        Rect rect = new Rect(0, 0, 1024, 1024);
-                        Sprite sprite = Sprite.Create(texture, rect, Vector2.one * 0.5f);
-                        _Sprite = sprite;
-                        _images[i].sprite = sprite;
+                        LoadSpritePNG(i, filePath);
                     }
                     else
                     {
@@ -71,18 +64,17 @@ namespace ColorSwipeGame
                 }
             }
         }
-    }
 
-    [System.Serializable]
-    public struct SavedImageData
-    {
-        public int Level;
-        public string FileName;
-
-        public SavedImageData(int index, string fileName)
+        private void LoadSpritePNG(int i, string filePath)
         {
-            Level = index;
-            FileName = fileName;
+            byte[] bytes = File.ReadAllBytes(filePath);
+            Texture2D texture = new Texture2D(2, 2, TextureFormat.ARGB32, false);  // Size doesn't matter here; it will be overridden by LoadImage
+            texture.LoadImage(bytes);  // LoadImage auto-resizes the texture dimensions
+            _texture = texture;
+            Rect rect = new Rect(0, 0, 1024, 1024);
+            Sprite sprite = Sprite.Create(texture, rect, Vector2.one * 0.5f);
+            _Sprite = sprite;
+            _images[i].sprite = sprite;
         }
     }
 }

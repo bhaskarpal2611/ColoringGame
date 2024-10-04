@@ -1,7 +1,5 @@
 using DG.Tweening;
-using System;
 using System.Collections;
-using System.IO;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -18,13 +16,12 @@ namespace ColorSwipeGame
         [SerializeField] private LeftPanelController _leftPanelHandler;
         [SerializeField] private PenSelectionHandler _penSelectionHandler;
         [SerializeField] private LevelImageHandler _levelImageHandler;
+        [SerializeField] private SaveManager _saveManager;
         [SerializeField] private float _levelLoadTimeDelay = 0.25f;
 
         private GameObject _currentLevel;
         private int _currentLevelIndex;
         private bool _firstTimeLoaded = false;
-
-        private string filePath;
 
         public UnityEvent OnLevelLoaded = new();
 
@@ -39,58 +36,12 @@ namespace ColorSwipeGame
             {
                 Camera.main.orthographicSize = 7.5f;
             }
-            filePath = Path.Combine(Application.persistentDataPath, "currentTexturesData.json");
-
-
-            for (int i = 0; i < _levels.Levels.levelsData.Length; i++)
-            {
-                var tex = LoadCurrentTextures();
-                if (tex != null)
-                {
-                    _levels.Levels.levelsData[i].CurrentTextures = tex;
-                    _levels.Levels.levelsData[i].IsEdited = true;
-                    _levels.Levels.levelsData[i].SavedImageData.FileName = tex.LevelEditedImage;
-                    _levels.Levels.levelsData[i].SavedImageData.Level = i;
-                }
-            }
-
-            _levelImageHandler.LoadSprites();
-        }
-
-        public void SaveCurrentTextures(AllTexturesData currentTextures)
-        {
-            // Serialize the CurrentTextures field to JSON
-            string json = JsonUtility.ToJson(currentTextures, true);  // Pretty print for readability
-
-            // Write the JSON to a file
-            File.WriteAllText(filePath, json);
-
-            Debug.Log("CurrentTextures data saved to: " + filePath);
-        }
-
-        // Load the CurrentTextures field
-        public AllTexturesData LoadCurrentTextures()
-        {
-            if (File.Exists(filePath))
-            {
-                // Read the JSON file
-                string json = File.ReadAllText(filePath);
-
-                // Deserialize the JSON string back into AllTexturesData
-                AllTexturesData currentTextures = JsonUtility.FromJson<AllTexturesData>(json);
-
-                Debug.Log("CurrentTextures data loaded from: " + filePath);
-                return currentTextures;
-            }
-            else
-            {
-                Debug.LogWarning("Save file not found");
-                return null;
-            }
         }
 
         public void LoadLevel(int index)
         {
+            _saveManager.SaveLevelsData();
+
             if (_currentLevel != null)
             {
                 Destroy(_currentLevel);
@@ -117,6 +68,7 @@ namespace ColorSwipeGame
             else
             {
                 _paintService.OnLevelLoad();
+                _levels.Levels.levelsData[index].IsEdited = true;
             }
             _paintService.CanPaint = true;
 
@@ -136,14 +88,12 @@ namespace ColorSwipeGame
 
         private IEnumerator SaveTextures()
         {
-
-            yield return new WaitForSeconds(2f);
-            SaveLevelState();
-            _levelImageHandler.UpdateSprite(_currentLevelIndex);
             yield return null;
 
-            SaveCurrentTextures(_levels.Levels.levelsData[_currentLevelIndex].CurrentTextures);
-            _loadingPanel.DOScale(0f, .25f).SetEase(Ease.Linear).OnComplete(() =>
+            SaveLevelState();
+            _levelImageHandler.UpdateSprite(_currentLevelIndex);
+
+            _loadingPanel.DOScale(0f, 0.5f).SetEase(Ease.Linear).OnComplete(() =>
             {
                 _selectionSceneCanvas.SetActive(true);
                 _paintService.OnBackButtonPressed();
@@ -156,18 +106,17 @@ namespace ColorSwipeGame
             return _levels.Levels.levelsData[0].OriginalSprites;
         }
 
-        public void SaveLevelState()
+        private void SaveLevelState()
         {
             _levels.SaveLevelState(_currentLevelIndex, _paintService.SaveCurrentState());
 
         }
 
-        public float CalculateScreenAspectRatio()
+        private float CalculateScreenAspectRatio()
         {
             float width = Screen.width;
             float height = Screen.height;
             return width / height;
         }
     }
-
 }

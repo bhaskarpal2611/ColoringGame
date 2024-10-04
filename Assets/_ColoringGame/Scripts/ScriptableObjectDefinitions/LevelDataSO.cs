@@ -18,6 +18,29 @@ public class LevelDataSO : ScriptableObject
         return Levels.levelsData[index].LevelPrefab;
     }
 
+    public SaveData GetSaveData(int index)
+    {
+        return Levels.levelsData[index].LastSavedata;
+    }
+
+    public void SaveLevelData(int index)
+    {
+        SaveData saveData = new SaveData(index);
+        saveData.IsEdited = Levels.levelsData[index].IsEdited;
+        saveData.LevelIndex = index;
+        saveData.LevelImageName = Levels.levelsData[index].LevelImageName;
+        saveData.TexturesData = Levels.levelsData[index].CurrentTextures;
+        Levels.levelsData[index].LastSavedata = saveData;
+    }
+
+    public void RestoreSaveData(SaveData saveData)
+    {
+        Levels.levelsData[saveData.LevelIndex].LevelIndex = saveData.LevelIndex;
+        Levels.levelsData[saveData.LevelIndex].IsEdited = saveData.IsEdited;
+        Levels.levelsData[saveData.LevelIndex].LevelImageName = saveData.LevelImageName;
+        Levels.levelsData[saveData.LevelIndex].CurrentTextures = saveData.TexturesData;
+    }
+
     public bool IsEdited(int index) => Levels.levelsData[index].IsEdited;
 
     public void Reset()
@@ -28,16 +51,15 @@ public class LevelDataSO : ScriptableObject
         }
     }
 
-    public void SaveEditedImage(SavedImageData savedData)
+    public void SaveEditedImage(int index, string fileName)
     {
-        Debug.Log("fileName: " + savedData.FileName);
-        Levels.levelsData[savedData.Level].SavedImageData = savedData;
-        Levels.levelsData[savedData.Level].CurrentTextures.LevelEditedImage = savedData.FileName;
+        Debug.Log("fileName: " + fileName);
+        Levels.levelsData[index].LevelImageName = fileName;
     }
 
     public string GetEditedImage(int index)
     {
-        return Levels.levelsData[index].SavedImageData.FileName;
+        return Levels.levelsData[index].LevelImageName;
     }
 
     public void SaveLevelState(int index, Dictionary<int, Sprite> editedTextures)
@@ -52,8 +74,6 @@ public class LevelDataSO : ScriptableObject
 
             Levels.levelsData[index].CurrentTextures.TexturesData.Add(new TextureData(kvp.Key, textureFileName));
         }
-
-        Levels.levelsData[index].IsEdited = true;
     }
 
     public LevelTextures LoadTextures(int index)
@@ -79,7 +99,7 @@ public class LevelDataSO : ScriptableObject
     }
     private void SaveTextureToFile(Sprite sprite, string fileName)
     {
-        RenderTexture rt = RenderTexture.GetTemporary(sprite.texture.width, sprite.texture.height, 0, RenderTextureFormat.ARGB32);  
+        RenderTexture rt = RenderTexture.GetTemporary(sprite.texture.width, sprite.texture.height, 0, RenderTextureFormat.ARGB32);
         RenderTexture.active = rt;
         GL.Clear(true, true, Color.clear);
         Graphics.Blit(sprite.texture, rt);
@@ -111,6 +131,7 @@ public class LevelDataSO : ScriptableObject
     }
 }
 
+// LOAD
 [System.Serializable]
 public struct LevelTextures
 {
@@ -118,12 +139,30 @@ public struct LevelTextures
     public Dictionary<int, Texture2D> EditedTextures;
 }
 
-
 [System.Serializable]
 public struct Levels
 {
     public LevelData[] levelsData;
     public readonly int Length() => levelsData.Length;
+}
+
+[System.Serializable]
+public class LevelData
+{
+    public int LevelIndex;
+    public GameObject LevelPrefab;
+    public bool IsLevelCompleted = false;
+    public bool IsEdited = false;
+    public Sprite[] OriginalSprites;
+    public AllTexturesData CurrentTextures;
+    public string LevelImageName;
+    public SaveData LastSavedata;
+}
+
+[System.Serializable]
+public class AllTexturesData
+{
+    public List<TextureData> TexturesData;
 }
 
 [System.Serializable]
@@ -138,32 +177,27 @@ public class TextureData
     }
 }
 
+//SAVE DATA
+
 [System.Serializable]
-public class AllTexturesData
+public class LevelSaveData
 {
-    public List<TextureData> TexturesData;
-    public string LevelEditedImage;
+    public SaveData[] SaveData;
 }
 
 [System.Serializable]
-public class LevelData
+public class SaveData
 {
     public int LevelIndex;
-    public GameObject LevelPrefab;
-    public bool IsLevelCompleted = false;
-    public Sprite[] OriginalSprites;
-    public bool IsEdited = false;
-    public AllTexturesData CurrentTextures;
-    public SavedImageData SavedImageData;
-}
+    public bool IsEdited;
+    public string LevelImageName;
+    public AllTexturesData TexturesData;
 
-[System.Serializable]
-public struct EditedTexturePath
-{
-    public string[] TexturePath;
-
-    public EditedTexturePath(int length)
+    public SaveData(int index)
     {
-        TexturePath = new string[length];
+        LevelIndex = index;
+        IsEdited = false;
+        LevelImageName = null;
+        TexturesData = null;
     }
 }
