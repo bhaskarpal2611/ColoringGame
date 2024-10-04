@@ -32,6 +32,7 @@ public class LevelDataSO : ScriptableObject
     {
         Debug.Log("fileName: " + savedData.FileName);
         Levels.levelsData[savedData.Level].SavedImageData = savedData;
+        Levels.levelsData[savedData.Level].CurrentTextures.LevelEditedImage = savedData.FileName;
     }
 
     public string GetEditedImage(int index)
@@ -41,14 +42,15 @@ public class LevelDataSO : ScriptableObject
 
     public void SaveLevelState(int index, Dictionary<int, Sprite> editedTextures)
     {
-        Levels.levelsData[index].CurrentTextures.Clear();
+        Levels.levelsData[index].CurrentTextures.TexturesData.Clear();
 
         foreach (var kvp in editedTextures)
         {
             string textureFileName = "texture_" + index + "_" + kvp.Key;  // Unique file name
+            Debug.Log(kvp.Value.name);
             SaveTextureToFile(kvp.Value, textureFileName);
 
-            Levels.levelsData[index].CurrentTextures.Add(new TextureData { id = kvp.Key, textureFilePath = textureFileName });
+            Levels.levelsData[index].CurrentTextures.TexturesData.Add(new TextureData(kvp.Key, textureFileName));
         }
 
         Levels.levelsData[index].IsEdited = true;
@@ -63,13 +65,13 @@ public class LevelDataSO : ScriptableObject
         for (int i = 0; i < Levels.levelsData[index].OriginalSprites.Length; i++)
             levelTextures.OriginalSprites.Add(i, Levels.levelsData[index].OriginalSprites[i]);
 
-        var textureDataList = Levels.levelsData[index].CurrentTextures;
+        var textureDataList = Levels.levelsData[index].CurrentTextures.TexturesData;
         foreach (var textureData in textureDataList)
         {
             Texture2D texture = LoadTextureFromFile(textureData.textureFilePath);
             if (texture != null)
             {
-                levelTextures.EditedTextures.Add(textureData.id, texture);
+                levelTextures.EditedTextures[textureData.id] = texture;
                 // Do something with the loaded texture (e.g., apply it to a material)
             }
         }
@@ -77,7 +79,7 @@ public class LevelDataSO : ScriptableObject
     }
     private void SaveTextureToFile(Sprite sprite, string fileName)
     {
-        RenderTexture rt = RenderTexture.GetTemporary(sprite.texture.width, sprite.texture.height, 0, RenderTextureFormat.ARGB32);
+        RenderTexture rt = RenderTexture.GetTemporary(sprite.texture.width, sprite.texture.height, 0, RenderTextureFormat.ARGB32);  
         RenderTexture.active = rt;
         GL.Clear(true, true, Color.clear);
         Graphics.Blit(sprite.texture, rt);
@@ -129,6 +131,18 @@ public class TextureData
 {
     public int id;
     public string textureFilePath;  // Store the file path instead of the texture itself
+    public TextureData(int id, string textureFilePath)
+    {
+        this.id = id;
+        this.textureFilePath = textureFilePath;
+    }
+}
+
+[System.Serializable]
+public class AllTexturesData
+{
+    public List<TextureData> TexturesData;
+    public string LevelEditedImage;
 }
 
 [System.Serializable]
@@ -139,7 +153,17 @@ public class LevelData
     public bool IsLevelCompleted = false;
     public Sprite[] OriginalSprites;
     public bool IsEdited = false;
-    public List<TextureData> CurrentTextures;
-
+    public AllTexturesData CurrentTextures;
     public SavedImageData SavedImageData;
+}
+
+[System.Serializable]
+public struct EditedTexturePath
+{
+    public string[] TexturePath;
+
+    public EditedTexturePath(int length)
+    {
+        TexturePath = new string[length];
+    }
 }

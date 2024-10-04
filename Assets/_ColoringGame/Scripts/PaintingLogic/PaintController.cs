@@ -26,7 +26,7 @@ namespace ColorSwipeGame
         private Dictionary<int, Sprite> _editedSprites = new Dictionary<int, Sprite>();
         private Dictionary<int, Sprite> _savedSprites = new();
         private int _currentSRIndex;
-        private const int BLIT_THRESHOLD = 13;
+        private const int BLIT_THRESHOLD = 10;
         private readonly RaycastHit2D[] _hits;
         private readonly int BrushColorProperty = Shader.PropertyToID("_BrushColor");
         private readonly int BrushSizeProperty = Shader.PropertyToID("_BrushSize");
@@ -77,7 +77,7 @@ namespace ColorSwipeGame
 
             if (_currentRT)
             {
-                // SaveTextureChanges(_currentRT);
+                //SaveTextureChanges(_currentRT);
                 _currentRT.DiscardContents();
                 RenderTexture.ReleaseTemporary(_currentRT);
             }
@@ -166,9 +166,7 @@ namespace ColorSwipeGame
 
         public Dictionary<int, Sprite> GetLastEditState()
         {
-            // Dictionary<int, Sprite> dictionary = new Dictionary<int, Sprite>(_savedSprites);
-
-            Dictionary<int, Sprite> dictionary = new Dictionary<int, Sprite>(_savedSprites);
+            Dictionary<int, Sprite> dictionary = new Dictionary<int, Sprite>();
 
             int i = 0;
             foreach (Transform tf in _spritesParent)
@@ -255,6 +253,8 @@ namespace ColorSwipeGame
             _originalSprites.Add(spriteIndex, originalSprite);
             _isEdited.Add(false);
             _editedTextures.Add(spriteIndex, new Texture2D(originalTexture.width, originalTexture.height, originalTexture.format, originalTexture.mipmapCount, false));
+            Graphics.CopyTexture(originalSprite.texture, _editedTextures[spriteIndex]);
+
         }
         private void InitializeSprite(SpriteRenderer spriteRenderer, LevelTextures levelTextures)
         {
@@ -275,16 +275,10 @@ namespace ColorSwipeGame
                 Graphics.CopyTexture(originalSprite.texture, _editedTextures[_currentSRIndex]);
             }
 
-            Sprite newSprite = Sprite.Create(levelTextures.EditedTextures[_currentSRIndex], originalSprite.rect, Vector2.one / 2, originalSprite.pixelsPerUnit);
+            Sprite newSprite = Sprite.Create(_editedTextures[_currentSRIndex], originalSprite.rect, Vector2.one / 2, originalSprite.pixelsPerUnit);
             _editedSprites.Add(_currentSRIndex, newSprite);
             spriteRenderer.sprite = newSprite;
 
-            // // save first state
-            // _currentRT = RenderTexture.GetTemporary(_editedTextures[_currentSRIndex].width, _editedTextures[_currentSRIndex].height, 0, RenderTextureFormat.ARGB32);
-            // RenderTexture.active = _currentRT;
-            // GL.Clear(true, true, Color.clear);
-            // RenderTexture.active = null;
-            // SaveTextureChanges(_currentRT);
         }
 
         private void PreWarmShaders()
@@ -459,15 +453,17 @@ namespace ColorSwipeGame
                 _editedTextures.Add(i, new Texture2D(_originalSprites[i].texture.width, _originalSprites[i].texture.height, _originalSprites[i].texture.format, false));
                 _isEdited[i] = false;
 
+                //Save first state after clear
+                Texture2D texture = new Texture2D(_originalSprites[i].texture.width, _originalSprites[i].texture.height, TextureFormat.ARGB32, false);
+                Texture2D originalTexture = _originalSprites[i].texture;
+                Graphics.CopyTexture(originalTexture, texture);
+                Sprite newSprite = Sprite.Create(originalTexture, _originalSprites[i].rect, Vector2.one * 0.5f);
+                
+                _savedSprites.Remove(i);
+                _savedSprites.Add(i, newSprite);
             }
             _editedSprites.Clear();
 
-            // //Save first state after clear
-            // _currentRT = RenderTexture.GetTemporary(_editedTextures[_currentSRIndex].width, _editedTextures[_currentSRIndex].height, 0, RenderTextureFormat.ARGB32);
-            // RenderTexture.active = _currentRT;
-            // GL.Clear(true, true, Color.clear);
-            // RenderTexture.active = null;
-            // SaveTextureChanges(_currentRT);
         }
     }
 }

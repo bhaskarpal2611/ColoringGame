@@ -36,13 +36,9 @@ namespace ColorSwipeGame
             string fileName = _cameraScreenshotController.SaveCopy(index);
             SavedImageData savedImageData = new(index, fileName);
             _levelData.SaveEditedImage(savedImageData);
-
-            // Texture2D texture = _cameraScreenshotController.SaveTextureCopy();
-            // Rect rect = new Rect(0, 0, texture.width, texture.height);
-            // _sprites.data.LevelSprites[index] = Sprite.Create(texture, rect, Vector2.one * 0.5f);
         }
 
-        private void LoadSprites()
+        public void LoadSprites()
         {
             for (int i = 0; i < _sprites.data.LevelSprites.Length; i++)
             {

@@ -1,14 +1,12 @@
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
 namespace ColorSwipeGame.UI
 {
     public class PensHandler : MonoBehaviour
     {
         [SerializeField] private Color[] _colors;
-        [SerializeField] private int numberOfColors = 64;
 
         [SerializeField] private UI_PencilItem _pencilPrefab;
         [SerializeField] private UI_TextureItem[] _texturedPencilPrefab;

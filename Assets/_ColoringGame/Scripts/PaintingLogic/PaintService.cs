@@ -80,8 +80,6 @@ namespace ColorSwipeGame
         }
         public Dictionary<int, Sprite> SaveCurrentState()
         {
-            //     _sprite = _paintController.GetSprite();
-            //     _Texture = _paintController.GetTex();
             return _paintController.GetLastEditState();
         }
 
