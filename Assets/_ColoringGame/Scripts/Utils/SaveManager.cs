@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 namespace ColorSwipeGame
 {
-
     [System.Serializable]
     public class LevelSaveData
     {
@@ -62,7 +61,6 @@ namespace ColorSwipeGame
         public void SaveLevelsData()
         {
             LevelSaveData levelsData = new();
-            Debug.Log("chk save");
 
             for (int i = 0; i < _levelDataSO.Levels.levelsData.Length; i++)
             {

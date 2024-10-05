@@ -53,7 +53,6 @@ public class LevelDataSO : ScriptableObject
 
     public void SaveEditedImage(int index, string fileName)
     {
-        Debug.Log("fileName: " + fileName);
         Levels.levelsData[index].LevelImageName = fileName;
     }
 
@@ -69,7 +68,6 @@ public class LevelDataSO : ScriptableObject
         foreach (var kvp in editedTextures)
         {
             string textureFileName = "texture_" + index + "_" + kvp.Key;  // Unique file name
-            Debug.Log(kvp.Value.name);
             SaveTextureToFile(kvp.Value, textureFileName);
 
             Levels.levelsData[index].CurrentTextures.TexturesData.Add(new TextureData(kvp.Key, textureFileName));
@@ -92,7 +90,6 @@ public class LevelDataSO : ScriptableObject
             if (texture != null)
             {
                 levelTextures.EditedTextures[textureData.id] = texture;
-                // Do something with the loaded texture (e.g., apply it to a material)
             }
         }
         return levelTextures;
@@ -111,7 +108,6 @@ public class LevelDataSO : ScriptableObject
 
         File.WriteAllBytes(filePath, textureBytes);
 
-        Debug.Log("Texture saved to: " + filePath);
     }
 
     private Texture2D LoadTextureFromFile(string fileName)

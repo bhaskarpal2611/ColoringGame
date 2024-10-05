@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace ColorSwipeGame
 {
-    public class SelectionSceneManager : MonoBehaviour
+    public class LevelSelectionManager : MonoBehaviour
     {
         [SerializeField] private LevelDataSO _levels;
         [SerializeField] private Transform _levelParent;
@@ -38,10 +38,19 @@ namespace ColorSwipeGame
             }
         }
 
+        public void LoadDrawingScene()
+        {
+            _selectionSceneCanvas.SetActive(false);
+            _leftPanelHandler.ShowPanelAtStart();
+            _penSelectionHandler.ShowPanelAtStart();
+
+            _paintService.OnLevelLoad();
+            _paintService.CanPaint = true;
+        }
+
+
         public void LoadLevel(int index)
         {
-            _saveManager.SaveLevelsData();
-
             if (_currentLevel != null)
             {
                 Destroy(_currentLevel);
@@ -53,13 +62,11 @@ namespace ColorSwipeGame
             _currentLevel = Instantiate(_levels.GetLevelPrefab(index), _levelParent);
             _leftPanelHandler.ShowPanelAtStart();
 
-
             if (_firstTimeLoaded)
             {
                 _penSelectionHandler.ShowPanelAtStart();
                 _firstTimeLoaded = true;
             }
-
 
             if (_levels.IsEdited(index))
             {
@@ -80,7 +87,7 @@ namespace ColorSwipeGame
 
         public void GoBackToSelectionScene()
         {
-            _loadingPanel.DOScale(1f, .5f).SetEase(Ease.Linear).OnComplete(() =>
+            _loadingPanel.DOScale(1f, .25f).SetEase(Ease.Linear).OnComplete(() =>
             {
                 StartCoroutine(SaveTextures());
             });
@@ -93,8 +100,9 @@ namespace ColorSwipeGame
             SaveLevelState();
             _levelImageHandler.UpdateSprite(_currentLevelIndex);
 
-            _loadingPanel.DOScale(0f, 0.5f).SetEase(Ease.Linear).OnComplete(() =>
+            _loadingPanel.DOScale(0f, 0.25f).SetEase(Ease.Linear).OnComplete(() =>
             {
+                _saveManager.SaveLevelsData();
                 _selectionSceneCanvas.SetActive(true);
                 _paintService.OnBackButtonPressed();
                 Destroy(_currentLevel);
@@ -109,7 +117,6 @@ namespace ColorSwipeGame
         private void SaveLevelState()
         {
             _levels.SaveLevelState(_currentLevelIndex, _paintService.SaveCurrentState());
-
         }
 
         private float CalculateScreenAspectRatio()

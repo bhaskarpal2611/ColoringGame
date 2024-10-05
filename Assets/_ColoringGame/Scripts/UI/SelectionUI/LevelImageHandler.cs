@@ -53,7 +53,6 @@ namespace ColorSwipeGame
                     }
                     else
                     {
-                        Debug.Log("filename is not valid. loading default sprite for level");
                         _images[i].sprite = _sprites.data.LevelSprites[i];
 
                     }

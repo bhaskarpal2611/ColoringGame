@@ -180,7 +180,6 @@ namespace ColorSwipeGame
 
         public void InitializeLevel(Transform spritesParent)
         {
-            Debug.Log("chk 1");
             _spritesParent = spritesParent;
             foreach (Transform spriteTransform in _spritesParent)
             {
@@ -189,7 +188,6 @@ namespace ColorSwipeGame
         }
         public void InitializeLevel(Transform spritesParent, LevelTextures levelTextures)
         {
-            Debug.Log("chk 2");
             _spritesParent = spritesParent;
             foreach (Transform spriteTransform in _spritesParent)
             {
@@ -390,8 +388,6 @@ namespace ColorSwipeGame
             Graphics.Blit(_editedTextures[key], _currentRT, _brushMaterial);
 
             Graphics.CopyTexture(_currentRT, _editedTextures[key]);
-            // _editedTextures[key].ReadPixels(new Rect(0, 0, _editedTextures[key].width, _editedTextures[key].height), 0, 0);
-            // _editedTextures[key].Apply();
 
             if (!_editedSprites.TryGetValue(key, out Sprite _))
             {
@@ -452,15 +448,6 @@ namespace ColorSwipeGame
                 _editedTextures.Remove(i);
                 _editedTextures.Add(i, new Texture2D(_originalSprites[i].texture.width, _originalSprites[i].texture.height, _originalSprites[i].texture.format, false));
                 _isEdited[i] = false;
-
-                //Save first state after clear
-                Texture2D texture = new Texture2D(_originalSprites[i].texture.width, _originalSprites[i].texture.height, TextureFormat.ARGB32, false);
-                Texture2D originalTexture = _originalSprites[i].texture;
-                Graphics.CopyTexture(originalTexture, texture);
-                Sprite newSprite = Sprite.Create(originalTexture, _originalSprites[i].rect, Vector2.one * 0.5f);
-                
-                _savedSprites.Remove(i);
-                _savedSprites.Add(i, newSprite);
             }
             _editedSprites.Clear();
 

@@ -940,7 +940,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8279649877264561769}
   m_Layer: 0
-  m_Name: Level_06_LION
+  m_Name: Level_05_LION
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

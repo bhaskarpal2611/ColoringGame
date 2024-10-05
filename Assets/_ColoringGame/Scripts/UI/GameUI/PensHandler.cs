@@ -22,7 +22,6 @@ namespace ColorSwipeGame.UI
 
         private int _currentSelectedIndex = 0;
         private SelectedPenData SelectedPenData;
-
         private void Start()
         {
             // Default active and color
