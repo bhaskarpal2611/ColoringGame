@@ -76,7 +76,12 @@ namespace ColorSwipeGame
 
         public void LoadDrawPaintLevel()
         {
-            _paintController.InitializeLevel(_spritesContainer.GetChild(0));
+            _paintController.InitializeLevel(_spritesContainer);
+        }
+
+        public void OnEditedLevelLoad(DrawnTexture drawnTexture)
+        {
+            _paintController.InitializeLevel(_spritesContainer.GetChild(0), drawnTexture);
         }
 
         public void OnEditedLevelLoad(LevelTextures levelTextures)
@@ -86,6 +91,13 @@ namespace ColorSwipeGame
         public Dictionary<int, Sprite> SaveCurrentState()
         {
             return _paintController.GetLastEditState();
+        }
+
+        public Sprite SaveDrawnState()
+        {
+            var obj = _paintController.GetDrawingSprite();
+
+            return obj;
         }
 
         private void BeginDrag(Vector2 touchPosition)

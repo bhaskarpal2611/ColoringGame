@@ -8,6 +8,7 @@ namespace ColorSwipeGame
     public class LevelSelectionManager : MonoBehaviour
     {
         [SerializeField] private LevelDataSO _levels;
+        [SerializeField] private DrawnDataSO _drawings;
         [SerializeField] private Transform _levelParent;
         [SerializeField] private Transform _loadingPanel;
         [SerializeField] private GameObject _selectionSceneCanvas;
@@ -16,7 +17,9 @@ namespace ColorSwipeGame
         [SerializeField] private LeftPanelController _leftPanelHandler;
         [SerializeField] private PenSelectionHandler _penSelectionHandler;
         [SerializeField] private LevelImageHandler _levelImageHandler;
+        [SerializeField] private DrawnImageHandler _drawnImageHandler;
         [SerializeField] private SaveManager _saveManager;
+        [SerializeField] private Draw_SaveManager _drawnSaveManager;
         [SerializeField] private float _levelLoadTimeDelay = 0.25f;
 
         private GameObject _currentLevel;
@@ -24,6 +27,8 @@ namespace ColorSwipeGame
         private bool _firstTimeLoaded = false;
 
         public UnityEvent OnLevelLoaded = new();
+
+        private Coroutine _saveCoroutine;
 
         private void Start()
         {
@@ -38,14 +43,25 @@ namespace ColorSwipeGame
             }
         }
 
-        public void LoadDrawingScene()
+        public void LoadDrawingScene(int index = 0)
         {
             _selectionSceneCanvas.SetActive(false);
             _leftPanelHandler.ShowPanelAtStart();
-            _penSelectionHandler.ShowPanelAtStart();
+            // _penSelectionHandler.ShowPanelAtStart();
 
-            _paintService.OnLevelLoad();
+            if (index == 0)
+            {
+                Debug.Log(_drawings.Levels.Count);
+                _currentLevelIndex = _drawings.Levels.Count;
+                _paintService.LoadDrawPaintLevel();
+            }
+            else
+            {
+                _paintService.OnEditedLevelLoad(_drawings.LoadDrawnTexture(index));
+            }
             _paintService.CanPaint = true;
+
+            OnLevelLoaded.Invoke();
         }
 
 
@@ -75,7 +91,7 @@ namespace ColorSwipeGame
             else
             {
                 _paintService.OnLevelLoad();
-                _levels.Levels.levelsData[index].IsEdited = true;
+                _levels.SetIsEdited(index, true);
             }
             _paintService.CanPaint = true;
 
@@ -85,11 +101,30 @@ namespace ColorSwipeGame
         });
         }
 
+
+        // DRAW _ Paint Mode
+        public void BackToSelection()
+        {
+            _loadingPanel.DOScale(1f, 0.25f).SetEase(Ease.InSine).OnComplete(() =>
+            {
+                if (_saveCoroutine != null)
+                {
+                    StopCoroutine(_saveCoroutine);
+                }
+                _saveCoroutine = StartCoroutine(SaveDrawing());
+            });
+        }
+
+        // COLORING MODE
         public void GoBackToSelectionScene()
         {
             _loadingPanel.DOScale(1f, .25f).SetEase(Ease.Linear).OnComplete(() =>
             {
-                StartCoroutine(SaveTextures());
+                if (_saveCoroutine != null)
+                {
+                    StopCoroutine(_saveCoroutine);
+                }
+                _saveCoroutine = StartCoroutine(SaveTextures());
             });
         }
 
@@ -109,14 +144,29 @@ namespace ColorSwipeGame
             });
         }
 
-        public Sprite[] GetSprite()
+        private IEnumerator SaveDrawing()
         {
-            return _levels.Levels.levelsData[0].OriginalSprites;
+            Debug.Log(_currentLevelIndex);
+            _drawnImageHandler.UpdateDrawing(_currentLevelIndex);
+            SaveDrawnState();
+            yield return null;
+
+            _loadingPanel.DOScale(0f, 0.25f).SetEase(Ease.Linear).OnComplete(() =>
+            {
+                _selectionSceneCanvas.SetActive(true);
+                _drawnSaveManager.SaveDrawingsData();
+                _paintService.OnBackButtonPressed();
+            });
         }
 
         private void SaveLevelState()
         {
             _levels.SaveLevelState(_currentLevelIndex, _paintService.SaveCurrentState());
+        }
+
+        private void SaveDrawnState()
+        {
+            _drawings.SaveDrawnTexture(_currentLevelIndex, _paintService.SaveDrawnState());
         }
 
         private float CalculateScreenAspectRatio()

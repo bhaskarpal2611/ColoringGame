@@ -15,8 +15,6 @@ namespace ColorSwipeGame
 
         private Image[] _images;
 
-        private bool[] _isEdited;
-
         private void Awake()
         {
             _images = new Image[transform.childCount];
@@ -54,7 +52,6 @@ namespace ColorSwipeGame
                     else
                     {
                         _images[i].sprite = _sprites.data.LevelSprites[i];
-
                     }
                 }
                 else

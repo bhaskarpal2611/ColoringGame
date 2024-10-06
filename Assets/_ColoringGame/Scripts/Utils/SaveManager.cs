@@ -14,8 +14,6 @@ namespace ColorSwipeGame
     {
         [SerializeField] private LevelDataSO _levelDataSO;
 
-        private LevelSaveData _saveData;
-
         private string _filePath;
 
         private void Awake()
@@ -60,24 +58,24 @@ namespace ColorSwipeGame
 
         public void SaveLevelsData()
         {
-            LevelSaveData levelsData = new();
+            LevelSaveData AllLevelData = new();
 
             for (int i = 0; i < _levelDataSO.Levels.levelsData.Length; i++)
             {
-                if (_levelDataSO.Levels.levelsData[i].IsEdited)
+                if (_levelDataSO.IsEdited(i))
                 {
                     SaveData savdata = _levelDataSO.GetSaveData(i);
-                    levelsData.saveDatas.Add(savdata);
+                    AllLevelData.saveDatas.Add(savdata);
                 }
                 else
                 {
                     SaveData newData = new SaveData(i);
-                    levelsData.saveDatas.Add(newData);
+                    AllLevelData.saveDatas.Add(newData);
                 }
             }
 
             // Serialize the CurrentTextures field to JSON
-            string json = JsonUtility.ToJson(levelsData, true);  // Pretty print for readability
+            string json = JsonUtility.ToJson(AllLevelData, true);  // Pretty print for readability
 
             // Write the JSON to a file
             File.WriteAllText(_filePath, json);

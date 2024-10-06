@@ -157,13 +157,6 @@ namespace ColorSwipeGame
             return _spritesParent.GetChild(0).GetComponent<SpriteRenderer>().sprite.texture;
         }
 
-        public Sprite GetSprite()
-        {
-            var sr = _spritesParent.GetChild(0).GetComponent<SpriteRenderer>();
-            var texture = sr.sprite.texture;
-            return Sprite.Create(texture, sr.sprite.rect, Vector2.one * 0.5f);
-        }
-
         public Dictionary<int, Sprite> GetLastEditState()
         {
             Dictionary<int, Sprite> dictionary = new Dictionary<int, Sprite>();
@@ -174,13 +167,23 @@ namespace ColorSwipeGame
                 SpriteRenderer sr = tf.GetComponent<SpriteRenderer>();
                 dictionary[i++] = sr.sprite;
             }
-
             return dictionary;
+        }
+
+        public Sprite GetDrawingSprite()
+        {
+            Debug.Log(_spritesParent.name);
+            if (_spritesParent.name == "Sprites_Container")
+            {
+                return _spritesParent.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+            }
+            return _spritesParent.GetComponent<SpriteRenderer>().sprite;
         }
 
         public void InitializeLevel(Transform spritesParent)
         {
             _spritesParent = spritesParent;
+            Debug.Log(_spritesParent.gameObject.name);
             foreach (Transform spriteTransform in _spritesParent)
             {
                 InitializeSprite(spriteTransform.GetComponent<SpriteRenderer>());
@@ -193,6 +196,18 @@ namespace ColorSwipeGame
             {
                 InitializeSprite(spriteTransform.GetComponent<SpriteRenderer>(), levelTextures);
             }
+        }
+
+        public void InitializeLevel(Transform spritesParent, DrawnTexture drawnTextures)
+        {
+            _spritesParent = spritesParent;
+
+            LevelTextures levelTextures = new();
+            levelTextures.EditedTextures[0] = drawnTextures.CurrentTexture;
+            levelTextures.OriginalSprites[0] = drawnTextures.OriginalSprite;
+
+            SpriteRenderer spriteRenderer = _spritesParent.GetComponent<SpriteRenderer>();
+            InitializeSprite(spriteRenderer, levelTextures);
         }
 
         /* PRIVATE METHODS */
@@ -250,16 +265,24 @@ namespace ColorSwipeGame
 
             _originalSprites.Add(spriteIndex, originalSprite);
             _isEdited.Add(false);
-            _editedTextures.Add(spriteIndex, new Texture2D(originalTexture.width, originalTexture.height, originalTexture.format, originalTexture.mipmapCount, false));
-            Graphics.CopyTexture(originalSprite.texture, _editedTextures[spriteIndex]);
+            Debug.Log("dic len " + _editedTextures.Count);
+            Debug.Log("index " + spriteIndex);
 
+            if (_editedTextures == null)
+            {
+                _editedTextures = new();
+            }
+            {
+                _editedTextures[spriteIndex] = new Texture2D(originalTexture.width, originalTexture.height, originalTexture.format, originalTexture.mipmapCount, false);
+            }
+            Graphics.CopyTexture(originalSprite.texture, _editedTextures[spriteIndex]);
         }
         private void InitializeSprite(SpriteRenderer spriteRenderer, LevelTextures levelTextures)
         {
             _currentSRIndex = spriteRenderer.transform.GetSiblingIndex();
             Sprite originalSprite = levelTextures.OriginalSprites[_currentSRIndex];
 
-            _originalSprites.Add(_currentSRIndex, originalSprite);
+            _originalSprites[_currentSRIndex] = originalSprite;
 
             if (levelTextures.EditedTextures.ContainsKey(_currentSRIndex))
             {
@@ -274,7 +297,7 @@ namespace ColorSwipeGame
             }
 
             Sprite newSprite = Sprite.Create(_editedTextures[_currentSRIndex], originalSprite.rect, Vector2.one / 2, originalSprite.pixelsPerUnit);
-            _editedSprites.Add(_currentSRIndex, newSprite);
+            _editedSprites[_currentSRIndex] = newSprite;
             spriteRenderer.sprite = newSprite;
 
         }
@@ -444,7 +467,7 @@ namespace ColorSwipeGame
             {
                 _spritesParent.GetChild(i).GetComponent<SpriteRenderer>().sprite = _originalSprites[i];
 
-                UnityEngine.Object.Destroy(_editedTextures[i]);
+                Object.Destroy(_editedTextures[i]);
                 _editedTextures.Remove(i);
                 _editedTextures.Add(i, new Texture2D(_originalSprites[i].texture.width, _originalSprites[i].texture.height, _originalSprites[i].texture.format, false));
                 _isEdited[i] = false;
