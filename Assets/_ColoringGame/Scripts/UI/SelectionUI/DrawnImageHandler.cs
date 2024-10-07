@@ -12,14 +12,22 @@ namespace ColorSwipeGame
         [SerializeField] private LevelSelectionManager _levelSelectionManager;
         [SerializeField] private CaptureCameraRender _cameraScreenshotController;
 
-        public Sprite _Sprite;
-        public Texture2D _texture;
+        private RectTransform _rectTransform;
+
         private readonly Vector2 _basePosition = new Vector2(700f, -500f);
+        private readonly Vector2 _baseContentSize = new Vector2(500f, 775f);
+
+        private void Awake()
+        {
+            _rectTransform = GetComponent<RectTransform>();
+        }
 
         private void OnEnable()
         {
             LoadDrawingIcons();
         }
+
+
         public void UpdateDrawing(int index)
         {
             string fileName = _cameraScreenshotController.SaveCopy(index);
@@ -29,6 +37,8 @@ namespace ColorSwipeGame
         private void LoadDrawingIcons()
         {
             int counter = 0;
+            // resize to base size
+            _rectTransform.sizeDelta = _baseContentSize;
 
             for (int i = 0; i < _drawnData.Levels.Count; i++)
             {
@@ -47,17 +57,31 @@ namespace ColorSwipeGame
                             _levelSelectionManager.LoadDrawingScene(index);
                         });
 
-                        float xOffset = counter * 450f;
-                        float yOffset = (counter % 2 == 0) ? -500f : -250f;
-                        Vector2 position = new Vector2(_basePosition.x + xOffset, yOffset);
+                        ArrangeIconPosition(counter, drawingIconPrefab);
 
-                        // Set the position
-                        drawingIconPrefab.MovePosition(position);
+                        ResizeContent();
+
+                        counter++;
                     }
-                    Debug.Log(counter);
-                    counter++;
                 }
             }
+        }
+
+        private void ResizeContent()
+        {
+            Vector2 sizeDelta = _rectTransform.sizeDelta;
+            sizeDelta.x += 450f;
+            _rectTransform.sizeDelta = sizeDelta;
+        }
+
+        private void ArrangeIconPosition(int counter, DrawnPrefabHandler drawingIconPrefab)
+        {
+            float xOffset = counter * 450f;
+            float yOffset = (counter % 2 == 0) ? -500f : -250f;
+            Vector2 position = new Vector2(_basePosition.x + xOffset, yOffset);
+
+            // Set the position
+            drawingIconPrefab.MovePosition(position);
         }
 
         private Sprite LoadSpritePNG(int i, string filePath)
@@ -65,10 +89,10 @@ namespace ColorSwipeGame
             byte[] bytes = File.ReadAllBytes(filePath);
             Texture2D texture = new Texture2D(2, 2, TextureFormat.ARGB32, false);  // Size doesn't matter here; it will be overridden by LoadImage
             texture.LoadImage(bytes);  // LoadImage auto-resizes the texture dimensions
-            _texture = texture;
+
             Rect rect = new Rect(0, 0, 1024, 1024);
             Sprite sprite = Sprite.Create(texture, rect, Vector2.one * 0.5f);
-            _Sprite = sprite;
+
             return sprite;
         }
     }

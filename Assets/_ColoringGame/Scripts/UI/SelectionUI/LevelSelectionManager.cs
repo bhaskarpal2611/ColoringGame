@@ -43,20 +43,21 @@ namespace ColorSwipeGame
             }
         }
 
-        public void LoadDrawingScene(int index = 0)
+        public void LoadDrawingScene(int index = -1)
         {
             _selectionSceneCanvas.SetActive(false);
             _leftPanelHandler.ShowPanelAtStart();
             // _penSelectionHandler.ShowPanelAtStart();
 
-            if (index == 0)
+            if (index == -1)
             {
                 Debug.Log(_drawings.Levels.Count);
                 _currentLevelIndex = _drawings.Levels.Count;
-                _paintService.LoadDrawPaintLevel();
+                _paintService.LoadDrawPaintLevel(_drawings.OriginalEmptySprite);
             }
             else
             {
+                _currentLevelIndex = index;
                 _paintService.OnEditedLevelLoad(_drawings.LoadDrawnTexture(index));
             }
             _paintService.CanPaint = true;
@@ -146,15 +147,15 @@ namespace ColorSwipeGame
 
         private IEnumerator SaveDrawing()
         {
-            Debug.Log(_currentLevelIndex);
+            yield return null;
             _drawnImageHandler.UpdateDrawing(_currentLevelIndex);
             SaveDrawnState();
             yield return null;
 
             _loadingPanel.DOScale(0f, 0.25f).SetEase(Ease.Linear).OnComplete(() =>
             {
+                _drawnSaveManager.SaveDrawingsData(); // calling late as SavEDrawnState will have saved the texture as PNG already
                 _selectionSceneCanvas.SetActive(true);
-                _drawnSaveManager.SaveDrawingsData();
                 _paintService.OnBackButtonPressed();
             });
         }

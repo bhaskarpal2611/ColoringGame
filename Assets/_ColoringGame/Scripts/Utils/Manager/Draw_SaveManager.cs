@@ -4,6 +4,12 @@ using System.Collections.Generic;
 
 namespace ColorSwipeGame
 {
+
+    [System.Serializable]
+    public class SavedDrawnData
+    {
+        public List<DrawnData> drawnDatas = new();
+    }
     public class Draw_SaveManager : MonoBehaviour
     {
         [SerializeField] private DrawnDataSO _drawnDataSO;
@@ -51,20 +57,16 @@ namespace ColorSwipeGame
 
         public void SaveDrawingsData()
         {
-            SavedDrawnData AllSavedData = new();
-            Debug.Log("chk");
+            SavedDrawnData savedDrawnData = new();
 
             for (int i = 0; i < _drawnDataSO.Levels.Count; i++)
             {
                 var obj = _drawnDataSO.GetSaveData(i);
-                Debug.Log(obj.IndexNumber);
-                Debug.Log(obj.SnapshotFileName);
-                Debug.Log(obj.DrawnTextureFileName);
-                AllSavedData.drawnDatas.Add(obj);
+                savedDrawnData.drawnDatas.Add(obj);
             }
 
             // Serialize the CurrentTextures field to JSON
-            string json = JsonUtility.ToJson(AllSavedData, true);  // Pretty print for readability
+            string json = JsonUtility.ToJson(savedDrawnData, true);  // Pretty print for readability
 
             // Write the JSON to a file
             File.WriteAllText(_filePath, json);
@@ -72,11 +74,5 @@ namespace ColorSwipeGame
             Debug.Log("Level data saved to: " + _filePath);
         }
 
-    }
-
-    [System.Serializable]
-    public class SavedDrawnData
-    {
-        public List<DrawnData> drawnDatas;
     }
 }

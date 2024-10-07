@@ -13,22 +13,4 @@ MonoBehaviour:
   m_Name: SO_DrawnData
   m_EditorClassIdentifier: 
   OriginalEmptySprite: {fileID: 21300000, guid: 6092bc6eb694b49409584b4f55b78464, type: 3}
-  Levels:
-  - IndexNumber: 0
-    DrawnTextureFileName: Texture_000
-    SnapshotFileName: SavedLevelImage_000
-  - IndexNumber: 1
-    DrawnTextureFileName: Texture_001
-    SnapshotFileName: SavedLevelImage_001
-  - IndexNumber: 2
-    DrawnTextureFileName: Texture_002
-    SnapshotFileName: SavedLevelImage_002
-  - IndexNumber: 3
-    DrawnTextureFileName: Texture_003
-    SnapshotFileName: SavedLevelImage_003
-  - IndexNumber: 4
-    DrawnTextureFileName: Texture_004
-    SnapshotFileName: SavedLevelImage_004
-  - IndexNumber: 5
-    DrawnTextureFileName: Texture_005
-    SnapshotFileName: SavedLevelImage_005
+  Levels: []

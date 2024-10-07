@@ -23,10 +23,6 @@ namespace ColorSwipeGame
         private PaintController _paintController;
         private Camera _mainCamera;
 
-        // test tex
-        public Texture2D _Texture;
-        public Sprite _sprite;
-
         public bool CanPaint { get; set; } = false;
 
         private void Awake()
@@ -74,9 +70,11 @@ namespace ColorSwipeGame
             _paintController.InitializeLevel(_spritesContainer.GetChild(0).GetChild(0));
         }
 
-        public void LoadDrawPaintLevel()
+        public void LoadDrawPaintLevel(Sprite originalSprite)
         {
-            _paintController.InitializeLevel(_spritesContainer);
+            Transform drawSprite = _spritesContainer.GetChild(0);
+
+            _paintController.InitializeLevel(drawSprite, originalSprite);
         }
 
         public void OnEditedLevelLoad(DrawnTexture drawnTexture)
@@ -148,6 +146,7 @@ namespace ColorSwipeGame
         public void SetTexture(int index) => _paintController.SetTexture(index);
 
         public void ClearPainting() => _paintController.ClearPainting();
+        public void ClearDrawing() => _paintController.ClearDrawing();
 
         public void OnBackButtonPressed() => _paintController.ClearMemory();
     }

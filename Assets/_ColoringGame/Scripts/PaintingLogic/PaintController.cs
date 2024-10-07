@@ -12,6 +12,7 @@ namespace ColorSwipeGame
 
         private Material _brushMaterial;
         private Transform _spritesParent;
+        private SpriteRenderer _drawingSR;
         private SpriteRenderer _currentSpriteRenderer;
         private Collider2D _currentCollider;
         private RenderTexture _currentRT;
@@ -147,15 +148,9 @@ namespace ColorSwipeGame
             _brushMaterial.SetFloat(BrushSizeProperty, _paintData.BrushSize);
         }
 
-        public void ClearPainting()
-        {
-            RestoreOriginalTextures();
-        }
+        public void ClearPainting() => RestoreOriginalTextures();
 
-        public Texture2D GetTex()
-        {
-            return _spritesParent.GetChild(0).GetComponent<SpriteRenderer>().sprite.texture;
-        }
+        public void ClearDrawing() => RestoreEmptyCanvas();
 
         public Dictionary<int, Sprite> GetLastEditState()
         {
@@ -170,16 +165,19 @@ namespace ColorSwipeGame
             return dictionary;
         }
 
-        public Sprite GetDrawingSprite()
+        public Sprite GetDrawingSprite() => _drawingSR.sprite;
+
+        // initializers for DrawPaint - single texture
+
+        public void InitializeLevel(Transform sprite, Sprite originalSprite)
         {
-            Debug.Log(_spritesParent.name);
-            if (_spritesParent.name == "Sprites_Container")
-            {
-                return _spritesParent.GetChild(0).GetComponent<SpriteRenderer>().sprite;
-            }
-            return _spritesParent.GetComponent<SpriteRenderer>().sprite;
+            Debug.Log(sprite.name);
+            int spriteIndex = sprite.GetSiblingIndex();
+            _drawingSR = sprite.GetComponent<SpriteRenderer>();
+            InitializeSprite(spriteIndex, originalSprite);
         }
 
+        // initializers for New/Fresh ColoringSwipe - Multiple sprites => many textures
         public void InitializeLevel(Transform spritesParent)
         {
             _spritesParent = spritesParent;
@@ -189,6 +187,8 @@ namespace ColorSwipeGame
                 InitializeSprite(spriteTransform.GetComponent<SpriteRenderer>());
             }
         }
+
+        // initializer for Loading ColoringSwipe - Multiple sprites => many textures
         public void InitializeLevel(Transform spritesParent, LevelTextures levelTextures)
         {
             _spritesParent = spritesParent;
@@ -200,14 +200,13 @@ namespace ColorSwipeGame
 
         public void InitializeLevel(Transform spritesParent, DrawnTexture drawnTextures)
         {
-            _spritesParent = spritesParent;
+            _drawingSR = spritesParent.GetComponent<SpriteRenderer>();
 
             LevelTextures levelTextures = new();
             levelTextures.EditedTextures[0] = drawnTextures.CurrentTexture;
             levelTextures.OriginalSprites[0] = drawnTextures.OriginalSprite;
 
-            SpriteRenderer spriteRenderer = _spritesParent.GetComponent<SpriteRenderer>();
-            InitializeSprite(spriteRenderer, levelTextures);
+            InitializeSprite(_drawingSR, levelTextures);
         }
 
         /* PRIVATE METHODS */
@@ -223,40 +222,60 @@ namespace ColorSwipeGame
             _brushMaterial.SetFloat(BrushSizeProperty, _paintData.BrushSize);
         }
 
-        private void SaveTextureChanges(RenderTexture source)
+        // private void SaveTextureChanges(RenderTexture source)
+        // {
+        //     // Create a temporary RenderTexture
+        //     RenderTexture temp = RenderTexture.GetTemporary(
+        //         source.width,
+        //         source.height,
+        //         0,
+        //         RenderTextureFormat.ARGB32,
+        //         RenderTextureReadWrite.Linear
+        //     );
+
+        //     // Blit from the source to the temporary RenderTexture
+        //     Graphics.Blit(source, temp);
+
+        //     // Set the active RenderTexture to the temporary one
+        //     RenderTexture previous = RenderTexture.active;
+        //     RenderTexture.active = temp;
+
+        //     if (!_savedSprites.ContainsKey(_currentSRIndex))
+        //     {
+        //         _savedSprites.Add(_currentSRIndex, Sprite.Create(new Texture2D(source.width, source.height), _originalSprites[_currentSRIndex].rect, Vector2.one * .5f));
+        //     }
+
+        //     // Read the pixels from the temporary RenderTexture to the destination Texture2D
+        //     _savedSprites[_currentSRIndex].texture.ReadPixels(new Rect(0, 0, temp.width, temp.height), 0, 0);
+        //     _savedSprites[_currentSRIndex].texture.Apply();
+
+        //     // Restore the previous active RenderTexture
+        //     RenderTexture.active = previous;
+
+        //     // Release the temporary RenderTexture
+        //     RenderTexture.ReleaseTemporary(temp);
+        // }
+
+        //drawing specific
+        private void InitializeSprite(int spriteIndex, Sprite originalSprite)
         {
-            // Create a temporary RenderTexture
-            RenderTexture temp = RenderTexture.GetTemporary(
-                source.width,
-                source.height,
-                0,
-                RenderTextureFormat.ARGB32,
-                RenderTextureReadWrite.Linear
-            );
+            _drawingSR.sprite = originalSprite;
+            Texture2D originalTexture = originalSprite.texture;
 
-            // Blit from the source to the temporary RenderTexture
-            Graphics.Blit(source, temp);
+            _originalSprites.Add(spriteIndex, originalSprite);
+            // _originalSprites[spriteIndex] = originalSprite;
 
-            // Set the active RenderTexture to the temporary one
-            RenderTexture previous = RenderTexture.active;
-            RenderTexture.active = temp;
-
-            if (!_savedSprites.ContainsKey(_currentSRIndex))
+            _isEdited.Add(false);
+            if (_editedTextures == null)
             {
-                _savedSprites.Add(_currentSRIndex, Sprite.Create(new Texture2D(source.width, source.height), _originalSprites[_currentSRIndex].rect, Vector2.one * .5f));
+                _editedTextures = new();
             }
 
-            // Read the pixels from the temporary RenderTexture to the destination Texture2D
-            _savedSprites[_currentSRIndex].texture.ReadPixels(new Rect(0, 0, temp.width, temp.height), 0, 0);
-            _savedSprites[_currentSRIndex].texture.Apply();
-
-            // Restore the previous active RenderTexture
-            RenderTexture.active = previous;
-
-            // Release the temporary RenderTexture
-            RenderTexture.ReleaseTemporary(temp);
+            _editedTextures.Add(spriteIndex, new Texture2D(originalTexture.width, originalTexture.height, originalTexture.format, false));
+            Graphics.CopyTexture(originalTexture, _editedTextures[spriteIndex]);
         }
 
+        // coloring - specific only
         private void InitializeSprite(SpriteRenderer spriteRenderer)
         {
             int spriteIndex = spriteRenderer.transform.GetSiblingIndex();
@@ -272,11 +291,13 @@ namespace ColorSwipeGame
             {
                 _editedTextures = new();
             }
-            {
-                _editedTextures[spriteIndex] = new Texture2D(originalTexture.width, originalTexture.height, originalTexture.format, originalTexture.mipmapCount, false);
-            }
+
+            _editedTextures[spriteIndex] = new Texture2D(originalTexture.width, originalTexture.height, originalTexture.format, originalTexture.mipmapCount, false);
+
             Graphics.CopyTexture(originalSprite.texture, _editedTextures[spriteIndex]);
         }
+
+        // used both by coloring and drawing
         private void InitializeSprite(SpriteRenderer spriteRenderer, LevelTextures levelTextures)
         {
             _currentSRIndex = spriteRenderer.transform.GetSiblingIndex();
@@ -434,16 +455,16 @@ namespace ColorSwipeGame
 
 
         // Save State - UNDO _ FUNCTION
-        private void SaveCurrentTextureState()
-        {
-            int index = _currentSpriteRenderer.transform.GetSiblingIndex();
+        // private void SaveCurrentTextureState()
+        // {
+        //     int index = _currentSpriteRenderer.transform.GetSiblingIndex();
 
-            if (_isEdited[index])
-            {
-                Texture2D newTex = new(_editedTextures[index].width, _editedTextures[index].height, TextureFormat.RGBA32, 1, false);
-                Graphics.CopyTexture(_editedTextures[index], newTex);
-            }
-        }
+        //     if (_isEdited[index])
+        //     {
+        //         Texture2D newTex = new(_editedTextures[index].width, _editedTextures[index].height, TextureFormat.RGBA32, 1, false);
+        //         Graphics.CopyTexture(_editedTextures[index], newTex);
+        //     }
+        // }
 
         // CLEAR _ Function
         private void CleanupResources()
@@ -456,7 +477,16 @@ namespace ColorSwipeGame
                 }
             }
             _editedTextures.Clear();
+
+            foreach (var sprite in _editedSprites.Values)
+            {
+                if (sprite != null)
+                {
+                    // Object.Destroy(sprite);
+                }
+            }
             _editedSprites.Clear();
+
             _originalSprites.Clear();
         }
 
@@ -473,7 +503,16 @@ namespace ColorSwipeGame
                 _isEdited[i] = false;
             }
             _editedSprites.Clear();
+        }
 
+        private void RestoreEmptyCanvas()
+        {
+            _drawingSR.sprite = _originalSprites[0];
+            Object.Destroy(_editedTextures[0]);
+            _editedTextures.Remove(0);
+            _editedTextures.Add(0, new Texture2D(_originalSprites[0].texture.width, _originalSprites[0].texture.height, _originalSprites[0].texture.format, false));
+            _isEdited[0] = false;
+            _editedSprites.Clear();
         }
     }
 }

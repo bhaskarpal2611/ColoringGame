@@ -21,7 +21,14 @@ namespace ColorSwipeGame
 
         public void RestoreDrawnData(DrawnData drawnData)
         {
-            Levels[drawnData.IndexNumber] = drawnData;
+            if (Levels.Count == drawnData.IndexNumber)
+            {
+                Levels.Add(drawnData);
+            }
+            else
+            {
+                Levels[drawnData.IndexNumber] = drawnData;
+            }
         }
 
         public void SaveImageForIcon(int index, string fileName)
