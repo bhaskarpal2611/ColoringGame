@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 namespace ColorSwipeGame.UI
 {
-    public class ButtonClicker : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+    public class ButtonClickEffectHandler : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         private Button _button;
         private readonly Vector2 _largeScale = 1.1f * Vector2.one;

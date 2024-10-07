@@ -104,7 +104,7 @@ namespace ColorSwipeGame
             return _texture;
         }
 
-        public string SaveCopy(int index)
+        public string SaveCopy(int index, int isDrawing = 0)
         {
             RenderTexture.active = _cameraRT;
 
@@ -122,7 +122,15 @@ namespace ColorSwipeGame
 
             _bytes = _texture.EncodeToPNG();
 
-            string fileName = "SavedLevelImage_00" + index;
+            string fileName;
+            if (isDrawing == 0)
+            {
+                fileName = "SavedLevelImage_00" + index;
+            }
+            else
+            {
+                fileName = "SavedDrawing_00" + index;
+            }
             string editorPath = Path.Combine(Application.persistentDataPath, fileName + ".png");
             File.WriteAllBytes(editorPath, _bytes);
             return fileName;

@@ -8,7 +8,7 @@ namespace ColorSwipeGame
     {
         [SerializeField] private Transform _spritesContainer;
         [SerializeField] private Texture2D[] _textures;
-        [SerializeField] private InputHandler _inputHandler;
+        [SerializeField] private NewInputHandler _inputHandler;
         [SerializeField] private PenSelectionHandler _penPanelHandler;
         [SerializeField] private AudioManager _audioHandler;
 
@@ -35,12 +35,8 @@ namespace ColorSwipeGame
 
             if (_inputHandler == null)
             {
-                _inputHandler = GetComponent<InputHandler>();
-                if (_inputHandler == null)
-                {
-                    Debug.LogError("InputHandler not found. Please assign it in the inspector or add it to this GameObject.");
-                    return;
-                }
+                Debug.LogError("InputHandler not found. Please assign it in the inspector or add it to this GameObject.");
+                return;
             }
         }
 

@@ -30,7 +30,7 @@ namespace ColorSwipeGame
 
         public void UpdateDrawing(int index)
         {
-            string fileName = _cameraScreenshotController.SaveCopy(index);
+            string fileName = _cameraScreenshotController.SaveCopy(index, 1); // passing 1 to take screenshot photo by another name
             _drawnData.SaveImageForIcon(index, fileName);
         }
 

@@ -425,7 +425,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90961449a3636ac4493fa57cc788e4b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioManager: {fileID: 985682491}
+  OnButtonClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &90783502
 GameObject:
   m_ObjectHideFlags: 0
@@ -4397,6 +4399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levels: {fileID: 11400000, guid: 55a9e952404c5d346b2a4aad8232ef2f, type: 2}
+  _drawings: {fileID: 0}
   _levelParent: {fileID: 4820031844533456078}
   _loadingPanel: {fileID: 697083479}
   _selectionSceneCanvas: {fileID: 3663624211818795837}
@@ -4405,7 +4408,9 @@ MonoBehaviour:
   _leftPanelHandler: {fileID: 2120985412}
   _penSelectionHandler: {fileID: 1677388976}
   _levelImageHandler: {fileID: 8214585287191498458}
+  _drawnImageHandler: {fileID: 0}
   _saveManager: {fileID: 1127304901}
+  _drawnSaveManager: {fileID: 0}
   _levelLoadTimeDelay: 0.5
   OnLevelLoaded:
     m_PersistentCalls:
@@ -5401,7 +5406,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 682.0001, y: -50}
+  m_AnchoredPosition: {x: 682, y: -50}
   m_SizeDelta: {x: 1000, y: 100}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1904748523
@@ -5745,6 +5750,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1955107644}
   - component: {fileID: 1955107645}
+  - component: {fileID: 1955107646}
   m_Layer: 0
   m_Name: Touch_Input_Handler
   m_TagString: Untagged
@@ -5774,13 +5780,30 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1955107643}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d53a0e5cad10d6f46b60d8c4431be6e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   minDistance: 5
   maxFrequency: 0.01
+--- !u!114 &1955107646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955107643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c551e5393e30d51caba8b59b4679e54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDragDistance: 2
+  maxSmoothDistance: 25
+  maxSwipeSpeed: 2500
+  predictionStrength: 0.75
+  smoothingStrength: 8
 --- !u!1 &1972586215
 GameObject:
   m_ObjectHideFlags: 0
@@ -8820,7 +8843,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 9b5cdb5352c1bcac387bb6a99c420ac2, type: 3}
   - {fileID: 2800000, guid: 9ecbbe7f50cb355638ac142ae243aef8, type: 3}
   - {fileID: 2800000, guid: ecddc4526fef70dd7802cb17a11292fa, type: 3}
-  _inputHandler: {fileID: 1955107645}
+  _inputHandler: {fileID: 1955107646}
   _penPanelHandler: {fileID: 1677388976}
   _audioHandler: {fileID: 985682491}
   _maxHitColliders: 8
@@ -8831,8 +8854,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 2c1f668067a2ef142a0f818422891801, type: 2}
   - {fileID: 2100000, guid: 9ecabad1768eeb44f87d70356d164f4f, type: 2}
   - {fileID: 2100000, guid: 91c79add08051f7459b23ed7dd7c22c5, type: 2}
-  _Texture: {fileID: 0}
-  _sprite: {fileID: 0}
 --- !u!1 &8214585287191498457
 GameObject:
   m_ObjectHideFlags: 0
