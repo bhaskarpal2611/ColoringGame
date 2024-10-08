@@ -20,6 +20,7 @@ namespace ColorSwipeGame
         private InitPaintData _paintData;
         private PenSelectionHandler _penSelectionHandler;
         private AudioManager _audioHandler;
+        private TimeKeeper _timeKeeper;
 
         private List<bool> _isEdited = new();
         private Dictionary<int, Texture2D> _editedTextures = new Dictionary<int, Texture2D>();
@@ -37,12 +38,13 @@ namespace ColorSwipeGame
         private readonly int OriginalProperty = Shader.PropertyToID("_Original");
 
         // CONSTRUCTOR
-        public PaintController(InitPaintData paintData, PenSelectionHandler penPanelHandler, AudioManager audioMan)
+        public PaintController(InitPaintData paintData, PenSelectionHandler penPanelHandler, AudioManager audioMan, TimeKeeper timer)
         {
             _paintData = paintData;
             _hits = new RaycastHit2D[paintData.MaxHitColliders];
             _penSelectionHandler = penPanelHandler;
             _audioHandler = audioMan;
+            _timeKeeper = timer;
             PreWarmShaders();
             SetDefaultColor();
         }
@@ -57,6 +59,8 @@ namespace ColorSwipeGame
         public void ContinueDrag(Vector2 worldPosition)
         {
             if (!_currentSpriteRenderer) return;
+
+            _timeKeeper.AddTime();
             _isDragging = true;
             DrawLines(worldPosition);
             _audioHandler.PlayPaintingSound();
@@ -122,6 +126,8 @@ namespace ColorSwipeGame
         }
 
         // Properties
+
+        public bool IsDrawingEdited { get { return _isEdited[0]; } }
         public Color CurrentBrushColor
         {
             get => _paintData.DefaultBrushColor;
@@ -171,7 +177,8 @@ namespace ColorSwipeGame
 
         public void InitializeLevel(Transform sprite, Sprite originalSprite)
         {
-            Debug.Log(sprite.name);
+            _timeKeeper.StartTimer();
+
             int spriteIndex = sprite.GetSiblingIndex();
             _drawingSR = sprite.GetComponent<SpriteRenderer>();
             InitializeSprite(spriteIndex, originalSprite);
@@ -180,6 +187,9 @@ namespace ColorSwipeGame
         // initializers for New/Fresh ColoringSwipe - Multiple sprites => many textures
         public void InitializeLevel(Transform spritesParent)
         {
+            _timeKeeper.StartTimer();
+
+
             _spritesParent = spritesParent;
             Debug.Log(_spritesParent.gameObject.name);
             foreach (Transform spriteTransform in _spritesParent)
@@ -191,6 +201,9 @@ namespace ColorSwipeGame
         // initializer for Loading ColoringSwipe - Multiple sprites => many textures
         public void InitializeLevel(Transform spritesParent, LevelTextures levelTextures)
         {
+            _timeKeeper.StartTimer();
+
+
             _spritesParent = spritesParent;
             foreach (Transform spriteTransform in _spritesParent)
             {
@@ -200,6 +213,9 @@ namespace ColorSwipeGame
 
         public void InitializeLevel(Transform spritesParent, DrawnTexture drawnTextures)
         {
+            _timeKeeper.StartTimer();
+
+
             _drawingSR = spritesParent.GetComponent<SpriteRenderer>();
 
             LevelTextures levelTextures = new();

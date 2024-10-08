@@ -8,9 +8,10 @@ namespace ColorSwipeGame
     {
         [SerializeField] private Transform _spritesContainer;
         [SerializeField] private Texture2D[] _textures;
-        [SerializeField] private NewInputHandler _inputHandler;
+        [SerializeField] private InputHandler _inputHandler;
         [SerializeField] private PenSelectionHandler _penPanelHandler;
         [SerializeField] private AudioManager _audioHandler;
+        [SerializeField] private TimeKeeper _timer;
 
         [Header("Brush Settings")]
         [SerializeField] private int _maxHitColliders = 10;
@@ -31,7 +32,7 @@ namespace ColorSwipeGame
             Application.targetFrameRate = 60;
 
             InitPaintData newData = new InitPaintData(_maxHitColliders, _brushSize * _brushScaleFactor, _defaultBrushColor, _customMaterials, _textures);
-            _paintController = new PaintController(newData, _penPanelHandler, _audioHandler);
+            _paintController = new PaintController(newData, _penPanelHandler, _audioHandler, _timer);
 
             if (_inputHandler == null)
             {
@@ -53,7 +54,6 @@ namespace ColorSwipeGame
             _inputHandler.OnDragging -= OnDrag;
             _inputHandler.OnDragEnd -= EndDrag;
             _inputHandler.OnDragStationary -= OnDragStationary;
-
         }
 
         private void OnDestroy()
@@ -145,6 +145,8 @@ namespace ColorSwipeGame
         public void ClearDrawing() => _paintController.ClearDrawing();
 
         public void OnBackButtonPressed() => _paintController.ClearMemory();
+
+        public bool IsDrawingEdited() => _paintController.IsDrawingEdited;
     }
 
     [System.Serializable]

@@ -30,19 +30,6 @@ namespace ColorSwipeGame
 
         private Coroutine _saveCoroutine;
 
-        private void Start()
-        {
-            float aspectRatio = CalculateScreenAspectRatio();
-            if (aspectRatio > 1.5f)
-            {
-                Camera.main.orthographicSize = 5.76f;
-            }
-            else
-            {
-                Camera.main.orthographicSize = 7.5f;
-            }
-        }
-
         public void LoadDrawingScene(int index = -1)
         {
             _selectionSceneCanvas.SetActive(false);
@@ -51,7 +38,6 @@ namespace ColorSwipeGame
 
             if (index == -1)
             {
-                Debug.Log(_drawings.Levels.Count);
                 _currentLevelIndex = _drawings.Levels.Count;
                 _paintService.LoadDrawPaintLevel(_drawings.OriginalEmptySprite);
             }
@@ -106,14 +92,17 @@ namespace ColorSwipeGame
         // DRAW _ Paint Mode
         public void BackToSelection()
         {
-            _loadingPanel.DOScale(1f, 0.25f).SetEase(Ease.InSine).OnComplete(() =>
+            if (_paintService.IsDrawingEdited())
             {
-                if (_saveCoroutine != null)
+                _loadingPanel.DOScale(1f, 0.25f).SetEase(Ease.InSine).OnComplete(() =>
                 {
-                    StopCoroutine(_saveCoroutine);
-                }
-                _saveCoroutine = StartCoroutine(SaveDrawing());
-            });
+                    if (_saveCoroutine != null)
+                    {
+                        StopCoroutine(_saveCoroutine);
+                    }
+                    _saveCoroutine = StartCoroutine(SaveDrawing());
+                });
+            }
         }
 
         // COLORING MODE
@@ -170,11 +159,6 @@ namespace ColorSwipeGame
             _drawings.SaveDrawnTexture(_currentLevelIndex, _paintService.SaveDrawnState());
         }
 
-        private float CalculateScreenAspectRatio()
-        {
-            float width = Screen.width;
-            float height = Screen.height;
-            return width / height;
-        }
+
     }
 }

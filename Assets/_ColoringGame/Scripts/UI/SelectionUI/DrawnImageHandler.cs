@@ -40,7 +40,7 @@ namespace ColorSwipeGame
             // resize to base size
             _rectTransform.sizeDelta = _baseContentSize;
 
-            for (int i = 0; i < _drawnData.Levels.Count; i++)
+            for (int i = _drawnData.Levels.Count - 1; i >= 0; i--)
             {
                 string fileName = _drawnData.GetImageIconFileName(i);
                 if (fileName != null)
@@ -58,13 +58,37 @@ namespace ColorSwipeGame
                         });
 
                         ArrangeIconPosition(counter, drawingIconPrefab);
-
                         ResizeContent();
-
                         counter++;
                     }
                 }
             }
+
+            //for (int i = 0; i < _drawnData.Levels.Count; i++)
+            //{
+            //    string fileName = _drawnData.GetImageIconFileName(i);
+            //    if (fileName != null)
+            //    {
+            //        string filePath = Path.Combine(Application.persistentDataPath, fileName + ".png");
+            //        if (File.Exists(filePath))
+            //        {
+            //            Sprite sprite = LoadSpritePNG(i, filePath);
+            //            int index = i;
+            //            DrawnPrefabHandler drawingIconPrefab = Instantiate(_drawingIconPrefab, _sprites);
+            //            drawingIconPrefab.SetImage(sprite);
+            //            drawingIconPrefab.Button.onClick.AddListener(() =>
+            //            {
+            //                _levelSelectionManager.LoadDrawingScene(index);
+            //            });
+
+            //            ArrangeIconPosition(counter, drawingIconPrefab);
+
+            //            ResizeContent();
+
+            //            counter++;
+            //        }
+            //    }
+            //}
         }
 
         private void ResizeContent()
