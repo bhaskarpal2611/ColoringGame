@@ -21,7 +21,8 @@ namespace ColorSwipeGame
         [SerializeField] private Transform _backButton;
         [SerializeField] private Transform _clearButton;
 
-        private Texture2D _texture;
+        public Texture2D _texture;
+        public Sprite _sprite;
         private Rect _rect;
 
         private int counter = 0;
@@ -115,8 +116,9 @@ namespace ColorSwipeGame
             RenderTexture.active = null;
 
             // create a sprite from texture
+            _rect = new Rect(0, 0, _texture.width, _texture.height);
             Sprite sprite = Sprite.Create(_texture, _rect, Vector2.one * 0.5f);
-            sprite.name = "Saved Image";
+            _sprite = sprite;
             _referenceImage.sprite = sprite;
             _referenceImage.color = Color.white;
 

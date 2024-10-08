@@ -146,7 +146,7 @@ namespace ColorSwipeGame
 
         public void OnBackButtonPressed() => _paintController.ClearMemory();
 
-        public bool IsDrawingEdited() => _paintController.IsDrawingEdited;
+        public bool IsDrawingEdited() => _paintController.IsDrawingEdited();
     }
 
     [System.Serializable]

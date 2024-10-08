@@ -127,7 +127,17 @@ namespace ColorSwipeGame
 
         // Properties
 
-        public bool IsDrawingEdited { get { return _isEdited[0]; } }
+        public bool IsDrawingEdited()
+        {
+            for (int i = 0; i < _isEdited.Count; i++)
+            {
+                if (_isEdited[i])
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         public Color CurrentBrushColor
         {
             get => _paintData.DefaultBrushColor;

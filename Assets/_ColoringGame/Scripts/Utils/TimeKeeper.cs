@@ -14,7 +14,7 @@ namespace ColorSwipeGame
 
         public void GoBackToMainMenu()
         {
-            SceneManager.LoadScene(TMKOCPlaySchoolConstants.TMKOCPlayMainMenu);
+            // SceneManager.LoadScene(TMKOCPlaySchoolConstants.TMKOCPlayMainMenu);
         }
     }
 }
