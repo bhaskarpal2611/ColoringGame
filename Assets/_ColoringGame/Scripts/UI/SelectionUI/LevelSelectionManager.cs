@@ -92,17 +92,14 @@ namespace ColorSwipeGame
         // DRAW _ Paint Mode
         public void BackToSelection()
         {
-            if (_paintService.IsDrawingEdited())
+            _loadingPanel.DOScale(1f, 0.25f).SetEase(Ease.InSine).OnComplete(() =>
             {
-                _loadingPanel.DOScale(1f, 0.25f).SetEase(Ease.InSine).OnComplete(() =>
+                if (_saveCoroutine != null)
                 {
-                    if (_saveCoroutine != null)
-                    {
-                        StopCoroutine(_saveCoroutine);
-                    }
-                    _saveCoroutine = StartCoroutine(SaveDrawing());
-                });
-            }
+                    StopCoroutine(_saveCoroutine);
+                }
+                _saveCoroutine = StartCoroutine(SaveDrawing());
+            });
         }
 
         // COLORING MODE
@@ -137,14 +134,20 @@ namespace ColorSwipeGame
         private IEnumerator SaveDrawing()
         {
             yield return null;
-            _drawnImageHandler.UpdateDrawing(_currentLevelIndex);
-            SaveDrawnState();
+            if (_paintService.IsDrawingEdited())
+            {
+                _drawnImageHandler.UpdateDrawing(_currentLevelIndex);
+                SaveDrawnState();
+            }
             yield return null;
 
             _loadingPanel.DOScale(0f, 0.25f).SetEase(Ease.Linear).OnComplete(() =>
             {
-                _drawnSaveManager.SaveDrawingsData(); // calling late as SavEDrawnState will have saved the texture as PNG already
-                _selectionSceneCanvas.SetActive(true);
+                if (_paintService.IsDrawingEdited())
+                {
+                    _drawnSaveManager.SaveDrawingsData(); // calling late as SavEDrawnState will have saved the texture as PNG already
+                }
+                    _selectionSceneCanvas.SetActive(true);
                 _paintService.OnBackButtonPressed();
             });
         }

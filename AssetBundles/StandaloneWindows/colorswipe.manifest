@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 596501001
+CRC: 202801973
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 0dabfbb27aea7ab92d1e34736d1e8e3f
+    Hash: 1f0e66736b673728684182b24189a27f
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 1bb230e652868097ebfb4e9ebd8e370b
+    Hash: e4fe80eaa1e9f0eb20d4929df83d2441
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 0dabfbb27aea7ab92d1e34736d1e8e3f
+    Hash: 1f0e66736b673728684182b24189a27f
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -49,11 +49,7 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 3f6ca4d2c50920d849b7a1575197e875, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 6602d84d3af25ac40802958c6d257f82, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 26722ed742c655a00bc6012d7d6fb185, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: f9af4e2e12d854a48bd04ccb2256dc88, type: 3}
 - Class: 114
@@ -85,10 +81,6 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 4e8e921064825bf2ca7fe5d50f04edaa, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 17561fba9884bfb44a69adbba0896aa6, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
@@ -105,7 +97,7 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: fc56f158070570752876b31f6919e4bb, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 5c83e10a60126c6e6817557701b496bd, type: 3}
+  Script: {fileID: 11500000, guid: cf5cf433ac7f4f44989d4cee4c16762a, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: bd91751b980ec3d43ad3c73bc1b4b73d, type: 3}
 - Class: 114
@@ -118,8 +110,6 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 613fe6819bd436047a173b1190a0635a, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 4e88d7c96922ad2498590958ec77b574, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: cf5cf433ac7f4f44989d4cee4c16762a, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 157
@@ -141,5 +131,4 @@ ClassTypes:
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/_ColoringGame/Scene/ColorSwipe_Scene.unity
-- Assets/_ColoringGame/Scene/DrawPaint_Scene.unity
 Dependencies: []

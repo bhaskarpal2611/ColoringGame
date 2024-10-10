@@ -2873,6 +2873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e3bd42d19fe144aa44f757085a1a3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _PopOnTouch: 1
 --- !u!1 &789508167
 GameObject:
   m_ObjectHideFlags: 0
@@ -4332,6 +4333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e3bd42d19fe144aa44f757085a1a3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _PopOnTouch: 1
 --- !u!1 &1264335335
 GameObject:
   m_ObjectHideFlags: 0
@@ -4812,6 +4814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e3bd42d19fe144aa44f757085a1a3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _PopOnTouch: 1
 --- !u!1 &1577749509
 GameObject:
   m_ObjectHideFlags: 0
@@ -6772,6 +6775,8 @@ MonoBehaviour:
   _paintToolPanel: {fileID: 1781777094}
   _backButton: {fileID: 1257450070}
   _clearButton: {fileID: 1517349289}
+  _texture: {fileID: 0}
+  _sprite: {fileID: 0}
 --- !u!1 &1955107643
 GameObject:
   m_ObjectHideFlags: 0
@@ -6817,8 +6822,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53a0e5cad10d6f46b60d8c4431be6e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDistance: 5
-  maxFrequency: 0.01
+  minDistance: 7
+  maxFrequency: 0.02
 --- !u!114 &1955107646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7182,6 +7187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e3bd42d19fe144aa44f757085a1a3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _PopOnTouch: 1
 --- !u!1 &2109716047
 GameObject:
   m_ObjectHideFlags: 0
