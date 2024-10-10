@@ -25,34 +25,14 @@ MonoBehaviour:
       - {fileID: -1312862383, guid: 95bc941413259ea4d9a2fc1728332a37, type: 3}
       - {fileID: 21300000, guid: ae14279de4cc45a49b6dc9221f4d0a5e, type: 3}
       CurrentTextures:
-        TexturesData:
-        - id: 0
-          textureFilePath: texture_0_0
-        - id: 1
-          textureFilePath: texture_0_1
-        - id: 2
-          textureFilePath: texture_0_2
-        - id: 3
-          textureFilePath: texture_0_3
-        - id: 4
-          textureFilePath: texture_0_4
-      LevelImageName: SavedLevelImage_000
+        TexturesData: []
+      LevelImageName: 
       LastSavedata:
         LevelIndex: 0
-        IsEdited: 1
-        LevelImageName: SavedLevelImage_000
+        IsEdited: 0
+        LevelImageName: 
         TexturesData:
-          TexturesData:
-          - id: 0
-            textureFilePath: texture_0_0
-          - id: 1
-            textureFilePath: texture_0_1
-          - id: 2
-            textureFilePath: texture_0_2
-          - id: 3
-            textureFilePath: texture_0_3
-          - id: 4
-            textureFilePath: texture_0_4
+          TexturesData: []
     - LevelIndex: 1
       LevelPrefab: {fileID: 2460442869233561013, guid: a805462e80cb065418871d2b641a472d, type: 3}
       IsLevelCompleted: 0

@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: ColoringGame
+  productName: SwipeToDraw
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -158,7 +158,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.DefaultCompany.ColoringGame
+    Android: com.DefaultCompany.SwipeToDraw
     Standalone: com.DefaultCompany.ColoringGame
   buildNumber:
     Standalone: 0
@@ -284,7 +284,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 16be85fdbfebf9b4b9ba8020850c3c50, type: 3}
+      m_Icon: {fileID: 2800000, guid: fa379dacfb566c84da3ca136173d83a7, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0

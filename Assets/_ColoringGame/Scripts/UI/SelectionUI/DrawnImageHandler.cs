@@ -53,7 +53,7 @@ namespace ColorSwipeGame
                         DrawnPrefabHandler drawingIconPrefab = Instantiate(_drawingIconPrefab, _sprites);
                         drawingIconPrefab.SetImage(sprite);
                         drawingIconPrefab.Button.onClick.AddListener(() =>
-                        {
+                        {   
                             _levelSelectionManager.LoadDrawingScene(index);
                         });
 

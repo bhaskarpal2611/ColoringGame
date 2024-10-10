@@ -20,6 +20,8 @@ namespace ColorSwipeGame
         [SerializeField] private RectTransform _paintToolPanel;
         [SerializeField] private Transform _backButton;
         [SerializeField] private Transform _clearButton;
+        [SerializeField] private Transform _cameraButton;
+        [SerializeField] private SpriteRenderer _paintingArea;
 
         public Texture2D _texture;
         public Sprite _sprite;
@@ -37,18 +39,21 @@ namespace ColorSwipeGame
         public void TakePhoto()
         {
             _leftPanelController.CompleteHidePanel();
+
             _backButton.DOScale(0f, 0.25f).SetEase(Ease.InOutQuad);
             _clearButton.DOScale(0f, 0.25f).SetEase(Ease.InOutQuad);
+            _cameraButton.DOScale(0f, 0.25f).SetEase(Ease.InOutQuad);
+
 
             _paintToolSelection.DOScale(0f, 0.25f).OnComplete(() =>
             {
-                _paintToolPanel.DOLocalMoveX(1000f, .5f).OnComplete(() =>
-                {
-                    TakeSnap();
-                    _bottomLeftPanel.PopOpen();
-                });
+                _paintToolPanel.DOLocalMoveX(1000f, .5f);
+                TakeSnap();
+                _bottomLeftPanel.PopOpen();
+
             });
         }
+
 
         public void SaveToGallery()
         {
@@ -85,13 +90,18 @@ namespace ColorSwipeGame
             _leftPanelController.CloseSidePanel();
             _bottomLeftPanel.ForceCloseWindow();
             // move back the panel
-            _backButton.DOScale(1f, 0.25f).SetEase(Ease.InOutQuad);
-            _clearButton.DOScale(1f, 0.25f).SetEase(Ease.InOutQuad);
+
 
             _paintToolPanel.DOLocalMoveX(0f, .5f).OnComplete(() =>
             {
+                _paintingArea.DOFade(1f, 0.25f);
                 _paintToolSelection.DOScale(1f, 0.25f);
+                _backButton.DOScale(1f, 0.25f).SetEase(Ease.InOutQuad);
+                _clearButton.DOScale(1f, 0.25f).SetEase(Ease.InOutQuad);
+                _cameraButton.DOScale(1f, 0.25f).SetEase(Ease.InOutQuad);
+
             });
+
         }
 
         public Texture2D SaveTextureCopy()
@@ -108,6 +118,9 @@ namespace ColorSwipeGame
         public string SaveCopy(int index, int isDrawing = 0)
         {
             RenderTexture.active = _cameraRT;
+
+            //RenderTexture temp = RenderTexture.GetTemporary(Screen.width, Screen.height, 0, RenderTextureFormat.ARGB32);
+            //RenderTexture.active = temp;
 
             // Read pixels from the RenderTexture into the Texture2D
             _texture.ReadPixels(new Rect(0, 0, _cameraRT.width, _cameraRT.height), 0, 0);
@@ -140,6 +153,8 @@ namespace ColorSwipeGame
 
         private void TakeSnap()
         {
+            _paintingArea.DOFade(0f, 0.25f);
+
             RenderTexture.active = _cameraRT;
 
             // Read pixels from the RenderTexture into the Texture2D
@@ -160,6 +175,8 @@ namespace ColorSwipeGame
 
             // play camera click sound
             _audioManager.PlayCameraButtonSound();
+
+
         }
 
         private void InitializeTexture()

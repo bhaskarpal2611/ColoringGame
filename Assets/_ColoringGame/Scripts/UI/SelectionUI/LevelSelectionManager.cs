@@ -71,11 +71,11 @@ namespace ColorSwipeGame
                 _firstTimeLoaded = true;
             }
 
-            if (_levels.IsEdited(index))
-            {
-                _paintService.OnEditedLevelLoad(_levels.LoadTextures(index));
-            }
-            else
+            //if (_levels.IsEdited(index))
+            //{
+            //    _paintService.OnEditedLevelLoad(_levels.LoadTextures(index));
+            //}
+            //else
             {
                 _paintService.OnLevelLoad();
                 _levels.SetIsEdited(index, true);
@@ -119,12 +119,12 @@ namespace ColorSwipeGame
         {
             yield return null;
 
-            SaveLevelState();
-            _levelImageHandler.UpdateSprite(_currentLevelIndex);
+            //SaveLevelState();
+            //_levelImageHandler.UpdateSprite(_currentLevelIndex);
 
             _loadingPanel.DOScale(0f, 0.25f).SetEase(Ease.Linear).OnComplete(() =>
             {
-                _saveManager.SaveLevelsData();
+                //_saveManager.SaveLevelsData();
                 _selectionSceneCanvas.SetActive(true);
                 _paintService.OnBackButtonPressed();
                 Destroy(_currentLevel);
