@@ -10,9 +10,7 @@ namespace ColorSwipeGame
         [SerializeField] private LevelDataSO _levelData;
         [SerializeField] private CaptureCameraRender _cameraScreenshotController;
 
-        public Sprite _Sprite;
-        public Texture2D _texture;
-
+        private Texture2D _texture;
         private Image[] _images;
 
         private void Awake()
@@ -37,6 +35,11 @@ namespace ColorSwipeGame
             {
                 _camera.orthographicSize = 7.5f;
             }
+        }
+
+        private void OnDestroy()
+        {
+            Destroy(_texture);
         }
 
         private float CalculateScreenAspectRatio()
@@ -86,12 +89,10 @@ namespace ColorSwipeGame
         private void LoadSpritePNG(int i, string filePath)
         {
             byte[] bytes = File.ReadAllBytes(filePath);
-            Texture2D texture = new Texture2D(2, 2, TextureFormat.ARGB32, false);  // Size doesn't matter here; it will be overridden by LoadImage
-            texture.LoadImage(bytes);  // LoadImage auto-resizes the texture dimensions
-            _texture = texture;
+            _texture = new Texture2D(2, 2, TextureFormat.ARGB32, false);  // Size doesn't matter here; it will be overridden by LoadImage
+            _texture.LoadImage(bytes);  // LoadImage auto-resizes the texture dimensions
             Rect rect = new Rect(0, 0, 1024, 1024);
-            Sprite sprite = Sprite.Create(texture, rect, Vector2.one * 0.5f);
-            _Sprite = sprite;
+            Sprite sprite = Sprite.Create(_texture, rect, Vector2.one * 0.5f);
             _images[i].sprite = sprite;
         }
     }

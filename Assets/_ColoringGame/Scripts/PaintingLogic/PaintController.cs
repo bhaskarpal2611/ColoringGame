@@ -28,7 +28,7 @@ namespace ColorSwipeGame
         private Dictionary<int, Sprite> _editedSprites = new Dictionary<int, Sprite>();
         private Dictionary<int, Sprite> _savedSprites = new();
         private int _currentSRIndex;
-        private const int BLIT_THRESHOLD = 10;
+        private const int BLIT_THRESHOLD = 5;
         private readonly RaycastHit2D[] _hits;
         private readonly int BrushColorProperty = Shader.PropertyToID("_BrushColor");
         private readonly int BrushSizeProperty = Shader.PropertyToID("_BrushSize");
@@ -56,13 +56,16 @@ namespace ColorSwipeGame
             RaycastSprites(worldPosition);
         }
 
-        public void ContinueDrag(Vector2 worldPosition)
+        public void ContinueDrag(Vector2 worldPosition, bool isFastSwipe)
         {
             if (!_currentSpriteRenderer) return;
 
             _timeKeeper.AddTime();
+
             _isDragging = true;
-            DrawLines(worldPosition);
+
+
+            DrawLines(worldPosition, isFastSwipe);
             _audioHandler.PlayPaintingSound();
         }
 
@@ -212,7 +215,6 @@ namespace ColorSwipeGame
         public void InitializeLevel(Transform spritesParent, LevelTextures levelTextures)
         {
             _timeKeeper.StartTimer();
-
 
             _spritesParent = spritesParent;
             foreach (Transform spriteTransform in _spritesParent)
@@ -399,7 +401,7 @@ namespace ColorSwipeGame
             ColorSpriteAtPosition(_hits[topIndex].point);
         }
 
-        private void DrawLines(Vector2 currentTouchPosition)
+        private void DrawLines(Vector2 currentTouchPosition, bool isFastSwipe)
         {
             if (_firstTouch)
             {
@@ -408,24 +410,38 @@ namespace ColorSwipeGame
 
                 // 1f is waitTime for delay in hiding panel
                 _penSelectionHandler.HideMainPanel(.5f);
+                ColorSpriteAtPosition(currentTouchPosition);
             }
 
-            float distance = Vector2.Distance(_lastTouchPosition, currentTouchPosition);
-            int steps = Mathf.CeilToInt(distance / (_paintData.BrushSize * 0.5f));
-            int currentSteps = 0;
+            float distanceSqr = (currentTouchPosition - _lastTouchPosition).sqrMagnitude;
+            float stepSize = _paintData.BrushSize * 0.25f;
 
-            for (int i = 0; i <= steps; i++)
+            if (isFastSwipe)
             {
-                currentSteps++;
-                if (currentSteps >= BLIT_THRESHOLD)
+                int steps = Mathf.Max(1, Mathf.CeilToInt(Mathf.Sqrt(distanceSqr) / stepSize));
+                for (int i = 1; i <= steps; i++)
                 {
-                    currentSteps = 0;
-                    Vector2 interpolatedPoint = Vector2.Lerp(_lastTouchPosition, currentTouchPosition, i / (float)steps);
-                    ColorSpriteAtPosition(interpolatedPoint);
+                    if (i % BLIT_THRESHOLD == 0)
+                    {
+                        float t = i / (float)steps;
+                        Vector2 interpolatedPoint = Vector2.Lerp(_lastTouchPosition, currentTouchPosition, t);
+                        ColorSpriteAtPosition(interpolatedPoint);
+                    }
                 }
             }
-            _lastTouchPosition = currentTouchPosition;
+            else // Slow drawing
+            {
+                Vector2 direction = (currentTouchPosition - _lastTouchPosition).normalized;
+                Vector2 currentPoint = _lastTouchPosition;
 
+                while ((currentPoint - _lastTouchPosition).sqrMagnitude < distanceSqr)
+                {
+                    ColorSpriteAtPosition(currentPoint);
+                    currentPoint += direction * stepSize;
+                }
+            }
+
+            _lastTouchPosition = currentTouchPosition;
         }
 
         private void ColorSpriteAtPosition(Vector2 worldPosition)
@@ -449,7 +465,7 @@ namespace ColorSwipeGame
 
             if (!_isDragging)
             {
-                _currentRT = RenderTexture.GetTemporary(_editedTextures[key].width, _editedTextures[key].height, 0, RenderTextureFormat.ARGB32);
+                _currentRT = RenderTexture.GetTemporary(_editedTextures[key].width, _editedTextures[key].height, 0);
                 RenderTexture.active = _currentRT;
                 GL.Clear(true, true, Color.clear);
                 RenderTexture.active = null;

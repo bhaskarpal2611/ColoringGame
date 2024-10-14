@@ -5761,7 +5761,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1955107644}
   - component: {fileID: 1955107645}
-  - component: {fileID: 1955107646}
   m_Layer: 0
   m_Name: Touch_Input_Handler
   m_TagString: Untagged
@@ -5796,25 +5795,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53a0e5cad10d6f46b60d8c4431be6e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDistance: 10
-  maxFrequency: 0.1
---- !u!114 &1955107646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1955107643}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c551e5393e30d51caba8b59b4679e54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minDragDistance: 2
-  maxSmoothDistance: 100
-  maxSwipeSpeed: 5000
-  predictionStrength: 1
-  smoothingStrength: 10
+  _minDistance: 5
+  _maxFrequency: 0.2
+  _fastSwipeThreshold: 1000
+  _velocityMeasurementPeriod: 0.1
 --- !u!1 &1968331368
 GameObject:
   m_ObjectHideFlags: 0

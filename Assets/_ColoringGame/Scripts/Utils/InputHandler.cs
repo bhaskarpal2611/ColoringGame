@@ -1,16 +1,21 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using TMPro;
 
 namespace ColorSwipeGame
 {
     public class InputHandler : MonoBehaviour
     {
-        public Action<Vector2> OnBeginDrag, OnDragging;
+        public Action<Vector2> OnBeginDrag;
+        public Action<Vector2, bool> OnDragging;
         public Action OnDragEnd, OnDragStationary;
 
-        [SerializeField] private float minDistance = 5f;
-        [SerializeField] private float maxFrequency = 0.2f;
+        [SerializeField] private float _minDistance = 5f;
+        [SerializeField] private float _maxFrequency = 0.2f;
+        [SerializeField] private float _fastSwipeThreshold = 1000f; // Units per second
+        [SerializeField] private float _velocityMeasurementPeriod = 0.1f; // Seconds
+
 
         private Touch _touch;
         private Vector2 _lastPosition;
@@ -18,11 +23,16 @@ namespace ColorSwipeGame
         private Queue<Vector2> _positionBuffer = new();
         private const int BufferSize = 3;
 
+        private Vector2 _velocityStartPosition;
+        private float _velocityStartTime;
+        private bool _fastSwipeFlag;
+
         private void Update()
         {
             if (Input.touchCount <= 0) return;
 
             _touch = Input.GetTouch(0);
+
             switch (_touch.phase)
             {
                 case TouchPhase.Began:
@@ -50,6 +60,9 @@ namespace ColorSwipeGame
             {
                 _positionBuffer.Enqueue(position);
             }
+            _velocityStartPosition = position;
+            _velocityStartTime = Time.time;
+            _fastSwipeFlag = false;
         }
 
         private void HandleMove(Vector2 currentPosition)
@@ -57,10 +70,25 @@ namespace ColorSwipeGame
             float distance = Vector2.Distance(_lastPosition, currentPosition);
             float timeSinceLastUpdate = Time.time - _lastUpdateTime;
 
-            if (distance >= minDistance || timeSinceLastUpdate >= maxFrequency)
+            // Calculate velocity
+            float timeSinceVelocityStart = Time.time - _velocityStartTime;
+            if (timeSinceVelocityStart >= _velocityMeasurementPeriod)
+            {
+                Vector2 displacement = currentPosition - _velocityStartPosition;
+                float velocity = displacement.magnitude / timeSinceVelocityStart;
+                _fastSwipeFlag = velocity >= _fastSwipeThreshold;
+
+                // Reset velocity measurement
+                _velocityStartPosition = currentPosition;
+                _velocityStartTime = Time.time;
+
+            }
+
+            if (distance >= _minDistance || timeSinceLastUpdate >= _maxFrequency)
             {
                 // Update the position buffer
-                _positionBuffer.Dequeue();
+                if (_positionBuffer.Count >= BufferSize)
+                    _positionBuffer.Dequeue();
                 _positionBuffer.Enqueue(currentPosition);
 
                 // Calculate the average position
@@ -71,7 +99,7 @@ namespace ColorSwipeGame
                 }
                 averagePosition /= BufferSize;
 
-                OnDragging?.Invoke(averagePosition);
+                OnDragging?.Invoke(averagePosition, true);
                 _lastPosition = currentPosition;
                 _lastUpdateTime = Time.time;
             }
