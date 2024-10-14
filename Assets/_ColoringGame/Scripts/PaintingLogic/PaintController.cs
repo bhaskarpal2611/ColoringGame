@@ -28,7 +28,7 @@ namespace ColorSwipeGame
         private Dictionary<int, Sprite> _editedSprites = new Dictionary<int, Sprite>();
         private Dictionary<int, Sprite> _savedSprites = new();
         private int _currentSRIndex;
-        private const int BLIT_THRESHOLD = 5;
+        private const int BLIT_THRESHOLD = 10;
         private readonly RaycastHit2D[] _hits;
         private readonly int BrushColorProperty = Shader.PropertyToID("_BrushColor");
         private readonly int BrushSizeProperty = Shader.PropertyToID("_BrushSize");

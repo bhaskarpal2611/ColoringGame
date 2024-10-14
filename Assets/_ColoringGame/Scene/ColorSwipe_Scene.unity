@@ -5930,7 +5930,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 682, y: -50}
+  m_AnchoredPosition: {x: 682.0001, y: -50}
   m_SizeDelta: {x: 1000, y: 100}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1904748523
@@ -6313,7 +6313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53a0e5cad10d6f46b60d8c4431be6e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDistance: 4
+  minDistance: 10
   maxFrequency: 0.02
 --- !u!114 &1955107646
 MonoBehaviour:
@@ -9377,8 +9377,8 @@ MonoBehaviour:
   _penPanelHandler: {fileID: 1677388976}
   _audioHandler: {fileID: 985682491}
   _timer: {fileID: 397821762}
-  _maxHitColliders: 8
-  _brushSize: 3
+  _maxHitColliders: 10
+  _brushSize: 5
   _brushScaleFactor: 0.01
   _defaultBrushColor: {r: 0, g: 1, b: 0, a: 1}
   _customMaterials:

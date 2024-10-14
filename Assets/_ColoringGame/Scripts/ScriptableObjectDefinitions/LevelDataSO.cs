@@ -11,7 +11,7 @@ namespace ColorSwipeGame
 
         public GameObject GetLevelPrefab(int index)
         {
-            if (index < 0 || index >= Levels.Length())
+            if (index < 0 || index >= Levels.levelsData.Length)
             {
                 Debug.LogError("Index out of bound");
                 return null;

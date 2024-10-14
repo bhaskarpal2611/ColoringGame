@@ -15,18 +15,28 @@ MonoBehaviour:
   Levels:
     levelsData:
     - LevelIndex: 0
-      LevelPrefab: {fileID: 1967041107805472303, guid: 228b87b615240734bbc2126aef9e3c76, type: 3}
+      LevelPrefab: {fileID: 1967041107805472303, guid: 0a028174d8c20f840a6b32030d012001, type: 3}
       IsLevelCompleted: 0
       IsEdited: 1
       OriginalSprites:
-      - {fileID: -1392156214, guid: 95bc941413259ea4d9a2fc1728332a37, type: 3}
-      - {fileID: 380050506, guid: 95bc941413259ea4d9a2fc1728332a37, type: 3}
-      - {fileID: -654135770, guid: 95bc941413259ea4d9a2fc1728332a37, type: 3}
-      - {fileID: -1312862383, guid: 95bc941413259ea4d9a2fc1728332a37, type: 3}
-      - {fileID: 21300000, guid: ae14279de4cc45a49b6dc9221f4d0a5e, type: 3}
+      - {fileID: 21300000, guid: efa3473d2e0f3d24ca11e13fdcf6db0f, type: 3}
+      - {fileID: 21300000, guid: ae976c00c47acf345888425a87ee0623, type: 3}
+      - {fileID: 21300000, guid: 977ab68883125a04ebf0f211a4cc7800, type: 3}
+      - {fileID: 21300000, guid: c7168ee79088cae46a0cd0eb22fbca0a, type: 3}
+      - {fileID: 21300000, guid: 40060718712c6c046ad92fe91445c927, type: 3}
       CurrentTextures:
-        TexturesData: []
-      LevelImageName: 
+        TexturesData:
+        - id: 0
+          textureFilePath: texture_0_0
+        - id: 1
+          textureFilePath: texture_0_1
+        - id: 2
+          textureFilePath: texture_0_2
+        - id: 3
+          textureFilePath: texture_0_3
+        - id: 4
+          textureFilePath: texture_0_4
+      LevelImageName: SavedLevelImage_000
       LastSavedata:
         LevelIndex: 0
         IsEdited: 0
@@ -34,31 +44,33 @@ MonoBehaviour:
         TexturesData:
           TexturesData: []
     - LevelIndex: 1
-      LevelPrefab: {fileID: 2460442869233561013, guid: a805462e80cb065418871d2b641a472d, type: 3}
+      LevelPrefab: {fileID: 2460442869233561013, guid: e27eb30663aa98b4bb9159426eb9e725, type: 3}
       IsLevelCompleted: 0
       IsEdited: 1
       OriginalSprites:
-      - {fileID: 436181756, guid: e1a473693e1a99143996ae1672815b95, type: 3}
-      - {fileID: -1353468911, guid: e1a473693e1a99143996ae1672815b95, type: 3}
-      - {fileID: -519673294, guid: e1a473693e1a99143996ae1672815b95, type: 3}
-      - {fileID: -1912216310, guid: e1a473693e1a99143996ae1672815b95, type: 3}
-      - {fileID: 1829361979, guid: e1a473693e1a99143996ae1672815b95, type: 3}
-      - {fileID: -755196367, guid: e1a473693e1a99143996ae1672815b95, type: 3}
-      - {fileID: -1255488470, guid: e1a473693e1a99143996ae1672815b95, type: 3}
-      - {fileID: -1472929063, guid: e1a473693e1a99143996ae1672815b95, type: 3}
-      - {fileID: -680081563, guid: e1a473693e1a99143996ae1672815b95, type: 3}
-      - {fileID: 1881221398, guid: e1a473693e1a99143996ae1672815b95, type: 3}
-      - {fileID: -496285520, guid: e1a473693e1a99143996ae1672815b95, type: 3}
-      - {fileID: -1806125089, guid: e1a473693e1a99143996ae1672815b95, type: 3}
-      - {fileID: -1968548722, guid: e1a473693e1a99143996ae1672815b95, type: 3}
-      - {fileID: 718534062, guid: e1a473693e1a99143996ae1672815b95, type: 3}
-      - {fileID: -872881776, guid: e1a473693e1a99143996ae1672815b95, type: 3}
-      - {fileID: -1022532872, guid: e1a473693e1a99143996ae1672815b95, type: 3}
-      - {fileID: -281693555, guid: e1a473693e1a99143996ae1672815b95, type: 3}
-      - {fileID: -281693555, guid: e1a473693e1a99143996ae1672815b95, type: 3}
-      - {fileID: -281693555, guid: e1a473693e1a99143996ae1672815b95, type: 3}
-      - {fileID: -763926183, guid: e1a473693e1a99143996ae1672815b95, type: 3}
-      - {fileID: 21300000, guid: ae14279de4cc45a49b6dc9221f4d0a5e, type: 3}
+      - {fileID: 21300000, guid: 1299a915ed0c48c4fb1b59aa1c93e0de, type: 3}
+      - {fileID: 21300000, guid: 0efe5f3c40cb5d34d981347d95cfcc88, type: 3}
+      - {fileID: 21300000, guid: 71ffa8b0b3df4c1478b1fe483719dc5f, type: 3}
+      - {fileID: 21300000, guid: b23df799f000efc4b849abb8044fe6fa, type: 3}
+      - {fileID: 21300000, guid: 4224c808eb2188e49bb04c628584820a, type: 3}
+      - {fileID: 21300000, guid: bfb52814d06103d49a9a018d403b1264, type: 3}
+      - {fileID: 21300000, guid: a992560d1802a874db6b03f9ce92ce60, type: 3}
+      - {fileID: 21300000, guid: 195528d042a5bec4aa55317fe9e1e4c4, type: 3}
+      - {fileID: 21300000, guid: e4c91ee9a13ea4844ba8172af8e65d9c, type: 3}
+      - {fileID: 21300000, guid: 3d36bfb493876a4429df396ffb314d49, type: 3}
+      - {fileID: 21300000, guid: f128fbab4e48d024997bab66a927168d, type: 3}
+      - {fileID: 21300000, guid: 01a0fd44a6f433443b62547d721d4023, type: 3}
+      - {fileID: 21300000, guid: b4b092603cb972f4f83f1f7979495e08, type: 3}
+      - {fileID: 21300000, guid: 3354d36ab8353194abe58c5301ee6b0d, type: 3}
+      - {fileID: 21300000, guid: a36a54a8654bb6448993e91ced3f4938, type: 3}
+      - {fileID: 21300000, guid: a00f0e1b9dca0a548b4a03bd5842d040, type: 3}
+      - {fileID: 21300000, guid: 57242d8cfa209594f8cbf57e3365745a, type: 3}
+      - {fileID: 21300000, guid: 9f8626385bbf042468b4ca479a280ec4, type: 3}
+      - {fileID: 21300000, guid: e71af3967a5967346903bead2d387db2, type: 3}
+      - {fileID: 21300000, guid: 29cfc4e8916ebb94daa25e6959e5603d, type: 3}
+      - {fileID: 21300000, guid: 29cfc4e8916ebb94daa25e6959e5603d, type: 3}
+      - {fileID: 21300000, guid: 29cfc4e8916ebb94daa25e6959e5603d, type: 3}
+      - {fileID: 21300000, guid: 40060718712c6c046ad92fe91445c927, type: 3}
       CurrentTextures:
         TexturesData:
         - id: 0
@@ -105,84 +117,42 @@ MonoBehaviour:
           textureFilePath: texture_1_20
       LevelImageName: SavedLevelImage_001
       LastSavedata:
-        LevelIndex: 1
-        IsEdited: 1
-        LevelImageName: SavedLevelImage_001
+        LevelIndex: 0
+        IsEdited: 0
+        LevelImageName: 
         TexturesData:
-          TexturesData:
-          - id: 0
-            textureFilePath: texture_1_0
-          - id: 1
-            textureFilePath: texture_1_1
-          - id: 2
-            textureFilePath: texture_1_2
-          - id: 3
-            textureFilePath: texture_1_3
-          - id: 4
-            textureFilePath: texture_1_4
-          - id: 5
-            textureFilePath: texture_1_5
-          - id: 6
-            textureFilePath: texture_1_6
-          - id: 7
-            textureFilePath: texture_1_7
-          - id: 8
-            textureFilePath: texture_1_8
-          - id: 9
-            textureFilePath: texture_1_9
-          - id: 10
-            textureFilePath: texture_1_10
-          - id: 11
-            textureFilePath: texture_1_11
-          - id: 12
-            textureFilePath: texture_1_12
-          - id: 13
-            textureFilePath: texture_1_13
-          - id: 14
-            textureFilePath: texture_1_14
-          - id: 15
-            textureFilePath: texture_1_15
-          - id: 16
-            textureFilePath: texture_1_16
-          - id: 17
-            textureFilePath: texture_1_17
-          - id: 18
-            textureFilePath: texture_1_18
-          - id: 19
-            textureFilePath: texture_1_19
-          - id: 20
-            textureFilePath: texture_1_20
+          TexturesData: []
     - LevelIndex: 2
-      LevelPrefab: {fileID: 1297199473006019427, guid: fcfdc3b386215c0498b7570c3bc20265, type: 3}
+      LevelPrefab: {fileID: 1297199473006019427, guid: d2cc6a777ce584147840eea3ad99f243, type: 3}
       IsLevelCompleted: 0
       IsEdited: 1
       OriginalSprites:
-      - {fileID: -948955882, guid: ec21f9015b1f16a41ad3483c550ede13, type: 3}
-      - {fileID: 2086485277, guid: ec21f9015b1f16a41ad3483c550ede13, type: 3}
-      - {fileID: 213429823, guid: ec21f9015b1f16a41ad3483c550ede13, type: 3}
-      - {fileID: -934209284, guid: ec21f9015b1f16a41ad3483c550ede13, type: 3}
-      - {fileID: -2036083887, guid: ec21f9015b1f16a41ad3483c550ede13, type: 3}
-      - {fileID: 2040909112, guid: ec21f9015b1f16a41ad3483c550ede13, type: 3}
-      - {fileID: 1324864632, guid: ec21f9015b1f16a41ad3483c550ede13, type: 3}
-      - {fileID: -1923418030, guid: ec21f9015b1f16a41ad3483c550ede13, type: 3}
-      - {fileID: -1487044307, guid: ec21f9015b1f16a41ad3483c550ede13, type: 3}
-      - {fileID: -1566072196, guid: ec21f9015b1f16a41ad3483c550ede13, type: 3}
-      - {fileID: 1184671445, guid: ec21f9015b1f16a41ad3483c550ede13, type: 3}
-      - {fileID: 2063544618, guid: ec21f9015b1f16a41ad3483c550ede13, type: 3}
-      - {fileID: -663171984, guid: ec21f9015b1f16a41ad3483c550ede13, type: 3}
-      - {fileID: -2036253324, guid: ec21f9015b1f16a41ad3483c550ede13, type: 3}
-      - {fileID: 1552887032, guid: ec21f9015b1f16a41ad3483c550ede13, type: 3}
-      - {fileID: 576991409, guid: ec21f9015b1f16a41ad3483c550ede13, type: 3}
-      - {fileID: 2106783801, guid: ec21f9015b1f16a41ad3483c550ede13, type: 3}
-      - {fileID: 318809298, guid: ec21f9015b1f16a41ad3483c550ede13, type: 3}
-      - {fileID: -176920434, guid: ec21f9015b1f16a41ad3483c550ede13, type: 3}
-      - {fileID: 1289955188, guid: ec21f9015b1f16a41ad3483c550ede13, type: 3}
-      - {fileID: -1777749130, guid: ec21f9015b1f16a41ad3483c550ede13, type: 3}
-      - {fileID: -2082848042, guid: ec21f9015b1f16a41ad3483c550ede13, type: 3}
-      - {fileID: -866623447, guid: ec21f9015b1f16a41ad3483c550ede13, type: 3}
-      - {fileID: 773818161, guid: ec21f9015b1f16a41ad3483c550ede13, type: 3}
-      - {fileID: -58043695, guid: ec21f9015b1f16a41ad3483c550ede13, type: 3}
-      - {fileID: 21300000, guid: ae14279de4cc45a49b6dc9221f4d0a5e, type: 3}
+      - {fileID: 21300000, guid: c0d31ec6e9217e546a853314fe806c7b, type: 3}
+      - {fileID: 21300000, guid: 89b16dfe2dd5e1246a0361062973aec4, type: 3}
+      - {fileID: 21300000, guid: 68293a2ebfb1d8349b118f0fd769633b, type: 3}
+      - {fileID: 21300000, guid: 3e564fdc638e4f246b658dddedccf843, type: 3}
+      - {fileID: 21300000, guid: 946a5174b4599454e833440f9d401c10, type: 3}
+      - {fileID: 21300000, guid: db3d180ede6265b4996323e50f4c5750, type: 3}
+      - {fileID: 21300000, guid: 80c59afaba792de449b799798a2b633e, type: 3}
+      - {fileID: 21300000, guid: 1cc9041df9c302e41a9464d5fed07dca, type: 3}
+      - {fileID: 21300000, guid: 51d7dfad939c2d743ba29f048146dbb3, type: 3}
+      - {fileID: 21300000, guid: e52953e3b9b1f28438f4e022fe61fe4b, type: 3}
+      - {fileID: 21300000, guid: 5baf13af780178848b1658d928ce55b5, type: 3}
+      - {fileID: 21300000, guid: 1ef884986478185479f011949452d8e3, type: 3}
+      - {fileID: 21300000, guid: c6e374732d2b4904e92f3e9e8be02245, type: 3}
+      - {fileID: 21300000, guid: fac06eb029afa314ebea50efad1ea00c, type: 3}
+      - {fileID: 21300000, guid: fc0574569077dc040978479061ed2b38, type: 3}
+      - {fileID: 21300000, guid: c71a8824143b08c4fae1973970464077, type: 3}
+      - {fileID: 21300000, guid: 6246f95e9065cbc4899b94102c7ff1b7, type: 3}
+      - {fileID: 21300000, guid: 4730d2e47810b6f4da3fd21ef37546e9, type: 3}
+      - {fileID: 21300000, guid: 7337407dfbda1a940a561773c93d5a49, type: 3}
+      - {fileID: 21300000, guid: 048b00215bbbd9a44b943cab9bbd52b6, type: 3}
+      - {fileID: 21300000, guid: e1d5561d75453e44eb33bba178d3ea19, type: 3}
+      - {fileID: 21300000, guid: 822de4df9c9da1b4fae0250e5ab9950f, type: 3}
+      - {fileID: 21300000, guid: a8d28ced5e42bb144b7a28dfe8efec6f, type: 3}
+      - {fileID: 21300000, guid: a54a8a6111bc7434f9a222df3fa3be8e, type: 3}
+      - {fileID: 21300000, guid: 54c0a254cf621ed41af8eab95cd201ab, type: 3}
+      - {fileID: 21300000, guid: 40060718712c6c046ad92fe91445c927, type: 3}
       CurrentTextures:
         TexturesData:
         - id: 0
@@ -297,22 +267,22 @@ MonoBehaviour:
           - id: 25
             textureFilePath: texture_2_25
     - LevelIndex: 3
-      LevelPrefab: {fileID: 7559283923001293542, guid: 97075ba594af9a941bf93bd2c40884aa, type: 3}
+      LevelPrefab: {fileID: 7559283923001293542, guid: e1dbd0e9c1ce1774f971c593ea7f8f4e, type: 3}
       IsLevelCompleted: 0
       IsEdited: 1
       OriginalSprites:
-      - {fileID: -1430231194, guid: c1297a98ab5938947a8a4d6174b16aa9, type: 3}
-      - {fileID: 1943771269, guid: c1297a98ab5938947a8a4d6174b16aa9, type: 3}
-      - {fileID: -1435390531, guid: c1297a98ab5938947a8a4d6174b16aa9, type: 3}
-      - {fileID: -820487458, guid: c1297a98ab5938947a8a4d6174b16aa9, type: 3}
-      - {fileID: 1898625673, guid: c1297a98ab5938947a8a4d6174b16aa9, type: 3}
-      - {fileID: -2101936546, guid: c1297a98ab5938947a8a4d6174b16aa9, type: 3}
-      - {fileID: 922212316, guid: c1297a98ab5938947a8a4d6174b16aa9, type: 3}
-      - {fileID: 892590542, guid: c1297a98ab5938947a8a4d6174b16aa9, type: 3}
-      - {fileID: 736674105, guid: c1297a98ab5938947a8a4d6174b16aa9, type: 3}
-      - {fileID: -1317560207, guid: c1297a98ab5938947a8a4d6174b16aa9, type: 3}
-      - {fileID: 232003411, guid: c1297a98ab5938947a8a4d6174b16aa9, type: 3}
-      - {fileID: 21300000, guid: ae14279de4cc45a49b6dc9221f4d0a5e, type: 3}
+      - {fileID: 21300000, guid: d2270f884826d644e9a5d1f7d90f071d, type: 3}
+      - {fileID: 21300000, guid: 874d23ec469c65c4d8d2cc5360b4b4a8, type: 3}
+      - {fileID: 21300000, guid: f58efe8581d469449a40de763fb55057, type: 3}
+      - {fileID: 21300000, guid: ce58294f4c8725f42b644e44c2f03cfe, type: 3}
+      - {fileID: 21300000, guid: 2778c38f16f63b241802de994cfdbc78, type: 3}
+      - {fileID: 273193564, guid: c5dcff00974fd36499533c77efc0dafc, type: 3}
+      - {fileID: 1771113815, guid: c5dcff00974fd36499533c77efc0dafc, type: 3}
+      - {fileID: 21300000, guid: 75f1697c1b2b0ea41a310d42d8233ebf, type: 3}
+      - {fileID: 21300000, guid: 2f0fb17da9966a74dac2037e2e921ff7, type: 3}
+      - {fileID: 21300000, guid: ec4cd27d96e8cf84eb66da863ffb3860, type: 3}
+      - {fileID: 21300000, guid: c9f9f3a6474b3b241889dee64b9b70eb, type: 3}
+      - {fileID: 21300000, guid: 40060718712c6c046ad92fe91445c927, type: 3}
       CurrentTextures:
         TexturesData:
         - id: 0
@@ -341,50 +311,26 @@ MonoBehaviour:
           textureFilePath: texture_3_11
       LevelImageName: SavedLevelImage_003
       LastSavedata:
-        LevelIndex: 3
-        IsEdited: 1
-        LevelImageName: SavedLevelImage_003
+        LevelIndex: 0
+        IsEdited: 0
+        LevelImageName: 
         TexturesData:
-          TexturesData:
-          - id: 0
-            textureFilePath: texture_3_0
-          - id: 1
-            textureFilePath: texture_3_1
-          - id: 2
-            textureFilePath: texture_3_2
-          - id: 3
-            textureFilePath: texture_3_3
-          - id: 4
-            textureFilePath: texture_3_4
-          - id: 5
-            textureFilePath: texture_3_5
-          - id: 6
-            textureFilePath: texture_3_6
-          - id: 7
-            textureFilePath: texture_3_7
-          - id: 8
-            textureFilePath: texture_3_8
-          - id: 9
-            textureFilePath: texture_3_9
-          - id: 10
-            textureFilePath: texture_3_10
-          - id: 11
-            textureFilePath: texture_3_11
+          TexturesData: []
     - LevelIndex: 4
-      LevelPrefab: {fileID: 404216453300770895, guid: 8b7b88da2ecefbc41a0b4071f801518f, type: 3}
+      LevelPrefab: {fileID: 404216453300770895, guid: 849503493cf7e5349b4e1df2db71854e, type: 3}
       IsLevelCompleted: 0
       IsEdited: 1
       OriginalSprites:
-      - {fileID: 1121519737, guid: 04ff0a6e25590d440a7d7ce30fad62a8, type: 3}
-      - {fileID: 180662225, guid: 04ff0a6e25590d440a7d7ce30fad62a8, type: 3}
-      - {fileID: 446846515, guid: 04ff0a6e25590d440a7d7ce30fad62a8, type: 3}
-      - {fileID: 377332723, guid: 04ff0a6e25590d440a7d7ce30fad62a8, type: 3}
-      - {fileID: -57347823, guid: 04ff0a6e25590d440a7d7ce30fad62a8, type: 3}
-      - {fileID: 1441975312, guid: 04ff0a6e25590d440a7d7ce30fad62a8, type: 3}
-      - {fileID: 153899457, guid: 04ff0a6e25590d440a7d7ce30fad62a8, type: 3}
-      - {fileID: 1112911300, guid: 04ff0a6e25590d440a7d7ce30fad62a8, type: 3}
-      - {fileID: -189272258, guid: 04ff0a6e25590d440a7d7ce30fad62a8, type: 3}
-      - {fileID: 21300000, guid: ae14279de4cc45a49b6dc9221f4d0a5e, type: 3}
+      - {fileID: 21300000, guid: 954eef0f9120ed540812a3be1645121c, type: 3}
+      - {fileID: 21300000, guid: ef38e4f869f83d04a9240f5e68697e75, type: 3}
+      - {fileID: 21300000, guid: cde1a8ac5fdc705488527e91ae00b5d5, type: 3}
+      - {fileID: 21300000, guid: f787ee8b3bb36c1408222da5cff37dae, type: 3}
+      - {fileID: 21300000, guid: 64768feac6fe9b5468c03981b7a47da6, type: 3}
+      - {fileID: 21300000, guid: 158b7aefce2ed7748870a235a7b9df8a, type: 3}
+      - {fileID: 21300000, guid: 9d782a6e5d9ca3f42839398b711f8bdd, type: 3}
+      - {fileID: 21300000, guid: 8eedf56a06eb42f44aeeec3f4171eac4, type: 3}
+      - {fileID: 21300000, guid: a93e1d7edec71f648ad01ddc1993d218, type: 3}
+      - {fileID: 21300000, guid: 40060718712c6c046ad92fe91445c927, type: 3}
       CurrentTextures:
         TexturesData:
         - id: 0
@@ -409,388 +355,122 @@ MonoBehaviour:
           textureFilePath: texture_4_9
       LevelImageName: SavedLevelImage_004
       LastSavedata:
-        LevelIndex: 4
-        IsEdited: 1
-        LevelImageName: SavedLevelImage_004
+        LevelIndex: 0
+        IsEdited: 0
+        LevelImageName: 
         TexturesData:
-          TexturesData:
-          - id: 0
-            textureFilePath: texture_4_0
-          - id: 1
-            textureFilePath: texture_4_1
-          - id: 2
-            textureFilePath: texture_4_2
-          - id: 3
-            textureFilePath: texture_4_3
-          - id: 4
-            textureFilePath: texture_4_4
-          - id: 5
-            textureFilePath: texture_4_5
-          - id: 6
-            textureFilePath: texture_4_6
-          - id: 7
-            textureFilePath: texture_4_7
-          - id: 8
-            textureFilePath: texture_4_8
-          - id: 9
-            textureFilePath: texture_4_9
+          TexturesData: []
     - LevelIndex: 5
-      LevelPrefab: {fileID: 1947265809199597286, guid: 21b9d7c506e329f458460289b845dbb8, type: 3}
+      LevelPrefab: {fileID: 1947265809199597286, guid: 5c0e2e37d1bcd9647aee46ab413add0c, type: 3}
       IsLevelCompleted: 0
-      IsEdited: 1
+      IsEdited: 0
       OriginalSprites:
-      - {fileID: -234630624, guid: cb9ab9fe81ba8e541b01173093749b5a, type: 3}
-      - {fileID: 483959570, guid: cb9ab9fe81ba8e541b01173093749b5a, type: 3}
-      - {fileID: -1931843189, guid: cb9ab9fe81ba8e541b01173093749b5a, type: 3}
-      - {fileID: -834476210, guid: cb9ab9fe81ba8e541b01173093749b5a, type: 3}
-      - {fileID: 70180688, guid: cb9ab9fe81ba8e541b01173093749b5a, type: 3}
-      - {fileID: 716454058, guid: cb9ab9fe81ba8e541b01173093749b5a, type: 3}
-      - {fileID: -838723301, guid: cb9ab9fe81ba8e541b01173093749b5a, type: 3}
-      - {fileID: -1320733252, guid: cb9ab9fe81ba8e541b01173093749b5a, type: 3}
-      - {fileID: 981658345, guid: cb9ab9fe81ba8e541b01173093749b5a, type: 3}
-      - {fileID: 1690527236, guid: cb9ab9fe81ba8e541b01173093749b5a, type: 3}
-      - {fileID: 50890894, guid: cb9ab9fe81ba8e541b01173093749b5a, type: 3}
-      - {fileID: -1142733653, guid: cb9ab9fe81ba8e541b01173093749b5a, type: 3}
-      - {fileID: 2030504715, guid: cb9ab9fe81ba8e541b01173093749b5a, type: 3}
-      - {fileID: -537487075, guid: cb9ab9fe81ba8e541b01173093749b5a, type: 3}
-      - {fileID: -60288577, guid: cb9ab9fe81ba8e541b01173093749b5a, type: 3}
-      - {fileID: 1564766356, guid: cb9ab9fe81ba8e541b01173093749b5a, type: 3}
-      - {fileID: 970850560, guid: cb9ab9fe81ba8e541b01173093749b5a, type: 3}
-      - {fileID: -684199382, guid: cb9ab9fe81ba8e541b01173093749b5a, type: 3}
-      - {fileID: 21300000, guid: ae14279de4cc45a49b6dc9221f4d0a5e, type: 3}
+      - {fileID: 21300000, guid: 4a738e4b9dcfc3c43b3097f41b21d71e, type: 3}
+      - {fileID: 21300000, guid: 5b34c3227001e4546b2a0c24a8d80ea3, type: 3}
+      - {fileID: 21300000, guid: 3a81aff4b6c0684459a69c19d9b0f460, type: 3}
+      - {fileID: 21300000, guid: bf325d713416be84f943b9c054b293fa, type: 3}
+      - {fileID: 21300000, guid: 77d563115145df542af784fa8950dba6, type: 3}
+      - {fileID: 21300000, guid: 0b77e30bdd4b9714ab9803dd1b7ea091, type: 3}
+      - {fileID: 21300000, guid: 1d22b66ec1ed58844b561f0890b2cb0b, type: 3}
+      - {fileID: 1755605170, guid: 5261d02be75445a4f8a1149265cb95e6, type: 3}
+      - {fileID: -920359531, guid: 5261d02be75445a4f8a1149265cb95e6, type: 3}
+      - {fileID: -693975274, guid: f3693a56db64f554b94463c55e091d48, type: 3}
+      - {fileID: 77293261, guid: f3693a56db64f554b94463c55e091d48, type: 3}
+      - {fileID: 21300000, guid: ba299670017567949829f483f3e40193, type: 3}
+      - {fileID: 21300000, guid: f947e4a82e8c43a4284999485d5ce221, type: 3}
+      - {fileID: 21300000, guid: 090ef66dae6c0ca469874dcaa1165845, type: 3}
+      - {fileID: 21300000, guid: 919d511bf98f7134a8b0024bcd10cb6a, type: 3}
+      - {fileID: 21300000, guid: d6e8faf010cfab747bd3ea4c41a3ade5, type: 3}
+      - {fileID: 21300000, guid: b0a536bd014d4ef4db015a49864b9212, type: 3}
+      - {fileID: 21300000, guid: a8ec2043d9d233346b7c91bb62ed713f, type: 3}
+      - {fileID: 21300000, guid: 40060718712c6c046ad92fe91445c927, type: 3}
       CurrentTextures:
-        TexturesData:
-        - id: 0
-          textureFilePath: texture_5_0
-        - id: 1
-          textureFilePath: texture_5_1
-        - id: 2
-          textureFilePath: texture_5_2
-        - id: 3
-          textureFilePath: texture_5_3
-        - id: 4
-          textureFilePath: texture_5_4
-        - id: 5
-          textureFilePath: texture_5_5
-        - id: 6
-          textureFilePath: texture_5_6
-        - id: 7
-          textureFilePath: texture_5_7
-        - id: 8
-          textureFilePath: texture_5_8
-        - id: 9
-          textureFilePath: texture_5_9
-        - id: 10
-          textureFilePath: texture_5_10
-        - id: 11
-          textureFilePath: texture_5_11
-        - id: 12
-          textureFilePath: texture_5_12
-        - id: 13
-          textureFilePath: texture_5_13
-        - id: 14
-          textureFilePath: texture_5_14
-        - id: 15
-          textureFilePath: texture_5_15
-        - id: 16
-          textureFilePath: texture_5_16
-        - id: 17
-          textureFilePath: texture_5_17
-        - id: 18
-          textureFilePath: texture_5_18
-      LevelImageName: SavedLevelImage_005
+        TexturesData: []
+      LevelImageName: 
       LastSavedata:
-        LevelIndex: 5
-        IsEdited: 1
-        LevelImageName: SavedLevelImage_005
+        LevelIndex: 0
+        IsEdited: 0
+        LevelImageName: 
         TexturesData:
-          TexturesData:
-          - id: 0
-            textureFilePath: texture_5_0
-          - id: 1
-            textureFilePath: texture_5_1
-          - id: 2
-            textureFilePath: texture_5_2
-          - id: 3
-            textureFilePath: texture_5_3
-          - id: 4
-            textureFilePath: texture_5_4
-          - id: 5
-            textureFilePath: texture_5_5
-          - id: 6
-            textureFilePath: texture_5_6
-          - id: 7
-            textureFilePath: texture_5_7
-          - id: 8
-            textureFilePath: texture_5_8
-          - id: 9
-            textureFilePath: texture_5_9
-          - id: 10
-            textureFilePath: texture_5_10
-          - id: 11
-            textureFilePath: texture_5_11
-          - id: 12
-            textureFilePath: texture_5_12
-          - id: 13
-            textureFilePath: texture_5_13
-          - id: 14
-            textureFilePath: texture_5_14
-          - id: 15
-            textureFilePath: texture_5_15
-          - id: 16
-            textureFilePath: texture_5_16
-          - id: 17
-            textureFilePath: texture_5_17
-          - id: 18
-            textureFilePath: texture_5_18
+          TexturesData: []
     - LevelIndex: 6
-      LevelPrefab: {fileID: 9167756834360458280, guid: a62d15eaa304f144da8b98cc4cc2a1b6, type: 3}
+      LevelPrefab: {fileID: 9167756834360458280, guid: 2fbf7c5217495624baf0c666bc57ddf7, type: 3}
       IsLevelCompleted: 0
-      IsEdited: 1
+      IsEdited: 0
       OriginalSprites:
-      - {fileID: -284287726, guid: b549828043fcb7841a4b2a167fdf5886, type: 3}
-      - {fileID: -1524506726, guid: b549828043fcb7841a4b2a167fdf5886, type: 3}
-      - {fileID: -1637525399, guid: b549828043fcb7841a4b2a167fdf5886, type: 3}
-      - {fileID: -606774831, guid: b549828043fcb7841a4b2a167fdf5886, type: 3}
-      - {fileID: 1341763061, guid: b549828043fcb7841a4b2a167fdf5886, type: 3}
-      - {fileID: -1503704150, guid: b549828043fcb7841a4b2a167fdf5886, type: 3}
-      - {fileID: -1414162426, guid: b549828043fcb7841a4b2a167fdf5886, type: 3}
-      - {fileID: -736513707, guid: b549828043fcb7841a4b2a167fdf5886, type: 3}
-      - {fileID: 1209460101, guid: b549828043fcb7841a4b2a167fdf5886, type: 3}
-      - {fileID: -584440139, guid: b549828043fcb7841a4b2a167fdf5886, type: 3}
-      - {fileID: -381432214, guid: b549828043fcb7841a4b2a167fdf5886, type: 3}
-      - {fileID: 1886861621, guid: b549828043fcb7841a4b2a167fdf5886, type: 3}
-      - {fileID: -581376360, guid: b549828043fcb7841a4b2a167fdf5886, type: 3}
-      - {fileID: -2078686403, guid: b549828043fcb7841a4b2a167fdf5886, type: 3}
-      - {fileID: 328982300, guid: b549828043fcb7841a4b2a167fdf5886, type: 3}
-      - {fileID: -475420739, guid: b549828043fcb7841a4b2a167fdf5886, type: 3}
-      - {fileID: 190853864, guid: b549828043fcb7841a4b2a167fdf5886, type: 3}
-      - {fileID: -45484560, guid: b549828043fcb7841a4b2a167fdf5886, type: 3}
-      - {fileID: -206007667, guid: b549828043fcb7841a4b2a167fdf5886, type: 3}
-      - {fileID: 1766448674, guid: b549828043fcb7841a4b2a167fdf5886, type: 3}
-      - {fileID: -124342412, guid: b549828043fcb7841a4b2a167fdf5886, type: 3}
-      - {fileID: -690474760, guid: b549828043fcb7841a4b2a167fdf5886, type: 3}
-      - {fileID: 1292149754, guid: b549828043fcb7841a4b2a167fdf5886, type: 3}
-      - {fileID: 21300000, guid: ae14279de4cc45a49b6dc9221f4d0a5e, type: 3}
+      - {fileID: 21300000, guid: dde9433cce7ec814883580e6552ef1ea, type: 3}
+      - {fileID: 21300000, guid: 8f973503cf4d3c14ea05442b942b8e01, type: 3}
+      - {fileID: 21300000, guid: ef75e85ccf7063846a3e8d70c7b33ae9, type: 3}
+      - {fileID: 21300000, guid: 201d7ad3e82d545438e4513f0c36de34, type: 3}
+      - {fileID: 21300000, guid: 162c86be190f49846a663553172eadb4, type: 3}
+      - {fileID: 21300000, guid: 6b04c9dcec0c5a64588a75819578c4ef, type: 3}
+      - {fileID: 21300000, guid: cda1634dac95aa3428b67713ed6af3e7, type: 3}
+      - {fileID: 21300000, guid: 059467c72ad6df340aa5e2a8284b0b83, type: 3}
+      - {fileID: 21300000, guid: 446cf3a5e8798e44ea2ab5005a0a4374, type: 3}
+      - {fileID: 21300000, guid: 4e7c266aa824c344d9d8f0017b2b5f2b, type: 3}
+      - {fileID: 21300000, guid: a9257ba99f4ed9542ba424d20498b992, type: 3}
+      - {fileID: 21300000, guid: 465d8075ae6d24d4dae46a9ff7b57218, type: 3}
+      - {fileID: 1325609891, guid: 7c4d2e05c84563e408c0f449c68605fa, type: 3}
+      - {fileID: 1486323152, guid: 7c4d2e05c84563e408c0f449c68605fa, type: 3}
+      - {fileID: 21300000, guid: 0e2698add6672164ab5185181724be81, type: 3}
+      - {fileID: 21300000, guid: 71f4e7ac70efb7749862f6f58bdf7e11, type: 3}
+      - {fileID: 21300000, guid: f39653cbb5d1f9e4ca5f14c53dd853e2, type: 3}
+      - {fileID: 21300000, guid: a678f0216cf712c4fb3663d4ca403d9c, type: 3}
+      - {fileID: 21300000, guid: cfe661cb5d56fb441b47b9bde71439b6, type: 3}
+      - {fileID: 21300000, guid: cebc70cb5041bc24ba23d49a8e724542, type: 3}
+      - {fileID: 21300000, guid: d46108df71ea46149885210b16a3ce96, type: 3}
+      - {fileID: 21300000, guid: 40060718712c6c046ad92fe91445c927, type: 3}
       CurrentTextures:
-        TexturesData:
-        - id: 0
-          textureFilePath: texture_6_0
-        - id: 1
-          textureFilePath: texture_6_1
-        - id: 2
-          textureFilePath: texture_6_2
-        - id: 3
-          textureFilePath: texture_6_3
-        - id: 4
-          textureFilePath: texture_6_4
-        - id: 5
-          textureFilePath: texture_6_5
-        - id: 6
-          textureFilePath: texture_6_6
-        - id: 7
-          textureFilePath: texture_6_7
-        - id: 8
-          textureFilePath: texture_6_8
-        - id: 9
-          textureFilePath: texture_6_9
-        - id: 10
-          textureFilePath: texture_6_10
-        - id: 11
-          textureFilePath: texture_6_11
-        - id: 12
-          textureFilePath: texture_6_12
-        - id: 13
-          textureFilePath: texture_6_13
-        - id: 14
-          textureFilePath: texture_6_14
-        - id: 15
-          textureFilePath: texture_6_15
-        - id: 16
-          textureFilePath: texture_6_16
-        - id: 17
-          textureFilePath: texture_6_17
-        - id: 18
-          textureFilePath: texture_6_18
-        - id: 19
-          textureFilePath: texture_6_19
-        - id: 20
-          textureFilePath: texture_6_20
-        - id: 21
-          textureFilePath: texture_6_21
-        - id: 22
-          textureFilePath: texture_6_22
-        - id: 23
-          textureFilePath: texture_6_23
+        TexturesData: []
       LevelImageName: 
       LastSavedata:
         LevelIndex: 6
-        IsEdited: 1
+        IsEdited: 0
         LevelImageName: 
         TexturesData:
-          TexturesData:
-          - id: 0
-            textureFilePath: texture_6_0
-          - id: 1
-            textureFilePath: texture_6_1
-          - id: 2
-            textureFilePath: texture_6_2
-          - id: 3
-            textureFilePath: texture_6_3
-          - id: 4
-            textureFilePath: texture_6_4
-          - id: 5
-            textureFilePath: texture_6_5
-          - id: 6
-            textureFilePath: texture_6_6
-          - id: 7
-            textureFilePath: texture_6_7
-          - id: 8
-            textureFilePath: texture_6_8
-          - id: 9
-            textureFilePath: texture_6_9
-          - id: 10
-            textureFilePath: texture_6_10
-          - id: 11
-            textureFilePath: texture_6_11
-          - id: 12
-            textureFilePath: texture_6_12
-          - id: 13
-            textureFilePath: texture_6_13
-          - id: 14
-            textureFilePath: texture_6_14
-          - id: 15
-            textureFilePath: texture_6_15
-          - id: 16
-            textureFilePath: texture_6_16
-          - id: 17
-            textureFilePath: texture_6_17
-          - id: 18
-            textureFilePath: texture_6_18
-          - id: 19
-            textureFilePath: texture_6_19
-          - id: 20
-            textureFilePath: texture_6_20
-          - id: 21
-            textureFilePath: texture_6_21
-          - id: 22
-            textureFilePath: texture_6_22
-          - id: 23
-            textureFilePath: texture_6_23
+          TexturesData: []
     - LevelIndex: 7
-      LevelPrefab: {fileID: 646319494229189181, guid: d8082a4557d85024884a898c4fcf00fe, type: 3}
+      LevelPrefab: {fileID: 646319494229189181, guid: bf998c364b783684a8b77c91372a6d2b, type: 3}
       IsLevelCompleted: 0
-      IsEdited: 1
-      OriginalSprites: []
+      IsEdited: 0
+      OriginalSprites:
+      - {fileID: 21300000, guid: d5d00dd7cb75e1d45bab8c9182ed9453, type: 3}
+      - {fileID: 21300000, guid: 01da62dd16518cb4ab58d76fc686e901, type: 3}
+      - {fileID: 21300000, guid: 92d86c0fb1e7cb14ea665a199d900376, type: 3}
+      - {fileID: 21300000, guid: 28c9a66aa13e7ca46ae78eda3edc19ea, type: 3}
+      - {fileID: 21300000, guid: b71abc0be99d76f4fb25122a736f713b, type: 3}
+      - {fileID: 21300000, guid: fa82a0230d7d93d459846840796ee3d2, type: 3}
+      - {fileID: 21300000, guid: 8f7e5b18a2905624c90dd85db757ead6, type: 3}
+      - {fileID: 21300000, guid: c797d57bf93dc4447ac02ec07a847583, type: 3}
+      - {fileID: 21300000, guid: 997b9c28376b48e4bb3ac992aeb87fe6, type: 3}
+      - {fileID: 21300000, guid: 4d95586b0beb79b46a4b2c9ebdf9354c, type: 3}
+      - {fileID: 21300000, guid: 4651ecb46054d2a44a2361ff4344071c, type: 3}
+      - {fileID: 21300000, guid: 291900973286d274cbb89801583d5678, type: 3}
+      - {fileID: 21300000, guid: 6205af67648764c459595eca2041ffe4, type: 3}
+      - {fileID: 21300000, guid: 45da770c3db44284eaf6f8d7d294d8df, type: 3}
+      - {fileID: 21300000, guid: cf8a2ee75c71e3b4896f333be2a35ca3, type: 3}
+      - {fileID: 21300000, guid: d204309c6ebbf6e42a4e1e5b9fb99ac7, type: 3}
+      - {fileID: 21300000, guid: 0b1bea0156dfecc4285340dea6183826, type: 3}
+      - {fileID: 21300000, guid: 8f2a174058cd1c446bdf1a5b9fb9a313, type: 3}
+      - {fileID: 21300000, guid: 4ef11d3a81940f441bb7c71031ead6c3, type: 3}
+      - {fileID: 21300000, guid: 5b6524775faba184db8b2c1fbd105d0e, type: 3}
+      - {fileID: 21300000, guid: 862749cad0f416e4893fe04c470d235e, type: 3}
+      - {fileID: 21300000, guid: c7b9ab1670ad7eb4e8efe76b84e79e44, type: 3}
+      - {fileID: 21300000, guid: 97a54fceb309b3a4fa317bf6b79fe938, type: 3}
+      - {fileID: 21300000, guid: 40060718712c6c046ad92fe91445c927, type: 3}
       CurrentTextures:
-        TexturesData:
-        - id: 0
-          textureFilePath: texture_7_0
-        - id: 1
-          textureFilePath: texture_7_1
-        - id: 2
-          textureFilePath: texture_7_2
-        - id: 3
-          textureFilePath: texture_7_3
-        - id: 4
-          textureFilePath: texture_7_4
-        - id: 5
-          textureFilePath: texture_7_5
-        - id: 6
-          textureFilePath: texture_7_6
-        - id: 7
-          textureFilePath: texture_7_7
-        - id: 8
-          textureFilePath: texture_7_8
-        - id: 9
-          textureFilePath: texture_7_9
-        - id: 10
-          textureFilePath: texture_7_10
-        - id: 11
-          textureFilePath: texture_7_11
-        - id: 12
-          textureFilePath: texture_7_12
-        - id: 13
-          textureFilePath: texture_7_13
-        - id: 14
-          textureFilePath: texture_7_14
-        - id: 15
-          textureFilePath: texture_7_15
-        - id: 16
-          textureFilePath: texture_7_16
-        - id: 17
-          textureFilePath: texture_7_17
-        - id: 18
-          textureFilePath: texture_7_18
-        - id: 19
-          textureFilePath: texture_7_19
-        - id: 20
-          textureFilePath: texture_7_20
-        - id: 21
-          textureFilePath: texture_7_21
-        - id: 22
-          textureFilePath: texture_7_22
-        - id: 23
-          textureFilePath: texture_7_23
-      LevelImageName: SavedLevelImage_007
+        TexturesData: []
+      LevelImageName: 
       LastSavedata:
         LevelIndex: 7
-        IsEdited: 1
-        LevelImageName: SavedLevelImage_007
+        IsEdited: 0
+        LevelImageName: 
         TexturesData:
-          TexturesData:
-          - id: 0
-            textureFilePath: texture_7_0
-          - id: 1
-            textureFilePath: texture_7_1
-          - id: 2
-            textureFilePath: texture_7_2
-          - id: 3
-            textureFilePath: texture_7_3
-          - id: 4
-            textureFilePath: texture_7_4
-          - id: 5
-            textureFilePath: texture_7_5
-          - id: 6
-            textureFilePath: texture_7_6
-          - id: 7
-            textureFilePath: texture_7_7
-          - id: 8
-            textureFilePath: texture_7_8
-          - id: 9
-            textureFilePath: texture_7_9
-          - id: 10
-            textureFilePath: texture_7_10
-          - id: 11
-            textureFilePath: texture_7_11
-          - id: 12
-            textureFilePath: texture_7_12
-          - id: 13
-            textureFilePath: texture_7_13
-          - id: 14
-            textureFilePath: texture_7_14
-          - id: 15
-            textureFilePath: texture_7_15
-          - id: 16
-            textureFilePath: texture_7_16
-          - id: 17
-            textureFilePath: texture_7_17
-          - id: 18
-            textureFilePath: texture_7_18
-          - id: 19
-            textureFilePath: texture_7_19
-          - id: 20
-            textureFilePath: texture_7_20
-          - id: 21
-            textureFilePath: texture_7_21
-          - id: 22
-            textureFilePath: texture_7_22
-          - id: 23
-            textureFilePath: texture_7_23
+          TexturesData: []
     - LevelIndex: 8
       LevelPrefab: {fileID: 4429773294001562870, guid: 243f93c4e40efe14eb17c541480d7f88, type: 3}
       IsLevelCompleted: 0
-      IsEdited: 1
+      IsEdited: 0
       OriginalSprites:
       - {fileID: -1322139222, guid: e001e617440d48a40acbdc808325c750, type: 3}
       - {fileID: -50486204, guid: e001e617440d48a40acbdc808325c750, type: 3}
@@ -818,111 +498,11 @@ MonoBehaviour:
       - {fileID: 1683005440, guid: e001e617440d48a40acbdc808325c750, type: 3}
       - {fileID: 21300000, guid: ae14279de4cc45a49b6dc9221f4d0a5e, type: 3}
       CurrentTextures:
-        TexturesData:
-        - id: 0
-          textureFilePath: texture_8_0
-        - id: 1
-          textureFilePath: texture_8_1
-        - id: 2
-          textureFilePath: texture_8_2
-        - id: 3
-          textureFilePath: texture_8_3
-        - id: 4
-          textureFilePath: texture_8_4
-        - id: 5
-          textureFilePath: texture_8_5
-        - id: 6
-          textureFilePath: texture_8_6
-        - id: 7
-          textureFilePath: texture_8_7
-        - id: 8
-          textureFilePath: texture_8_8
-        - id: 9
-          textureFilePath: texture_8_9
-        - id: 10
-          textureFilePath: texture_8_10
-        - id: 11
-          textureFilePath: texture_8_11
-        - id: 12
-          textureFilePath: texture_8_12
-        - id: 13
-          textureFilePath: texture_8_13
-        - id: 14
-          textureFilePath: texture_8_14
-        - id: 15
-          textureFilePath: texture_8_15
-        - id: 16
-          textureFilePath: texture_8_16
-        - id: 17
-          textureFilePath: texture_8_17
-        - id: 18
-          textureFilePath: texture_8_18
-        - id: 19
-          textureFilePath: texture_8_19
-        - id: 20
-          textureFilePath: texture_8_20
-        - id: 21
-          textureFilePath: texture_8_21
-        - id: 22
-          textureFilePath: texture_8_22
-        - id: 23
-          textureFilePath: texture_8_23
-        - id: 24
-          textureFilePath: texture_8_24
+        TexturesData: []
       LevelImageName: 
       LastSavedata:
         LevelIndex: 8
-        IsEdited: 1
+        IsEdited: 0
         LevelImageName: 
         TexturesData:
-          TexturesData:
-          - id: 0
-            textureFilePath: texture_8_0
-          - id: 1
-            textureFilePath: texture_8_1
-          - id: 2
-            textureFilePath: texture_8_2
-          - id: 3
-            textureFilePath: texture_8_3
-          - id: 4
-            textureFilePath: texture_8_4
-          - id: 5
-            textureFilePath: texture_8_5
-          - id: 6
-            textureFilePath: texture_8_6
-          - id: 7
-            textureFilePath: texture_8_7
-          - id: 8
-            textureFilePath: texture_8_8
-          - id: 9
-            textureFilePath: texture_8_9
-          - id: 10
-            textureFilePath: texture_8_10
-          - id: 11
-            textureFilePath: texture_8_11
-          - id: 12
-            textureFilePath: texture_8_12
-          - id: 13
-            textureFilePath: texture_8_13
-          - id: 14
-            textureFilePath: texture_8_14
-          - id: 15
-            textureFilePath: texture_8_15
-          - id: 16
-            textureFilePath: texture_8_16
-          - id: 17
-            textureFilePath: texture_8_17
-          - id: 18
-            textureFilePath: texture_8_18
-          - id: 19
-            textureFilePath: texture_8_19
-          - id: 20
-            textureFilePath: texture_8_20
-          - id: 21
-            textureFilePath: texture_8_21
-          - id: 22
-            textureFilePath: texture_8_22
-          - id: 23
-            textureFilePath: texture_8_23
-          - id: 24
-            textureFilePath: texture_8_24
+          TexturesData: []
