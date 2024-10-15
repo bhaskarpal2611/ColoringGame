@@ -158,9 +158,9 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.DefaultCompany.SwipeToColor
+    Android: com.DefaultCompany.SwipeToDraw
     Standalone: com.DefaultCompany.SwipeToDraw
-    iPhone: com.DefaultCompany.SwipeToDraw
+    iPhone: com.DefaultCompany.SwipeToColor
   buildNumber:
     Standalone: 0
     VisionOS: 0

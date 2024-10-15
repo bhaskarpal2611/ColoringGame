@@ -312,8 +312,6 @@ namespace ColorSwipeGame
 
             _originalSprites.Add(spriteIndex, originalSprite);
             _isEdited.Add(false);
-            Debug.Log("dic len " + _editedTextures.Count);
-            Debug.Log("index " + spriteIndex);
 
             if (_editedTextures == null)
             {

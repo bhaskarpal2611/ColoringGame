@@ -15,6 +15,7 @@ namespace ColorSwipeGame
         [SerializeField] private float _maxFrequency = 0.2f;
         [SerializeField] private float _fastSwipeThreshold = 1000f; // Units per second
         [SerializeField] private float _velocityMeasurementPeriod = 0.1f; // Seconds
+        [SerializeField] private TextMeshProUGUI _textMeshProUGUI;
 
 
         private Touch _touch;
@@ -81,6 +82,9 @@ namespace ColorSwipeGame
                 // Reset velocity measurement
                 _velocityStartPosition = currentPosition;
                 _velocityStartTime = Time.time;
+
+                if(_textMeshProUGUI)
+                _textMeshProUGUI.text = $"Velocity: {velocity:F2}, Fast: {_fastSwipeFlag}";
 
             }
 

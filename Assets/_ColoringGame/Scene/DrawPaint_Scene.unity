@@ -5799,6 +5799,7 @@ MonoBehaviour:
   _maxFrequency: 0.2
   _fastSwipeThreshold: 1000
   _velocityMeasurementPeriod: 0.1
+  _textMeshProUGUI: {fileID: 0}
 --- !u!1 &1968331368
 GameObject:
   m_ObjectHideFlags: 0
@@ -7416,7 +7417,7 @@ MonoBehaviour:
   _audioHandler: {fileID: 985682491}
   _timer: {fileID: 397821762}
   _maxHitColliders: 8
-  _brushSize: 5
+  _brushSize: 3
   _brushScaleFactor: 0.01
   _defaultBrushColor: {r: 0, g: 1, b: 0, a: 1}
   _customMaterials:
