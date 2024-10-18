@@ -463,7 +463,7 @@ namespace ColorSwipeGame
 
             if (!_isDragging)
             {
-                _currentRT = RenderTexture.GetTemporary(_editedTextures[key].width, _editedTextures[key].height, 0);
+                _currentRT = RenderTexture.GetTemporary(_editedTextures[key].width, _editedTextures[key].height, 0, RenderTextureFormat.ARGB32);
                 RenderTexture.active = _currentRT;
                 GL.Clear(true, true, Color.clear);
                 RenderTexture.active = null;
