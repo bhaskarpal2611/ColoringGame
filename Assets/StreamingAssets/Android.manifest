@@ -1,0 +1,10 @@
+ManifestFileVersion: 0
+CRC: 295989440
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: colorswipe
+      Dependencies: {}
+    Info_1:
+      Name: swipetodraw
+      Dependencies: {}
