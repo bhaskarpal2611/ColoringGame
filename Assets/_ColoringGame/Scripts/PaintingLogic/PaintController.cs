@@ -28,7 +28,7 @@ namespace ColorSwipeGame
         private Dictionary<int, Sprite> _editedSprites = new Dictionary<int, Sprite>();
         private Dictionary<int, Sprite> _savedSprites = new();
         private int _currentSRIndex;
-        private const int BLIT_THRESHOLD = 5;
+        private const int BLIT_THRESHOLD = 10;
         private readonly RaycastHit2D[] _hits;
         private readonly int BrushColorProperty = Shader.PropertyToID("_BrushColor");
         private readonly int BrushSizeProperty = Shader.PropertyToID("_BrushSize");
@@ -377,7 +377,7 @@ namespace ColorSwipeGame
             if (hitCount <= 0) return;
 
             int maxSortingLayer = -1000;
-            int topIndex = -1;
+            int topIndex = -1000;
 
             for (int i = 0; i < hitCount; i++)
             {
@@ -395,7 +395,6 @@ namespace ColorSwipeGame
 
             _currentCollider = _currentSpriteRenderer.GetComponent<Collider2D>();
             _currentCollider.enabled = false;
-
             ColorSpriteAtPosition(_hits[topIndex].point);
         }
 
@@ -412,10 +411,11 @@ namespace ColorSwipeGame
             }
 
             float distanceSqr = (currentTouchPosition - _lastTouchPosition).sqrMagnitude;
-            float stepSize = _paintData.BrushSize * 0.25f;
+            float stepSize = _paintData.BrushSize * 0.5f;
 
             if (isFastSwipe)
             {
+                Debug.Log("chk-> FAST_SWIPE");
                 int steps = Mathf.Max(1, Mathf.CeilToInt(Mathf.Sqrt(distanceSqr) / stepSize));
                 for (int i = 1; i <= steps; i++)
                 {
@@ -429,6 +429,7 @@ namespace ColorSwipeGame
             }
             else // Slow drawing
             {
+                Debug.Log("chk-> SLOW_DRAW");
                 Vector2 direction = (currentTouchPosition - _lastTouchPosition).normalized;
                 Vector2 currentPoint = _lastTouchPosition;
 

@@ -63,32 +63,6 @@ namespace ColorSwipeGame
                     }
                 }
             }
-
-            //for (int i = 0; i < _drawnData.Levels.Count; i++)
-            //{
-            //    string fileName = _drawnData.GetImageIconFileName(i);
-            //    if (fileName != null)
-            //    {
-            //        string filePath = Path.Combine(Application.persistentDataPath, fileName + ".png");
-            //        if (File.Exists(filePath))
-            //        {
-            //            Sprite sprite = LoadSpritePNG(i, filePath);
-            //            int index = i;
-            //            DrawnPrefabHandler drawingIconPrefab = Instantiate(_drawingIconPrefab, _sprites);
-            //            drawingIconPrefab.SetImage(sprite);
-            //            drawingIconPrefab.Button.onClick.AddListener(() =>
-            //            {
-            //                _levelSelectionManager.LoadDrawingScene(index);
-            //            });
-
-            //            ArrangeIconPosition(counter, drawingIconPrefab);
-
-            //            ResizeContent();
-
-            //            counter++;
-            //        }
-            //    }
-            //}
         }
 
         private void ResizeContent()
@@ -111,10 +85,10 @@ namespace ColorSwipeGame
         private Sprite LoadSpritePNG(int i, string filePath)
         {
             byte[] bytes = File.ReadAllBytes(filePath);
-            Texture2D texture = new Texture2D(2, 2, TextureFormat.ARGB32, false);  // Size doesn't matter here; it will be overridden by LoadImage
+            Texture2D texture = new Texture2D(0, 0, TextureFormat.ARGB32, false);  // Size doesn't matter here; it will be overridden by LoadImage
             texture.LoadImage(bytes);  // LoadImage auto-resizes the texture dimensions
 
-            Rect rect = new Rect(0, 0, 1024, 1024);
+            Rect rect = new Rect(0, 0, texture.width, texture.height);
             Sprite sprite = Sprite.Create(texture, rect, Vector2.one * 0.5f);
 
             return sprite;

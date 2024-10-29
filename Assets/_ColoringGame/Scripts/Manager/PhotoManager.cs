@@ -34,9 +34,6 @@ namespace ColorSwipeGame
             // Get all PNG files in the directory
             string[] files = Directory.GetFiles(savedPhotosDirectory, "*.png");
 
-            // 
-
-
             if (files.Length > 0)
             {
                 Debug.Log("Displaying Saved Photos:");

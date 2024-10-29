@@ -2782,30 +2782,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2120985412}
-        m_TargetAssemblyTypeName: ColorSwipeGame.LeftPanelController, Assembly-CSharp
-        m_MethodName: CloseSidePanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 0
-      - m_Target: {fileID: 387311992}
-        m_TargetAssemblyTypeName: ColorSwipeGame.ExpandButton, Assembly-CSharp
-        m_MethodName: PopOpen
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0.25
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 0
 --- !u!114 &755133293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4220,18 +4196,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1616809397}
         m_TargetAssemblyTypeName: ColorSwipeGame.SelectionSceneManager, Assembly-CSharp
-        m_MethodName: ShowLoadingScreen
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 0
-      - m_Target: {fileID: 1616809397}
-        m_TargetAssemblyTypeName: ColorSwipeGame.SelectionSceneManager, Assembly-CSharp
         m_MethodName: GoBackToSelectionScene
         m_Mode: 1
         m_Arguments:
@@ -4254,18 +4218,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8100986678138197016}
-        m_TargetAssemblyTypeName: ColorSwipeGame.PaintService, Assembly-CSharp
-        m_MethodName: OnBackButtonPressed
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 0
 --- !u!114 &1257450072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6380,7 +6332,7 @@ MonoBehaviour:
   _paintToolPanel: {fileID: 1781777094}
   _backButton: {fileID: 1257450070}
   _clearButton: {fileID: 1517349289}
-  _cameraButton: {fileID: 0}
+  _cameraButton: {fileID: 755133291}
   _paintingArea: {fileID: 0}
   _texture: {fileID: 0}
   _sprite: {fileID: 0}
@@ -6431,7 +6383,7 @@ MonoBehaviour:
   _minDistance: 5
   _maxFrequency: 0.02
   _fastSwipeThreshold: 1000
-  _velocityMeasurementPeriod: 1
+  _velocityMeasurementPeriod: 0.1
   _textMeshProUGUI: {fileID: 78069560}
 --- !u!1 &1972586215
 GameObject:

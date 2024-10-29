@@ -104,32 +104,21 @@ namespace ColorSwipeGame
 
         }
 
-        public Texture2D SaveTextureCopy()
-        {
-            RenderTexture.active = _cameraRT;
-
-            // Read pixels from the RenderTexture into the Texture2D
-            _texture.ReadPixels(new Rect(0, 0, _cameraRT.width, _cameraRT.height), 0, 0);
-            _texture.Apply();
-
-            return _texture;
-        }
 
         public string SaveCopy(int index, int isDrawing = 0)
         {
             RenderTexture.active = _cameraRT;
 
-            //RenderTexture temp = RenderTexture.GetTemporary(Screen.width, Screen.height, 0, RenderTextureFormat.ARGB32);
-            //RenderTexture.active = temp;
+            _rect = new Rect(0, 0, _cameraRT.width, _cameraRT.height);
+            _texture = new Texture2D(_cameraRT.width, _cameraRT.height, TextureFormat.ARGB32, false);
 
             // Read pixels from the RenderTexture into the Texture2D
-            _texture.ReadPixels(new Rect(0, 0, _cameraRT.width, _cameraRT.height), 0, 0);
+            _texture.ReadPixels(_rect, 0, 0);
             _texture.Apply();
 
             RenderTexture.active = null;
 
             // create a sprite from texture
-            _rect = new Rect(0, 0, _texture.width, _texture.height);
             Sprite sprite = Sprite.Create(_texture, _rect, Vector2.one * 0.5f);
             _sprite = sprite;
             _referenceImage.sprite = sprite;
@@ -182,7 +171,7 @@ namespace ColorSwipeGame
         private void InitializeTexture()
         {
             _rect = new Rect(0, 0, _cameraRT.width, _cameraRT.height);
-            _texture = new Texture2D(_cameraRT.width, _cameraRT.height, TextureFormat.ARGB32, false);
+            _texture = new Texture2D(1024, 1024, TextureFormat.ARGB32, false);
         }
 
         private void CameraFlash()

@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 396800207099875066}
   - component: {fileID: 1192559847014396812}
   m_Layer: 0
-  m_Name: T-RexSpriteSheet_9
+  m_Name: Non-Reachable_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1916,7 +1916,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -1.9070728}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1927,7 +1927,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.24, y: 10.24}
+  m_Size: {x: 10.24, y: 6.425854}
   m_EdgeRadius: 0
 --- !u!1 &4754630683068372451
 GameObject:
@@ -2173,7 +2173,7 @@ GameObject:
   - component: {fileID: 2194289444608693227}
   - component: {fileID: 1780148150614072021}
   m_Layer: 0
-  m_Name: T-RexSpriteSheet_12
+  m_Name: Non_reaching_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3139,7 +3139,7 @@ Transform:
   m_GameObject: {fileID: 7749329312183027773}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.27, y: -0.1, z: 0}
+  m_LocalPosition: {x: 0.32, y: -0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3857,7 +3857,7 @@ GameObject:
   - component: {fileID: 3203003329882710246}
   - component: {fileID: 2009325186438550579}
   m_Layer: 0
-  m_Name: T-Rex_Tree_Trunk_01
+  m_Name: Non_Reaching_Trunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
