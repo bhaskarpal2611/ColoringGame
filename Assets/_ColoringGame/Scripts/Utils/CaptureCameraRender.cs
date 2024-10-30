@@ -109,11 +109,11 @@ namespace ColorSwipeGame
         {
             RenderTexture.active = _cameraRT;
 
-            _rect = new Rect(0, 0, _cameraRT.width, _cameraRT.height);
-            _texture = new Texture2D(_cameraRT.width, _cameraRT.height, TextureFormat.ARGB32, false);
+            //_rect = new Rect(0, 0, _cameraRT.width, _cameraRT.height);
+            //_texture = new Texture2D(_cameraRT.width, _cameraRT.height, TextureFormat.ARGB32, false);
 
             // Read pixels from the RenderTexture into the Texture2D
-            _texture.ReadPixels(_rect, 0, 0);
+            _texture.ReadPixels(new Rect(0, 0, _cameraRT.width, _cameraRT.height), 0, 0);
             _texture.Apply();
 
             RenderTexture.active = null;
