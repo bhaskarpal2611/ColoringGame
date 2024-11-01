@@ -5,4 +5,9 @@ namespace ColorSwipeGame
     {
         Color, Erase, Texture,
     }
+
+    public enum GameMode
+    {
+        None, Color, Draw
+    }
 }

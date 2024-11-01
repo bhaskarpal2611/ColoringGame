@@ -45,6 +45,8 @@ namespace ColorSwipeGame
 
         public void SaveDrawnTexture(int index, Sprite editedTexture)
         {
+            Debug.Log("tex: " + editedTexture.name);
+
             if (Levels.Count == index)
             {
                 Levels.Add(Levels[index]);

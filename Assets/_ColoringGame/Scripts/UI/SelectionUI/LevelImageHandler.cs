@@ -23,30 +23,9 @@ namespace ColorSwipeGame
             }
         }
 
-        private void Start()
-        {
-            Camera _camera = Camera.main;
-            float aspectRatio = CalculateScreenAspectRatio();
-            if (aspectRatio > 1.5f)
-            {
-                _camera.orthographicSize = 5.76f;
-            }
-            else
-            {
-                _camera.orthographicSize = 7.5f;
-            }
-        }
-
         private void OnDestroy()
         {
             Destroy(_texture);
-        }
-
-        private float CalculateScreenAspectRatio()
-        {
-            float width = Screen.width;
-            float height = Screen.height;
-            return width / height;
         }
 
         private void OnEnable()

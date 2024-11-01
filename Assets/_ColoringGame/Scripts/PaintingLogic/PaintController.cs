@@ -184,7 +184,14 @@ namespace ColorSwipeGame
             return dictionary;
         }
 
-        public Sprite GetDrawingSprite() => _drawingSR.sprite;
+        public Sprite GetDrawingSprite()
+        {
+            // SpriteRenderer curr = _currentSpriteRenderer;
+            // Debug.Log("current Sprite: " + curr.name);
+
+            Debug.Log("sprite texture: " + _drawingSR.name);
+            return _drawingSR.sprite;
+        }
 
         // initializers for DrawPaint - single texture
 
@@ -194,6 +201,7 @@ namespace ColorSwipeGame
 
             int spriteIndex = sprite.GetSiblingIndex();
             _drawingSR = sprite.GetComponent<SpriteRenderer>();
+            Debug.Log("sprite texture: " + _drawingSR.sprite.name);
             InitializeSprite(spriteIndex, originalSprite);
         }
 
@@ -201,7 +209,6 @@ namespace ColorSwipeGame
         public void InitializeLevel(Transform spritesParent)
         {
             _timeKeeper.StartTimer();
-
 
             _spritesParent = spritesParent;
             Debug.Log(_spritesParent.gameObject.name);
@@ -415,7 +422,6 @@ namespace ColorSwipeGame
 
             if (isFastSwipe)
             {
-                Debug.Log("chk-> FAST_SWIPE");
                 int steps = Mathf.Max(1, Mathf.CeilToInt(Mathf.Sqrt(distanceSqr) / stepSize));
                 for (int i = 1; i <= steps; i++)
                 {
@@ -429,7 +435,6 @@ namespace ColorSwipeGame
             }
             else // Slow drawing
             {
-                Debug.Log("chk-> SLOW_DRAW");
                 Vector2 direction = (currentTouchPosition - _lastTouchPosition).normalized;
                 Vector2 currentPoint = _lastTouchPosition;
 

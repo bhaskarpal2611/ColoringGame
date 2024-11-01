@@ -66,6 +66,12 @@ namespace ColorSwipeGame
             _paintController.InitializeLevel(_spritesContainer.GetChild(0).GetChild(0));
         }
 
+        public void OnEditedLevelLoad(LevelTextures levelTextures)
+        {
+            _paintController.InitializeLevel(_spritesContainer.GetChild(0).GetChild(0), levelTextures);
+        }
+
+        // SwipeToDraw - Load Blank or Level
         public void LoadDrawPaintLevel(Sprite originalSprite)
         {
             Transform drawSprite = _spritesContainer.GetChild(0);
@@ -76,11 +82,6 @@ namespace ColorSwipeGame
         public void OnEditedLevelLoad(DrawnTexture drawnTexture)
         {
             _paintController.InitializeLevel(_spritesContainer.GetChild(0), drawnTexture);
-        }
-
-        public void OnEditedLevelLoad(LevelTextures levelTextures)
-        {
-            _paintController.InitializeLevel(_spritesContainer.GetChild(0).GetChild(0), levelTextures);
         }
         public Dictionary<int, Sprite> SaveCurrentState()
         {

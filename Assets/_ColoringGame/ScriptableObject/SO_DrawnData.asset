@@ -12,65 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c83e10a60126c6e6817557701b496bd, type: 3}
   m_Name: SO_DrawnData
   m_EditorClassIdentifier: 
-  OriginalEmptySprite: {fileID: 21300000, guid: 6092bc6eb694b49409584b4f55b78464, type: 3}
+  OriginalEmptySprite: {fileID: 21300000, guid: 40060718712c6c046ad92fe91445c927, type: 3}
   Levels:
   - IndexNumber: 0
-    DrawnTextureFileName: 
-    SnapshotFileName: 
+    DrawnTextureFileName: Texture_000
+    SnapshotFileName: SavedDrawing_000
   - IndexNumber: 1
     DrawnTextureFileName: Texture_001
     SnapshotFileName: SavedDrawing_001
   - IndexNumber: 2
     DrawnTextureFileName: Texture_002
     SnapshotFileName: SavedDrawing_002
-  - IndexNumber: 3
-    DrawnTextureFileName: Texture_003
-    SnapshotFileName: SavedDrawing_003
-  - IndexNumber: 4
-    DrawnTextureFileName: Texture_004
-    SnapshotFileName: SavedDrawing_004
-  - IndexNumber: 5
-    DrawnTextureFileName: Texture_005
-    SnapshotFileName: SavedDrawing_005
-  - IndexNumber: 6
-    DrawnTextureFileName: Texture_006
-    SnapshotFileName: SavedDrawing_006
-  - IndexNumber: 7
-    DrawnTextureFileName: Texture_007
-    SnapshotFileName: SavedDrawing_007
-  - IndexNumber: 8
-    DrawnTextureFileName: Texture_008
-    SnapshotFileName: SavedDrawing_008
-  - IndexNumber: 9
-    DrawnTextureFileName: Texture_009
-    SnapshotFileName: SavedDrawing_009
-  - IndexNumber: 10
-    DrawnTextureFileName: Texture_0010
-    SnapshotFileName: SavedDrawing_0010
-  - IndexNumber: 11
-    DrawnTextureFileName: Texture_0011
-    SnapshotFileName: SavedDrawing_0011
-  - IndexNumber: 12
-    DrawnTextureFileName: Texture_0012
-    SnapshotFileName: SavedDrawing_0012
-  - IndexNumber: 13
-    DrawnTextureFileName: Texture_0013
-    SnapshotFileName: SavedDrawing_0013
-  - IndexNumber: 14
-    DrawnTextureFileName: Texture_0014
-    SnapshotFileName: SavedDrawing_0014
-  - IndexNumber: 15
-    DrawnTextureFileName: Texture_0015
-    SnapshotFileName: SavedDrawing_0015
-  - IndexNumber: 16
-    DrawnTextureFileName: Texture_0016
-    SnapshotFileName: SavedDrawing_0016
-  - IndexNumber: 17
-    DrawnTextureFileName: Texture_0017
-    SnapshotFileName: SavedDrawing_0017
-  - IndexNumber: 18
-    DrawnTextureFileName: Texture_0018
-    SnapshotFileName: SavedDrawing_0018
-  - IndexNumber: 19
-    DrawnTextureFileName: Texture_0019
-    SnapshotFileName: SavedDrawing_0019

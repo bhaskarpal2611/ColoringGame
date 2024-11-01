@@ -164,6 +164,8 @@ namespace ColorSwipeGame
 
             // play camera click sound
             _audioManager.PlayCameraButtonSound();
+
+
         }
 
         private void InitializeTexture()
