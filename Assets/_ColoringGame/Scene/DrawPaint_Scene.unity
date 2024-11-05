@@ -1066,7 +1066,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 57
-          m_FloatArgument: 1
+          m_FloatArgument: 0.5
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -2537,7 +2537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.40273035, g: 0.3226415, b: 1, a: 0}
+  m_Color: {r: 0.40273035, g: 0.3226415, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2804,13 +2804,40 @@ MonoBehaviour:
   _isMute: 0
   _audioClips:
   - soundtype: 2
-    soundclip: {fileID: 0}
+    soundclips:
+    - {fileID: 8300000, guid: 7d20312533f485f4ebd8278fae3f322f, type: 3}
   - soundtype: 1
-    soundclip: {fileID: 8300000, guid: b3ece8625e0383e47aa8bf562ee75369, type: 3}
-  - soundtype: 3
-    soundclip: {fileID: 8300000, guid: 0a20507ab3b68d144b21c3d4d9e57efd, type: 3}
+    soundclips:
+    - {fileID: 8300000, guid: 70862d3c854243c43a525a7105e4710a, type: 3}
   - soundtype: 4
-    soundclip: {fileID: 8300000, guid: 3866589eb9721084886b6dc0d01aba9c, type: 3}
+    soundclips:
+    - {fileID: 8300000, guid: 9aa27570c68c3714fa98a5da0097a898, type: 3}
+  - soundtype: 6
+    soundclips:
+    - {fileID: 8300000, guid: a53ea7ef9f6eeb547af0d21ebfe438e1, type: 3}
+  - soundtype: 7
+    soundclips:
+    - {fileID: 8300000, guid: befd8d3bdb46a494c8bb398ce1330f9b, type: 3}
+    - {fileID: 8300000, guid: 5c5437654663e9745a84c83ec7a735fe, type: 3}
+    - {fileID: 8300000, guid: 71ce743f0365ffe46ab02613ac54dbc3, type: 3}
+  - soundtype: 9
+    soundclips:
+    - {fileID: 8300000, guid: 9646ba3f888248e409a6cbf049f245a3, type: 3}
+  - soundtype: 8
+    soundclips:
+    - {fileID: 8300000, guid: 6d124ee6b4face14ba4b582dfd777303, type: 3}
+    - {fileID: 8300000, guid: 9cffde622e5fdc04b8326a63b43ae8c2, type: 3}
+    - {fileID: 8300000, guid: 1e2516699e7eb9f47acd9305eded2e6d, type: 3}
+    - {fileID: 8300000, guid: f898e5de51e1ba4468df1bd53b7d00c7, type: 3}
+    - {fileID: 8300000, guid: 239755b53fd6b104588954bff78fc035, type: 3}
+    - {fileID: 8300000, guid: 2faff29538f864649b9286225c9af0d5, type: 3}
+    - {fileID: 8300000, guid: 953d47af02d77c1488e5ffb6f3a62899, type: 3}
+    - {fileID: 8300000, guid: 47115aa1c700ca849acc65d96bf7fc74, type: 3}
+    - {fileID: 8300000, guid: 3705224b9a61d5948890262bf0e71f55, type: 3}
+    - {fileID: 8300000, guid: 9e1f708b8dcfda5489297ff7cc731555, type: 3}
+  - soundtype: 10
+    soundclips:
+    - {fileID: 8300000, guid: 794fc65696371a9479846a6edf933435, type: 3}
 --- !u!82 &985682492
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4153,7 +4180,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 25
-          m_FloatArgument: 5
+          m_FloatArgument: 2.75
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -4331,6 +4358,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 0
+      - m_Target: {fileID: 53747459}
+        m_TargetAssemblyTypeName: ColorSwipeGame.UI.CommonButtonFunctionsHandler,
+          Assembly-CSharp
+        m_MethodName: LoadButtonsAll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 53747459}
         m_TargetAssemblyTypeName: ColorSwipeGame.UI.CommonButtonFunctionsHandler,
           Assembly-CSharp
@@ -4531,7 +4571,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
-          m_FloatArgument: 3
+          m_FloatArgument: 1.75
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -5355,7 +5395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.40273035, g: 0.3226415, b: 1, a: 1}
+  m_Color: {r: 0.40273035, g: 0.3226415, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7281,6 +7321,7 @@ MonoBehaviour:
   _paintService: {fileID: 8100986678138197016}
   _penSelectionHandler: {fileID: 1677388976}
   _eraseButtonHandler: {fileID: 1082712493}
+  _buttonsHandler: {fileID: 53747459}
 --- !u!223 &7787153502089473280
 Canvas:
   m_ObjectHideFlags: 0
@@ -7418,7 +7459,7 @@ MonoBehaviour:
   _audioHandler: {fileID: 985682491}
   _timer: {fileID: 397821762}
   _maxHitColliders: 8
-  _brushSize: 3
+  _brushSize: 2
   _brushScaleFactor: 0.01
   _defaultBrushColor: {r: 0, g: 1, b: 0, a: 1}
   _customMaterials:

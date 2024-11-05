@@ -1,11 +1,10 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace ColorSwipeGame
 {
-
-
-    public class AudioManager : MonoBehaviour
+    public class AudioManager : GenericSingleton<AudioManager>
     {
         [SerializeField] private bool _isMute = false;
         [SerializeField] private AudioInfo[] _audioClips;
@@ -14,18 +13,51 @@ namespace ColorSwipeGame
         private AudioSource _soundMusic;
         private AudioSource _paintSFX;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+
             _soundMusic = GetComponents<AudioSource>()[0];
             _soundEffect = GetComponents<AudioSource>()[1];
             _paintSFX = GetComponents<AudioSource>()[2];
-            _paintSFX.clip = GetSoundClip(Sounds.PaintBrush);
-
+            ChangeBrushSound_Paint();
             PlayBackgroundMusic();
         }
 
-        public void PlayClickSound() => PlaySound(Sounds.ButtonClick);
+        public void ChangeBrushSound_Erase()
+        {
+            _paintSFX.clip = GetSoundClip(Sounds.Erase);
+        }
+
+        public void ChangeBrushSound_Paint()
+        {
+            _paintSFX.clip = GetSoundClip(Sounds.PaintBrush);
+        }
+
+        public void PlayClickSound()
+        {
+            PlaySound(Sounds.ButtonClick);
+        }
+
         public void PlayCameraButtonSound() => PlaySound(Sounds.CameraShutter);
+
+        public void PlayIntroAudio() => PlaySound(Sounds.GameIntro);
+        public void PlayGameStartAudio()
+        {
+            if (_soundEffect.isPlaying)
+            {
+                _soundEffect.Stop();
+            }
+            PlaySound(Sounds.GameStart);
+        }
+
+        public void PlayCheeringAudio()
+        {
+            if (!_soundEffect.isPlaying)
+            {
+                PlaySound(Sounds.Cheer);
+            }
+        }
 
         public void PlayBackgroundMusic()
         {
@@ -34,6 +66,16 @@ namespace ColorSwipeGame
             {
                 _soundMusic.clip = backgroundMusic;
                 _soundMusic.Play();
+            }
+        }
+
+        private bool _playOnceFlag = false;
+        public void PlayGameEndAudio()
+        {
+            if (!_playOnceFlag)
+            {
+                _playOnceFlag = true;
+                PlaySound(Sounds.GameEnd);
             }
         }
 
@@ -70,7 +112,9 @@ namespace ColorSwipeGame
             AudioInfo item = Array.Find(_audioClips, i => i.soundtype == sound);
             if (item != null)
             {
-                return item.soundclip;
+                int randomIndex = UnityEngine.Random.Range(0, item.soundclips.Length);
+                Debug.Log("INDEX: " + randomIndex);
+                return item.soundclips[randomIndex];
             }
             else
             {
@@ -95,7 +139,7 @@ namespace ColorSwipeGame
     public class AudioInfo
     {
         public Sounds soundtype;
-        public AudioClip soundclip;
+        public AudioClip[] soundclips;
     }
 
     public enum Sounds
@@ -106,5 +150,10 @@ namespace ColorSwipeGame
         Interactive,
         PaintBrush,
         CameraShutter,
+        GameIntro,
+        GameStart,
+        Cheer,
+        GameEnd,
+        Erase,
     }
 }

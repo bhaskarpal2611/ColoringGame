@@ -30,6 +30,11 @@ namespace ColorSwipeGame
 
         private Coroutine _saveCoroutine;
 
+        public void Start()
+        {
+            AudioManager.Instance.PlayIntroAudio();
+        }
+
         public void LoadDrawingScene(int index = -1)
         {
             _selectionSceneCanvas.SetActive(false);
@@ -127,6 +132,11 @@ namespace ColorSwipeGame
                 _saveManager.SaveLevelsData();
                 _selectionSceneCanvas.SetActive(true);
                 _paintService.OnBackButtonPressed();
+
+                if (_saveManager.CheckAllLevelsCompleted())
+                {
+                    AudioManager.Instance.PlayGameEndAudio();
+                }
                 Destroy(_currentLevel);
             });
         }

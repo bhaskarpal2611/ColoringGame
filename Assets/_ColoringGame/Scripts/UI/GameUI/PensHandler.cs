@@ -15,6 +15,7 @@ namespace ColorSwipeGame.UI
         [SerializeField] private PaintService _paintService;
         [SerializeField] private PenSelectionHandler _penSelectionHandler;
         [SerializeField] private EraseButtonHandler _eraseButtonHandler;
+        [SerializeField] private CommonButtonFunctionsHandler _buttonsHandler;
 
         private const float XPOS_RIGHT = 0f;
         private const float XPOS_LEFT = -360f;
@@ -32,6 +33,7 @@ namespace ColorSwipeGame.UI
             GeneratePencils();
             GenerateTexturedPens();
             MoveLeft();
+            _buttonsHandler.LoadButtonsAll();
         }
 
         private bool IsColorImportant(Color color)

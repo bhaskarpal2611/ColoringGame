@@ -15,7 +15,12 @@ namespace ColorSwipeGame
         }
 
         public Button Button { get { return _button; } }
-        public void OnTextureSelected() => transform.DOScale(1.25f, 0.25f);
+        public void OnTextureSelected()
+        {
+            transform.DOScale(1.25f, 0.25f);
+            AudioManager.Instance.PlayClickSound();
+        }
+
         public void UnselectedTexture() => transform.DOScale(01f, 0.25f);
     }
 }

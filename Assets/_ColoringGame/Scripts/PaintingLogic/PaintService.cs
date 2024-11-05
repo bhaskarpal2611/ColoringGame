@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using Random = UnityEngine.Random;
 
 namespace ColorSwipeGame
 {
@@ -24,12 +25,16 @@ namespace ColorSwipeGame
         private PaintController _paintController;
         private Camera _mainCamera;
 
+        private int _touchCount = 0;
+        private int _maxTouchCount = 0;
+
         public bool CanPaint { get; set; } = false;
 
         private void Awake()
         {
             _mainCamera = Camera.main;
             Application.targetFrameRate = 60;
+            _maxTouchCount = Random.Range(10, 20);
 
             InitPaintData newData = new InitPaintData(_maxHitColliders, _brushSize * _brushScaleFactor, _defaultBrushColor, _customMaterials, _textures);
             _paintController = new PaintController(newData, _penPanelHandler, _audioHandler, _timer);
@@ -101,6 +106,7 @@ namespace ColorSwipeGame
             {
                 Vector2 worldPosition = _mainCamera.ScreenToWorldPoint(touchPosition);
                 _paintController.BeginDrag(worldPosition);
+                _touchCount++;
             }
         }
 
@@ -110,6 +116,13 @@ namespace ColorSwipeGame
             {
                 Vector2 worldPosition = _mainCamera.ScreenToWorldPoint(touchPosition);
                 _paintController.ContinueDrag(worldPosition, isFastSwipe);
+            
+                if(_touchCount > _maxTouchCount)
+                {
+                    AudioManager.Instance.PlayCheeringAudio();
+                    _touchCount = 0;
+                    _maxTouchCount = Random.Range(10, 20);
+                }
             }
         }
 
@@ -117,7 +130,7 @@ namespace ColorSwipeGame
         {
             if (CanPaint)
             {
-
+                //AudioManager.Instance.StopPaintingSound();
             }
             //_audioHandler.StopPaintingSound();
         }
@@ -134,9 +147,23 @@ namespace ColorSwipeGame
         public void SetBrushSize(float size) => _paintController.SetBrushScale(size * _brushScaleFactor);
 
         // on main pen selection or erase button
-        public void SetDefaultColorMode() => _paintController.SetDefaultColor();
-        public void SetDefaultTextureMode(int index = 0) => _paintController.SetDefaultTexture(index);
-        public void SetErase() => _paintController.SetErase();
+        public void SetDefaultColorMode()
+        {
+            AudioManager.Instance.ChangeBrushSound_Paint();
+            _paintController.SetDefaultColor();
+        }
+
+        public void SetDefaultTextureMode(int index = 0)
+        {
+            AudioManager.Instance.ChangeBrushSound_Paint();
+            _paintController.SetDefaultTexture(index);
+        }
+
+        public void SetErase()
+        {
+            AudioManager.Instance.ChangeBrushSound_Erase();
+            _paintController.SetErase();
+        }
 
         // on individual pens
         public void SetColor(Color color) => _paintController.SetColor(color);
