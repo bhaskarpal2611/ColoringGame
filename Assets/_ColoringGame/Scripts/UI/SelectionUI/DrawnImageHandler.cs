@@ -6,11 +6,13 @@ namespace ColorSwipeGame
 {
     public class DrawnImageHandler : MonoBehaviour
     {
-        [SerializeField] private Transform _sprites;
+        [SerializeField] private Transform _contentParent;
+        [SerializeField] private Transform _newDrawing;
         [SerializeField] private DrawnDataSO _drawnData;
         [SerializeField] private DrawnPrefabHandler _drawingIconPrefab;
         [SerializeField] private LevelSelectionManager _levelSelectionManager;
         [SerializeField] private CaptureCameraRender _cameraScreenshotController;
+        [SerializeField] private Sprite[] _pins;
 
         private RectTransform _rectTransform;
 
@@ -34,35 +36,57 @@ namespace ColorSwipeGame
             _drawnData.SaveImageForIcon(index, fileName);
         }
 
+        bool initLoadFlag = false;
+
         private void LoadDrawingIcons()
         {
-            int counter = 0;
-            // resize to base size
-            _rectTransform.sizeDelta = _baseContentSize;
+            if (initLoadFlag)
+            {
+                Debug.Log("level count: " + (_drawnData.Levels.Count - 1));
+                Debug.Log("tf count: " + transform.childCount);
+
+                int index = _drawnData.Levels.Count - 1;
+
+                string fileName = _drawnData.GetImageIconFileName(index);
+                if (fileName != null)
+                {
+                    InitializeDrawingImagePrefab(index, fileName);
+                }
+                return;
+            }
 
             for (int i = _drawnData.Levels.Count - 1; i >= 0; i--)
             {
                 string fileName = _drawnData.GetImageIconFileName(i);
                 if (fileName != null)
                 {
-                    string filePath = Path.Combine(Application.persistentDataPath, fileName + ".png");
-                    if (File.Exists(filePath))
-                    {
-                        Sprite sprite = LoadSpritePNG(i, filePath);
-                        int index = i;
-                        DrawnPrefabHandler drawingIconPrefab = Instantiate(_drawingIconPrefab, _sprites);
-                        drawingIconPrefab.SetImage(sprite);
-                        drawingIconPrefab.Button.onClick.AddListener(() =>
-                        {   
-                            _levelSelectionManager.LoadDrawingScene(index);
-                        });
-
-                        ArrangeIconPosition(counter, drawingIconPrefab);
-                        ResizeContent();
-                        counter++;
-                    }
+                    InitializeDrawingImagePrefab(i, fileName);
                 }
             }
+            initLoadFlag = true;
+        }
+
+        int _currentIndex = -1;
+
+        private void InitializeDrawingImagePrefab(int i, string fileName)
+        {
+            string filePath = Path.Combine(Application.persistentDataPath, fileName + ".png");
+            if (File.Exists(filePath))
+            {
+                Sprite sprite = LoadSpritePNG(i, filePath);
+                int index = i;
+                DrawnPrefabHandler drawingIconPrefab = Instantiate(_drawingIconPrefab, _contentParent);
+                drawingIconPrefab.SetImage(sprite);
+                drawingIconPrefab.transform.SetAsFirstSibling();
+                int randomIndex = Random.Range(0, _pins.Length);
+                drawingIconPrefab.SetPin(_pins[randomIndex]);
+                drawingIconPrefab.Button.onClick.AddListener(() =>
+                {
+                    _currentIndex = index;
+                    _levelSelectionManager.LoadDrawingScene(index);
+                });
+            }
+            _newDrawing.SetAsFirstSibling();
         }
 
         private void ResizeContent()
