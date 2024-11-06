@@ -2468,7 +2468,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d4bac3a7113f1f24188a923a6c2f169d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d4cbc14c1e4c42843b3aa2b0d05e76c1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2809,9 +2809,6 @@ MonoBehaviour:
   - soundtype: 1
     soundclips:
     - {fileID: 8300000, guid: 70862d3c854243c43a525a7105e4710a, type: 3}
-  - soundtype: 4
-    soundclips:
-    - {fileID: 8300000, guid: 9aa27570c68c3714fa98a5da0097a898, type: 3}
   - soundtype: 6
     soundclips:
     - {fileID: 8300000, guid: a53ea7ef9f6eeb547af0d21ebfe438e1, type: 3}
@@ -2851,8 +2848,8 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 1
-  Loop: 1
+  m_Pitch: 0.8
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -3416,7 +3413,6 @@ MonoBehaviour:
   - {fileID: 2800000, guid: ecddc4526fef70dd7802cb17a11292fa, type: 3}
   _inputHandler: {fileID: 1955107645}
   _penPanelHandler: {fileID: 1677388976}
-  _audioHandler: {fileID: 985682491}
   _timer: {fileID: 397821762}
   _maxHitColliders: 8
   _brushSize: 5
@@ -7376,7 +7372,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6706747588898562575}
-  m_LocalRotation: {x: 0, y: 0, z: 0.065403156, w: 0.99785894}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7384,10 +7380,10 @@ RectTransform:
   - {fileID: 1722268526206362079}
   - {fileID: 1675838581}
   m_Father: {fileID: 5781245073046353442}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 7.5}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -250}
+  m_AnchoredPosition: {x: 250, y: -375}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7966881976695344406
@@ -7456,7 +7452,6 @@ MonoBehaviour:
   - {fileID: 2800000, guid: ecddc4526fef70dd7802cb17a11292fa, type: 3}
   _inputHandler: {fileID: 1955107645}
   _penPanelHandler: {fileID: 1677388976}
-  _audioHandler: {fileID: 985682491}
   _timer: {fileID: 397821762}
   _maxHitColliders: 8
   _brushSize: 2

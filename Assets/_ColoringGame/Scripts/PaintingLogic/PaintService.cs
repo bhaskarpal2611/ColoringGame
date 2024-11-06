@@ -11,7 +11,6 @@ namespace ColorSwipeGame
         [SerializeField] private Texture2D[] _textures;
         [SerializeField] private InputHandler _inputHandler;
         [SerializeField] private PenSelectionHandler _penPanelHandler;
-        [SerializeField] private AudioManager _audioHandler;
         [SerializeField] private TimeKeeper _timer;
 
         [Header("Brush Settings")]
@@ -37,7 +36,7 @@ namespace ColorSwipeGame
             _maxTouchCount = Random.Range(10, 20);
 
             InitPaintData newData = new InitPaintData(_maxHitColliders, _brushSize * _brushScaleFactor, _defaultBrushColor, _customMaterials, _textures);
-            _paintController = new PaintController(newData, _penPanelHandler, _audioHandler, _timer);
+            _paintController = new PaintController(newData, _penPanelHandler, _timer);
 
             if (_inputHandler == null)
             {
@@ -130,9 +129,8 @@ namespace ColorSwipeGame
         {
             if (CanPaint)
             {
-                //AudioManager.Instance.StopPaintingSound();
+
             }
-            //_audioHandler.StopPaintingSound();
         }
 
         private void EndDrag()

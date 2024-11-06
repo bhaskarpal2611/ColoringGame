@@ -100,11 +100,17 @@ namespace ColorSwipeGame
 
         public void PlayPaintingSound()
         {
-            _paintSFX.enabled = true;
+            if (_paintSFX.isPlaying)
+            {
+                _paintSFX.Stop();
+            }
+            _paintSFX.Play();
         }
         public void StopPaintingSound()
         {
-            _paintSFX.enabled = false;
+            //_paintSFX.enabled = false;
+            _paintSFX.Stop();
+
         }
 
         private AudioClip GetSoundClip(Sounds sound)
@@ -113,7 +119,6 @@ namespace ColorSwipeGame
             if (item != null)
             {
                 int randomIndex = UnityEngine.Random.Range(0, item.soundclips.Length);
-                Debug.Log("INDEX: " + randomIndex);
                 return item.soundclips[randomIndex];
             }
             else

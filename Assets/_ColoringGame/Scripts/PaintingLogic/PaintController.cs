@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace ColorSwipeGame
 {
@@ -19,7 +20,6 @@ namespace ColorSwipeGame
 
         private InitPaintData _paintData;
         private PenSelectionHandler _penSelectionHandler;
-        private AudioManager _audioHandler;
         private TimeKeeper _timeKeeper;
 
         private List<bool> _isEdited = new();
@@ -38,12 +38,11 @@ namespace ColorSwipeGame
         private readonly int OriginalProperty = Shader.PropertyToID("_Original");
 
         // CONSTRUCTOR
-        public PaintController(InitPaintData paintData, PenSelectionHandler penPanelHandler, AudioManager audioMan, TimeKeeper timer)
+        public PaintController(InitPaintData paintData, PenSelectionHandler penPanelHandler, TimeKeeper timer)
         {
             _paintData = paintData;
             _hits = new RaycastHit2D[paintData.MaxHitColliders];
             _penSelectionHandler = penPanelHandler;
-            _audioHandler = audioMan;
             _timeKeeper = timer;
             PreWarmShaders();
             SetDefaultColor();
@@ -54,6 +53,7 @@ namespace ColorSwipeGame
             _firstTouch = true;
             //_currentRT = new RenderTexture(2048, 2048, 0, RenderTextureFormat.ARGB32);
             RaycastSprites(worldPosition);
+            AudioManager.Instance.PlayPaintingSound();
         }
 
         public void ContinueDrag(Vector2 worldPosition, bool isFastSwipe)
@@ -66,13 +66,12 @@ namespace ColorSwipeGame
 
 
             DrawLines(worldPosition, isFastSwipe);
-            _audioHandler.PlayPaintingSound();
         }
 
         public void EndDrag()
         {
             _isDragging = false;
-            _audioHandler.StopPaintingSound();
+            AudioManager.Instance.StopPaintingSound();
             if (_currentSpriteRenderer)
             {
                 if (_currentCollider != null)
