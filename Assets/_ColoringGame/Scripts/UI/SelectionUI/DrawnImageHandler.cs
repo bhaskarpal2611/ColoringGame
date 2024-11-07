@@ -67,6 +67,7 @@ namespace ColorSwipeGame
         }
 
         int _currentIndex = -1;
+        int _signChanger = -1;
 
         private void InitializeDrawingImagePrefab(int i, string fileName)
         {
@@ -85,6 +86,13 @@ namespace ColorSwipeGame
                     _currentIndex = index;
                     _levelSelectionManager.LoadDrawingScene(index);
                 });
+
+                float zRotation = Random.Range(2f, 7f);
+
+                _signChanger *= -1;
+                zRotation *= _signChanger;
+
+                drawingIconPrefab.transform.localEulerAngles = new(transform.localEulerAngles.x, transform.localEulerAngles.y, zRotation);
             }
             _newDrawing.SetAsFirstSibling();
         }
