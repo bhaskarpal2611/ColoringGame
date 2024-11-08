@@ -17,7 +17,7 @@ MonoBehaviour:
     - LevelIndex: 0
       LevelPrefab: {fileID: 1967041107805472303, guid: 0a028174d8c20f840a6b32030d012001, type: 3}
       IsLevelCompleted: 0
-      IsEdited: 0
+      IsEdited: 1
       OriginalSprites:
       - {fileID: 21300000, guid: efa3473d2e0f3d24ca11e13fdcf6db0f, type: 3}
       - {fileID: 21300000, guid: ae976c00c47acf345888425a87ee0623, type: 3}
@@ -25,18 +25,8 @@ MonoBehaviour:
       - {fileID: 21300000, guid: c7168ee79088cae46a0cd0eb22fbca0a, type: 3}
       - {fileID: 21300000, guid: 40060718712c6c046ad92fe91445c927, type: 3}
       CurrentTextures:
-        TexturesData:
-        - id: 0
-          textureFilePath: texture_0_0
-        - id: 1
-          textureFilePath: texture_0_1
-        - id: 2
-          textureFilePath: texture_0_2
-        - id: 3
-          textureFilePath: texture_0_3
-        - id: 4
-          textureFilePath: texture_0_4
-      LevelImageName: SavedLevelImage_000
+        TexturesData: []
+      LevelImageName: 
       LastSavedata:
         LevelIndex: 0
         IsEdited: 0

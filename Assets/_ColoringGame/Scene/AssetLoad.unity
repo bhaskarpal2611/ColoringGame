@@ -723,11 +723,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1928801039}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0ae5f382aab180469e327e640df4b75, type: 3}
+  m_Script: {fileID: 11500000, guid: 9154b813a9dab4fa68869fb80af802c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assetBundle: {fileID: 0}
-  bundle_name: colorswipe
+  bundleName: swipetodraw
+  _assetMany:
+    bundleButtonClick:
+    - {fileID: 1490699978}
 --- !u!4 &1928801041
 Transform:
   m_ObjectHideFlags: 0

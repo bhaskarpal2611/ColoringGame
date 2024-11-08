@@ -38,7 +38,8 @@ namespace ColorSwipeGame
         public void LoadDrawingScene(int index = -1)
         {
             _selectionSceneCanvas.SetActive(false);
-            _leftPanelHandler.ShowPanelAtStart();
+            if (_leftPanelHandler != null)
+                _leftPanelHandler.ShowPanelAtStart();
             // _penSelectionHandler.ShowPanelAtStart();
 
             if (index == -1)

@@ -38,7 +38,8 @@ namespace ColorSwipeGame
 
         public void TakePhoto()
         {
-            _leftPanelController.CompleteHidePanel();
+            if (_leftPanelController != null)
+                _leftPanelController.CompleteHidePanel();
 
             _backButton.DOScale(0f, 0.25f).SetEase(Ease.InOutQuad);
             _clearButton.DOScale(0f, 0.25f).SetEase(Ease.InOutQuad);
@@ -87,14 +88,15 @@ namespace ColorSwipeGame
 
         public void ClosePanel()
         {
-            _leftPanelController.CloseSidePanel();
+            if (_leftPanelController != null)
+                _leftPanelController.CloseSidePanel();
             _bottomLeftPanel.ForceCloseWindow();
             // move back the panel
 
 
             _paintToolPanel.DOLocalMoveX(0f, .5f).OnComplete(() =>
             {
-                _paintingArea.DOFade(1f, 0.25f);
+                //_paintingArea.DOFade(1f, 0.25f);
                 _paintToolSelection.DOScale(1f, 0.25f);
                 _backButton.DOScale(1f, 0.25f).SetEase(Ease.InOutQuad);
                 _clearButton.DOScale(1f, 0.25f).SetEase(Ease.InOutQuad);
@@ -142,7 +144,7 @@ namespace ColorSwipeGame
 
         private void TakeSnap()
         {
-            _paintingArea.DOFade(0f, 0.25f);
+            //_paintingArea.DOFade(0f, 0.25f);
 
             RenderTexture.active = _cameraRT;
 
