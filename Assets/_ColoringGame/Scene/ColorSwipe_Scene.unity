@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 35537129}
   - component: {fileID: 35537128}
   - component: {fileID: 35537127}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Cancel_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -435,7 +435,7 @@ GameObject:
   - component: {fileID: 79779058}
   - component: {fileID: 79779057}
   - component: {fileID: 79779056}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Mid_Scale_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -616,7 +616,7 @@ GameObject:
   - component: {fileID: 90783503}
   - component: {fileID: 90783505}
   - component: {fileID: 90783504}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Loading_Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -692,7 +692,7 @@ GameObject:
   - component: {fileID: 163642148}
   - component: {fileID: 163642150}
   - component: {fileID: 163642149}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: pin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -837,7 +837,7 @@ GameObject:
   - component: {fileID: 191508462}
   - component: {fileID: 191508461}
   - component: {fileID: 191508460}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Dino
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -985,7 +985,7 @@ GameObject:
   - component: {fileID: 201911633}
   - component: {fileID: 201911635}
   - component: {fileID: 201911634}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: ColorImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1060,7 +1060,7 @@ GameObject:
   - component: {fileID: 264818225}
   - component: {fileID: 264818224}
   - component: {fileID: 264818223}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1081,9 +1081,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.40273035, g: 0.3226415, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1135,7 +1135,7 @@ GameObject:
   m_Component:
   - component: {fileID: 296392076}
   - component: {fileID: 296392077}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Button_Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1200,7 +1200,7 @@ GameObject:
   - component: {fileID: 339557474}
   - component: {fileID: 339557476}
   - component: {fileID: 339557475}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: CapturedImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1275,7 +1275,7 @@ GameObject:
   - component: {fileID: 350580475}
   - component: {fileID: 350580477}
   - component: {fileID: 350580476}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: pin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1350,7 +1350,7 @@ GameObject:
   - component: {fileID: 371329320}
   - component: {fileID: 371329322}
   - component: {fileID: 371329323}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Colored_Pens
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1426,7 +1426,7 @@ GameObject:
   m_Component:
   - component: {fileID: 387311991}
   - component: {fileID: 387311992}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Bottom_Left_Anchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1606,7 +1606,7 @@ GameObject:
   - component: {fileID: 476366949}
   - component: {fileID: 476366951}
   - component: {fileID: 476366950}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Brush_Scale_Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1682,7 +1682,7 @@ GameObject:
   - component: {fileID: 484849437}
   - component: {fileID: 484849439}
   - component: {fileID: 484849438}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: pin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1928,7 +1928,7 @@ GameObject:
   - component: {fileID: 551024259}
   - component: {fileID: 551024261}
   - component: {fileID: 551024260}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: ColorImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2003,7 +2003,7 @@ GameObject:
   - component: {fileID: 553152177}
   - component: {fileID: 553152179}
   - component: {fileID: 553152178}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Arrow_Click
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2076,7 +2076,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 568766310}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Parent (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2117,7 +2117,7 @@ GameObject:
   - component: {fileID: 681391126}
   - component: {fileID: 681391125}
   - component: {fileID: 681391127}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: SwitchPenType_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2262,7 +2262,7 @@ GameObject:
   - component: {fileID: 697083479}
   - component: {fileID: 697083481}
   - component: {fileID: 697083480}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: LoadingPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2338,7 +2338,7 @@ GameObject:
   - component: {fileID: 705325631}
   - component: {fileID: 705325633}
   - component: {fileID: 705325632}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: pin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2411,7 +2411,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 706625032}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Panel_Anchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2450,7 +2450,7 @@ GameObject:
   - component: {fileID: 728868992}
   - component: {fileID: 728868991}
   - component: {fileID: 728868990}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: BackToMainMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2583,7 +2583,7 @@ GameObject:
   - component: {fileID: 755133293}
   - component: {fileID: 755133292}
   - component: {fileID: 755133295}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Camera_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2739,7 +2739,7 @@ GameObject:
   - component: {fileID: 789508168}
   - component: {fileID: 789508170}
   - component: {fileID: 789508169}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2780,9 +2780,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.40273035, g: 0.3226415, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2816,7 +2816,7 @@ GameObject:
   - component: {fileID: 803464920}
   - component: {fileID: 803464919}
   - component: {fileID: 803464921}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2960,7 +2960,7 @@ GameObject:
   - component: {fileID: 842849411}
   - component: {fileID: 842849410}
   - component: {fileID: 842849409}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3057,7 +3057,7 @@ GameObject:
   - component: {fileID: 921556576}
   - component: {fileID: 921556578}
   - component: {fileID: 921556577}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: pin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3505,7 +3505,7 @@ GameObject:
   - component: {fileID: 1021422561}
   - component: {fileID: 1021422563}
   - component: {fileID: 1021422562}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: TakePicture_Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3582,7 +3582,7 @@ GameObject:
   - component: {fileID: 1061067101}
   - component: {fileID: 1061067103}
   - component: {fileID: 1061067102}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Saving_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3656,7 +3656,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1082712492}
   - component: {fileID: 1082712493}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: EraseBrush_Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3708,7 +3708,7 @@ GameObject:
   - component: {fileID: 1086729755}
   - component: {fileID: 1086729757}
   - component: {fileID: 1086729756}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: TexturedImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3858,7 +3858,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1153562194}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Pens_Selection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4047,7 +4047,7 @@ GameObject:
   - component: {fileID: 1257450072}
   - component: {fileID: 1257450071}
   - component: {fileID: 1257450074}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Back_Button_Clicker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4203,7 +4203,7 @@ GameObject:
   - component: {fileID: 1264335336}
   - component: {fileID: 1264335338}
   - component: {fileID: 1264335337}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Textured_Pens
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4280,7 +4280,7 @@ GameObject:
   - component: {fileID: 1274314699}
   - component: {fileID: 1274314701}
   - component: {fileID: 1274314700}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: BG_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4355,7 +4355,7 @@ GameObject:
   - component: {fileID: 1363606302}
   - component: {fileID: 1363606304}
   - component: {fileID: 1363606303}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: pin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4464,7 +4464,7 @@ GameObject:
   - component: {fileID: 1517349291}
   - component: {fileID: 1517349290}
   - component: {fileID: 1517349293}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Clear_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4610,7 +4610,7 @@ GameObject:
   - component: {fileID: 1577749513}
   - component: {fileID: 1577749512}
   - component: {fileID: 1577749511}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Small_Scale_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4875,7 +4875,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1625598355}
   - component: {fileID: 1625598356}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Buttons_Group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4973,7 +4973,7 @@ GameObject:
   - component: {fileID: 1675838581}
   - component: {fileID: 1675838583}
   - component: {fileID: 1675838582}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: pin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5100,7 +5100,7 @@ GameObject:
   - component: {fileID: 1727982347}
   - component: {fileID: 1727982346}
   - component: {fileID: 1727982345}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Large_Scale_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5282,7 +5282,7 @@ GameObject:
   - component: {fileID: 1769063776}
   - component: {fileID: 1769063775}
   - component: {fileID: 1769063774}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: SwitchPenType_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5425,7 +5425,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1781777094}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: PaintTool_Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5463,7 +5463,7 @@ GameObject:
   - component: {fileID: 1813915693}
   - component: {fileID: 1813915692}
   - component: {fileID: 1813915691}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5484,9 +5484,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.40273035, g: 0.3226415, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -5540,7 +5540,7 @@ GameObject:
   - component: {fileID: 1824561753}
   - component: {fileID: 1824561752}
   - component: {fileID: 1824561751}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Green_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5759,7 +5759,7 @@ GameObject:
   - component: {fileID: 1862967205}
   - component: {fileID: 1862967207}
   - component: {fileID: 1862967206}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Art_Board_Scroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5835,7 +5835,7 @@ GameObject:
   - component: {fileID: 1885480076}
   - component: {fileID: 1885480078}
   - component: {fileID: 1885480077}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: pin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5910,7 +5910,7 @@ GameObject:
   - component: {fileID: 1904748522}
   - component: {fileID: 1904748524}
   - component: {fileID: 1904748523}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: BG_PenHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6059,7 +6059,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1922149156}
   - component: {fileID: 1922149157}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Vertical_PArent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6331,7 +6331,7 @@ GameObject:
   - component: {fileID: 1972586216}
   - component: {fileID: 1972586218}
   - component: {fileID: 1972586217}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: pin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6404,7 +6404,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1978382489}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: BackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6442,7 +6442,7 @@ GameObject:
   - component: {fileID: 2061915600}
   - component: {fileID: 2061915602}
   - component: {fileID: 2061915601}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: TexturedImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6520,7 +6520,7 @@ GameObject:
   - component: {fileID: 2087868927}
   - component: {fileID: 2087868930}
   - component: {fileID: 2087868931}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Hint_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6678,7 +6678,7 @@ GameObject:
   - component: {fileID: 2109716048}
   - component: {fileID: 2109716050}
   - component: {fileID: 2109716049}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6754,7 +6754,7 @@ GameObject:
   - component: {fileID: 2120985411}
   - component: {fileID: 2120985410}
   - component: {fileID: 2120985412}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Left_Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7208,7 +7208,7 @@ GameObject:
   - component: {fileID: 1500343480387063756}
   - component: {fileID: 2375341253497104673}
   - component: {fileID: 9214263342871726326}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Giraffe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7227,7 +7227,7 @@ GameObject:
   - component: {fileID: 8088190089531870753}
   - component: {fileID: 2844794175548131029}
   - component: {fileID: 3551448251384342190}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Painting_Pens_ScrollView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7580,7 +7580,7 @@ GameObject:
   - component: {fileID: 4814345659678786024}
   - component: {fileID: 7916077125032945858}
   - component: {fileID: 859427549498614855}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7637,7 +7637,7 @@ GameObject:
   - component: {fileID: 6492142004930135410}
   - component: {fileID: 3409189788753454078}
   - component: {fileID: 586312994121752210}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: PaintTools_Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7726,7 +7726,7 @@ GameObject:
   - component: {fileID: 7787153502089473280}
   - component: {fileID: 3927962760264665354}
   - component: {fileID: 5949502284815608495}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Selection_Scene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7876,7 +7876,7 @@ GameObject:
   - component: {fileID: 2831765366361567897}
   - component: {fileID: 1527704785001464744}
   - component: {fileID: 2983462333135428158}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Scroll View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7920,7 +7920,7 @@ GameObject:
   - component: {fileID: 4080848639332792792}
   - component: {fileID: 4999166763860827939}
   - component: {fileID: 9131301651267707344}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Owl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7970,7 +7970,7 @@ GameObject:
   - component: {fileID: 5446876721652918861}
   - component: {fileID: 5956097279990846358}
   - component: {fileID: 2715976118969997380}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Frog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8009,7 +8009,7 @@ GameObject:
   - component: {fileID: 2945305560568279890}
   - component: {fileID: 8283793211545923714}
   - component: {fileID: 735511099294723611}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Elephant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8087,7 +8087,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3950650347267524902}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Content-Pencils
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8105,7 +8105,7 @@ GameObject:
   - component: {fileID: 6679840270693553275}
   - component: {fileID: 22728838143313039}
   - component: {fileID: 5325266669574042823}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8179,7 +8179,7 @@ GameObject:
   - component: {fileID: 1722268526206362079}
   - component: {fileID: 5793318814855413180}
   - component: {fileID: 2756527670303364959}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8442,7 +8442,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5455368559493646880}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: SelectionScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8461,7 +8461,7 @@ GameObject:
   - component: {fileID: 7663598794245461464}
   - component: {fileID: 7782629899868623176}
   - component: {fileID: 7782629899868623177}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: PaintingToolSelection_Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8640,7 +8640,7 @@ GameObject:
   - component: {fileID: 3588401750285356192}
   - component: {fileID: 4596762129108034073}
   - component: {fileID: 7005205695838130339}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Lion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8659,7 +8659,7 @@ GameObject:
   - component: {fileID: 958417821992568640}
   - component: {fileID: 8997908238300983388}
   - component: {fileID: 5285803535733452093}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Viewport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8771,7 +8771,7 @@ GameObject:
   - component: {fileID: 3130253163297612138}
   - component: {fileID: 1046215073883862501}
   - component: {fileID: 3109201258349739699}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Lotus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8950,7 +8950,7 @@ GameObject:
   - component: {fileID: 3660779910850173521}
   - component: {fileID: 8441524244407152497}
   - component: {fileID: 7741607299950582114}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9053,7 +9053,7 @@ GameObject:
   - component: {fileID: 1128788641995630210}
   - component: {fileID: 6888555586082542792}
   - component: {fileID: 2650481318750088132}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: TREX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9073,7 +9073,7 @@ GameObject:
   - component: {fileID: 3208045554906979880}
   - component: {fileID: 5721980632911997584}
   - component: {fileID: 3466830626341810045}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Monkey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9253,7 +9253,7 @@ GameObject:
   - component: {fileID: 4685208616166452278}
   - component: {fileID: 8827274121170999327}
   - component: {fileID: 3888233476951237045}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9385,7 +9385,7 @@ GameObject:
   - component: {fileID: 8214585287191498458}
   - component: {fileID: 8214585287191498460}
   - component: {fileID: 8214585287191498459}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Content
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9512,7 +9512,7 @@ GameObject:
   - component: {fileID: 8593422884434590728}
   - component: {fileID: 4294097881401922998}
   - component: {fileID: 5880464562225827012}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9578,7 +9578,7 @@ GameObject:
   - component: {fileID: 5595453669481013345}
   - component: {fileID: 2571042043769920429}
   - component: {fileID: 1645790788333556621}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9605,7 +9605,7 @@ GameObject:
   - component: {fileID: 3843982361657553851}
   - component: {fileID: 2635760297358927045}
   - component: {fileID: 3559636523981727949}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Viewport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9653,7 +9653,7 @@ GameObject:
   - component: {fileID: 1713297687094993120}
   - component: {fileID: 881435835374337994}
   - component: {fileID: 5235909842110081865}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Vehicle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

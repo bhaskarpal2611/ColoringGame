@@ -237,7 +237,7 @@ GameObject:
   - component: {fileID: 35537129}
   - component: {fileID: 35537128}
   - component: {fileID: 35537127}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Cancel_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -451,7 +451,7 @@ GameObject:
   - component: {fileID: 90783503}
   - component: {fileID: 90783505}
   - component: {fileID: 90783504}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Loading_Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -595,7 +595,7 @@ GameObject:
   - component: {fileID: 201911633}
   - component: {fileID: 201911635}
   - component: {fileID: 201911634}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: ColorImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -669,7 +669,7 @@ GameObject:
   m_Component:
   - component: {fileID: 296392076}
   - component: {fileID: 296392077}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Button_Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -734,7 +734,7 @@ GameObject:
   - component: {fileID: 339557474}
   - component: {fileID: 339557476}
   - component: {fileID: 339557475}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: CapturedImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -807,7 +807,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 368025072}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: CameraButton_Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -845,7 +845,7 @@ GameObject:
   - component: {fileID: 371329320}
   - component: {fileID: 371329322}
   - component: {fileID: 371329323}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Colored_Pens
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -921,7 +921,7 @@ GameObject:
   m_Component:
   - component: {fileID: 387311991}
   - component: {fileID: 387311992}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: ScreenShot_POPUP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -976,7 +976,7 @@ GameObject:
   - component: {fileID: 394286467}
   - component: {fileID: 394286470}
   - component: {fileID: 394286471}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Small_Scale_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1344,7 +1344,7 @@ GameObject:
   - component: {fileID: 476366949}
   - component: {fileID: 476366951}
   - component: {fileID: 476366950}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Brush_Scale_Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1591,7 +1591,7 @@ GameObject:
   - component: {fileID: 551024259}
   - component: {fileID: 551024261}
   - component: {fileID: 551024260}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: ColorImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1668,7 +1668,7 @@ GameObject:
   - component: {fileID: 681391125}
   - component: {fileID: 681391127}
   - component: {fileID: 681391128}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: SwitchPenType_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1826,7 +1826,7 @@ GameObject:
   - component: {fileID: 697083479}
   - component: {fileID: 697083481}
   - component: {fileID: 697083480}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: LoadingPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1904,7 +1904,7 @@ GameObject:
   - component: {fileID: 755133293}
   - component: {fileID: 755133292}
   - component: {fileID: 755133295}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Camera_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2062,7 +2062,7 @@ GameObject:
   - component: {fileID: 803464919}
   - component: {fileID: 803464921}
   - component: {fileID: 803464922}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2219,7 +2219,7 @@ GameObject:
   - component: {fileID: 890956833}
   - component: {fileID: 890956832}
   - component: {fileID: 890956831}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: BackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2350,7 +2350,7 @@ GameObject:
   - component: {fileID: 926151123}
   - component: {fileID: 926151125}
   - component: {fileID: 926151124}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2391,7 +2391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.40273035, g: 0.3226415, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2795,7 +2795,7 @@ GameObject:
   - component: {fileID: 1021422561}
   - component: {fileID: 1021422563}
   - component: {fileID: 1021422562}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: TakePicture_Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2872,7 +2872,7 @@ GameObject:
   - component: {fileID: 1061067101}
   - component: {fileID: 1061067103}
   - component: {fileID: 1061067102}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Saving_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2946,7 +2946,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1082712492}
   - component: {fileID: 1082712493}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: EraseBrush_Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2998,7 +2998,7 @@ GameObject:
   - component: {fileID: 1086729755}
   - component: {fileID: 1086729757}
   - component: {fileID: 1086729756}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: TexturedImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3148,7 +3148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1153562194}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Pens_Selection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3208,73 +3208,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1207586888
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1207586889}
-  - component: {fileID: 1207586890}
-  m_Layer: 0
-  m_Name: PaintService
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1207586889
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1207586888}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1207586890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1207586888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffed2f39f8dd34df39d13406860da61d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _spritesContainer: {fileID: 4820031844533456078}
-  _textures:
-  - {fileID: 2800000, guid: 4517db95e06e313da8b72ddd8be1b2e2, type: 3}
-  - {fileID: 2800000, guid: 8fdfeac95fb51c0dc80658e9a737d28e, type: 3}
-  - {fileID: 2800000, guid: ab217830ccff349d8a7657c6f7f704fe, type: 3}
-  - {fileID: 2800000, guid: fe2b964d13a82121cb3e995d735cec93, type: 3}
-  - {fileID: 2800000, guid: b26f9a0ad03ac662fb624fc3b6bbc537, type: 3}
-  - {fileID: 2800000, guid: 5830bac96dfac9fd48ba0c24497c1d4d, type: 3}
-  - {fileID: 2800000, guid: 0a142a01d7eba7a2dbaa7ad6abd20173, type: 3}
-  - {fileID: 2800000, guid: 9b5cdb5352c1bcac387bb6a99c420ac2, type: 3}
-  - {fileID: 2800000, guid: 9ecbbe7f50cb355638ac142ae243aef8, type: 3}
-  - {fileID: 2800000, guid: ecddc4526fef70dd7802cb17a11292fa, type: 3}
-  _inputHandler: {fileID: 1955107645}
-  _penPanelHandler: {fileID: 1677388976}
-  _timer: {fileID: 397821762}
-  _maxHitColliders: 8
-  _brushSize: 5
-  _brushScaleFactor: 0.01
-  _defaultBrushColor: {r: 0, g: 1, b: 0, a: 1}
-  _customMaterials:
-  - {fileID: 2100000, guid: 2c1f668067a2ef142a0f818422891801, type: 2}
-  - {fileID: 2100000, guid: 9ecabad1768eeb44f87d70356d164f4f, type: 2}
-  - {fileID: 2100000, guid: 91c79add08051f7459b23ed7dd7c22c5, type: 2}
 --- !u!1 &1208699205
 GameObject:
   m_ObjectHideFlags: 0
@@ -3372,7 +3305,7 @@ GameObject:
   - component: {fileID: 1257450072}
   - component: {fileID: 1257450071}
   - component: {fileID: 1257450074}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Back_Button_Clicker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3528,7 +3461,7 @@ GameObject:
   - component: {fileID: 1264335336}
   - component: {fileID: 1264335338}
   - component: {fileID: 1264335337}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Textured_Pens
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3605,7 +3538,7 @@ GameObject:
   - component: {fileID: 1274314699}
   - component: {fileID: 1274314701}
   - component: {fileID: 1274314700}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: BG_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3714,7 +3647,7 @@ GameObject:
   - component: {fileID: 1517349291}
   - component: {fileID: 1517349290}
   - component: {fileID: 1517349293}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Clear_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3859,7 +3792,7 @@ GameObject:
   - component: {fileID: 1554144042}
   - component: {fileID: 1554144044}
   - component: {fileID: 1554144043}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3951,7 +3884,7 @@ GameObject:
   - component: {fileID: 1604711677}
   - component: {fileID: 1604711680}
   - component: {fileID: 1604711681}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Large_Scale_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4279,7 +4212,7 @@ GameObject:
   - component: {fileID: 1657534381}
   - component: {fileID: 1657534384}
   - component: {fileID: 1657534385}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Mid_Scale_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4473,7 +4406,7 @@ GameObject:
   - component: {fileID: 1675838581}
   - component: {fileID: 1675838583}
   - component: {fileID: 1675838582}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: pin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4596,7 +4529,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1718330622}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4638,7 +4571,7 @@ GameObject:
   - component: {fileID: 1769063775}
   - component: {fileID: 1769063774}
   - component: {fileID: 1769063777}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: SwitchPenType_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4794,7 +4727,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1781777094}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: PaintTool_Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4834,7 +4767,7 @@ GameObject:
   - component: {fileID: 1824561753}
   - component: {fileID: 1824561752}
   - component: {fileID: 1824561751}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Green_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5053,7 +4986,7 @@ GameObject:
   - component: {fileID: 1862967205}
   - component: {fileID: 1862967207}
   - component: {fileID: 1862967206}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Art_Board_Scroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5129,7 +5062,7 @@ GameObject:
   - component: {fileID: 1864255616}
   - component: {fileID: 1864255618}
   - component: {fileID: 1864255617}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5170,7 +5103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.40273035, g: 0.3226415, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -5205,7 +5138,7 @@ GameObject:
   - component: {fileID: 1904748522}
   - component: {fileID: 1904748524}
   - component: {fileID: 1904748523}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: BG_PenHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5354,7 +5287,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1922149156}
   - component: {fileID: 1922149157}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Pen_And_Texture_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5626,7 +5559,7 @@ GameObject:
   - component: {fileID: 1968331369}
   - component: {fileID: 1968331371}
   - component: {fileID: 1968331370}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5667,7 +5600,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.40273035, g: 0.3226415, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -5700,7 +5633,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1978382489}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: BackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5738,7 +5671,7 @@ GameObject:
   - component: {fileID: 2061915600}
   - component: {fileID: 2061915602}
   - component: {fileID: 2061915601}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: TexturedImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5965,7 +5898,7 @@ GameObject:
   - component: {fileID: 8088190089531870753}
   - component: {fileID: 2844794175548131029}
   - component: {fileID: 3551448251384342190}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Painting_Pens_ScrollView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6180,7 +6113,7 @@ GameObject:
   - component: {fileID: 6492142004930135410}
   - component: {fileID: 3409189788753454078}
   - component: {fileID: 586312994121752210}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: PaintTools_Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6242,7 +6175,7 @@ GameObject:
   - component: {fileID: 7787153502089473280}
   - component: {fileID: 3927962760264665354}
   - component: {fileID: 5949502284815608495}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Selection_Scene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6332,7 +6265,7 @@ GameObject:
   - component: {fileID: 2831765366361567897}
   - component: {fileID: 1527704785001464744}
   - component: {fileID: 2983462333135428158}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Scroll View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6408,7 +6341,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3950650347267524902}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Content-Pencils
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6426,7 +6359,7 @@ GameObject:
   - component: {fileID: 1722268526206362079}
   - component: {fileID: 5793318814855413180}
   - component: {fileID: 2756527670303364959}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6495,7 +6428,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5455368559493646880}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: SelectionScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6514,7 +6447,7 @@ GameObject:
   - component: {fileID: 7663598794245461464}
   - component: {fileID: 7782629899868623176}
   - component: {fileID: 7782629899868623177}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: PaintingToolSelection_Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6578,7 +6511,7 @@ GameObject:
   - component: {fileID: 958417821992568640}
   - component: {fileID: 8997908238300983388}
   - component: {fileID: 5285803535733452093}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Viewport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6605,7 +6538,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 385112227
+  m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1 &6706747588898562575
@@ -6622,7 +6555,7 @@ GameObject:
   - component: {fileID: 1046215073883862501}
   - component: {fileID: 3109201258349739699}
   - component: {fileID: 7966881976695344406}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: FirstDrawing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6996,7 +6929,7 @@ GameObject:
   - component: {fileID: 8214585287191498458}
   - component: {fileID: 8214585287191498460}
   - component: {fileID: 8214585287191498459}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Content
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7076,7 +7009,7 @@ GameObject:
   - component: {fileID: 3843982361657553851}
   - component: {fileID: 2635760297358927045}
   - component: {fileID: 3559636523981727949}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Viewport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7131,6 +7064,5 @@ SceneRoots:
   - {fileID: 397821761}
   - {fileID: 1484107863}
   - {fileID: 1839691773}
-  - {fileID: 1207586889}
   - {fileID: 1139906780}
   - {fileID: 1183523692}
