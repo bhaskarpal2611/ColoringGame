@@ -3264,7 +3264,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.2
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3361,43 +3361,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isMute: 0
-  _audioClips:
-  - soundtype: 2
-    soundclips:
-    - {fileID: 8300000, guid: 7d20312533f485f4ebd8278fae3f322f, type: 3}
-  - soundtype: 1
-    soundclips:
-    - {fileID: 8300000, guid: 70862d3c854243c43a525a7105e4710a, type: 3}
-  - soundtype: 6
-    soundclips:
-    - {fileID: 8300000, guid: 8cd847bcbde6228408b744b6dacf8f56, type: 3}
-  - soundtype: 7
-    soundclips:
-    - {fileID: 8300000, guid: befd8d3bdb46a494c8bb398ce1330f9b, type: 3}
-    - {fileID: 8300000, guid: 5c5437654663e9745a84c83ec7a735fe, type: 3}
-    - {fileID: 8300000, guid: 71ce743f0365ffe46ab02613ac54dbc3, type: 3}
-  - soundtype: 9
-    soundclips:
-    - {fileID: 8300000, guid: 324683966f48dae478d441de4179c261, type: 3}
-  - soundtype: 8
-    soundclips:
-    - {fileID: 8300000, guid: 83ea19c6e14467448a03e53011982b8f, type: 3}
-    - {fileID: 8300000, guid: 5c39c8e2ced7adf4cb7618046dcbc3b4, type: 3}
-    - {fileID: 8300000, guid: 9286f0a7485375f4cbf51c464fadca87, type: 3}
-    - {fileID: 8300000, guid: 38c7d376653428e44a9307f92f2e5b93, type: 3}
-    - {fileID: 8300000, guid: e0301a0b03537794b9bc5715a3602a69, type: 3}
-    - {fileID: 8300000, guid: 22de890bc569071478d3b716cd271e13, type: 3}
-    - {fileID: 8300000, guid: d8e55cefeb8fe6646a26ecbf70ea43d3, type: 3}
-    - {fileID: 8300000, guid: 62e234dae711a574c9e342cc8acfc4dd, type: 3}
-    - {fileID: 8300000, guid: 991c408f18e3f6e4098e00aeb9bcee1b, type: 3}
-    - {fileID: 8300000, guid: 6013254d51497714981fc19113f323f4, type: 3}
-    - {fileID: 8300000, guid: 1d6f53c97daffe8479760cb6e39f7806, type: 3}
-    - {fileID: 8300000, guid: cc3ca847d953f894a9625eb341f5abc2, type: 3}
-    - {fileID: 8300000, guid: 2d971a16f5df7154ebe74b0bc0de0f7c, type: 3}
-    - {fileID: 8300000, guid: f24da36c4d81a7d44bbb97156f592d16, type: 3}
-  - soundtype: 10
-    soundclips:
-    - {fileID: 8300000, guid: 794fc65696371a9479846a6edf933435, type: 3}
+  _englishAudio: {fileID: 11400000, guid: 33ba45f5009ed6743b4ca21a68d34795, type: 2}
+  _hindiAudio: {fileID: 11400000, guid: 4f262fa733c5b3d4f8af06780e37427e, type: 2}
+  _audioLocalization: Hindi
 --- !u!82 &985682492
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8729,7 +8695,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 50
   m_TargetDisplay: 0
 --- !u!222 &6640948767166687771
 CanvasRenderer:

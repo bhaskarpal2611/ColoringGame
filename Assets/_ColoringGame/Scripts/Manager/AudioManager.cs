@@ -7,16 +7,20 @@ namespace ColorSwipeGame
     public class AudioManager : GenericSingleton<AudioManager>
     {
         [SerializeField] private bool _isMute = false;
-        [SerializeField] private AudioInfo[] _audioClips;
+        [SerializeField] private AudioSO _englishAudio;
+        [SerializeField] private AudioSO _hindiAudio;
+        [SerializeField] private string _audioLocalization;
 
         private AudioSource _soundEffect;
         private AudioSource _soundMusic;
         private AudioSource _paintSFX;
 
+        private AudioSO _currentMainAudio;
+
         protected override void Awake()
         {
             base.Awake();
-
+            SetLanguage();
             _soundMusic = GetComponents<AudioSource>()[0];
             _soundEffect = GetComponents<AudioSource>()[1];
             _paintSFX = GetComponents<AudioSource>()[2];
@@ -24,9 +28,26 @@ namespace ColorSwipeGame
             PlayBackgroundMusic();
         }
 
+        private void SetLanguage()
+        {
+            _audioLocalization = PlayerPrefs.GetString("PlaySchoolLanguage", _audioLocalization);
+            switch (_audioLocalization)
+            {
+                case "English":
+                    _currentMainAudio = _englishAudio;
+                    break;
+                case "Hindi":
+                    _currentMainAudio = _hindiAudio;
+                    break;
+                default:
+                    _currentMainAudio = _englishAudio;
+                    break;
+            }
+        }
+
         public void ChangeBrushSound_Erase()
         {
-            _paintSFX.clip = GetSoundClip(Sounds.Erase);
+            _paintSFX.clip = GetSoundClip(Sounds.Erase);    
         }
 
         public void ChangeBrushSound_Paint()
@@ -115,7 +136,7 @@ namespace ColorSwipeGame
 
         private AudioClip GetSoundClip(Sounds sound)
         {
-            AudioInfo item = Array.Find(_audioClips, i => i.soundtype == sound);
+            AudioInfo item = Array.Find(_currentMainAudio.Audios, i => i.soundtype == sound);
             if (item != null)
             {
                 int randomIndex = UnityEngine.Random.Range(0, item.soundclips.Length);

@@ -2558,7 +2558,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2655,39 +2655,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isMute: 0
-  _audioClips:
-  - soundtype: 2
-    soundclips:
-    - {fileID: 8300000, guid: 7d20312533f485f4ebd8278fae3f322f, type: 3}
-  - soundtype: 1
-    soundclips:
-    - {fileID: 8300000, guid: 70862d3c854243c43a525a7105e4710a, type: 3}
-  - soundtype: 6
-    soundclips:
-    - {fileID: 8300000, guid: a53ea7ef9f6eeb547af0d21ebfe438e1, type: 3}
-  - soundtype: 7
-    soundclips:
-    - {fileID: 8300000, guid: befd8d3bdb46a494c8bb398ce1330f9b, type: 3}
-    - {fileID: 8300000, guid: 5c5437654663e9745a84c83ec7a735fe, type: 3}
-    - {fileID: 8300000, guid: 71ce743f0365ffe46ab02613ac54dbc3, type: 3}
-  - soundtype: 9
-    soundclips:
-    - {fileID: 8300000, guid: 9646ba3f888248e409a6cbf049f245a3, type: 3}
-  - soundtype: 8
-    soundclips:
-    - {fileID: 8300000, guid: 6d124ee6b4face14ba4b582dfd777303, type: 3}
-    - {fileID: 8300000, guid: 9cffde622e5fdc04b8326a63b43ae8c2, type: 3}
-    - {fileID: 8300000, guid: 1e2516699e7eb9f47acd9305eded2e6d, type: 3}
-    - {fileID: 8300000, guid: f898e5de51e1ba4468df1bd53b7d00c7, type: 3}
-    - {fileID: 8300000, guid: 239755b53fd6b104588954bff78fc035, type: 3}
-    - {fileID: 8300000, guid: 2faff29538f864649b9286225c9af0d5, type: 3}
-    - {fileID: 8300000, guid: 953d47af02d77c1488e5ffb6f3a62899, type: 3}
-    - {fileID: 8300000, guid: 47115aa1c700ca849acc65d96bf7fc74, type: 3}
-    - {fileID: 8300000, guid: 3705224b9a61d5948890262bf0e71f55, type: 3}
-    - {fileID: 8300000, guid: 9e1f708b8dcfda5489297ff7cc731555, type: 3}
-  - soundtype: 10
-    soundclips:
-    - {fileID: 8300000, guid: 794fc65696371a9479846a6edf933435, type: 3}
+  _englishAudio: {fileID: 11400000, guid: fdba5cfe65480b24cb83f10358d768e5, type: 2}
+  _hindiAudio: {fileID: 11400000, guid: 8556edb457fc21b47bfcbde3c320215b, type: 2}
+  _audioLocalization: Hindi
 --- !u!82 &985682492
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6539,7 +6509,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!1 &6706747588898562575
 GameObject:
