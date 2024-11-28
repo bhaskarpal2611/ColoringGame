@@ -8,7 +8,8 @@ namespace ColorSwipeGame
 
     public class PhotoManager : MonoBehaviour
     {
-        private  string savedPhotosDirectory;
+        [SerializeField] private Canvas _canvas;
+        private string savedPhotosDirectory;
 
         private void Start()
         {
@@ -26,6 +27,7 @@ namespace ColorSwipeGame
             else
             {
                 Debug.Log("SavedPhotos directory does not exist.");
+
             }
         }
 
@@ -47,6 +49,7 @@ namespace ColorSwipeGame
             else
             {
                 Debug.Log("No photos found in SavedPhotos directory.");
+
             }
         }
 
@@ -64,7 +67,6 @@ namespace ColorSwipeGame
             }
         }
 
-        [SerializeField] private Canvas _canvas;
         public void DisplayTextureFromPath(string filePath)
         {
             if (File.Exists(filePath))

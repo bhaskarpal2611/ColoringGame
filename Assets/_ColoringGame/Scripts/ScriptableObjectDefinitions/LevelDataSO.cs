@@ -111,14 +111,28 @@ namespace ColorSwipeGame
             sprite.texture.Apply();
 
             byte[] textureBytes = sprite.texture.EncodeToPNG();  // Or use EncodeToJPG for smaller files
-            string filePath = Path.Combine(Application.persistentDataPath, fileName + ".png");
 
-            File.WriteAllBytes(filePath, textureBytes);
+            string filePath = Path.Combine(Application.persistentDataPath, "SavedTextures");
+
+            if (!Directory.Exists(filePath))
+            {
+                Directory.CreateDirectory(filePath);
+                Debug.Log($"Created folder: {filePath}");
+            }
+            else
+            {
+                Debug.Log($"Folder already exists: {filePath}");
+            }
+
+            string folderName = fileName + ".png";
+            string fullPath = Path.Combine(filePath, folderName);
+                
+            File.WriteAllBytes(fullPath, textureBytes);
         }
 
         private Texture2D LoadTextureFromFile(string fileName)
         {
-            string filePath = Path.Combine(Application.persistentDataPath, fileName + ".png");
+            string filePath = Path.Combine(Application.persistentDataPath, "SavedTextures/" + fileName + ".png");
 
             if (File.Exists(filePath))
             {

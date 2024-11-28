@@ -48,7 +48,7 @@ namespace ColorSwipeGame
 
                 if (fileName != null || fileName != "")
                 {
-                    string filePath = Path.Combine(Application.persistentDataPath, fileName + ".png");
+                    string filePath = Path.Combine(Application.persistentDataPath, "SavedPhotos/" + fileName + ".png");  
                     if (File.Exists(filePath))
                     {
                         LoadSpritePNG(i, filePath);

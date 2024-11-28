@@ -14,25 +14,47 @@ namespace ColorSwipeGame
     {
         [SerializeField] private LevelDataSO _levelDataSO;
 
-        private string _filePath;
+        private string _jsonFilePath;
+
+        private string _jsonFileName = "currentSaveState.json";
+
+        private string _finalPath;
 
         private void Awake()
         {
-            _filePath = Path.Combine(Application.persistentDataPath, "currentSaveState.json");
+            _jsonFilePath = Path.Combine(Application.persistentDataPath, "JSONColoring");
+
+            CreateFolder(_jsonFilePath);
+
+            _finalPath = Path.Combine(_jsonFilePath, _jsonFileName);
+
             LoadAllLevels();
+        }
+
+        public void CreateFolder(string folderPath)
+        {
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+                Debug.Log($"Created folder: {folderPath}");
+            }
+            else
+            {
+                Debug.Log($"Folder already exists: {folderPath}");
+            }
         }
 
         private LevelSaveData LoadLevelsData()
         {
-            if (File.Exists(_filePath))
+            if (File.Exists(_finalPath))
             {
                 // Read the JSON file
-                string json = File.ReadAllText(_filePath);
+                string json = File.ReadAllText(_finalPath);
 
                 // Deserialize the JSON string back into AllTexturesData
                 LevelSaveData levelData = JsonUtility.FromJson<LevelSaveData>(json);
 
-                Debug.Log("CurrentTextures data loaded from: " + _filePath);
+                Debug.Log("CurrentTextures data loaded from: " + _finalPath);
                 return levelData;
             }
             else
@@ -79,8 +101,8 @@ namespace ColorSwipeGame
                 {
                     if (_levelDataSO.IsEdited(i))
                     {
-                        SaveData savdata = _levelDataSO.GetSaveData(i);
-                        AllLevelData.saveDatas.Add(savdata);
+                        SaveData savedata = _levelDataSO.GetSaveData(i);
+                        AllLevelData.saveDatas.Add(savedata);
                     }
                     else
                     {
@@ -93,9 +115,9 @@ namespace ColorSwipeGame
                 string json = JsonUtility.ToJson(AllLevelData, true);  // Pretty print for readability
 
                 // Write the JSON to a file
-                File.WriteAllText(_filePath, json);
+                File.WriteAllText(_finalPath, json);
 
-                Debug.Log("Level data saved to: " + _filePath);
+                Debug.Log("Level data saved to: " + _finalPath);
             }
 
         }

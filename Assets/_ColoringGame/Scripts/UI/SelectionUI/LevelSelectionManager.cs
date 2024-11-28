@@ -54,7 +54,7 @@ namespace ColorSwipeGame
             }
             _paintService.CanPaint = true;
 
-            OnLevelLoaded.Invoke();
+            OnLevelLoaded?.Invoke();
         }
 
 
@@ -90,7 +90,7 @@ namespace ColorSwipeGame
 
             transform.DOMove(transform.position, _levelLoadTimeDelay).OnComplete(() =>
         {
-            OnLevelLoaded.Invoke();
+            OnLevelLoaded?.Invoke();
         });
         }
 

@@ -27,6 +27,8 @@ namespace ColorSwipeGame
         public Sprite _sprite;
         private Rect _rect;
 
+        private string _filePath;
+
         private int counter = 0;
         private float _startTime;
         private byte[] _bytes;
@@ -34,6 +36,18 @@ namespace ColorSwipeGame
         private void Start()
         {
             InitializeTexture();
+
+            _filePath = Path.Combine(Application.persistentDataPath, _albumName);
+
+            if (!Directory.Exists(_filePath))
+            {
+                Directory.CreateDirectory(_filePath);
+                Debug.Log($"Created folder: {_filePath}");
+            }
+            else
+            {
+                Debug.Log($"Folder already exists: {_filePath}");
+            }
         }
 
         public void TakePhoto()
@@ -137,7 +151,8 @@ namespace ColorSwipeGame
             {
                 fileName = "SavedDrawing_00" + index;
             }
-            string editorPath = Path.Combine(Application.persistentDataPath, fileName + ".png");
+
+            string editorPath = Path.Combine(_filePath, fileName + ".png");
             File.WriteAllBytes(editorPath, _bytes);
             return fileName;
         }
