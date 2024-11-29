@@ -156,7 +156,7 @@ namespace ColorSwipeGame
             {
                 if (_paintService.IsDrawingEdited())
                 {
-                    _drawnSaveManager.SaveDrawingsData(); // calling late as SavEDrawnState will have saved the texture as PNG already
+                    _drawnSaveManager.SaveDrawingsData(); // calling late as SaveDrawnState will have saved the texture as PNG already
                 }
                 _selectionSceneCanvas.SetActive(true);
                 _paintService.OnBackButtonPressed();

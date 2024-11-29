@@ -16,24 +16,40 @@ namespace ColorSwipeGame
 
         private string _filePath;
 
+        private string _completePath;
+
+        private string _fileName  = "drawingSaveState.json";
+
         private void Awake()
         {
-            _filePath = Path.Combine(Application.persistentDataPath, "drawingSaveState.json");
+            _filePath = Path.Combine(Application.persistentDataPath, "JSONDrawing");
+
+            if (!Directory.Exists(_filePath))
+            {
+                Directory.CreateDirectory(_filePath);
+                Debug.Log($"Created folder: {_filePath}");
+            }
+            else
+            {
+                Debug.Log($"Folder already exists: {_filePath}");
+            }
+
+            _completePath = Path.Combine(_filePath, _fileName);
 
             LoadAllDrawings();
         }
 
         private SavedDrawnData LoadSavedData()
         {
-            if (File.Exists(_filePath))
+            if (File.Exists(_completePath))
             {
                 // Read the JSON file
-                string json = File.ReadAllText(_filePath);
+                string json = File.ReadAllText(_completePath);
 
                 // Deserialize the JSON string back 
                 SavedDrawnData savedData = JsonUtility.FromJson<SavedDrawnData>(json);
 
-                Debug.Log("Saved Draw Data loaded from: " + _filePath);
+                Debug.Log("Saved Draw Data loaded from: " + _completePath);
                 return savedData;
             }
             else
@@ -69,9 +85,9 @@ namespace ColorSwipeGame
             string json = JsonUtility.ToJson(savedDrawnData, true);  // Pretty print for readability
 
             // Write the JSON to a file
-            File.WriteAllText(_filePath, json);
+            File.WriteAllText(_completePath, json);
 
-            Debug.Log("Level data saved to: " + _filePath);
+            Debug.Log("Level data saved to: " + _completePath);
         }
 
     }

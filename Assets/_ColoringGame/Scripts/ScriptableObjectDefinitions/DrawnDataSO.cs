@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
+
+//using System.IO;
 using UnityEngine;
 
 namespace ColorSwipeGame
@@ -74,14 +76,22 @@ namespace ColorSwipeGame
             texture.Apply();
 
             byte[] textureBytes = texture.EncodeToPNG();  // Or use EncodeToJPG for smaller files
-            string filePath = Path.Combine(Application.persistentDataPath, fileName + ".png");
+
+            string folderPath = Path.Combine(Application.persistentDataPath, "SavedDrawings");
+
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
+            string filePath = Path.Combine(folderPath, fileName + ".png");
 
             File.WriteAllBytes(filePath, textureBytes);
         }
 
         private Texture2D LoadTextureFromFile(string fileName)
         {
-            string filePath = Path.Combine(Application.persistentDataPath, fileName + ".png");
+            string filePath = Path.Combine(Application.persistentDataPath, "SavedDrawings/" + fileName + ".png");
 
             if (File.Exists(filePath))
             {

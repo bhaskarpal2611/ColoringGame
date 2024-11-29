@@ -71,7 +71,7 @@ namespace ColorSwipeGame
 
         private void InitializeDrawingImagePrefab(int i, string fileName)
         {
-            string filePath = Path.Combine(Application.persistentDataPath, fileName + ".png");
+            string filePath = Path.Combine(Application.persistentDataPath, "SavedPhotos/" + fileName + ".png");
             if (File.Exists(filePath))
             {
                 Sprite sprite = LoadSpritePNG(i, filePath);
