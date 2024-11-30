@@ -111,8 +111,9 @@ namespace ColorSwipeGame
         // COLORING MODE
         public void GoBackToSelectionScene()
         {
-
             _selectionSceneCanvas.SetActive(true);
+            _paintService.OnBackButtonPressed();
+            Destroy(_currentLevel.gameObject);
 
             //_loadingPanel.DOScale(1f, .25f).SetEase(Ease.Linear).OnComplete(() =>
             //{

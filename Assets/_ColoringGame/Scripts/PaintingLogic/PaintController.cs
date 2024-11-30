@@ -210,7 +210,11 @@ namespace ColorSwipeGame
             _timeKeeper.StartTimer();
 
             _spritesParent = spritesParent;
-            Debug.Log(_spritesParent.gameObject.name);
+
+            _originalSprites = new();
+            _isEdited = new();
+            _editedTextures = new();
+
             foreach (Transform spriteTransform in _spritesParent)
             {
                 InitializeSprite(spriteTransform.GetComponent<SpriteRenderer>());
@@ -297,7 +301,6 @@ namespace ColorSwipeGame
             Texture2D originalTexture = originalSprite.texture;
 
             _originalSprites.Add(spriteIndex, originalSprite);
-            // _originalSprites[spriteIndex] = originalSprite;
 
             _isEdited.Add(false);
             if (_editedTextures == null)
@@ -316,18 +319,16 @@ namespace ColorSwipeGame
             Sprite originalSprite = spriteRenderer.sprite;
             Texture2D originalTexture = originalSprite.texture;
 
-            if (!_originalSprites.ContainsKey(spriteIndex))
-            {
-                _originalSprites.Add(spriteIndex, originalSprite);
-            }
+
+            // if (!_originalSprites.ContainsKey(spriteIndex))
+            // {
+            //     _originalSprites.Add(spriteIndex, originalSprite);
+            // }
+
+            _originalSprites.Add(spriteIndex, originalSprite);
             _isEdited.Add(false);
 
-            if (_editedTextures == null)
-            {
-                _editedTextures = new();
-            }
-
-            _editedTextures[spriteIndex] = new Texture2D(originalTexture.width, originalTexture.height, originalTexture.format, originalTexture.mipmapCount, false);
+            _editedTextures.Add(spriteIndex, new Texture2D(originalTexture.width, originalTexture.height, originalTexture.format, originalTexture.mipmapCount, false));
 
             Graphics.CopyTexture(originalSprite.texture, _editedTextures[spriteIndex]);
         }
@@ -459,10 +460,7 @@ namespace ColorSwipeGame
             int key = _currentSpriteRenderer.transform.GetSiblingIndex();
             _currentSRIndex = key;
 
-            Debug.Log("Edited Dictionary: " + _isEdited[key]);
-            Debug.Log("Edited Dictionary: " + _editedTextures[key]);
-
-            if (!_isEdited[key] && sprite.texture != _editedTextures[key])      
+            if (!_isEdited[key] && sprite.texture != _editedTextures[key])
             {
                 Graphics.CopyTexture(sprite.texture, _editedTextures[key]);
                 _isEdited[key] = true;
@@ -537,7 +535,6 @@ namespace ColorSwipeGame
                 }
             }
             _editedSprites.Clear();
-
             _originalSprites.Clear();
         }
 
