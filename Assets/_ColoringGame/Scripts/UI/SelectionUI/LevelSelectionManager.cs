@@ -77,14 +77,14 @@ namespace ColorSwipeGame
                 _firstTimeLoaded = true;
             }
 
-            if (_levels.IsEdited(index))
-            {
-                _paintService.OnEditedLevelLoad(_levels.LoadTextures(index));
-            }
-            else
+            //if (_levels.IsEdited(index))
+            //{
+            //    _paintService.OnEditedLevelLoad(_levels.LoadTextures(index));
+            //}
+            //else
             {
                 _paintService.OnLevelLoad();
-                _levels.SetIsEdited(index, true);
+                //_levels.SetIsEdited(index, true);
             }
             _paintService.CanPaint = true;
 
@@ -111,14 +111,18 @@ namespace ColorSwipeGame
         // COLORING MODE
         public void GoBackToSelectionScene()
         {
-            _loadingPanel.DOScale(1f, .25f).SetEase(Ease.Linear).OnComplete(() =>
-            {
-                if (_saveCoroutine != null)
-                {
-                    StopCoroutine(_saveCoroutine);
-                }
-                _saveCoroutine = StartCoroutine(SaveTextures());
-            });
+
+            _selectionSceneCanvas.SetActive(true);
+
+            //_loadingPanel.DOScale(1f, .25f).SetEase(Ease.Linear).OnComplete(() =>
+            //{
+            //    if (_saveCoroutine != null)
+            //    {
+            //        StopCoroutine(_saveCoroutine);
+            //    }
+
+            //    _saveCoroutine = StartCoroutine(SaveTextures());
+            //});
         }
 
         private IEnumerator SaveTextures()

@@ -21,7 +21,7 @@ namespace ColorSwipeGame
 
         public SaveData GetSaveData(int index)
         {
-            return Levels.levelsData[index].LastSavedata;
+            return Levels.levelsData[index].LastSaveData;
         }
 
         public void SaveLevelData(int index)
@@ -33,7 +33,7 @@ namespace ColorSwipeGame
                 saveData.LevelImageName = Levels.levelsData[index].LevelImageName;
                 saveData.TexturesData = Levels.levelsData[index].CurrentTextures;
             }
-            Levels.levelsData[index].LastSavedata = saveData;
+            Levels.levelsData[index].LastSaveData = saveData;
         }
 
         public void RestoreSaveData(SaveData saveData)
@@ -178,7 +178,7 @@ namespace ColorSwipeGame
         public Sprite[] OriginalSprites;
         public AllTexturesData CurrentTextures;
         public string LevelImageName;
-        public SaveData LastSavedata;
+        public SaveData LastSaveData;
     }
 
     [System.Serializable]

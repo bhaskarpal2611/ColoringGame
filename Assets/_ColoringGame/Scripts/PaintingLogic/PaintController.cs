@@ -286,7 +286,7 @@ namespace ColorSwipeGame
         //     // Restore the previous active RenderTexture
         //     RenderTexture.active = previous;
 
-        //     // Release the temporary RenderTexture
+        //     // Release the temporary RenWderTexture
         //     RenderTexture.ReleaseTemporary(temp);
         // }
 
@@ -316,7 +316,10 @@ namespace ColorSwipeGame
             Sprite originalSprite = spriteRenderer.sprite;
             Texture2D originalTexture = originalSprite.texture;
 
-            _originalSprites.Add(spriteIndex, originalSprite);
+            if (!_originalSprites.ContainsKey(spriteIndex))
+            {
+                _originalSprites.Add(spriteIndex, originalSprite);
+            }
             _isEdited.Add(false);
 
             if (_editedTextures == null)
@@ -456,7 +459,10 @@ namespace ColorSwipeGame
             int key = _currentSpriteRenderer.transform.GetSiblingIndex();
             _currentSRIndex = key;
 
-            if (!_isEdited[key] && sprite.texture != _editedTextures[key])
+            Debug.Log("Edited Dictionary: " + _isEdited[key]);
+            Debug.Log("Edited Dictionary: " + _editedTextures[key]);
+
+            if (!_isEdited[key] && sprite.texture != _editedTextures[key])      
             {
                 Graphics.CopyTexture(sprite.texture, _editedTextures[key]);
                 _isEdited[key] = true;
