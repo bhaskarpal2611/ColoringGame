@@ -142,7 +142,7 @@ namespace ColorSwipeGame
                 return texture;
             }
 
-            Debug.LogError("Texture file not found: " + filePath);
+            Debug.Log("Texture file not found: " + filePath);
             return null;
         }
     }

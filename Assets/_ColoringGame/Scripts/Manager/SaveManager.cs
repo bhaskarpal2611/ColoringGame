@@ -27,6 +27,7 @@ namespace ColorSwipeGame
             CreateFolder(_jsonFilePath);
 
             _finalPath = Path.Combine(_jsonFilePath, _jsonFileName);
+            Debug.Log("Final Path: " + _finalPath);
 
             LoadAllLevels();
         }

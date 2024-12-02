@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -76,16 +77,22 @@ namespace ColorSwipeGame
                 _penSelectionHandler.ShowPanelAtStart();
                 _firstTimeLoaded = true;
             }
-
-            //if (_levels.IsEdited(index))
-            //{
-            //    _paintService.OnEditedLevelLoad(_levels.LoadTextures(index));
-            //}
-            //else
+#if UNITY_ANDROID
+            if (_levels.IsEdited(index))
+            {
+                _paintService.OnEditedLevelLoad(_levels.LoadTextures(index));
+            }
+            else
             {
                 _paintService.OnLevelLoad();
-                //_levels.SetIsEdited(index, true);
+                _levels.SetIsEdited(index, true);
             }
+#endif
+
+#if UNITY_IPHONE || UNITY_IOS
+            _paintService.OnLevelLoad();
+#endif
+
             _paintService.CanPaint = true;
 
             transform.DOMove(transform.position, _levelLoadTimeDelay).OnComplete(() =>
@@ -111,19 +118,25 @@ namespace ColorSwipeGame
         // COLORING MODE
         public void GoBackToSelectionScene()
         {
+
+#if UNITY_ANDROID
+            _loadingPanel.DOScale(1f, .25f).SetEase(Ease.Linear).OnComplete(() =>
+            {
+                if (_saveCoroutine != null)
+                {
+                    StopCoroutine(_saveCoroutine);
+                }
+
+                _saveCoroutine = StartCoroutine(SaveTextures());
+            });
+#endif
+
+#if UNITY_IPHONE || UNITY_IOS
             _selectionSceneCanvas.SetActive(true);
             _paintService.OnBackButtonPressed();
             Destroy(_currentLevel.gameObject);
+#endif
 
-            //_loadingPanel.DOScale(1f, .25f).SetEase(Ease.Linear).OnComplete(() =>
-            //{
-            //    if (_saveCoroutine != null)
-            //    {
-            //        StopCoroutine(_saveCoroutine);
-            //    }
-
-            //    _saveCoroutine = StartCoroutine(SaveTextures());
-            //});
         }
 
         private IEnumerator SaveTextures()

@@ -42,13 +42,15 @@ namespace ColorSwipeGame
 
         public void LoadSprites()
         {
+
+#if UNITY_ANDROID 
             for (int i = 0; i < _sprites.data.LevelSprites.Length; i++)
             {
                 string fileName = _levelData.GetEditedImage(i);
 
                 if (fileName != null || fileName != "")
                 {
-                    string filePath = Path.Combine(Application.persistentDataPath, "SavedPhotos/" + fileName + ".png");  
+                    string filePath = Path.Combine(Application.persistentDataPath, "SavedPhotos/" + fileName + ".png");
                     if (File.Exists(filePath))
                     {
                         LoadSpritePNG(i, filePath);
@@ -63,8 +65,15 @@ namespace ColorSwipeGame
                     _images[i].sprite = _sprites.data.LevelSprites[i];
                 }
             }
-        }
+#endif
 
+#if UNITY_IPHONE || UNITY_IOS
+            for (int i = 0; i < _sprites.data.LevelSprites.Length; i++)
+            {
+                _images[i].sprite = _sprites.data.LevelSprites[i];
+            }
+#endif
+        }
         private void LoadSpritePNG(int i, string filePath)
         {
             byte[] bytes = File.ReadAllBytes(filePath);
