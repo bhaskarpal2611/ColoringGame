@@ -136,7 +136,6 @@ namespace ColorSwipeGame
             _paintService.OnBackButtonPressed();
             Destroy(_currentLevel.gameObject);
 #endif
-
         }
 
         private IEnumerator SaveTextures()

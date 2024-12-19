@@ -22,6 +22,7 @@ namespace ColorSwipeGame
 
         private void Awake()
         {
+#if UNITY_ANDROID || UNITY_EDITOR
             _jsonFilePath = Path.Combine(Application.persistentDataPath, "JSONColoring");
 
             CreateFolder(_jsonFilePath);
@@ -30,6 +31,7 @@ namespace ColorSwipeGame
             Debug.Log("Final Path: " + _finalPath);
 
             LoadAllLevels();
+#endif
         }
 
         public void CreateFolder(string folderPath)
@@ -85,7 +87,7 @@ namespace ColorSwipeGame
             int length = _levelDataSO.Levels.levelsData.Length;
             for (int i = 0; i < length; i++)
             {
-                if(_levelDataSO.IsEdited(i))
+                if (_levelDataSO.IsEdited(i))
                 {
                     count++;
                 }
@@ -94,32 +96,32 @@ namespace ColorSwipeGame
             return count >= length - 1;
         }
 
-            public void SaveLevelsData()
+        public void SaveLevelsData()
+        {
+            LevelSaveData AllLevelData = new();
+
+            for (int i = 0; i < _levelDataSO.Levels.levelsData.Length; i++)
             {
-                LevelSaveData AllLevelData = new();
-
-                for (int i = 0; i < _levelDataSO.Levels.levelsData.Length; i++)
+                if (_levelDataSO.IsEdited(i))
                 {
-                    if (_levelDataSO.IsEdited(i))
-                    {
-                        SaveData savedata = _levelDataSO.GetSaveData(i);
-                        AllLevelData.saveDatas.Add(savedata);
-                    }
-                    else
-                    {
-                        SaveData newData = new SaveData(i);
-                        AllLevelData.saveDatas.Add(newData);
-                    }
+                    SaveData savedata = _levelDataSO.GetSaveData(i);
+                    AllLevelData.saveDatas.Add(savedata);
                 }
-
-                // Serialize the CurrentTextures field to JSON
-                string json = JsonUtility.ToJson(AllLevelData, true);  // Pretty print for readability
-
-                // Write the JSON to a file
-                File.WriteAllText(_finalPath, json);
-
-                Debug.Log("Level data saved to: " + _finalPath);
+                else
+                {
+                    SaveData newData = new SaveData(i);
+                    AllLevelData.saveDatas.Add(newData);
+                }
             }
 
+            // Serialize the CurrentTextures field to JSON
+            string json = JsonUtility.ToJson(AllLevelData, true);  // Pretty print for readability
+
+            // Write the JSON to a file
+            File.WriteAllText(_finalPath, json);
+
+            Debug.Log("Level data saved to: " + _finalPath);
         }
+
     }
+}
