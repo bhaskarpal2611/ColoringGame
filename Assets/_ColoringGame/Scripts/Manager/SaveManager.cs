@@ -22,7 +22,7 @@ namespace ColorSwipeGame
 
         private void Awake()
         {
-#if UNITY_ANDROID || UNITY_EDITOR
+#if UNITY_ANDROID
             _jsonFilePath = Path.Combine(Application.persistentDataPath, "JSONColoring");
 
             CreateFolder(_jsonFilePath);
