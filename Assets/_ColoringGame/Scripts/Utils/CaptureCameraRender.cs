@@ -59,7 +59,6 @@ namespace ColorSwipeGame
             _clearButton.DOScale(0f, 0.25f).SetEase(Ease.InOutQuad);
             _cameraButton.DOScale(0f, 0.25f).SetEase(Ease.InOutQuad);
 
-
             _paintToolSelection.DOScale(0f, 0.25f).OnComplete(() =>
             {
                 _paintToolPanel.DOLocalMoveX(1000f, .5f);

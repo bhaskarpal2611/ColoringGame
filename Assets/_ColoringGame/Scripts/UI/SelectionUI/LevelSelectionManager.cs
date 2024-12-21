@@ -9,7 +9,7 @@ namespace ColorSwipeGame
     public class LevelSelectionManager : MonoBehaviour
     {
         [SerializeField] private LevelDataSO _levels;
-        [SerializeField] private DrawnDataSO _drawings;
+        [SerializeField] private DrawnDataSO _drawings; // DRAWING
         [SerializeField] private Transform _levelParent;
         [SerializeField] private Transform _loadingPanel;
         [SerializeField] private GameObject _selectionSceneCanvas;
@@ -18,9 +18,9 @@ namespace ColorSwipeGame
         [SerializeField] private LeftPanelController _leftPanelHandler;
         [SerializeField] private PenSelectionHandler _penSelectionHandler;
         [SerializeField] private LevelImageHandler _levelImageHandler;
-        [SerializeField] private DrawnImageHandler _drawnImageHandler;
+        [SerializeField] private DrawnImageHandler _drawnImageHandler; // DRAWING
         [SerializeField] private SaveManager _saveManager;
-        [SerializeField] private Draw_SaveManager _drawnSaveManager;
+        [SerializeField] private Draw_SaveManager _drawnSaveManager; // DRAWING
         [SerializeField] private float _levelLoadTimeDelay = 0.25f;
 
         private GameObject _currentLevel;
@@ -162,6 +162,7 @@ namespace ColorSwipeGame
         private IEnumerator SaveDrawing()
         {
             yield return null;
+
             if (_paintService.IsDrawingEdited())
             {
                 _drawnImageHandler.UpdateDrawing(_currentLevelIndex);

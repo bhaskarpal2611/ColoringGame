@@ -9,6 +9,7 @@ namespace ColorSwipeGame
         [SerializeField] private bool _isMute = false;
         [SerializeField] private AudioSO _englishAudio;
         [SerializeField] private AudioSO _hindiAudio;
+        [SerializeField] private AudioSO _tamilAudio;
         [SerializeField] private string _audioLocalization;
 
         private AudioSource _soundEffect;
@@ -30,19 +31,14 @@ namespace ColorSwipeGame
 
         private void SetLanguage()
         {
-            _audioLocalization = PlayerPrefs.GetString("PlaySchoolLanguage", _audioLocalization);
-            switch (_audioLocalization)
+            _audioLocalization = PlayerPrefs.GetString("PlayschoolLanguageAudio", _audioLocalization);
+            _currentMainAudio = _audioLocalization switch
             {
-                case "English":
-                    _currentMainAudio = _englishAudio;
-                    break;
-                case "Hindi":
-                    _currentMainAudio = _hindiAudio;
-                    break;
-                default:
-                    _currentMainAudio = _englishAudio;
-                    break;
-            }
+                "English" => _englishAudio,
+                "Hindi" => _hindiAudio,
+                "Tamil" => _tamilAudio,
+                _ => _englishAudio,
+            };
         }
 
         public void ChangeBrushSound_Erase()
