@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Threading;
+using System.Linq;
 
 namespace ColorSwipeGame
 {
@@ -502,55 +503,105 @@ namespace ColorSwipeGame
             );
         }
 
-
-        // Save State - UNDO _ FUNCTION
-        // private void SaveCurrentTextureState()
-        // {
-        //     int index = _currentSpriteRenderer.transform.GetSiblingIndex();
-
-        //     if (_isEdited[index])
-        //     {
-        //         Texture2D newTex = new(_editedTextures[index].width, _editedTextures[index].height, TextureFormat.RGBA32, 1, false);
-        //         Graphics.CopyTexture(_editedTextures[index], newTex);
-        //     }
-        // }
-
-        // CLEAR _ Function
-        private void CleanupResources()
-        {
-            foreach (var texture in _editedTextures.Values)
-            {
-                if (texture != null)
-                {
-                    Object.Destroy(texture);
-                }
-            }
-            _editedTextures.Clear();
-
-            foreach (var sprite in _editedSprites.Values)
-            {
-                if (sprite != null)
-                {
-                    // Object.Destroy(sprite);
-                }
-            }
-            _editedSprites.Clear();
-            _originalSprites.Clear();
-        }
-
-
         private void RestoreOriginalTextures()
         {
-            for (int i = 0; i < _spritesParent.childCount; i++)
-            {
-                _spritesParent.GetChild(i).GetComponent<SpriteRenderer>().sprite = _originalSprites[i];
+            if (_spritesParent == null || _originalSprites == null || _editedTextures == null || _isEdited == null) return;
 
-                Object.Destroy(_editedTextures[i]);
-                _editedTextures.Remove(i);
-                _editedTextures.Add(i, new Texture2D(_originalSprites[i].texture.width, _originalSprites[i].texture.height, _originalSprites[i].texture.format, false));
-                _isEdited[i] = false;
+            for (int i = 0; i < _spritesParent.childCount && i < _originalSprites.Count && i < _isEdited.Count; i++)
+            {
+                var childRenderer = _spritesParent.GetChild(i)?.GetComponent<SpriteRenderer>();
+                if (childRenderer == null) continue;
+
+                // Restore original sprite
+                if (_originalSprites[i] != null)
+                {
+                    childRenderer.sprite = _originalSprites[i];
+                }
+
+                // Cleanup old texture
+                if (_editedTextures.TryGetValue(i, out var oldTexture))
+                {
+                    if (oldTexture != null)
+                    {
+                        Object.Destroy(oldTexture);
+                    }
+                    _editedTextures.Remove(i);
+                }
+
+                // Create new texture
+                try
+                {
+                    if (_originalSprites[i]?.texture != null)
+                    {
+                        var originalTexture = _originalSprites[i].texture;
+                        var newTexture = new Texture2D(
+                            originalTexture.width,
+                            originalTexture.height,
+                            originalTexture.format,
+                            false
+                        );
+                        _editedTextures[i] = newTexture;
+                    }
+                }
+                catch (System.Exception e)
+                {
+                    Debug.LogError($"Failed to create new texture for sprite {i}: {e.Message}");
+                }
+
+                // Set edited flag in list
+                if (i < _isEdited.Count)
+                {
+                    _isEdited[i] = false;
+                }
             }
-            _editedSprites.Clear();
+
+            _editedSprites?.Clear();
+        }
+
+        private void CleanupResources()
+        {
+            try
+            {
+                // Clean up edited textures
+                if (_editedTextures != null)
+                {
+                    var texturesToDestroy = _editedTextures.Values.ToList();
+                    foreach (var texture in texturesToDestroy)
+                    {
+                        if (texture != null)
+                        {
+                            Object.Destroy(texture);
+                        }
+                    }
+                    _editedTextures.Clear();
+                }
+
+                // Clean up edited sprites references
+                if (_editedSprites != null)
+                {
+                    _editedSprites.Clear();
+                }
+
+                // Clear original sprite references
+                _originalSprites?.Clear();
+
+                // Clear edited flags
+                _isEdited?.Clear();
+
+                // Force cleanup on iOS
+                Resources.UnloadUnusedAssets();
+                System.GC.Collect();
+            }
+            catch (System.OutOfMemoryException oom)
+            {
+                Debug.LogError($"Out of memory during cleanup: {oom.Message}");
+                System.GC.Collect();
+                Resources.UnloadUnusedAssets();
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"Error during cleanup: {e.Message}");
+            }
         }
 
         private void RestoreEmptyCanvas()

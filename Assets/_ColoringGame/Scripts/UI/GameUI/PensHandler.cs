@@ -172,6 +172,7 @@ namespace ColorSwipeGame.UI
                 Color color = _colors[i];
                 color.a = 1f;
                 SelectedPenData.ColoredPens[i].SetColorOnPencil(color);
+
                 SelectedPenData.ColoredPens[i].Button.onClick.AddListener(() =>
                 {
                     _paintService.SetColor(color);
