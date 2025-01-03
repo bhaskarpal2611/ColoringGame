@@ -71,7 +71,7 @@ namespace ColorSwipeGame
             temp[0] = pathParent.transform.GetChild(0);
             temp[1] = pathParent.transform.GetChild(1);
 
-            StartPlayingRoute(temp);
+            ColoringRoute(temp);
         }
 
         private void StartPlayingRoute(Transform[] routes)
@@ -121,7 +121,6 @@ namespace ColorSwipeGame
             // Precompute and cache the path points
             _cachedPathPoints = PrecomputeBezierPoints(routes);
 
-            Debug.Log("Path Points: " + _cachedPathPoints.Count);
 
             // Use DOTween to follow the path
             OnPathStart?.Invoke();

@@ -113,7 +113,6 @@ namespace ColorSwipeGame
         {
             if (CanPaint)
             {
-                Debug.Log("chk - call on drag");
 
                 Vector2 worldPosition = _mainCamera.ScreenToWorldPoint(touchPosition);
                 _paintController.ContinueDrag(worldPosition, isFastSwipe);

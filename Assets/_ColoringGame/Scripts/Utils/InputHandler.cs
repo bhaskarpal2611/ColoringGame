@@ -63,6 +63,7 @@ namespace ColorSwipeGame
 
         public void BeginDrag(Vector2 currentPosition)
         {
+            Debug.Log("chk - begin drag");
             OnBeginDrag?.Invoke(currentPosition);
             ResetTracking(currentPosition);
         }
