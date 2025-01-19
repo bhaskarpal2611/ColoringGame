@@ -11,7 +11,7 @@ namespace ColorSwipeGame
         public Action<Vector2, bool> OnDragging;
         public Action OnDragEnd, OnDragStationary;
 
-        public bool IsTouchEnabled {  get; set; }
+        public bool IsTouchEnabled { get; set; }
 
         [SerializeField] private float _minDistance = 5f;
         [SerializeField] private float _maxFrequency = 0.2f;
@@ -63,7 +63,6 @@ namespace ColorSwipeGame
 
         public void BeginDrag(Vector2 currentPosition)
         {
-            Debug.Log("chk - begin drag");
             OnBeginDrag?.Invoke(currentPosition);
             ResetTracking(currentPosition);
         }

@@ -1294,7 +1294,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &216936895
 Transform:
   m_ObjectHideFlags: 0
@@ -1821,7 +1821,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &412672531
 Transform:
   m_ObjectHideFlags: 0
@@ -3973,7 +3973,8 @@ MonoBehaviour:
   _englishAudio: {fileID: 11400000, guid: 33ba45f5009ed6743b4ca21a68d34795, type: 2}
   _hindiAudio: {fileID: 11400000, guid: 4f262fa733c5b3d4f8af06780e37427e, type: 2}
   _tamilAudio: {fileID: 11400000, guid: 39e48653e7377124785fe2bfde5a9171, type: 2}
-  _audioLocalization: Tamil
+  _frenchAudio: {fileID: 11400000, guid: 3936612207bec7bf1a3fc3a821e9bfe9, type: 2}
+  _audioLocalization: French
 --- !u!82 &985682492
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4256,7 +4257,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 50, y: -175}
+  m_AnchoredPosition: {x: 50.00006, y: -175}
   m_SizeDelta: {x: 193, y: 81}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1082712493
@@ -4597,10 +4598,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1616809397}
-        m_TargetAssemblyTypeName: ColorSwipeGame.SelectionSceneManager, Assembly-CSharp
-        m_MethodName: GoBackToSelectionScene
-        m_Mode: 1
+      - m_Target: {fileID: 8100986678138197016}
+        m_TargetAssemblyTypeName: ColorSwipeGame.PaintService, Assembly-CSharp
+        m_MethodName: set_CanPaint
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4609,10 +4610,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8100986678138197016}
-        m_TargetAssemblyTypeName: ColorSwipeGame.PaintService, Assembly-CSharp
-        m_MethodName: set_CanPaint
-        m_Mode: 6
+      - m_Target: {fileID: 1616809397}
+        m_TargetAssemblyTypeName: ColorSwipeGame.SelectionSceneManager, Assembly-CSharp
+        m_MethodName: GoBackToSelectionScene
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5398,7 +5399,10 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
-        m_CallState: 2
+        m_CallState: 0
+  OnBackButtonPressed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1617881670
 GameObject:
   m_ObjectHideFlags: 0
@@ -6482,7 +6486,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1846780782
 Transform:
   m_ObjectHideFlags: 0

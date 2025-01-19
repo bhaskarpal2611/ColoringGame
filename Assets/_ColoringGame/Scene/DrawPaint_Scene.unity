@@ -831,7 +831,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 130, y: 50}
+  m_AnchoredPosition: {x: 100, y: 50}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0, y: 0}
 --- !u!1 &371329319
@@ -2658,7 +2658,8 @@ MonoBehaviour:
   _englishAudio: {fileID: 11400000, guid: fdba5cfe65480b24cb83f10358d768e5, type: 2}
   _hindiAudio: {fileID: 11400000, guid: 8556edb457fc21b47bfcbde3c320215b, type: 2}
   _tamilAudio: {fileID: 11400000, guid: ca045b5f626edb146b957d57c06360e0, type: 2}
-  _audioLocalization: Tamil
+  _frenchAudio: {fileID: 11400000, guid: 084321afa458f33e384a977bc5ca7270, type: 2}
+  _audioLocalization: French
 --- !u!82 &985682492
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2941,7 +2942,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 50, y: -175}
+  m_AnchoredPosition: {x: 50.00006, y: -175}
   m_SizeDelta: {x: 193, y: 81}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1082712493
@@ -3641,7 +3642,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -550, y: 50}
+  m_AnchoredPosition: {x: -520, y: 50}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1517349290
@@ -5629,7 +5630,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 185, y: -100}
-  m_SizeDelta: {x: 180, y: 180}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.49999964, y: 0.5}
 --- !u!1 &2061915599
 GameObject:

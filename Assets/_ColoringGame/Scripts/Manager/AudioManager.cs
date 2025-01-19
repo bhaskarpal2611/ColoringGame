@@ -7,9 +7,16 @@ namespace ColorSwipeGame
     public class AudioManager : GenericSingleton<AudioManager>
     {
         [SerializeField] private bool _isMute = false;
+
+        [Header("All Different Audio SO's")]
         [SerializeField] private AudioSO _englishAudio;
         [SerializeField] private AudioSO _hindiAudio;
         [SerializeField] private AudioSO _tamilAudio;
+        [SerializeField] private AudioSO _frenchAudio;
+
+        [Space]
+        [Space]
+        [Space]
         [SerializeField] private string _audioLocalization;
 
         private AudioSource _soundEffect;
@@ -37,13 +44,14 @@ namespace ColorSwipeGame
                 "English" => _englishAudio,
                 "Hindi" => _hindiAudio,
                 "Tamil" => _tamilAudio,
+                "French" => _frenchAudio,
                 _ => _englishAudio,
             };
         }
 
         public void ChangeBrushSound_Erase()
         {
-            _paintSFX.clip = GetSoundClip(Sounds.Erase);    
+            _paintSFX.clip = GetSoundClip(Sounds.Erase);
         }
 
         public void ChangeBrushSound_Paint()
@@ -59,6 +67,8 @@ namespace ColorSwipeGame
         public void PlayCameraButtonSound() => PlaySound(Sounds.CameraShutter);
 
         public void PlayIntroAudio() => PlaySound(Sounds.GameIntro);
+
+        // Playing through Unity Events in Level Selection Manager's Level Load
         public void PlayGameStartAudio()
         {
             if (_soundEffect.isPlaying)
@@ -96,7 +106,7 @@ namespace ColorSwipeGame
             }
         }
 
-        public void PlaySound(Sounds sound)
+        private void PlaySound(Sounds sound)
         {
             if (_isMute) return;
             AudioClip clip = GetSoundClip(sound);

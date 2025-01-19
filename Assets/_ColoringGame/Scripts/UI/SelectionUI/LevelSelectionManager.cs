@@ -27,7 +27,7 @@ namespace ColorSwipeGame
         private int _currentLevelIndex;
         private bool _firstTimeLoaded = false;
 
-        public UnityEvent OnLevelLoaded = new();
+        public UnityEvent OnLevelLoaded, OnBackButtonPressed = new();
 
         private Coroutine _saveCoroutine;
 

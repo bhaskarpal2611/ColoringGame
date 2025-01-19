@@ -46,6 +46,3 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 97b89d4acef4ddd46b98e84a36ef9de8, type: 3}
     - {fileID: 8300000, guid: 9268d65823e8bb24a9b3fde225102438, type: 3}
     - {fileID: 8300000, guid: c859f36bb609a2c4fbd3b34250813e42, type: 3}
-  - soundtype: 10
-    soundclips:
-    - {fileID: 8300000, guid: 794fc65696371a9479846a6edf933435, type: 3}
