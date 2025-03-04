@@ -2971,10 +2971,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 397821762}
-        m_TargetAssemblyTypeName: ColorSwipeGame.TimeKeeper, Assembly-CSharp
-        m_MethodName: GoBackToMainMenu
-        m_Mode: 1
+      - m_Target: {fileID: 1955107645}
+        m_TargetAssemblyTypeName: ColorSwipeGame.InputHandler, Assembly-CSharp
+        m_MethodName: set_IsTouchEnabled
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2983,10 +2983,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1955107645}
-        m_TargetAssemblyTypeName: ColorSwipeGame.InputHandler, Assembly-CSharp
-        m_MethodName: set_IsTouchEnabled
-        m_Mode: 6
+      - m_Target: {fileID: 397821762}
+        m_TargetAssemblyTypeName: ColorSwipeGame.TimeKeeper, Assembly-CSharp
+        m_MethodName: GoBackToMainMenu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4257,7 +4257,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 50.00006, y: -175}
+  m_AnchoredPosition: {x: 50.000122, y: -175}
   m_SizeDelta: {x: 193, y: 81}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1082712493
