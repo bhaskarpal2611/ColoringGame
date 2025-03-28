@@ -2659,6 +2659,8 @@ MonoBehaviour:
   _hindiAudio: {fileID: 11400000, guid: 8556edb457fc21b47bfcbde3c320215b, type: 2}
   _tamilAudio: {fileID: 11400000, guid: ca045b5f626edb146b957d57c06360e0, type: 2}
   _frenchAudio: {fileID: 11400000, guid: 084321afa458f33e384a977bc5ca7270, type: 2}
+  _marathiAudio: {fileID: 11400000, guid: f2039bb1d113eed48baf816aaa43b054, type: 2}
+  _bengaliAudio: {fileID: 0}
   _audioLocalization: French
 --- !u!82 &985682492
 AudioSource:
@@ -6823,10 +6825,10 @@ RectTransform:
   - {fileID: 1675838581}
   m_Father: {fileID: 5781245073046353442}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -2}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 275, y: -387.5}
-  m_SizeDelta: {x: 400, y: 475}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7966881976695344406
 MonoBehaviour:

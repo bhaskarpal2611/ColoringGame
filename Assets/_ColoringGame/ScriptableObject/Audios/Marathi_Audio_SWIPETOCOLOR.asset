@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7afb63838b333514a93c998635c9d58b, type: 3}
+  m_Name: Marathi_Audio_SWIPETOCOLOR
+  m_EditorClassIdentifier: 
+  Audios:
+  - soundtype: 2
+    soundclips:
+    - {fileID: 8300000, guid: 7d20312533f485f4ebd8278fae3f322f, type: 3}
+  - soundtype: 1
+    soundclips:
+    - {fileID: 8300000, guid: 70862d3c854243c43a525a7105e4710a, type: 3}
+  - soundtype: 6
+    soundclips:
+    - {fileID: 8300000, guid: ea73c0e0eea02af4290e5698658f9191, type: 3}
+  - soundtype: 9
+    soundclips:
+    - {fileID: 8300000, guid: f39a6703533ef9941b73f453195de5fd, type: 3}
+  - soundtype: 8
+    soundclips:
+    - {fileID: 8300000, guid: 977907d7a32ee1943a801ed9ff8c173c, type: 3}
+    - {fileID: 8300000, guid: e9719da6917d6d042a3ab1965d9b8085, type: 3}
+    - {fileID: 8300000, guid: f48c5ea5a2f208a429cea619d56583d4, type: 3}
+    - {fileID: 8300000, guid: d8508cfda1a3cf842a55b3766f2f1672, type: 3}
+    - {fileID: 8300000, guid: 011923e6497787949a5a1b4c005b6c2f, type: 3}
+    - {fileID: 8300000, guid: 8da86aa19d736c24cbb807e4690e3912, type: 3}
+    - {fileID: 8300000, guid: 20ef16532a094dc44ba42aee7b374631, type: 3}
+    - {fileID: 8300000, guid: b4432de476428dd43a6c9b7d230ab8cf, type: 3}
+    - {fileID: 8300000, guid: eb1f26617f12e5e44ba06b384f6088a7, type: 3}
+    - {fileID: 8300000, guid: b6947c4fe321fab428be388ae508aacc, type: 3}
+  - soundtype: 5
+    soundclips:
+    - {fileID: 8300000, guid: 6ed4adb4c2a741849b5bc3e8f2daedc5, type: 3}

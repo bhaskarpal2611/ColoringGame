@@ -22,11 +22,6 @@ MonoBehaviour:
   - soundtype: 6
     soundclips:
     - {fileID: 8300000, guid: da047235e9138264f99765b299ff9d42, type: 3}
-  - soundtype: 7
-    soundclips:
-    - {fileID: 8300000, guid: befd8d3bdb46a494c8bb398ce1330f9b, type: 3}
-    - {fileID: 8300000, guid: 5c5437654663e9745a84c83ec7a735fe, type: 3}
-    - {fileID: 8300000, guid: 71ce743f0365ffe46ab02613ac54dbc3, type: 3}
   - soundtype: 9
     soundclips:
     - {fileID: 8300000, guid: 977ae33a9729d1c4fb14383b6b1d41c2, type: 3}

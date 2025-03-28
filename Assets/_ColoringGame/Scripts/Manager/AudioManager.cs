@@ -13,8 +13,9 @@ namespace ColorSwipeGame
         [SerializeField] private AudioSO _hindiAudio;
         [SerializeField] private AudioSO _tamilAudio;
         [SerializeField] private AudioSO _frenchAudio;
+        [SerializeField] private AudioSO _marathiAudio;
+        [SerializeField] private AudioSO _bengaliAudio;
 
-        [Space]
         [Space]
         [Space]
         [SerializeField] private string _audioLocalization;
@@ -45,8 +46,12 @@ namespace ColorSwipeGame
                 "Hindi" => _hindiAudio,
                 "Tamil" => _tamilAudio,
                 "French" => _frenchAudio,
+                "Marathi" => _marathiAudio,
+                "Bengali" => _bengaliAudio,
                 _ => _englishAudio,
             };
+
+            if (_currentMainAudio == null) _currentMainAudio = _englishAudio;
         }
 
         public void ChangeBrushSound_Erase()
