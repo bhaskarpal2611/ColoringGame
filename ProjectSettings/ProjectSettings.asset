@@ -893,7 +893,13 @@ PlayerSettings:
   windowsGamepadBackendHint: 0
   cloudProjectId: 92695a7c-f382-42cb-b1b5-1782db138bd3
   framebufferDepthMemorylessMode: 0
-  qualitySettingsNames: []
+  qualitySettingsNames:
+  - Very Low
+  - Low
+  - High
+  - Medium
+  - Very High
+  - Ultra
   projectName: ColoringGame
   organizationId: bhaskarp_unity
   cloudEnabled: 0

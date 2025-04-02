@@ -382,7 +382,6 @@ namespace ColorSwipeGame
 
         private void RaycastSprites(Vector2 worldPosition)
         {
-            Debug.Log("CHk _ Call ->  Raycasting Sprites");
 
             int hitCount = Physics2D.RaycastNonAlloc(worldPosition, Vector2.zero, _hits);
             if (hitCount <= 0) return;
@@ -432,7 +431,6 @@ namespace ColorSwipeGame
                 {
                     if (i % BLIT_THRESHOLD == 0)
                     {
-                        Debug.Log("_current SR: " + _currentSpriteRenderer.gameObject.name);
                         float t = i / (float)steps;
                         Vector2 interpolatedPoint = Vector2.Lerp(_lastTouchPosition, currentTouchPosition, t);
                         ColorSpriteAtPosition(interpolatedPoint);

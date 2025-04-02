@@ -2660,7 +2660,7 @@ MonoBehaviour:
   _tamilAudio: {fileID: 11400000, guid: ca045b5f626edb146b957d57c06360e0, type: 2}
   _frenchAudio: {fileID: 11400000, guid: 084321afa458f33e384a977bc5ca7270, type: 2}
   _marathiAudio: {fileID: 11400000, guid: f2039bb1d113eed48baf816aaa43b054, type: 2}
-  _bengaliAudio: {fileID: 0}
+  _bengaliAudio: {fileID: 11400000, guid: 725549b7d96b7fb47a8b529f39df09cf, type: 2}
   _audioLocalization: French
 --- !u!82 &985682492
 AudioSource:
