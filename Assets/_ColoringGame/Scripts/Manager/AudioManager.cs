@@ -39,7 +39,7 @@ namespace ColorSwipeGame
 
         private void SetLanguage()
         {
-            _audioLocalization = PlayerPrefs.GetString("PlayschoolLanguageAudio", _audioLocalization);
+            _audioLocalization = PlayerPrefs.GetString("PlayschoolLanguageAudio");
             _currentMainAudio = _audioLocalization switch
             {
                 "English" => _englishAudio,
