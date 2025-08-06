@@ -78,6 +78,8 @@ namespace ColorSwipeGame
         // SwipeToDraw - Load Blank or Level
         public void LoadDrawPaintLevel(Sprite originalSprite)
         {
+            Debug.Log("Chek call to new ");
+
             Transform drawSprite = _spritesContainer.GetChild(0);
 
             _paintController.InitializeLevel(drawSprite, originalSprite);

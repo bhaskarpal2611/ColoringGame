@@ -20,7 +20,7 @@ namespace ColorSwipeGame
             else
             {
                 _instance = this as T;
-                DontDestroyOnLoad(Instance);
+                //DontDestroyOnLoad(Instance);
             }
         }
     }

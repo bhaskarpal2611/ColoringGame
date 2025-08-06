@@ -43,7 +43,8 @@ namespace ColorSwipeGame
         public void LoadSprites()
         {
 
-#if UNITY_ANDROID 
+#if UNITY_ANDROID || UNITY_EDITOR
+
             for (int i = 0; i < _sprites.data.LevelSprites.Length; i++)
             {
                 string fileName = _levelData.GetEditedImage(i);

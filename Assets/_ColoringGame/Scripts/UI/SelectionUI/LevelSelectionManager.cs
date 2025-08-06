@@ -77,7 +77,7 @@ namespace ColorSwipeGame
                 _penSelectionHandler.ShowPanelAtStart();
                 _firstTimeLoaded = true;
             }
-#if UNITY_ANDROID
+#if UNITY_ANDROID || UNITY_EDITOR
             if (_levels.IsEdited(index))
             {
                 _paintService.OnEditedLevelLoad(_levels.LoadTextures(index));
@@ -119,7 +119,7 @@ namespace ColorSwipeGame
         public void GoBackToSelectionScene()
         {
 
-#if UNITY_ANDROID
+#if UNITY_ANDROID || UNITY_EDITOR
             _loadingPanel.DOScale(1f, .25f).SetEase(Ease.Linear).OnComplete(() =>
             {
                 if (_saveCoroutine != null)

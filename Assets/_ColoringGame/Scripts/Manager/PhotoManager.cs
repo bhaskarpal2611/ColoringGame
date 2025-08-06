@@ -13,9 +13,9 @@ namespace ColorSwipeGame
 
         private void Start()
         {
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_EDITOR
             savedPhotosDirectory = Application.persistentDataPath + "/SavedPhotos";
-#elif UNITY_ANDROID
+#elif UNITY_ANDROID || UNITY_EDITOR
         savedPhotosDirectory = Application.persistentDataPath + "/SavedPhotos";
 #endif
 

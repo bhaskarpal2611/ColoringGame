@@ -72,7 +72,7 @@ namespace ColorSwipeGame
         public void SaveToGallery()
         {
             #region ANDROID
-#if UNITY_ANDROID
+#if UNITY_ANDROID || UNITY_EDITOR
             string fileName = "ScreenShot_00" + ++counter + ".png";
             NativeGallery.SaveImageToGallery(_bytes, _albumName, fileName, (success, path) =>
             {

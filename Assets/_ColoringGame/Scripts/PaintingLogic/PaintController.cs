@@ -296,6 +296,8 @@ namespace ColorSwipeGame
         //drawing specific
         private void InitializeSprite(int spriteIndex, Sprite originalSprite)
         {
+            Debug.Log("Chk 0");
+
             _drawingSR.sprite = originalSprite;
             Texture2D originalTexture = originalSprite.texture;
 
@@ -314,6 +316,8 @@ namespace ColorSwipeGame
         // coloring - specific only
         private void InitializeSprite(SpriteRenderer spriteRenderer)
         {
+            Debug.Log("Chk 1");
+
             int spriteIndex = spriteRenderer.transform.GetSiblingIndex();
             Sprite originalSprite = spriteRenderer.sprite;
             Texture2D originalTexture = originalSprite.texture;
@@ -335,6 +339,9 @@ namespace ColorSwipeGame
         // used both by coloring and drawing
         private void InitializeSprite(SpriteRenderer spriteRenderer, LevelTextures levelTextures)
         {
+            Debug.Log("Chk 2");
+
+
             _currentSRIndex = spriteRenderer.transform.GetSiblingIndex();
             Sprite originalSprite = levelTextures.OriginalSprites[_currentSRIndex];
 
@@ -460,6 +467,7 @@ namespace ColorSwipeGame
             Sprite sprite = _currentSpriteRenderer.sprite;
             int key = _currentSpriteRenderer.transform.GetSiblingIndex();
             _currentSRIndex = key;
+
 
             if (!_isEdited[key] && sprite.texture != _editedTextures[key])
             {
