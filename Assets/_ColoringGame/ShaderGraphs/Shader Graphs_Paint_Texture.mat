@@ -37,7 +37,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BrushTexture:
-        m_Texture: {fileID: 2800000, guid: 9b5cdb5352c1bcac387bb6a99c420ac2, type: 3}
+        m_Texture: {fileID: 2800000, guid: b26f9a0ad03ac662fb624fc3b6bbc537, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -45,7 +45,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Original:
-        m_Texture: {fileID: 2800000, guid: ae976c00c47acf345888425a87ee0623, type: 3}
+        m_Texture: {fileID: 2800000, guid: efa3473d2e0f3d24ca11e13fdcf6db0f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -64,6 +64,6 @@ Material:
     m_Floats:
     - _BrushSize: 0.049999997
     m_Colors:
-    - _BrushColor: {r: 1, g: 1, b: 1, a: 1}
-    - _UVPosition: {r: 0.49544308, g: 0.52062273, b: 0, a: 0}
+    - _BrushColor: {r: 0, g: 1, b: 0, a: 1}
+    - _UVPosition: {r: 0.8128587, g: 0.55146843, b: 0, a: 0}
   m_BuildTextureStacks: []
