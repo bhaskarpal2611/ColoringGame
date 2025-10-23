@@ -1,6 +1,7 @@
-using UnityEngine;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace ColorSwipeGame
@@ -26,6 +27,11 @@ namespace ColorSwipeGame
 
         private int _touchCount = 0;
         private int _maxTouchCount = 0;
+
+        [PreviewField(256)]
+        public Texture2D _preTex;
+        [PreviewField(256)]
+        public Texture2D _postTex;
 
         public bool CanPaint { get; set; } = false;
 
@@ -118,8 +124,8 @@ namespace ColorSwipeGame
 
                 Vector2 worldPosition = _mainCamera.ScreenToWorldPoint(touchPosition);
                 _paintController.ContinueDrag(worldPosition, isFastSwipe);
-            
-                if(_touchCount > _maxTouchCount)
+
+                if (_touchCount > _maxTouchCount)
                 {
                     AudioManager.Instance.PlayCheeringAudio();
                     _touchCount = 0;

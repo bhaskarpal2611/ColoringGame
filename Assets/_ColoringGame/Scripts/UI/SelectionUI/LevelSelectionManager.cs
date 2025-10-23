@@ -191,6 +191,5 @@ namespace ColorSwipeGame
             _drawings.SaveDrawnTexture(_currentLevelIndex, _paintService.SaveDrawnState());
         }
 
-
     }
 }

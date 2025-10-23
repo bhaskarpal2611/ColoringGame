@@ -58,25 +58,24 @@ Shader "Custom/PaintCircleFull_URP6_AlphaColorMask"
             {
                 float2 uv = IN.uv;
 
-                half4 paintBase = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv);
-                half4 underBase = SAMPLE_TEXTURE2D(_Original, sampler_Original, uv);
+                half4 paintBase = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv);   // previous paint
+                half4 underBase = SAMPLE_TEXTURE2D(_Original, sampler_Original, uv); // original sprite
 
                 float dist = distance(uv, _UVPosition.xy);
-                float circleMask = step(dist, _BrushSize);
+                float edge = 0.015;
+                float circleMask = smoothstep(_BrushSize, _BrushSize - edge, dist);
 
-                // Color threshold to detect "near black" outlines
-                float colorThreshold = 0.05; // Adjust as needed
-                float isNotBlack = step(colorThreshold, length(underBase.rgb));
+                // Only prevent painting over original black outlines, ignore already painted areas
+                float3 origCol = underBase.rgb;
+                float isNotBlack = step(0.1, origCol.r) * step(0.1, origCol.g) * step(0.1, origCol.b);
 
-                // Updated: restrict mask by alpha AND color threshold
                 float mask = circleMask * underBase.a * isNotBlack;
 
                 half4 newPaint = lerp(paintBase, _BrushColor, mask * _BrushColor.a);
-                half4 finalRGB = lerp(underBase, newPaint, mask * _BrushColor.a);
-
-                float alpha = underBase.a;
-                return half4(finalRGB.rgb, alpha);
+    
+                return half4(newPaint.rgb, underBase.a);
             }
+
             ENDHLSL
         }
     }
