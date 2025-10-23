@@ -122,7 +122,7 @@ namespace ColorSwipeGame
         private Sprite LoadSpritePNG(int i, string filePath)
         {
             byte[] bytes = File.ReadAllBytes(filePath);
-            Texture2D texture = new Texture2D(0, 0, TextureFormat.ARGB32, false);  // Size doesn't matter here; it will be overridden by LoadImage
+            Texture2D texture = new Texture2D(1, 1, TextureFormat.ARGB32, false);  // Size doesn't matter here; it will be overridden by LoadImage
             texture.LoadImage(bytes);  // LoadImage auto-resizes the texture dimensions
 
             Rect rect = new Rect(0, 0, texture.width, texture.height);

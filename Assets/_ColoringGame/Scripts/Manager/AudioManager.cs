@@ -15,6 +15,10 @@ namespace ColorSwipeGame
         [SerializeField] private AudioSO _frenchAudio;
         [SerializeField] private AudioSO _marathiAudio;
         [SerializeField] private AudioSO _bengaliAudio;
+        [SerializeField] private AudioSO _malayalamAudio;
+        [SerializeField] private AudioSO _punjabiAudio;
+        [SerializeField] private AudioSO _bhojpuriAudio;
+        [SerializeField] private AudioSO _gujaratiAudio;
 
         [Space]
         [Space]
@@ -48,6 +52,10 @@ namespace ColorSwipeGame
                 "French" => _frenchAudio,
                 "Marathi" => _marathiAudio,
                 "Bengali" => _bengaliAudio,
+                "Malayalam" => _malayalamAudio,
+                "Punjabi" => _punjabiAudio,
+                "Bhojpuri" => _bhojpuriAudio,
+                "Gujarati" => _gujaratiAudio,
                 _ => _englishAudio,
             };
 

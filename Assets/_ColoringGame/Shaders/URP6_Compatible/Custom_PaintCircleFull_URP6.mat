@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Custom_PaintCircleErase_URP6
-  m_Shader: {fileID: 4800000, guid: 8eca0e2ad8e53a44cb7740f13e5057ef, type: 3}
+  m_Name: Custom_PaintCircleFull_URP6
+  m_Shader: {fileID: 4800000, guid: c82101b4fb77b774d8a706c1d3affde7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -28,13 +28,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Original:
-        m_Texture: {fileID: 2800000, guid: a93e1d7edec71f648ad01ddc1993d218, type: 3}
+        m_Texture: {fileID: 2800000, guid: 40060718712c6c046ad92fe91445c927, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BrushSize: 0.049999997
+    - _BrushSize: 0.02
     m_Colors:
-    - _UVPosition: {r: 0.5177027, g: 0.49678242, b: 0, a: 0}
+    - _BrushColor: {r: 0, g: 1, b: 0, a: 1}
+    - _UVPosition: {r: 0.78792304, g: 0.6332111, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
