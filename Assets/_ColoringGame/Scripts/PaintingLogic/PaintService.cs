@@ -23,7 +23,7 @@ namespace ColorSwipeGame
         private Material[] _customMaterials;
 
         private PaintController _paintController;
-        private Camera _mainCamera;
+        [SerializeField] private Camera _mainCamera;
 
         private int _touchCount = 0;
         private int _maxTouchCount = 0;
@@ -37,7 +37,10 @@ namespace ColorSwipeGame
 
         private void Awake()
         {
-            _mainCamera = Camera.main;
+            if (_mainCamera == null)
+            {
+                _mainCamera = Camera.main;
+            }
             Application.targetFrameRate = 60;
             _maxTouchCount = Random.Range(10, 20);
 

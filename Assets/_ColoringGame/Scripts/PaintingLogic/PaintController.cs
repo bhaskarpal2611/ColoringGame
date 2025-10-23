@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using System.Threading;
-using UnityEngine.Rendering;
 
 namespace ColorSwipeGame
 {
@@ -30,7 +28,7 @@ namespace ColorSwipeGame
         private Dictionary<int, Sprite> _savedSprites = new();
         private int _currentSRIndex;
         private const int BLIT_THRESHOLD = 10;
-        private readonly RaycastHit2D[] _hits;
+        private RaycastHit2D[] _hits;
         private readonly int BrushColorProperty = Shader.PropertyToID("_BrushColor");
         private readonly int BrushSizeProperty = Shader.PropertyToID("_BrushSize");
         private readonly int BrushTextureProperty = Shader.PropertyToID("_BrushTexture");
@@ -390,7 +388,10 @@ namespace ColorSwipeGame
 
         private void RaycastSprites(Vector2 worldPosition)
         {
-            int hitCount = Physics2D.RaycastNonAlloc(worldPosition, Vector2.zero, _hits);
+            _hits = Physics2D.RaycastAll(worldPosition, Vector2.zero);
+
+
+            int hitCount = _hits.Length;
             if (hitCount <= 0) return;
 
             int maxSortingLayer = -1000;
