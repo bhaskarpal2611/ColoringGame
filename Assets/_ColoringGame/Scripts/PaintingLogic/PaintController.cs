@@ -424,7 +424,8 @@ namespace ColorSwipeGame
                 _firstTouch = false;
 
                 // 1f is waitTime for delay in hiding panel
-                _penSelectionHandler.HideMainPanel(.5f);
+                if (_penSelectionHandler)
+                    _penSelectionHandler.HideMainPanel(.5f);
                 ColorSpriteAtPosition(currentTouchPosition);
             }
 

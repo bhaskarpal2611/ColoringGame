@@ -10143,8 +10143,9 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e5dabd531d301e24e8f239aa7b7b03e0, type: 2}
   - {fileID: 2100000, guid: 826a8c51fece24e40b0bf9e11a385070, type: 2}
   - {fileID: 2100000, guid: 2ae621e8b31d5d64dbda0d3a5af13c9c, type: 2}
-  _preTex: {fileID: 0}
-  _postTex: {fileID: 0}
+  _mainCamera: {fileID: 519420031}
+  _loadOnStart: 0
+  _forceOrthoCamera: 0
 --- !u!1 &8214585287191498457
 GameObject:
   m_ObjectHideFlags: 0

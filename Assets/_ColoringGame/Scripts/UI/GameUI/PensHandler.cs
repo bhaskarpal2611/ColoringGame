@@ -173,7 +173,7 @@ namespace ColorSwipeGame.UI
                 color.a = 1f;
                 SelectedPenData.ColoredPens[i].SetColorOnPencil(color);
 
-                SelectedPenData.ColoredPens[i].Button.onClick.AddListener(() =>
+                SelectedPenData.ColoredPens[i].Button.onClick.AddListener(() => 
                 {
                     _paintService.SetColor(color);
                     SelectedPenData.ColoredPenSelection(index);
@@ -253,7 +253,7 @@ namespace ColorSwipeGame.UI
                 ColoredPens[CurrentSelectedColorPen].UnselectedPen();
             }
 
-            ColoredPens[index].OnPenSelected();
+            ColoredPens[index].PenSelected();
             CurrentSelectedColorPen = index;
         }
         public void TexPenSelection(int index)

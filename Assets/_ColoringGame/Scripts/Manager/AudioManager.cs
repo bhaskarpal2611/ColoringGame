@@ -24,6 +24,8 @@ namespace ColorSwipeGame
         [Space]
         [SerializeField] private string _audioLocalization;
 
+
+
         private AudioSource _soundEffect;
         private AudioSource _soundMusic;
         private AudioSource _paintSFX;
@@ -64,12 +66,20 @@ namespace ColorSwipeGame
 
         public void ChangeBrushSound_Erase()
         {
-            _paintSFX.clip = GetSoundClip(Sounds.Erase);
+            var clip = GetSoundClip(Sounds.Erase);
+
+            if (clip != null)
+                _paintSFX.clip = clip;
         }
 
         public void ChangeBrushSound_Paint()
         {
-            _paintSFX.clip = GetSoundClip(Sounds.PaintBrush);
+            var clip = GetSoundClip(Sounds.PaintBrush);
+
+            if (clip != null)
+            {
+                _paintSFX.clip = clip;
+            }
         }
 
         public void PlayClickSound()
@@ -155,6 +165,8 @@ namespace ColorSwipeGame
 
         private AudioClip GetSoundClip(Sounds sound)
         {
+            if (_currentMainAudio == null) return null;
+
             AudioInfo item = Array.Find(_currentMainAudio.Audios, i => i.soundtype == sound);
             if (item != null)
             {

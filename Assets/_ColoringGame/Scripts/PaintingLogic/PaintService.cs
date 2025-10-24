@@ -1,4 +1,3 @@
-using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,24 +22,23 @@ namespace ColorSwipeGame
         private Material[] _customMaterials;
 
         private PaintController _paintController;
+
         [SerializeField] private Camera _mainCamera;
+
+        [Header("Helpers")]
+        [SerializeField] private bool _loadOnStart, _forceOrthoCamera;
 
         private int _touchCount = 0;
         private int _maxTouchCount = 0;
 
-        [PreviewField(256)]
-        public Texture2D _preTex;
-        [PreviewField(256)]
-        public Texture2D _postTex;
-
-        public bool CanPaint { get; set; } = false;
+        public bool CanPaint { get; set; } = true;
 
         private void Awake()
         {
+
             if (_mainCamera == null)
-            {
                 _mainCamera = Camera.main;
-            }
+
             Application.targetFrameRate = 60;
             _maxTouchCount = Random.Range(10, 20);
 
@@ -54,19 +52,35 @@ namespace ColorSwipeGame
             }
         }
 
+        private void Start()
+        {
+            if (_loadOnStart)
+                OnLevelLoad();
+        }
+
         private void OnEnable()
         {
+            if (_forceOrthoCamera)
+                _mainCamera.orthographic = true;
+
             _inputHandler.OnBeginDrag += BeginDrag;
             _inputHandler.OnDragging += OnDrag;
             _inputHandler.OnDragEnd += EndDrag;
             _inputHandler.OnDragStationary += OnDragStationary;
+
+            UI_PencilItem.OnPenSelected += ChangePenColor;
         }
         private void OnDisable()
         {
+            if (_mainCamera)
+                _mainCamera.orthographic = false;
+
             _inputHandler.OnBeginDrag -= BeginDrag;
             _inputHandler.OnDragging -= OnDrag;
             _inputHandler.OnDragEnd -= EndDrag;
             _inputHandler.OnDragStationary -= OnDragStationary;
+
+            UI_PencilItem.OnPenSelected -= ChangePenColor;
         }
 
         private void OnDestroy()
@@ -87,8 +101,6 @@ namespace ColorSwipeGame
         // SwipeToDraw - Load Blank or Level
         public void LoadDrawPaintLevel(Sprite originalSprite)
         {
-            Debug.Log("Chek call to new ");
-
             Transform drawSprite = _spritesContainer.GetChild(0);
 
             _paintController.InitializeLevel(drawSprite, originalSprite);
@@ -98,6 +110,7 @@ namespace ColorSwipeGame
         {
             _paintController.InitializeLevel(_spritesContainer.GetChild(0), drawnTexture);
         }
+
         public Dictionary<int, Sprite> SaveCurrentState()
         {
             return _paintController.GetLastEditState();
@@ -153,6 +166,7 @@ namespace ColorSwipeGame
             }
         }
 
+
         // Public methods for other scripts to interact with PaintController
         public void SetBrushSize(float size) => _paintController.SetBrushScale(size * _brushScaleFactor);
 
@@ -174,6 +188,14 @@ namespace ColorSwipeGame
             AudioManager.Instance.ChangeBrushSound_Erase();
             _paintController.SetErase();
         }
+
+
+        private void ChangePenColor(Color color)
+        {
+            _paintController.SetColor(color);
+            _defaultBrushColor = color;
+        }
+
 
         // on individual pens
         public void SetColor(Color color) => _paintController.SetColor(color);

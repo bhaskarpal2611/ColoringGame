@@ -33,7 +33,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BrushSize: 0.02
+    - _BrushSize: 0.049999997
     m_Colors:
     - _UVPosition: {r: 0.44625488, g: 0.49648708, b: 0, a: 0}
   m_BuildTextureStacks: []
