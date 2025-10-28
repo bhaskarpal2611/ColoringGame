@@ -5,68 +5,89 @@ using UnityEngine.UI;
 
 namespace ColorSwipeGame
 {
+    public enum MoveAxis
+    {
+        X, Y
+    }
     public class UI_PencilItem : MonoBehaviour
     {
-        [SerializeField] Image[] _pencilPieces;
+
+        [Header("Pencil Settings")]
+        [SerializeField] private Image[] _pencilPieces;
         [SerializeField] private Color m_pencilColor;
+        [SerializeField] private RectTransform _rectTransform;
+        [SerializeField] private Button _button;
 
-        private Button _button;
+        [Header("Movement Settings")]
+        [Tooltip("Choose whether this pen moves along X or Y axis when selected/unselected.")]
+        [SerializeField] private MoveAxis moveAxis = MoveAxis.X;
 
-        public Button Button { get { return _button; } }
+        [Tooltip("Anchored position value when the pen is selected.")]
+        [SerializeField] private float selectedPosition = 225f;
 
-        private float YPOS_SELECTED_PEN = -50f;
+        [Tooltip("Anchored position value when the pen is unselected.")]
+        [SerializeField] private float unselectedPosition = 275f;
 
-        private RectTransform _rectTransform;
+        [Tooltip("Tween duration for the pen movement.")]
+        [SerializeField] private float tweenDuration = 0.5f;
+
+        public Button Button => _button;
 
         public static event Action<Color> OnPenSelected;
 
-        private void Start()
-        {
-            _button = GetComponent<Button>();
-            _rectTransform = GetComponent<RectTransform>();
-            SetColorOnPencil(m_pencilColor);
-
-            YPOS_SELECTED_PEN = _rectTransform.localPosition.y;
-            _button.onClick.AddListener(OnButtonClick);
-        }
-
         private void OnEnable()
         {
-            UI_PencilItem.OnPenSelected += CheckSelection;
+            OnPenSelected += CheckSelection;
+        }
+
+        private void Start()
+        {
+            SetColorOnPencil(m_pencilColor);
+            Button.onClick.AddListener(OnButtonClick);
         }
 
         private void OnButtonClick()
         {
             OnPenSelected?.Invoke(m_pencilColor);
+            PenSelected();
         }
 
         private void OnDestroy()
         {
-            _button.onClick.RemoveAllListeners();
+            Button.onClick.RemoveAllListeners();
+            OnPenSelected -= CheckSelection;
         }
 
         private void CheckSelection(Color color)
         {
-            if (color == m_pencilColor)
-            {
-                PenSelected();
-            }
-            else
-            {
+            if (color != m_pencilColor)
                 UnselectedPen();
-            }
         }
-
 
         public void SetColorOnPencil(Color color)
         {
-            for (int i = 0; i < _pencilPieces.Length; i++)
-            {
-                _pencilPieces[i].color = color;
-            }
-        }
-        public void PenSelected() => _rectTransform.DOAnchorPosY(-1.5f, 0.5f);
+            foreach (var piece in _pencilPieces)
+                piece.color = color;
 
-        public void UnselectedPen() => _rectTransform.DOAnchorPosY(-2.5f, 0.5f);
+            m_pencilColor = color;
+        }
+
+        public void PenSelected()
+        {
+            MoveToPosition(selectedPosition);
+        }
+
+        public void UnselectedPen()
+        {
+            MoveToPosition(unselectedPosition);
+        }
+
+        private void MoveToPosition(float target)
+        {
+            if (moveAxis == MoveAxis.X)
+                _rectTransform.DOAnchorPosX(target, tweenDuration);
+            else
+                _rectTransform.DOAnchorPosY(target, tweenDuration);
+        }
     }
 }

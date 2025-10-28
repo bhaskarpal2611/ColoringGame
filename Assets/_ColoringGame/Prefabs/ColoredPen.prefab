@@ -326,6 +326,8 @@ MonoBehaviour:
   - {fileID: 6384745899287271986}
   - {fileID: 9197845643741806658}
   - {fileID: 5007443970328010027}
+  m_pencilColor: {r: 0, g: 0, b: 0, a: 0}
+  _rectTransform: {fileID: 5264994979391328941}
   _button: {fileID: 8152286466561882031}
 --- !u!1 &6721738995125343762
 GameObject:

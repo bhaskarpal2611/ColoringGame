@@ -55,39 +55,6 @@ namespace ColorSwipeGame.UI
             // Tween to the left (e.g., to -300 on the X-axis in 1 second)
             _pencilParent.DOAnchorPosX(XPOS_LEFT, .25f);
         }
-
-
-        //// SINGLE BUTTON SWAPPING
-        //public void OnPenCategorySelection()
-        //{
-        //    _penSelectionHandler.SwapButton();
-        //    _eraseButtonHandler.UnselectEraser();
-
-        //    int prevIndex = _currentSelectedIndex;
-        //    _currentSelectedIndex = ++_currentSelectedIndex % _maxLen;
-
-        //    if (_currentSelectedIndex % 2 != 0)
-        //    {
-        //        _paintService.SetDefaultTextureMode();
-        //    }
-        //    else
-        //    {
-        //        _paintService.SetDefaultColorMode();
-        //    }
-
-        //    _scrollViewReference.content = _pencilParent.GetChild(_currentSelectedIndex) as RectTransform;
-
-        //    // move right current pens.
-        //    // then move left the new pens selected
-
-        //    _pencilParent.DOAnchorPosX(XPOS_LEFT, .25f).SetEase(Ease.OutQuad).OnComplete(() =>
-        //    {
-        //        _pencilParent.GetChild(prevIndex).gameObject.SetActive(false);
-        //        _pencilParent.GetChild(_currentSelectedIndex).gameObject.SetActive(true);
-
-        //        MoveLeft();
-        //    });
-        //}
         
         // SINGLE BUTTON SWAPPING
         public void OnPenCategorySelection(int index)
@@ -100,19 +67,7 @@ namespace ColorSwipeGame.UI
             int prevIndex = _currentSelectedIndex;
             _currentSelectedIndex = ++_currentSelectedIndex % _maxLen;
 
-            //if (_currentSelectedIndex % 2 != 0)
-            //{
-            //    _paintService.SetDefaultTextureMode();
-            //}
-            //else
-            //{
-            //    _paintService.SetDefaultColorMode();
-            //}
-
             _scrollViewReference.content = _pencilParent.GetChild(_currentSelectedIndex) as RectTransform;
-
-            // move right current pens.
-            // then move left the new pens selected
 
             _pencilParent.DOAnchorPosX(XPOS_RIGHT, .25f).SetEase(Ease.OutQuad).OnComplete(() =>
             {
@@ -142,9 +97,6 @@ namespace ColorSwipeGame.UI
 
             _scrollViewReference.content = _pencilParent.GetChild(_currentSelectedIndex) as RectTransform;
 
-            // move right current pens.
-            // then move left the new pens selected
-
             _pencilParent.DOAnchorPosX(XPOS_RIGHT, .25f).SetEase(Ease.OutQuad).OnComplete(() =>
             {
                 _pencilParent.GetChild(prevIndex).gameObject.SetActive(false);
@@ -168,12 +120,12 @@ namespace ColorSwipeGame.UI
             for (int i = 0; i < _colors.Length; i++)
             {
                 int index = i;
-                SelectedPenData.ColoredPens[i] = Instantiate(_pencilPrefab, _pencilParent.GetChild(0));
-                Color color = _colors[i];
+                SelectedPenData.ColoredPens[index] = Instantiate(_pencilPrefab, _pencilParent.GetChild(0));
+                Color color = _colors[index];
                 color.a = 1f;
-                SelectedPenData.ColoredPens[i].SetColorOnPencil(color);
+                SelectedPenData.ColoredPens[index].SetColorOnPencil(color);
 
-                SelectedPenData.ColoredPens[i].Button.onClick.AddListener(() => 
+                SelectedPenData.ColoredPens[index].Button.onClick.AddListener(() => 
                 {
                     _paintService.SetColor(color);
                     SelectedPenData.ColoredPenSelection(index);
@@ -245,17 +197,9 @@ namespace ColorSwipeGame.UI
                 Debug.LogError("Index out of bounds");
                 return;
             }
-
-            if (CurrentSelectedColorPen == index) return;
-
-            if (CurrentSelectedColorPen != -1)
-            {
-                ColoredPens[CurrentSelectedColorPen].UnselectedPen();
-            }
-
-            ColoredPens[index].PenSelected();
             CurrentSelectedColorPen = index;
         }
+
         public void TexPenSelection(int index)
         {
             if (index < 0 || index >= TexturedPens.Length)

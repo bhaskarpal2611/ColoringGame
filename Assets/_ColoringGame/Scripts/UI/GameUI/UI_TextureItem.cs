@@ -7,7 +7,6 @@ namespace ColorSwipeGame
     public class UI_TextureItem : MonoBehaviour
     {
         [SerializeField] private Button _button;
-        private const float XPOS_SELECTED_PEN = -75f;
 
         private void OnDestroy()
         {
@@ -15,6 +14,7 @@ namespace ColorSwipeGame
         }
 
         public Button Button { get { return _button; } }
+
         public void OnTextureSelected()
         {
             transform.DOScale(1.25f, 0.25f);
