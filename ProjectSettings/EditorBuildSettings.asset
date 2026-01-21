@@ -18,3 +18,4 @@ EditorBuildSettings:
     path: Assets/Scenes/PlayschoolMainScene.unity
     guid: 4816754db985f4928880e901e3a522a3
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
