@@ -68,16 +68,24 @@ namespace ColorSwipeGame
             return Levels.levelsData[index].LevelImageName;
         }
 
-        public void SaveLevelState(int index, Dictionary<int, Sprite> editedTextures)
+        public System.Collections.IEnumerator SaveLevelState(int index, Dictionary<int, Sprite> editedTextures)
         {
             Levels.levelsData[index].CurrentTextures.TexturesData.Clear();
 
+            int count = 0;
             foreach (var kvp in editedTextures)
             {
                 string textureFileName = "texture_" + index + "_" + kvp.Key;  // Unique file name
                 SaveTextureToFile(kvp.Value, textureFileName);
 
                 Levels.levelsData[index].CurrentTextures.TexturesData.Add(new TextureData(kvp.Key, textureFileName));
+                
+                count++;
+                if (count % 3 == 0) // Yield every 3 textures to prevent freezing
+                {
+                    yield return null;
+                    Resources.UnloadUnusedAssets();
+                }
             }
         }
 

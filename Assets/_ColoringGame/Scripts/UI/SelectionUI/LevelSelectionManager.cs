@@ -141,8 +141,8 @@ namespace ColorSwipeGame
         private IEnumerator SaveTextures()
         {
             yield return null;
+            yield return SaveLevelState();
 
-            SaveLevelState();
             _levelImageHandler.UpdateSprite(_currentLevelIndex);
 
             _loadingPanel.DOScale(0f, 0.25f).SetEase(Ease.Linear).OnComplete(() =>
@@ -181,9 +181,9 @@ namespace ColorSwipeGame
             });
         }
 
-        private void SaveLevelState()
+        private IEnumerator SaveLevelState()
         {
-            _levels.SaveLevelState(_currentLevelIndex, _paintService.SaveCurrentState());
+            yield return _levels.SaveLevelState(_currentLevelIndex, _paintService.SaveCurrentState());
         }
 
         private void SaveDrawnState()
