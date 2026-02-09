@@ -275,26 +275,26 @@ namespace ColorSwipeGame
         //         RenderTextureFormat.ARGB32,
         //         RenderTextureReadWrite.Linear
         //     );
-        // 
+
         //     // Blit from the source to the temporary RenderTexture
         //     Graphics.Blit(source, temp);
-        // 
+
         //     // Set the active RenderTexture to the temporary one
         //     RenderTexture previous = RenderTexture.active;
         //     RenderTexture.active = temp;
-        // 
+
         //     if (!_savedSprites.ContainsKey(_currentSRIndex))
         //     {
         //         _savedSprites.Add(_currentSRIndex, Sprite.Create(new Texture2D(source.width, source.height), _originalSprites[_currentSRIndex].rect, Vector2.one * .5f));
         //     }
-        // 
+
         //     // Read the pixels from the temporary RenderTexture to the destination Texture2D
         //     _savedSprites[_currentSRIndex].texture.ReadPixels(new Rect(0, 0, temp.width, temp.height), 0, 0);
         //     _savedSprites[_currentSRIndex].texture.Apply();
-        // 
+
         //     // Restore the previous active RenderTexture
         //     RenderTexture.active = previous;
-        // 
+
         //     // Release the temporary RenWderTexture
         //     RenderTexture.ReleaseTemporary(temp);
         // }
@@ -560,7 +560,7 @@ namespace ColorSwipeGame
         // private void SaveCurrentTextureState()
         // {
         //     int index = _currentSpriteRenderer.transform.GetSiblingIndex();
-        // 
+
         //     if (_isEdited[index])
         //     {
         //         Texture2D newTex = new(_editedTextures[index].width, _editedTextures[index].height, TextureFormat.RGBA32, 1, false);
