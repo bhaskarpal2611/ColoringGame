@@ -22,7 +22,7 @@ namespace ColorSwipeGame
         }
 
         // now Y-Pos
-        private const float YPOS_MAX = 100f;
+        private const float YPOS_MAX = 50f;
         private const float YPOS_MIN = -240f;
 
         public void OpenSidePanel()
