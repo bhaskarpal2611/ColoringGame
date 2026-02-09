@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-UnityVersion: 6000.0.35f1
-CRC: 2602363965
+UnityVersion: 6000.0.62f1
+CRC: 244147876
 HashAppended: 0
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: swipetodraw
+      Name: colorswipe
       Dependencies: {}
     Info_1:
-      Name: colorswipe
+      Name: swipetodraw
       Dependencies: {}

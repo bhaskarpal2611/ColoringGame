@@ -133,6 +133,8 @@ namespace ColorSwipeGame
 
             RenderTexture.active = null;
 
+            if (_sprite != null) Destroy(_sprite); 
+
             // create a sprite from texture
             Sprite sprite = Sprite.Create(_texture, _rect, Vector2.one * 0.5f);
             _sprite = sprite;
@@ -167,6 +169,8 @@ namespace ColorSwipeGame
             _texture.Apply();
 
             RenderTexture.active = null;
+
+            if (_referenceImage.sprite != null) Destroy(_referenceImage.sprite);
 
             // create a sprite from texture
             Sprite sprite = Sprite.Create(_texture, _rect, Vector2.one * 0.5f);

@@ -542,7 +542,7 @@ namespace ColorSwipeGame
             {
                 if (sprite != null)
                 {
-                    // Object.Destroy(sprite);
+                    Object.Destroy(sprite);
                 }
             }
             _editedSprites.Clear();
@@ -561,6 +561,11 @@ namespace ColorSwipeGame
                 _editedTextures.Add(i, new Texture2D(_originalSprites[i].texture.width, _originalSprites[i].texture.height, _originalSprites[i].texture.format, false));
                 _isEdited[i] = false;
             }
+
+            foreach (var sprite in _editedSprites.Values)
+            {
+                if (sprite != null) Object.Destroy(sprite);
+            }
             _editedSprites.Clear();
         }
 
@@ -571,6 +576,11 @@ namespace ColorSwipeGame
             _editedTextures.Remove(0);
             _editedTextures.Add(0, new Texture2D(_originalSprites[0].texture.width, _originalSprites[0].texture.height, _originalSprites[0].texture.format, false));
             _isEdited[0] = false;
+
+            if (_editedSprites.ContainsKey(0) && _editedSprites[0] != null)
+            {
+                Object.Destroy(_editedSprites[0]);
+            }
             _editedSprites.Clear();
         }
     }
