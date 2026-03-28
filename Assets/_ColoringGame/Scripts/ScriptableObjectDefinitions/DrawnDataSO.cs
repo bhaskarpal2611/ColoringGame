@@ -51,7 +51,7 @@ namespace ColorSwipeGame
 
             if (Levels.Count == index)
             {
-                Levels.Add(Levels[index]);
+                Levels.Add(new DrawnData(index));
             }
             string texFileName = "Texture_00" + index;
             SaveTextureToFile(editedTexture.texture, texFileName);
@@ -69,6 +69,7 @@ namespace ColorSwipeGame
         private void SaveTextureToFile(Texture2D texture, string fileName)
         {
             RenderTexture rt = RenderTexture.GetTemporary(texture.width, texture.height, 0, RenderTextureFormat.ARGB32);
+            RenderTexture previous = RenderTexture.active;
             RenderTexture.active = rt;
             GL.Clear(true, true, Color.clear);
             Graphics.Blit(texture, rt);
@@ -86,7 +87,10 @@ namespace ColorSwipeGame
 
             string filePath = Path.Combine(folderPath, fileName + ".png");
 
-            File.WriteAllBytes(filePath, textureBytes);
+            System.Threading.Tasks.Task.Run(() => File.WriteAllBytes(filePath, textureBytes));
+
+            RenderTexture.active = previous;
+            RenderTexture.ReleaseTemporary(rt);
         }
 
         private Texture2D LoadTextureFromFile(string fileName)

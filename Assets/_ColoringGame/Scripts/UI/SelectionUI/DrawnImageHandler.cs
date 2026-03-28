@@ -36,26 +36,21 @@ namespace ColorSwipeGame
             _drawnData.SaveImageForIcon(index, fileName);
         }
 
-        bool initLoadFlag = false;
 
         private void LoadDrawingIcons()
         {
-            if (initLoadFlag)
+            // Clear existing icons to prevent duplication
+            foreach (Transform child in _contentParent)
             {
-                Debug.Log("level count: " + (_drawnData.Levels.Count - 1));
-                Debug.Log("tf count: " + transform.childCount);
-
-                int index = _drawnData.Levels.Count - 1;
-
-                string fileName = _drawnData.GetImageIconFileName(index);
-                if (fileName != null)
-                {
-                    InitializeDrawingImagePrefab(index, fileName);
-                }
-                return;
+                // Don't destroy the "New Drawing" button if it's a child, 
+                // but usually it's a separate sibling or we can just filter it.
+                if (child == _newDrawing) continue;
+                Destroy(child.gameObject);
             }
 
-            for (int i = _drawnData.Levels.Count - 1; i >= 0; i--)
+            // Loop from oldest to newest. Each new one becomes FirstSibling,
+            // so newest ends up being the first one displayed.
+            for (int i = 0; i < _drawnData.Levels.Count; i++)
             {
                 string fileName = _drawnData.GetImageIconFileName(i);
                 if (fileName != null)
@@ -63,7 +58,6 @@ namespace ColorSwipeGame
                     InitializeDrawingImagePrefab(i, fileName);
                 }
             }
-            initLoadFlag = true;
         }
 
         int _currentIndex = -1;

@@ -112,13 +112,20 @@ namespace ColorSwipeGame
         private void SaveTextureToFile(Sprite sprite, string fileName)
         {
             RenderTexture rt = RenderTexture.GetTemporary(sprite.texture.width, sprite.texture.height, 0, RenderTextureFormat.ARGB32);
+            RenderTexture previous = RenderTexture.active;
             RenderTexture.active = rt;
             GL.Clear(true, true, Color.clear);
             Graphics.Blit(sprite.texture, rt);
-            sprite.texture.ReadPixels(new Rect(0, 0, sprite.texture.width, sprite.texture.height), 0, 0);
-            sprite.texture.Apply();
+            
+            Texture2D tempTex = new Texture2D(sprite.texture.width, sprite.texture.height, TextureFormat.ARGB32, false);
+            tempTex.ReadPixels(new Rect(0, 0, tempTex.width, tempTex.height), 0, 0);
+            tempTex.Apply();
 
-            byte[] textureBytes = sprite.texture.EncodeToPNG();  // Or use EncodeToJPG for smaller files
+            byte[] textureBytes = tempTex.EncodeToPNG();  // Encode on main thread
+
+            RenderTexture.active = previous;
+            RenderTexture.ReleaseTemporary(rt);
+            Destroy(tempTex); // Cleanup temp texture to prevent RAM leak
 
             string filePath = Path.Combine(Application.persistentDataPath, "SavedTextures");
 
@@ -127,15 +134,10 @@ namespace ColorSwipeGame
                 Directory.CreateDirectory(filePath);
                 Debug.Log($"Created folder: {filePath}");
             }
-            else
-            {
-                Debug.Log($"Folder already exists: {filePath}");
-            }
 
-            string folderName = fileName + ".png";
-            string fullPath = Path.Combine(filePath, folderName);
+            string fullPath = Path.Combine(filePath, fileName + ".png");
                 
-            File.WriteAllBytes(fullPath, textureBytes);
+            System.Threading.Tasks.Task.Run(() => File.WriteAllBytes(fullPath, textureBytes));
         }
 
         private Texture2D LoadTextureFromFile(string fileName)

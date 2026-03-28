@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 
 namespace ColorSwipeGame
@@ -21,7 +21,7 @@ namespace ColorSwipeGame
         private PenSelectionHandler _penSelectionHandler;
         private TimeKeeper _timeKeeper;
 
-        private List<bool> _isEdited = new();
+        private Dictionary<int, bool> _isEdited = new();
         private Dictionary<int, Texture2D> _editedTextures = new Dictionary<int, Texture2D>();
         private Dictionary<int, Sprite> _originalSprites = new Dictionary<int, Sprite>();
         private Dictionary<int, Sprite> _editedSprites = new Dictionary<int, Sprite>();
@@ -130,9 +130,9 @@ namespace ColorSwipeGame
 
         public bool IsDrawingEdited()
         {
-            for (int i = 0; i < _isEdited.Count; i++)
+            foreach (var edited in _isEdited.Values)
             {
-                if (_isEdited[i])
+                if (edited)
                 {
                     return true;
                 }
@@ -205,7 +205,16 @@ namespace ColorSwipeGame
 
             int spriteIndex = sprite.GetSiblingIndex();
             _drawingSR = sprite.GetComponent<SpriteRenderer>();
-            Debug.Log("sprite texture: " + _drawingSR.sprite.name);
+
+            if (_drawingSR == null)
+            {
+                Debug.LogError($"[PaintController] SpriteRenderer not found on {sprite.name}!");
+                return;
+            }
+
+            if (_drawingSR.sprite != null)
+                Debug.Log("sprite texture: " + _drawingSR.sprite.name);
+
             InitializeSprite(spriteIndex, originalSprite);
         }
 
@@ -311,15 +320,16 @@ namespace ColorSwipeGame
                 _drawingSR.gameObject.AddComponent<PolygonCollider2D>();
             }
 
-            _originalSprites.Add(spriteIndex, originalSprite);
+            _originalSprites[spriteIndex] = originalSprite;
 
-            _isEdited.Add(false);
+            _isEdited[spriteIndex] = false;
+
             if (_editedTextures == null)
             {
                 _editedTextures = new();
             }
 
-            _editedTextures.Add(spriteIndex, CreateReadableTexture(originalSprite.texture));
+            _editedTextures[spriteIndex] = CreateReadableTexture(originalSprite.texture);
         }
 
         // coloring - specific only
@@ -335,10 +345,11 @@ namespace ColorSwipeGame
                 spriteRenderer.gameObject.AddComponent<PolygonCollider2D>();
             }
 
-            _originalSprites.Add(spriteIndex, originalSprite);
-            _isEdited.Add(false);
+            _originalSprites[spriteIndex] = originalSprite;
+            
+            _isEdited[spriteIndex] = false;
 
-            _editedTextures.Add(spriteIndex, CreateReadableTexture(originalSprite.texture));
+            _editedTextures[spriteIndex] = CreateReadableTexture(originalSprite.texture);
         }
 
         // used both by coloring and drawing
@@ -358,13 +369,13 @@ namespace ColorSwipeGame
 
             if (levelTextures.EditedTextures.ContainsKey(_currentSRIndex))
             {
-                _isEdited.Add(true);
+                _isEdited[_currentSRIndex] = true;
                 _editedTextures[_currentSRIndex] = levelTextures.EditedTextures[_currentSRIndex];
             }
             else
             {
-                _isEdited.Add(false);
-                _editedTextures.Add(_currentSRIndex, CreateReadableTexture(originalSprite.texture));
+                _isEdited[_currentSRIndex] = false;
+                _editedTextures[_currentSRIndex] = CreateReadableTexture(originalSprite.texture);
             }
 
             Sprite newSprite = Sprite.Create(_editedTextures[_currentSRIndex], originalSprite.rect, Vector2.one / 2, originalSprite.pixelsPerUnit);
@@ -513,6 +524,8 @@ namespace ColorSwipeGame
             int key = _currentSpriteRenderer.transform.GetSiblingIndex();
             _currentSRIndex = key;
 
+            if (!_isEdited.ContainsKey(key) || !_editedTextures.ContainsKey(key) || !_originalSprites.ContainsKey(key)) return;
+
             if (!_isEdited[key] && sprite.texture != _editedTextures[key])
             {
                 Graphics.CopyTexture(sprite.texture, _editedTextures[key]);
@@ -538,7 +551,7 @@ namespace ColorSwipeGame
             if (!_editedSprites.TryGetValue(key, out Sprite _))
             {
                 Sprite newSprite = Sprite.Create(_editedTextures[key], sprite.rect, Vector2.one / 2, sprite.pixelsPerUnit);
-                _editedSprites.Add(key, newSprite);
+                _editedSprites[key] = newSprite;
             }
             _currentSpriteRenderer.sprite = _editedSprites[key];
         }
@@ -596,11 +609,15 @@ namespace ColorSwipeGame
         {
             for (int i = 0; i < _spritesParent.childCount; i++)
             {
+                if (!_originalSprites.ContainsKey(i)) continue;
+
                 _spritesParent.GetChild(i).GetComponent<SpriteRenderer>().sprite = _originalSprites[i];
 
-                Object.Destroy(_editedTextures[i]);
-                _editedTextures.Remove(i);
-                _editedTextures.Add(i, CreateReadableTexture(_originalSprites[i].texture));
+                if (_editedTextures.ContainsKey(i))
+                {
+                    Object.Destroy(_editedTextures[i]);
+                }
+                _editedTextures[i] = CreateReadableTexture(_originalSprites[i].texture);
                 _isEdited[i] = false;
             }
 
@@ -613,11 +630,16 @@ namespace ColorSwipeGame
 
         private void RestoreEmptyCanvas()
         {
-            _drawingSR.sprite = _originalSprites[0];
-            Object.Destroy(_editedTextures[0]);
-            _editedTextures.Remove(0);
-            _editedTextures.Add(0, CreateReadableTexture(_originalSprites[0].texture));
-            _isEdited[0] = false;
+            int index = _drawingSR.transform.GetSiblingIndex();
+            if (!_originalSprites.ContainsKey(index)) return;
+
+            _drawingSR.sprite = _originalSprites[index];
+            if (_editedTextures.ContainsKey(index))
+            {
+                Object.Destroy(_editedTextures[index]);
+            }
+            _editedTextures[index] = CreateReadableTexture(_originalSprites[index].texture);
+            _isEdited[index] = false;
 
             if (_editedSprites.ContainsKey(0) && _editedSprites[0] != null)
             {

@@ -26,19 +26,36 @@ public class BundleTestandLoad : MonoBehaviour
     
     private void Awake()
     {
-     Screen.orientation = ScreenOrientation.LandscapeLeft;
-        if (isAndroid)
-        {
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
 
-            filePathAssetBundle = Path.Combine(Application.streamingAssetsPath + "/android", bundleName);
-        }
-        else
-        {
+        string platformSubfolder = "Windows"; // Default subfolder name
+        
+#if UNITY_ANDROID
+        platformSubfolder = "Android";
+#elif UNITY_IOS
+        platformSubfolder = "IOS";
+#endif
 
-
-            filePathAssetBundle = Path.Combine(Application.streamingAssetsPath, bundleName);
-        }
-
+#if UNITY_EDITOR
+        // In Editor, load from the project folder directly
+        // Note: We use "Windows" for Editor testing usually, but if you switched platform to Android in build settings,
+        // you might want to test Android bundles (if you have simulation enabled) or Windows bundles (for proper rendering).
+        // For this fix (Pink textures), we rely on Windows bundles in Editor.
+        platformSubfolder = "Windows"; 
+        
+        filePathAssetBundle = Path.Combine(Application.dataPath, "AssetBundles", platformSubfolder, bundleName);
+#else
+        // On Device, load from StreamingAssets
+        // IMPORTANT: You must copy the bundles from Assets/AssetBundles to Assets/StreamingAssets before building!
+        // or implement a build script to do it for you.
+         platformSubfolder = "android"; // Revert to lowercase for streaming assets if that's your convention or keep CamelCase
+         if (Application.platform == RuntimePlatform.Android) platformSubfolder = "Android";
+         if (Application.platform == RuntimePlatform.IPhonePlayer) platformSubfolder = "IOS";
+         
+        filePathAssetBundle = Path.Combine(Application.streamingAssetsPath, platformSubfolder, bundleName);
+#endif
+        
+        Debug.Log($"[BundleLoader] Platform: {Application.platform}. Loading bundle from: {filePathAssetBundle}");
     }
     private void Start() {
         loadingObject.gameObject.SetActive(true);

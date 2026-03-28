@@ -154,7 +154,7 @@ namespace ColorSwipeGame
             }
 
             string editorPath = Path.Combine(_filePath, fileName + ".png");
-            File.WriteAllBytes(editorPath, _bytes);
+            System.Threading.Tasks.Task.Run(() => File.WriteAllBytes(editorPath, _bytes));
             return fileName;
         }
 
