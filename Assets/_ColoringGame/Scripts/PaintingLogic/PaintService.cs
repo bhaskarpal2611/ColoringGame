@@ -133,13 +133,13 @@ namespace ColorSwipeGame
             }
         }
 
-        private void OnDrag(Vector2 touchPosition, bool isFastSwipe)
+        private void OnDrag(Vector2 touchPosition)
         {
             if (CanPaint)
             {
 
                 Vector2 worldPosition = _mainCamera.ScreenToWorldPoint(touchPosition);
-                _paintController.ContinueDrag(worldPosition, isFastSwipe);
+                _paintController.ContinueDrag(worldPosition);
 
                 if (_touchCount > _maxTouchCount)
                 {

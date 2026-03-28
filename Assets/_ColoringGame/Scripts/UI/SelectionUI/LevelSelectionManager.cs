@@ -77,7 +77,6 @@ namespace ColorSwipeGame
                 _penSelectionHandler.ShowPanelAtStart();
                 _firstTimeLoaded = true;
             }
-#if UNITY_ANDROID || UNITY_EDITOR
             if (_levels.IsEdited(index))
             {
                 _paintService.OnEditedLevelLoad(_levels.LoadTextures(index));
@@ -87,11 +86,6 @@ namespace ColorSwipeGame
                 _paintService.OnLevelLoad();
                 _levels.SetIsEdited(index, true);
             }
-#endif
-
-#if UNITY_IPHONE || UNITY_IOS
-            _paintService.OnLevelLoad();
-#endif
 
             _paintService.CanPaint = true;
 
@@ -119,7 +113,6 @@ namespace ColorSwipeGame
         public void GoBackToSelectionScene()
         {
 
-#if UNITY_ANDROID || UNITY_EDITOR
             _loadingPanel.DOScale(1f, .25f).SetEase(Ease.Linear).OnComplete(() =>
             {
                 if (_saveCoroutine != null)
@@ -129,13 +122,6 @@ namespace ColorSwipeGame
 
                 _saveCoroutine = StartCoroutine(SaveTextures());
             });
-#endif
-
-#if UNITY_IPHONE || UNITY_IOS
-            _selectionSceneCanvas.SetActive(true);
-            _paintService.OnBackButtonPressed();
-            Destroy(_currentLevel.gameObject);
-#endif
         }
 
         private IEnumerator SaveTextures()

@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Custom_PaintCircleFull_URP6
-  m_Shader: {fileID: 4800000, guid: c82101b4fb77b774d8a706c1d3affde7, type: 3}
+  m_Name: UI_MaskedPainter
+  m_Shader: {fileID: 4800000, guid: 6825a44a578d2b64da8d34c6206c4140, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -27,15 +27,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Original:
-        m_Texture: {fileID: 2800000, guid: 40060718712c6c046ad92fe91445c927, type: 3}
+    - _MaskTex:
+        m_Texture: {fileID: 2800000, guid: 44f9e20f47b6a474897c14511d20c51f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _PaintTex:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats:
-    - _BrushSize: 0.02
-    m_Colors:
-    - _BrushColor: {r: 0.93333334, g: 1, b: 0.5254902, a: 1}
-    - _UVPosition: {r: 0.24258961, g: 0.6922711, b: 0, a: 0}
+    m_Floats: []
+    m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -50,12 +50,21 @@ namespace ColorSwipeGame
         public void BeginDrag(Vector2 worldPosition)
         {
             _firstTouch = true;
-            //_currentRT = new RenderTexture(2048, 2048, 0, RenderTextureFormat.ARGB32);
+            _isDragging = false; // Reset to ensure new RenderTexture generation
+
+            // Safeguard: If a previous touch was interrupted and dropped EndDrag, clean up the leaked RT
+            if (_currentRT != null)
+            {
+                _currentRT.DiscardContents();
+                RenderTexture.ReleaseTemporary(_currentRT);
+                _currentRT = null;
+            }
+
             RaycastSprites(worldPosition);
             AudioManager.Instance.PlayPaintingSound();
         }
 
-        public void ContinueDrag(Vector2 worldPosition, bool isFastSwipe)
+        public void ContinueDrag(Vector2 worldPosition)
         {
             if (!_currentSpriteRenderer) return;
 
@@ -63,8 +72,7 @@ namespace ColorSwipeGame
 
             _isDragging = true;
 
-
-            DrawLines(worldPosition, isFastSwipe);
+            DrawLines(worldPosition);
         }
 
         public void EndDrag()
@@ -469,7 +477,7 @@ namespace ColorSwipeGame
             ColorSpriteAtPosition(_hits[topIndex].point);
         }
 
-        private void DrawLines(Vector2 currentTouchPosition, bool isFastSwipe)
+        private void DrawLines(Vector2 currentTouchPosition)
         {
             if (_firstTouch)
             {
@@ -482,31 +490,23 @@ namespace ColorSwipeGame
                 ColorSpriteAtPosition(currentTouchPosition);
             }
 
-            float distanceSqr = (currentTouchPosition - _lastTouchPosition).sqrMagnitude;
-            float stepSize = _paintData.BrushSize * 0.5f;
+            float distance = Vector2.Distance(_lastTouchPosition, currentTouchPosition);
+            float baseStepSize = Mathf.Max(0.01f, _paintData.BrushSize * 0.5f);
 
-            if (isFastSwipe)
-            {
-                int steps = Mathf.Max(1, Mathf.CeilToInt(Mathf.Sqrt(distanceSqr) / stepSize));
-                for (int i = 1; i <= steps; i++)
-                {
-                    if (i % BLIT_THRESHOLD == 0)
-                    {
-                        float t = i / (float)steps;
-                        Vector2 interpolatedPoint = Vector2.Lerp(_lastTouchPosition, currentTouchPosition, t);
-                        ColorSpriteAtPosition(interpolatedPoint);
-                    }
-                }
-            }
-            else // Slow drawing
-            {
-                Vector2 direction = (currentTouchPosition - _lastTouchPosition).normalized;
-                Vector2 currentPoint = _lastTouchPosition;
+            int requestedSteps = Mathf.CeilToInt(distance / baseStepSize);
+            
+            // Limit absolute max steps per frame to protect the GPU
+            // 40 steps per frame is high enough for a continuous line but safe for older iPhones
+            int maxSafeSteps = 40; 
+            int actualSteps = Mathf.Min(requestedSteps, maxSafeSteps);
 
-                while ((currentPoint - _lastTouchPosition).sqrMagnitude < distanceSqr)
+            if (actualSteps > 0)
+            {
+                for (int i = 1; i <= actualSteps; i++)
                 {
-                    ColorSpriteAtPosition(currentPoint);
-                    currentPoint += direction * stepSize;
+                    float t = i / (float)actualSteps; 
+                    Vector2 interpolatedPoint = Vector2.Lerp(_lastTouchPosition, currentTouchPosition, t);
+                    ColorSpriteAtPosition(interpolatedPoint);
                 }
             }
 
@@ -538,6 +538,11 @@ namespace ColorSwipeGame
 
             if (!_isDragging)
             {
+                if (_currentRT != null) 
+                {
+                    RenderTexture.ReleaseTemporary(_currentRT);
+                }
+
                 _currentRT = RenderTexture.GetTemporary(_editedTextures[key].width, _editedTextures[key].height, 0, RenderTextureFormat.ARGB32);
                 RenderTexture.active = _currentRT;
                 GL.Clear(true, true, Color.clear);
