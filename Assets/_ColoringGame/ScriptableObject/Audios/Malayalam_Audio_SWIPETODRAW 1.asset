@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7afb63838b333514a93c998635c9d58b, type: 3}
+  m_Name: Malayalam_Audio_SWIPETODRAW 1
+  m_EditorClassIdentifier: 
+  Audios:
+  - soundtype: 2
+    soundclips:
+    - {fileID: 8300000, guid: 7d20312533f485f4ebd8278fae3f322f, type: 3}
+  - soundtype: 1
+    soundclips:
+    - {fileID: 8300000, guid: 70862d3c854243c43a525a7105e4710a, type: 3}
+  - soundtype: 6
+    soundclips:
+    - {fileID: 8300000, guid: 08b6bf7abb164fc42b15d4570d4a49af, type: 3}
+  - soundtype: 7
+    soundclips:
+    - {fileID: 8300000, guid: 4d19def092bf67643a72f837e93d6a29, type: 3}
+  - soundtype: 9
+    soundclips:
+    - {fileID: 8300000, guid: c1c4cb7eaf207a54689600aa03c8e880, type: 3}
+  - soundtype: 8
+    soundclips:
+    - {fileID: 8300000, guid: 95d006e60383eca4994a7c5191294e1a, type: 3}
+    - {fileID: 8300000, guid: 1138b6415a1b7e249ab48b738b1fd285, type: 3}
+    - {fileID: 8300000, guid: 6ae69fef29cde4d4b96b8bd1d7546fe2, type: 3}
+    - {fileID: 8300000, guid: 71db34922b893064e82881e3f6dfe7f6, type: 3}
+    - {fileID: 8300000, guid: 64e2fa2715d38084eb77d462b32690e1, type: 3}
+    - {fileID: 8300000, guid: a1588dffe55a47f46ac8c79ff0439d4b, type: 3}
+    - {fileID: 8300000, guid: 1421a34e75c49df4794f048a803dfecb, type: 3}
+    - {fileID: 8300000, guid: 3f39841501a86c8429c08d7af5488e33, type: 3}
+    - {fileID: 8300000, guid: 5d77efc9a52612649a8924a1ad56c367, type: 3}
+    - {fileID: 8300000, guid: 4231cc5a5303da54b9a3408e96feccd3, type: 3}
+  - soundtype: 5
+    soundclips:
+    - {fileID: 8300000, guid: 6ed4adb4c2a741849b5bc3e8f2daedc5, type: 3}

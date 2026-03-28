@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c83e10a60126c6e6817557701b496bd, type: 3}
+  m_Name: SO_DrawnData
+  m_EditorClassIdentifier: 
+  OriginalEmptySprite: {fileID: 21300000, guid: 40060718712c6c046ad92fe91445c927, type: 3}
+  Levels:
+  - IndexNumber: 0
+    DrawnTextureFileName: Texture_000
+    SnapshotFileName: SavedDrawing_000
+  - IndexNumber: 1
+    DrawnTextureFileName: Texture_001
+    SnapshotFileName: SavedDrawing_001
+  - IndexNumber: 2
+    DrawnTextureFileName: Texture_002
+    SnapshotFileName: SavedDrawing_002

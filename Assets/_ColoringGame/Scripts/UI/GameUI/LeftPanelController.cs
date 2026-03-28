@@ -6,6 +6,7 @@ namespace ColorSwipeGame
 {
     public class LeftPanelController : MonoBehaviour, IPointerClickHandler
     {
+        [SerializeField] private ExpandButton _hintHelper;
 
         [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private float _sliderTime = 0.25f;
@@ -20,28 +21,36 @@ namespace ColorSwipeGame
             else CloseSidePanel();
         }
 
-        private const float XPOS_MAX = 0f;
-        private const float XPOS_MIN = -450f;
+        // now Y-Pos
+        private const float YPOS_MAX = 50f;
+        private const float YPOS_MIN = -240f;
 
         public void OpenSidePanel()
         {
-            _rectTransform.DOAnchorPosX(XPOS_MAX, _sliderTime);
+            _rectTransform.DOAnchorPosY(YPOS_MAX, _sliderTime);
             TogglePanelOpen();
         }
 
         public void CloseSidePanel()
         {
-            _rectTransform.DOAnchorPosX(XPOS_MIN, _sliderTime);
+            _rectTransform.DOAnchorPosY(YPOS_MIN, _sliderTime);
             TogglePanelOpen();
+            _hintHelper.ForceCloseWindow(0.25f);
         }
 
+        public void CompleteHidePanel()
+        {
+            _rectTransform.DOAnchorPosY(YPOS_MIN - 100f, _sliderTime);
+            TogglePanelOpen();
+            _hintHelper.ForceCloseWindow(0.25f);
+        }
 
         // opening panel and closing at start of level load
         public void ShowPanelAtStart()
         {
-            _rectTransform.DOAnchorPosX(XPOS_MAX, _sliderTime).SetDelay(_startingDelayTime).OnComplete(() =>
+            _rectTransform.DOAnchorPosY(YPOS_MAX, _sliderTime).SetDelay(_startingDelayTime).OnComplete(() =>
             {
-                _rectTransform.DOAnchorPosX(XPOS_MIN, _sliderTime).SetDelay(_startingDelayTime);
+                _rectTransform.DOAnchorPosY (YPOS_MIN, _sliderTime).SetDelay(_startingDelayTime);
             });
         }
     }
