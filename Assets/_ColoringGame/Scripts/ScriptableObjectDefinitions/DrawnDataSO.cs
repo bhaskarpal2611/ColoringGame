@@ -10,7 +10,7 @@ namespace ColorSwipeGame
     public class DrawnDataSO : ScriptableObject
     {
         public Sprite OriginalEmptySprite;
-        public List<DrawnData> Levels = new();
+        public List<DrawnData> Levels = new List<DrawnData>();
 
         // get default empty index - 0 empty box
 

@@ -42,9 +42,6 @@ namespace ColorSwipeGame
 
         public void LoadSprites()
         {
-
-#if UNITY_ANDROID || UNITY_EDITOR
-
             for (int i = 0; i < _sprites.data.LevelSprites.Length; i++)
             {
                 string fileName = _levelData.GetEditedImage(i);
@@ -66,14 +63,6 @@ namespace ColorSwipeGame
                     _images[i].sprite = _sprites.data.LevelSprites[i];
                 }
             }
-#endif
-
-#if UNITY_IPHONE || UNITY_IOS
-            for (int i = 0; i < _sprites.data.LevelSprites.Length; i++)
-            {
-                _images[i].sprite = _sprites.data.LevelSprites[i];
-            }
-#endif
         }
         private void LoadSpritePNG(int i, string filePath)
         {

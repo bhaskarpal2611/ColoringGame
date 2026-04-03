@@ -70,11 +70,16 @@ namespace ColorSwipeGame
 
         public System.Collections.IEnumerator SaveLevelState(int index, Dictionary<int, Sprite> editedTextures)
         {
+            if (editedTextures == null) yield break;
+
+            SafeInitialize(index);
             Levels.levelsData[index].CurrentTextures.TexturesData.Clear();
 
             int count = 0;
             foreach (var kvp in editedTextures)
             {
+                if (kvp.Value == null) continue;
+
                 string textureFileName = "texture_" + index + "_" + kvp.Key;  // Unique file name
                 SaveTextureToFile(kvp.Value, textureFileName);
 
@@ -89,11 +94,44 @@ namespace ColorSwipeGame
             }
         }
 
+        public void InitializeAllData()
+        {
+            if (Levels.levelsData == null) return;
+            for (int i = 0; i < Levels.levelsData.Length; i++)
+            {
+                SafeInitialize(i);
+            }
+        }
+
+        public void SafeInitialize(int index)
+        {
+            if (Levels.levelsData == null || index < 0 || index >= Levels.levelsData.Length) return;
+
+            if (Levels.levelsData[index].CurrentTextures == null)
+            {
+                Levels.levelsData[index].CurrentTextures = new AllTexturesData();
+            }
+            if (Levels.levelsData[index].CurrentTextures.TexturesData == null)
+            {
+                Levels.levelsData[index].CurrentTextures.TexturesData = new List<TextureData>();
+            }
+        }
+
+        public void ResetRuntimeData()
+        {
+            if (Levels.levelsData == null) return;
+            for (int i = 0; i < Levels.levelsData.Length; i++)
+            {
+                Levels.levelsData[i].IsEdited = false;
+                Levels.levelsData[i].IsLevelCompleted = false;
+            }
+        }
+
         public LevelTextures LoadTextures(int index)
         {
             LevelTextures levelTextures = new LevelTextures();
-            levelTextures.EditedTextures = new();
-            levelTextures.OriginalSprites = new();
+            levelTextures.EditedTextures = new Dictionary<int, Texture2D>();
+            levelTextures.OriginalSprites = new Dictionary<int, Sprite>();
 
             for (int i = 0; i < Levels.levelsData[index].OriginalSprites.Length; i++)
                 levelTextures.OriginalSprites.Add(i, Levels.levelsData[index].OriginalSprites[i]);
@@ -137,7 +175,17 @@ namespace ColorSwipeGame
 
             string fullPath = Path.Combine(filePath, fileName + ".png");
                 
-            System.Threading.Tasks.Task.Run(() => File.WriteAllBytes(fullPath, textureBytes));
+            System.Threading.Tasks.Task.Run(() => 
+            {
+                try 
+                {
+                    File.WriteAllBytes(fullPath, textureBytes);
+                }
+                catch (System.Exception e) 
+                {
+                    Debug.LogError($"[SaveManager] Background Texture Save Failed at {fullPath}: {e.Message}");
+                }
+            });
         }
 
         private Texture2D LoadTextureFromFile(string fileName)
@@ -166,8 +214,8 @@ namespace ColorSwipeGame
 
         public LevelTextures()
         {
-            OriginalSprites = new();
-            EditedTextures = new();
+            OriginalSprites = new Dictionary<int, Sprite>();
+            EditedTextures = new Dictionary<int, Texture2D>();
         }
     }
 
@@ -175,7 +223,6 @@ namespace ColorSwipeGame
     public struct Levels
     {
         public LevelData[] levelsData;
-        public readonly int Length() => levelsData.Length;
     }
 
     [System.Serializable]

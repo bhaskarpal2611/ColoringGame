@@ -21,11 +21,11 @@ namespace ColorSwipeGame
         private PenSelectionHandler _penSelectionHandler;
         private TimeKeeper _timeKeeper;
 
-        private Dictionary<int, bool> _isEdited = new();
+        private Dictionary<int, bool> _isEdited = new Dictionary<int, bool>();
         private Dictionary<int, Texture2D> _editedTextures = new Dictionary<int, Texture2D>();
         private Dictionary<int, Sprite> _originalSprites = new Dictionary<int, Sprite>();
         private Dictionary<int, Sprite> _editedSprites = new Dictionary<int, Sprite>();
-        private Dictionary<int, Sprite> _savedSprites = new();
+        private Dictionary<int, Sprite> _savedSprites = new Dictionary<int, Sprite>();
         private int _currentSRIndex;
         private const int BLIT_THRESHOLD = 10;
         private RaycastHit2D[] _hits;
@@ -61,7 +61,7 @@ namespace ColorSwipeGame
             }
 
             RaycastSprites(worldPosition);
-            AudioManager.Instance.PlayPaintingSound();
+            //AudioManager.Instance.PlayPaintingSound();
         }
 
         public void ContinueDrag(Vector2 worldPosition)

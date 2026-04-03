@@ -8,7 +8,7 @@ namespace ColorSwipeGame
     [System.Serializable]
     public class SavedDrawnData
     {
-        public List<DrawnData> drawnDatas = new();
+        public List<DrawnData> drawnDatas = new List<DrawnData>();
     }
     public class Draw_SaveManager : MonoBehaviour
     {

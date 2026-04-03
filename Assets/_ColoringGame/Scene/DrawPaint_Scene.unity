@@ -2242,8 +2242,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -50}
-  m_SizeDelta: {x: 150, y: 150}
+  m_AnchoredPosition: {x: 75, y: -75}
+  m_SizeDelta: {x: 125, y: 125}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &890956831
 MonoBehaviour:
@@ -2657,17 +2657,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isMute: 0
-  _englishAudio: {fileID: 11400000, guid: fdba5cfe65480b24cb83f10358d768e5, type: 2}
-  _hindiAudio: {fileID: 11400000, guid: 8556edb457fc21b47bfcbde3c320215b, type: 2}
-  _tamilAudio: {fileID: 11400000, guid: ca045b5f626edb146b957d57c06360e0, type: 2}
-  _frenchAudio: {fileID: 11400000, guid: 084321afa458f33e384a977bc5ca7270, type: 2}
-  _marathiAudio: {fileID: 11400000, guid: f2039bb1d113eed48baf816aaa43b054, type: 2}
-  _bengaliAudio: {fileID: 11400000, guid: 725549b7d96b7fb47a8b529f39df09cf, type: 2}
-  _malayalamAudio: {fileID: 11400000, guid: 0feef9518ea1b6f4f9f0ab934420c2e6, type: 2}
+  _englishAudio: {fileID: 0}
+  _hindiAudio: {fileID: 0}
+  _tamilAudio: {fileID: 0}
+  _frenchAudio: {fileID: 0}
+  _marathiAudio: {fileID: 0}
+  _bengaliAudio: {fileID: 0}
+  _malayalamAudio: {fileID: 0}
   _punjabiAudio: {fileID: 0}
   _bhojpuriAudio: {fileID: 0}
   _gujaratiAudio: {fileID: 0}
   _audioLocalization: French
+  _bgMusic: {fileID: 8300000, guid: 7d20312533f485f4ebd8278fae3f322f, type: 3}
+  _cameraSFX: {fileID: 8300000, guid: 6ed4adb4c2a741849b5bc3e8f2daedc5, type: 3}
+  _btnClick: {fileID: 8300000, guid: 70862d3c854243c43a525a7105e4710a, type: 3}
 --- !u!82 &985682492
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3313,7 +3316,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 150}
+  m_SizeDelta: {x: 125, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1257450071
 MonoBehaviour:
@@ -3403,7 +3406,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f50589e6f65d9c249bed8404bcd1811c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d4cbc14c1e4c42843b3aa2b0d05e76c1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3733,7 +3736,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 17844d3de7c925744bf655194add140b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2976795ebed794e469854136a9c51528, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -5652,9 +5655,70 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 185, y: -100}
+  m_AnchoredPosition: {x: 139.5, y: -136.7}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.49999964, y: 0.5}
+--- !u!1 &2026591912
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2026591914}
+  - component: {fileID: 2026591913}
+  m_Layer: 0
+  m_Name: AudioMapper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2026591913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026591912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4cbacb2817dd7b4fa3407508aec9719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Intro:
+  - Intro
+  GameStart: []
+  GameEnd:
+  - End
+  Cheer:
+  - Cheer1
+  - Cheer2
+  - Cheer3
+  - Cheer4
+  - Cheer4
+  - Cheer5
+  - Cheer6
+  - Cheer7
+  - Cheer8
+  - Cheer9
+  - Cheer10
+--- !u!4 &2026591914
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026591912}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2061915599
 GameObject:
   m_ObjectHideFlags: 0
@@ -7064,3 +7128,4 @@ SceneRoots:
   - {fileID: 1839691773}
   - {fileID: 1139906780}
   - {fileID: 1183523692}
+  - {fileID: 2026591914}

@@ -21,13 +21,15 @@ namespace ColorSwipeGame
         [SerializeField] private AudioSO _gujaratiAudio;
 
         [Space]
-        [Space]
         [SerializeField] private string _audioLocalization;
 
+        [Header("SFX, BG etc.")]
+        [SerializeField] private AudioClip _bgMusic;
+        [SerializeField] private AudioClip _cameraSFX, _btnClick;
 
 
-        private AudioSource _soundEffect;
-        private AudioSource _soundMusic;
+        private AudioSource _sfxSource;
+        private AudioSource _bgSource;
         private AudioSource _paintSFX;
 
         private AudioSO _currentMainAudio;
@@ -36,8 +38,8 @@ namespace ColorSwipeGame
         {
             base.Awake();
             SetLanguage();
-            _soundMusic = GetComponents<AudioSource>()[0];
-            _soundEffect = GetComponents<AudioSource>()[1];
+            _bgSource = GetComponents<AudioSource>()[0];
+            _sfxSource = GetComponents<AudioSource>()[1];
             _paintSFX = GetComponents<AudioSource>()[2];
             ChangeBrushSound_Paint();
             PlayBackgroundMusic();
@@ -84,38 +86,63 @@ namespace ColorSwipeGame
 
         public void PlayClickSound()
         {
-            PlaySound(Sounds.ButtonClick);
+            if(_btnClick != null)
+            {
+                _sfxSource.PlayOneShot(_btnClick);
+            }
         }
 
-        public void PlayCameraButtonSound() => PlaySound(Sounds.CameraShutter);
+        public void PlayCameraButtonSound()
+        {
+            if(_cameraSFX != null)
+            {
+                _sfxSource.PlayOneShot(_cameraSFX);
+            }
+        }
 
-        public void PlayIntroAudio() => PlaySound(Sounds.GameIntro);
+        public void PlayIntroAudio()
+        {
+            //PlaySound(Sounds.GameIntro);
+
+            RuntimeAudioLoader.Instance.PlayRuntimeAudio(AudioMapper.Instance.GetRandomKeyFor(Sounds.GameIntro));
+        }
 
         // Playing through Unity Events in Level Selection Manager's Level Load
         public void PlayGameStartAudio()
         {
-            if (_soundEffect.isPlaying)
-            {
-                _soundEffect.Stop();
-            }
-            PlaySound(Sounds.GameStart);
+            //if (_sfxSource.isPlaying)
+            //{
+            //    _sfxSource.Stop();
+            //}
+            //PlaySound(Sounds.GameStart);
+
+            RuntimeAudioLoader.Instance.PlayRuntimeAudio(AudioMapper.Instance.GetRandomKeyFor(Sounds.GameStart));
+
         }
 
         public void PlayCheeringAudio()
         {
-            if (!_soundEffect.isPlaying)
-            {
-                PlaySound(Sounds.Cheer);
-            }
+            //if (!_sfxSource.isPlaying)
+            //{
+            //    PlaySound(Sounds.Cheer);
+            //}
+
+            RuntimeAudioLoader.Instance.PlayRuntimeAudio(AudioMapper.Instance.GetRandomKeyFor(Sounds.Cheer));
         }
 
         public void PlayBackgroundMusic()
         {
-            var backgroundMusic = GetSoundClip(Sounds.BG_MUSIC);
-            if (backgroundMusic != null)
+            //var backgroundMusic = GetSoundClip(Sounds.BG_MUSIC);
+            //if (backgroundMusic != null)
+            //{
+            //    _soundMusic.clip = backgroundMusic;
+            //    _soundMusic.Play();
+            //}
+
+            if(_bgMusic != null)
             {
-                _soundMusic.clip = backgroundMusic;
-                _soundMusic.Play();
+                _bgSource.clip = _bgMusic;
+                _bgSource.Play();
             }
         }
 
@@ -125,7 +152,8 @@ namespace ColorSwipeGame
             if (!_playOnceFlag)
             {
                 _playOnceFlag = true;
-                PlaySound(Sounds.GameEnd);
+                //PlaySound(Sounds.GameEnd);
+                RuntimeAudioLoader.Instance.PlayRuntimeAudio(AudioMapper.Instance.GetRandomKeyFor(Sounds.GameEnd));
             }
         }
 
@@ -135,7 +163,7 @@ namespace ColorSwipeGame
             AudioClip clip = GetSoundClip(sound);
             if (clip != null)
             {
-                _soundEffect.PlayOneShot(clip);
+                _sfxSource.PlayOneShot(clip);
             }
             else
             {
@@ -160,7 +188,6 @@ namespace ColorSwipeGame
         {
             //_paintSFX.enabled = false;
             _paintSFX.Stop();
-
         }
 
         private AudioClip GetSoundClip(Sounds sound)
@@ -182,12 +209,12 @@ namespace ColorSwipeGame
         {
             if (_isMute)
             {
-                _soundMusic.volume = 0f;
+                _bgSource.volume = 0f;
                 return;
             }
             else
             {
-                _soundMusic.volume = 0.5f;
+                _bgSource.volume = 0.5f;
             }
         }
     }

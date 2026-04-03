@@ -7,7 +7,7 @@ namespace ColorSwipeGame
     [System.Serializable]
     public class LevelSaveData
     {
-        public List<SaveData> saveDatas = new();
+        public List<SaveData> saveDatas = new List<SaveData>();
     }
 
     public class SaveManager : MonoBehaviour
@@ -22,7 +22,6 @@ namespace ColorSwipeGame
 
         private void Awake()
         {
-#if UNITY_ANDROID || UNITY_EDITOR
             _jsonFilePath = Path.Combine(Application.persistentDataPath, "JSONColoring");
 
             CreateFolder(_jsonFilePath);
@@ -30,8 +29,19 @@ namespace ColorSwipeGame
             _finalPath = Path.Combine(_jsonFilePath, _jsonFileName);
             Debug.Log("Final Path: " + _finalPath);
 
-            LoadAllLevels();
-#endif
+            // Ensure the ScriptableObject lists are initialized
+            _levelDataSO.InitializeAllData();
+
+            if (File.Exists(_finalPath))
+            {
+                LoadAllLevels();
+            }
+            else
+            {
+                // If no save file exists, ensure the SO doesn't have 
+                // "dirty" data from Editor playtests.
+                _levelDataSO.ResetRuntimeData();
+            }
         }
 
         public void CreateFolder(string folderPath)
@@ -98,7 +108,7 @@ namespace ColorSwipeGame
 
         public void SaveLevelsData()
         {
-            LevelSaveData AllLevelData = new();
+            LevelSaveData AllLevelData = new LevelSaveData();
 
             for (int i = 0; i < _levelDataSO.Levels.levelsData.Length; i++)
             {

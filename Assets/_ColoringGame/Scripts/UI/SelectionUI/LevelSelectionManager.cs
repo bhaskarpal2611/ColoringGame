@@ -27,7 +27,7 @@ namespace ColorSwipeGame
         private int _currentLevelIndex;
         private bool _firstTimeLoaded = false;
 
-        public UnityEvent OnLevelLoaded, OnBackButtonPressed = new();
+        public UnityEvent OnLevelLoaded, OnBackButtonPressed = new UnityEvent();
 
         private Coroutine _saveCoroutine;
 
@@ -77,6 +77,11 @@ namespace ColorSwipeGame
                 _penSelectionHandler.ShowPanelAtStart();
                 _firstTimeLoaded = true;
             }
+            /* 
+#if UNITY_IPHONE || UNITY_IOS
+            _paintService.OnLevelLoad();
+#else
+*/
             if (_levels.IsEdited(index))
             {
                 _paintService.OnEditedLevelLoad(_levels.LoadTextures(index));
@@ -86,6 +91,7 @@ namespace ColorSwipeGame
                 _paintService.OnLevelLoad();
                 _levels.SetIsEdited(index, true);
             }
+// #endif
 
             _paintService.CanPaint = true;
 
@@ -112,7 +118,6 @@ namespace ColorSwipeGame
         // COLORING MODE
         public void GoBackToSelectionScene()
         {
-
             _loadingPanel.DOScale(1f, .25f).SetEase(Ease.Linear).OnComplete(() =>
             {
                 if (_saveCoroutine != null)
@@ -127,22 +132,30 @@ namespace ColorSwipeGame
         private IEnumerator SaveTextures()
         {
             yield return null;
+
+            // Wait for the asynchronous save to process (now null-safe in SO)
             yield return SaveLevelState();
 
             _levelImageHandler.UpdateSprite(_currentLevelIndex);
 
-            _loadingPanel.DOScale(0f, 0.25f).SetEase(Ease.Linear).OnComplete(() =>
-            {
-                _saveManager.SaveLevelsData();
-                _selectionSceneCanvas.SetActive(true);
-                _paintService.OnBackButtonPressed();
-
-                if (_saveManager.CheckAllLevelsCompleted())
+            // Always scale down loading panel and restore UI state
+            _loadingPanel.DOScale(0f, 0.25f)
+                .SetEase(Ease.Linear)
+                .OnComplete(() =>
                 {
-                    AudioManager.Instance.PlayGameEndAudio();
-                }
-                Destroy(_currentLevel);
-            });
+                    _saveManager.SaveLevelsData();
+                    _selectionSceneCanvas.SetActive(true);
+                    _paintService.OnBackButtonPressed();
+
+                    if (_saveManager.CheckAllLevelsCompleted())
+                    {
+                        AudioManager.Instance.PlayGameEndAudio();
+                    }
+                    if (_currentLevel != null)
+                    {
+                        Destroy(_currentLevel);
+                    }
+                });
         }
 
         private IEnumerator SaveDrawing()
