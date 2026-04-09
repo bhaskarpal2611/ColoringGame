@@ -34,7 +34,7 @@ public class BuildBundles
 
         // Build the bundles
         BuildPipeline.BuildAssetBundles(assetBundleDirectory, 
-                                        BuildAssetBundleOptions.None, 
+                                        BuildAssetBundleOptions.ChunkBasedCompression, 
                                         buildTarget);
         
         Debug.Log($"<b>[BuildBundles]</b> Successfully built {buildTarget} bundles to: {assetBundleDirectory}");

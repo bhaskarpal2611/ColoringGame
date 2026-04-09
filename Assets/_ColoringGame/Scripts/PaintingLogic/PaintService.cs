@@ -90,7 +90,14 @@ namespace ColorSwipeGame
 
         public void OnLevelLoad()
         {
-            _paintController.InitializeLevel(_spritesContainer.GetChild(0).GetChild(0));
+            try
+            {
+                _paintController.InitializeLevel(_spritesContainer.GetChild(0).GetChild(0));
+            }
+            catch (Exception e)
+            {
+                Debug.Log($"Exception: {e}");
+            }
         }
 
         public void OnEditedLevelLoad(LevelTextures levelTextures)
