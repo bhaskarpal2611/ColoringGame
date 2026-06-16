@@ -5,35 +5,31 @@ using UnityEngine.UI;
 
 namespace ColorSwipeGame
 {
-    public enum MoveAxis
-    {
-        X, Y
-    }
     public class UI_PencilItem : MonoBehaviour
     {
-
-        [Header("Pencil Settings")]
-        [SerializeField] private Image[] _pencilPieces;
+        [Header("Color Circle Settings")]
+        [SerializeField] private Image _colorImage;
+        [SerializeField] private Image _selectionRing;
         [SerializeField] private Color m_pencilColor;
-        [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private Button _button;
 
-        [Header("Movement Settings")]
-        [Tooltip("Choose whether this pen moves along X or Y axis when selected/unselected.")]
-        [SerializeField] private MoveAxis moveAxis = MoveAxis.X;
-
-        [Tooltip("Anchored position value when the pen is selected.")]
-        [SerializeField] private float selectedPosition = 225f;
-
-        [Tooltip("Anchored position value when the pen is unselected.")]
-        [SerializeField] private float unselectedPosition = 275f;
-
-        [Tooltip("Tween duration for the pen movement.")]
-        [SerializeField] private float tweenDuration = 0.5f;
+        [Header("Selection Animation")]
+        [SerializeField] private float selectedScale = 1.2f;
+        [SerializeField] private float unselectedScale = 1.0f;
+        [SerializeField] private float tweenDuration = 0.2f;
 
         public Button Button => _button;
 
         public static event Action<Color> OnPenSelected;
+
+        private void Awake()
+        {
+            // Auto-grab references if not assigned in Inspector
+            if (_colorImage == null)
+                _colorImage = GetComponent<Image>();
+            if (_button == null)
+                _button = GetComponent<Button>();
+        }
 
         private void OnEnable()
         {
@@ -42,8 +38,13 @@ namespace ColorSwipeGame
 
         private void Start()
         {
+            if (_button != null)
+                _button.onClick.AddListener(OnButtonClick);
+
+            if (_selectionRing != null)
+                _selectionRing.enabled = false;
+
             SetColorOnPencil(m_pencilColor);
-            Button.onClick.AddListener(OnButtonClick);
         }
 
         private void OnButtonClick()
@@ -54,7 +55,8 @@ namespace ColorSwipeGame
 
         private void OnDestroy()
         {
-            Button.onClick.RemoveAllListeners();
+            if (_button != null)
+                _button.onClick.RemoveAllListeners();
             OnPenSelected -= CheckSelection;
         }
 
@@ -66,28 +68,25 @@ namespace ColorSwipeGame
 
         public void SetColorOnPencil(Color color)
         {
-            foreach (var piece in _pencilPieces)
-                piece.color = color;
-
+            color.a = 1f;
             m_pencilColor = color;
+
+            if (_colorImage != null)
+                _colorImage.color = color;
         }
 
         public void PenSelected()
         {
-            MoveToPosition(selectedPosition);
+            transform.DOScale(selectedScale, tweenDuration).SetEase(Ease.OutBack);
+            if (_selectionRing != null)
+                _selectionRing.enabled = true;
         }
 
         public void UnselectedPen()
         {
-            MoveToPosition(unselectedPosition);
-        }
-
-        private void MoveToPosition(float target)
-        {
-            if (moveAxis == MoveAxis.X)
-                _rectTransform.DOAnchorPosX(target, tweenDuration);
-            else
-                _rectTransform.DOAnchorPosY(target, tweenDuration);
+            transform.DOScale(unselectedScale, tweenDuration).SetEase(Ease.InOutSine);
+            if (_selectionRing != null)
+                _selectionRing.enabled = false;
         }
     }
 }

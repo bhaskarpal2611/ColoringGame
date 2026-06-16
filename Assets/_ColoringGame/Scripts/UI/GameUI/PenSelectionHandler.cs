@@ -46,30 +46,23 @@ namespace ColorSwipeGame
             }
         }
 
-        private readonly float LEFT_POS = 150f;
-        private readonly float RIGHT_POS = 450f;
+        private readonly float VISIBLE_POS = 150f;
+        private readonly float HIDDEN_POS  = 450f;
 
-        // switch from color to tex pen
-        public void SelectButton(int index)
+        public void SelectButton(int index) { }
+
+        public void ShowMainPanel()
         {
-
+            _mainPanel.DOAnchorPosX(VISIBLE_POS, _mainPanelSlideTime);
         }
 
-        private void ShowMainPanel()
-        {
-            _mainPanel.DOAnchorPosX(LEFT_POS, _mainPanelSlideTime);
-        }
-        public void HideMainPanel(float waitTime)
-        {
-            //_mainPanel.DOAnchorPosX(RIGHT_POS, _mainPanelSlideTime).SetDelay(waitTime);
-        }
+        public void HideMainPanel(float waitTime) { }
 
         public void ShowPanelAtStart()
         {
-            _mainPanel.DOAnchorPosX(LEFT_POS, _mainPanelSlideTime).OnComplete(() =>
-            {
-                _mainPanel.DOAnchorPosX(RIGHT_POS, _mainPanelSlideTime).SetDelay(1f);
-            });
+            // Snap to hidden first so the slide-in always plays from a consistent position
+            _mainPanel.anchoredPosition = new Vector2(HIDDEN_POS, _mainPanel.anchoredPosition.y);
+            _mainPanel.DOAnchorPosX(VISIBLE_POS, _mainPanelSlideTime);
         }
     }
 }

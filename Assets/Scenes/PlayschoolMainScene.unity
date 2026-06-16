@@ -438,8 +438,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Fremch
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: eaa45bad409de3b42bd478e0f349b16f, type: 2}
-  m_sharedMaterial: {fileID: -1390732690484961152, guid: eaa45bad409de3b42bd478e0f349b16f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 750ab65be0bbb8a478a9ecc86c511c46, type: 2}
+  m_sharedMaterial: {fileID: 8916785536254011360, guid: 750ab65be0bbb8a478a9ecc86c511c46, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1616,8 +1616,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: eaa45bad409de3b42bd478e0f349b16f, type: 2}
-  m_sharedMaterial: {fileID: -1390732690484961152, guid: eaa45bad409de3b42bd478e0f349b16f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 750ab65be0bbb8a478a9ecc86c511c46, type: 2}
+  m_sharedMaterial: {fileID: 8916785536254011360, guid: 750ab65be0bbb8a478a9ecc86c511c46, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1752,8 +1752,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Loading .....
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: eaa45bad409de3b42bd478e0f349b16f, type: 2}
-  m_sharedMaterial: {fileID: -1390732690484961152, guid: eaa45bad409de3b42bd478e0f349b16f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 750ab65be0bbb8a478a9ecc86c511c46, type: 2}
+  m_sharedMaterial: {fileID: 8916785536254011360, guid: 750ab65be0bbb8a478a9ecc86c511c46, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2097,8 +2097,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Tamil
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: eaa45bad409de3b42bd478e0f349b16f, type: 2}
-  m_sharedMaterial: {fileID: -1390732690484961152, guid: eaa45bad409de3b42bd478e0f349b16f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 750ab65be0bbb8a478a9ecc86c511c46, type: 2}
+  m_sharedMaterial: {fileID: 8916785536254011360, guid: 750ab65be0bbb8a478a9ecc86c511c46, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2210,7 +2210,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -52.999023, y: -50.714996}
+  m_AnchoredPosition: {x: -52.999023, y: -50.714966}
   m_SizeDelta: {x: -396.977, y: -101.42807}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1045600073
@@ -2593,8 +2593,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Bengali
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: eaa45bad409de3b42bd478e0f349b16f, type: 2}
-  m_sharedMaterial: {fileID: -1390732690484961152, guid: eaa45bad409de3b42bd478e0f349b16f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 750ab65be0bbb8a478a9ecc86c511c46, type: 2}
+  m_sharedMaterial: {fileID: 8916785536254011360, guid: 750ab65be0bbb8a478a9ecc86c511c46, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2862,8 +2862,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: EnglishUS
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: eaa45bad409de3b42bd478e0f349b16f, type: 2}
-  m_sharedMaterial: {fileID: -1390732690484961152, guid: eaa45bad409de3b42bd478e0f349b16f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 750ab65be0bbb8a478a9ecc86c511c46, type: 2}
+  m_sharedMaterial: {fileID: 8916785536254011360, guid: 750ab65be0bbb8a478a9ecc86c511c46, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3209,8 +3209,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: eaa45bad409de3b42bd478e0f349b16f, type: 2}
-  m_sharedMaterial: {fileID: -1390732690484961152, guid: eaa45bad409de3b42bd478e0f349b16f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 750ab65be0bbb8a478a9ecc86c511c46, type: 2}
+  m_sharedMaterial: {fileID: 8916785536254011360, guid: 750ab65be0bbb8a478a9ecc86c511c46, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3477,8 +3477,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Malayalam
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: eaa45bad409de3b42bd478e0f349b16f, type: 2}
-  m_sharedMaterial: {fileID: -1390732690484961152, guid: eaa45bad409de3b42bd478e0f349b16f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 750ab65be0bbb8a478a9ecc86c511c46, type: 2}
+  m_sharedMaterial: {fileID: 8916785536254011360, guid: 750ab65be0bbb8a478a9ecc86c511c46, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3613,8 +3613,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Marathi
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: eaa45bad409de3b42bd478e0f349b16f, type: 2}
-  m_sharedMaterial: {fileID: -1390732690484961152, guid: eaa45bad409de3b42bd478e0f349b16f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 750ab65be0bbb8a478a9ecc86c511c46, type: 2}
+  m_sharedMaterial: {fileID: 8916785536254011360, guid: 750ab65be0bbb8a478a9ecc86c511c46, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

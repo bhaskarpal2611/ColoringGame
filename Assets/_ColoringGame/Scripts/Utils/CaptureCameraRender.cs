@@ -21,7 +21,9 @@ namespace ColorSwipeGame
         [SerializeField] private Transform _backButton;
         [SerializeField] private Transform _clearButton;
         [SerializeField] private Transform _cameraButton;
+        [SerializeField] private Camera _captureCamera;
         [SerializeField] private SpriteRenderer _paintingArea;
+        [SerializeField] private float _capturePadding = 0.05f; // fraction of bounds size added as padding
 
         public Texture2D _texture;
         public Sprite _sprite;
@@ -122,6 +124,7 @@ namespace ColorSwipeGame
 
         public string SaveCopy(int index, int isDrawing = 0)
         {
+            AlignCameraToBoard();
             RenderTexture.active = _cameraRT;
 
             //_rect = new Rect(0, 0, _cameraRT.width, _cameraRT.height);
@@ -160,8 +163,7 @@ namespace ColorSwipeGame
 
         private void TakeSnap()
         {
-            //_paintingArea.DOFade(0f, 0.25f);
-
+            AlignCameraToBoard();
             RenderTexture.active = _cameraRT;
 
             // Read pixels from the RenderTexture into the Texture2D
@@ -186,6 +188,18 @@ namespace ColorSwipeGame
             _audioManager.PlayCameraButtonSound();
 
 
+        }
+
+        private void AlignCameraToBoard()
+        {
+            if (_captureCamera == null || _paintingArea == null) return;
+
+            Bounds b = _paintingArea.bounds;
+            _captureCamera.transform.position = new Vector3(b.center.x, b.center.y, -10f);
+
+            // RT is square (1024x1024) so aspect = 1 — orthoSize is half-height = half-width
+            float size = Mathf.Max(b.extents.x, b.extents.y);
+            _captureCamera.orthographicSize = size * (1f + _capturePadding);
         }
 
         private void InitializeTexture()
