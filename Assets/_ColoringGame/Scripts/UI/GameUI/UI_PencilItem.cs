@@ -22,18 +22,28 @@ namespace ColorSwipeGame
 
         public static event Action<Color> OnPenSelected;
 
+        // Called from PensHandler to wire up the programmatically-created images
+        public void SetReferences(Image colorImg, Image ring)
+        {
+            _colorImage = colorImg;
+            _selectionRing = ring;
+        }
+
         private void Awake()
         {
-            // Auto-grab references if not assigned in Inspector
-            if (_colorImage == null)
-                _colorImage = GetComponent<Image>();
             if (_button == null)
                 _button = GetComponent<Button>();
         }
 
         private void OnEnable()
         {
+            OnPenSelected -= CheckSelection; // prevent double-subscribe on repeated activations
             OnPenSelected += CheckSelection;
+        }
+
+        private void OnDisable()
+        {
+            OnPenSelected -= CheckSelection;
         }
 
         private void Start()
@@ -62,6 +72,7 @@ namespace ColorSwipeGame
 
         private void CheckSelection(Color color)
         {
+            if (this == null) return; // guard against destroyed instances still in delegate list
             if (color != m_pencilColor)
                 UnselectedPen();
         }

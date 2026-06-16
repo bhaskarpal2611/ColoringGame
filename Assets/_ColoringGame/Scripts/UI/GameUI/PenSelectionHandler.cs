@@ -46,14 +46,14 @@ namespace ColorSwipeGame
             }
         }
 
-        private readonly float VISIBLE_POS = 150f;
-        private readonly float HIDDEN_POS  = 450f;
+        [SerializeField] private float _visiblePosX = 150f;
+        [SerializeField] private float _hiddenPosX  = 450f;
 
         public void SelectButton(int index) { }
 
         public void ShowMainPanel()
         {
-            _mainPanel.DOAnchorPosX(VISIBLE_POS, _mainPanelSlideTime);
+            _mainPanel.DOAnchorPosX(_visiblePosX, _mainPanelSlideTime);
         }
 
         public void HideMainPanel(float waitTime) { }
@@ -61,8 +61,8 @@ namespace ColorSwipeGame
         public void ShowPanelAtStart()
         {
             // Snap to hidden first so the slide-in always plays from a consistent position
-            _mainPanel.anchoredPosition = new Vector2(HIDDEN_POS, _mainPanel.anchoredPosition.y);
-            _mainPanel.DOAnchorPosX(VISIBLE_POS, _mainPanelSlideTime);
+            _mainPanel.anchoredPosition = new Vector2(_hiddenPosX, _mainPanel.anchoredPosition.y);
+            _mainPanel.DOAnchorPosX(_visiblePosX, _mainPanelSlideTime);
         }
     }
 }

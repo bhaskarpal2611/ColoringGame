@@ -44,11 +44,15 @@ namespace ColorSwipeGame.UI
         [SerializeField] private CommonButtonFunctionsHandler _buttonsHandler;
 
         [Header("Color Grid Settings")]
-        [SerializeField] private Sprite _colorButtonSprite;  // Assign "Colours Button.png" in Inspector
+        [SerializeField] private Sprite _colorButtonSprite;   // sprite used for the color circle
+        [SerializeField] private Sprite _selectionRingSprite; // sprite used for the selection outline ring
         [SerializeField] private Vector2 _cellSize = new Vector2(161f, 161f);
+        [SerializeField] private Vector2 _textureCellSize = new Vector2(161f, 161f);
         [SerializeField] private Vector2 _cellSpacing = new Vector2(10f, 10f);
         [SerializeField] private RectOffset _gridPadding = new RectOffset(12, 12, 12, 12);
         [SerializeField] private int _columnCount = 2;
+        [SerializeField] private float _selectionOutlineSize = 8f; // px the outline extends beyond the button
+        [SerializeField] private float _selectionRingYScale = 1f;  // tweak if ring overflows vertically
 
         private const float XPOS_RIGHT = 0f;
         private const float XPOS_LEFT = -360f;
@@ -83,7 +87,10 @@ namespace ColorSwipeGame.UI
 
             GeneratePencils();
             if (texLen > 0)
+            {
+                SetupTextureGrid();
                 GenerateTexturedPens();
+            }
 
             MoveLeft();
 
@@ -151,6 +158,34 @@ namespace ColorSwipeGame.UI
                 _scrollViewReference.vertical   = true;
                 _scrollViewReference.horizontal = false;
             }
+        }
+
+        private void SetupTextureGrid()
+        {
+            var texContainer = _pencilParent.GetChild(1);
+
+            var existing = texContainer.GetComponent<LayoutGroup>();
+            if (existing != null && !(existing is GridLayoutGroup))
+                Destroy(existing);
+
+            var texGrid = texContainer.GetComponent<GridLayoutGroup>();
+            if (texGrid == null)
+                texGrid = texContainer.gameObject.AddComponent<GridLayoutGroup>();
+
+            texGrid.constraint      = GridLayoutGroup.Constraint.FixedColumnCount;
+            texGrid.constraintCount = _columnCount;
+            texGrid.spacing         = _cellSpacing;
+            texGrid.padding         = _gridPadding;
+            texGrid.childAlignment  = TextAnchor.UpperCenter;
+            texGrid.startAxis       = GridLayoutGroup.Axis.Horizontal;
+            texGrid.startCorner     = GridLayoutGroup.Corner.UpperLeft;
+            texGrid.cellSize        = _textureCellSize;
+
+            var fitter = texContainer.GetComponent<ContentSizeFitter>();
+            if (fitter == null)
+                fitter = texContainer.gameObject.AddComponent<ContentSizeFitter>();
+            fitter.horizontalFit = ContentSizeFitter.FitMode.Unconstrained;
+            fitter.verticalFit   = ContentSizeFitter.FitMode.PreferredSize;
         }
 
         private void ApplyResponsiveCellSize()
@@ -251,27 +286,55 @@ namespace ColorSwipeGame.UI
                 color.a = 1f;
 
                 var penItem = Instantiate(_pencilPrefab, colorContainer);
-
-                // Flatten crayon shape — GridLayout owns the rect, we own the look
                 penItem.transform.localRotation = Quaternion.identity;
                 penItem.transform.localScale    = Vector3.one;
 
-                // Hide child crayon art; root Image becomes the color circle
+                // Hide all original children (crayon art etc.)
                 for (int c = 0; c < penItem.transform.childCount; c++)
                     penItem.transform.GetChild(c).gameObject.SetActive(false);
 
-                // Style root Image as a color circle
+                // Root Image: transparent container, handles raycasts for the button
                 var rootImg = penItem.GetComponent<Image>();
                 if (rootImg != null)
                 {
-                    if (_colorButtonSprite != null)
-                        rootImg.sprite = _colorButtonSprite;
-                    rootImg.color         = color;
+                    rootImg.color         = new Color(0f, 0f, 0f, 0f);
                     rootImg.raycastTarget = true;
-                    rootImg.preserveAspect = true;
-                    rootImg.type          = Image.Type.Simple;
                 }
 
+                // Child 0 — white circular ring (renders behind child 1)
+                var ringGO  = new GameObject("SelectionRing", typeof(Image));
+                ringGO.transform.SetParent(penItem.transform, false);
+                var ringRT  = ringGO.GetComponent<RectTransform>();
+                ringRT.anchorMin = Vector2.zero;
+                ringRT.anchorMax = Vector2.one;
+                ringRT.offsetMin = new Vector2(-_selectionOutlineSize, -_selectionOutlineSize);
+                ringRT.offsetMax = new Vector2( _selectionOutlineSize,  _selectionOutlineSize);
+                var ringImg = ringGO.GetComponent<Image>();
+                var ringSprite = _selectionRingSprite != null ? _selectionRingSprite : _colorButtonSprite;
+                if (ringSprite != null) ringImg.sprite = ringSprite;
+                ringImg.color         = Color.white;
+                ringImg.type          = Image.Type.Simple;
+                ringImg.raycastTarget = false;
+                ringImg.enabled       = false; // hidden until selected
+                ringGO.transform.localScale = new Vector3(1f, _selectionRingYScale, 1f);
+
+                // Child 1 — colored circle (renders on top of ring; only the rim of the ring shows)
+                var circleGO  = new GameObject("ColorCircle", typeof(Image));
+                circleGO.transform.SetParent(penItem.transform, false);
+                var circleRT  = circleGO.GetComponent<RectTransform>();
+                circleRT.anchorMin = Vector2.zero;
+                circleRT.anchorMax = Vector2.one;
+                circleRT.offsetMin = Vector2.zero;
+                circleRT.offsetMax = Vector2.zero;
+                var circleImg = circleGO.GetComponent<Image>();
+                if (_colorButtonSprite != null) circleImg.sprite = _colorButtonSprite;
+                circleImg.color          = color;
+                circleImg.type           = Image.Type.Simple;
+                circleImg.preserveAspect = true;
+                circleImg.raycastTarget  = false;
+
+                // Wire up references so UI_PencilItem uses our new images
+                penItem.SetReferences(circleImg, ringImg);
                 penItem.SetColorOnPencil(color);
                 SelectedPenData.ColoredPens[index] = penItem;
 
@@ -295,8 +358,24 @@ namespace ColorSwipeGame.UI
             for (int i = 0; i < _texturedPencilPrefab.Length; i++)
             {
                 int index = i;
-                SelectedPenData.TexturedPens[i] = Instantiate(_texturedPencilPrefab[i], texContainer);
-                SelectedPenData.TexturedPens[i].Button.onClick.AddListener(() =>
+                var texItem = Instantiate(_texturedPencilPrefab[i], texContainer);
+                SelectedPenData.TexturedPens[i] = texItem;
+
+                // White square border at sibling 0 — renders behind the pattern image children
+                var borderGO  = new GameObject("SelectionBorder", typeof(Image));
+                borderGO.transform.SetParent(texItem.transform, false);
+                borderGO.transform.SetSiblingIndex(0);
+                var borderRT  = borderGO.GetComponent<RectTransform>();
+                borderRT.anchorMin = Vector2.zero;
+                borderRT.anchorMax = Vector2.one;
+                borderRT.offsetMin = new Vector2(-_selectionOutlineSize, -_selectionOutlineSize);
+                borderRT.offsetMax = new Vector2( _selectionOutlineSize,  _selectionOutlineSize);
+                var borderImg = borderGO.GetComponent<Image>();
+                borderImg.color         = Color.white;
+                borderImg.raycastTarget = false;
+                texItem.SetSelectionBorder(borderImg);
+
+                texItem.Button.onClick.AddListener(() =>
                 {
                     _paintService.SetTexture(index);
                     SelectedPenData.TexPenSelection(index);
