@@ -136,6 +136,9 @@ namespace ColorSwipeGame
             for (int i = 0; i < Levels.levelsData[index].OriginalSprites.Length; i++)
                 levelTextures.OriginalSprites.Add(i, Levels.levelsData[index].OriginalSprites[i]);
 
+            if (Levels.levelsData[index].CurrentTextures?.TexturesData == null)
+                return levelTextures;
+
             var textureDataList = Levels.levelsData[index].CurrentTextures.TexturesData;
             foreach (var textureData in textureDataList)
             {

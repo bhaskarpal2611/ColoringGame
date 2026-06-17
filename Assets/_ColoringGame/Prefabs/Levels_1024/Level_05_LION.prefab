@@ -193,7 +193,6 @@ GameObject:
   - component: {fileID: 6139602217203342985}
   - component: {fileID: 7293258653322613520}
   - component: {fileID: 7128063330389774935}
-  - component: {fileID: 7735793598825221922}
   m_Layer: 0
   m_Name: LionSpriteSheet_0009_2
   m_TagString: Untagged
@@ -329,64 +328,6 @@ PolygonCollider2D:
       - {x: 0.385, y: -0.205}
       - {x: 0.405, y: -0.105}
   m_UseDelaunayMesh: 0
---- !u!60 &7735793598825221922
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 399774492673454204}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8, y: 0.78}
-    newSize: {x: 0.81, y: 0.79}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.405, y: 0.175}
-      - {x: 0.345, y: 0.285}
-      - {x: 0.185, y: 0.39499998}
-      - {x: -0.125, y: 0.39499998}
-      - {x: -0.275, y: 0.345}
-      - {x: -0.405, y: 0.13499999}
-      - {x: -0.405, y: -0.235}
-      - {x: -0.235, y: -0.39499998}
-      - {x: 0.155, y: -0.39499998}
-      - {x: 0.385, y: -0.205}
-      - {x: 0.405, y: -0.105}
-  m_UseDelaunayMesh: 0
 --- !u!1 &607515355108543260
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,7 +371,6 @@ GameObject:
   - component: {fileID: 5742701429082648246}
   - component: {fileID: 7088183696208923660}
   - component: {fileID: 988343244651462447}
-  - component: {fileID: 6744454290052068642}
   m_Layer: 0
   m_Name: LionSpriteSheet_0008
   m_TagString: Untagged
@@ -574,74 +514,6 @@ PolygonCollider2D:
       - {x: 0.385, y: -0.635}
       - {x: 0.575, y: -0.475}
       - {x: 0.66499996, y: -0.315}
-  m_UseDelaunayMesh: 0
---- !u!60 &6744454290052068642
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 805089116795328970}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.39, y: 1.37}
-    newSize: {x: 1.4, y: 1.38}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.7, y: -0.22999999}
-      - {x: 0.7, y: 0.13}
-      - {x: 0.62, y: 0.32999998}
-      - {x: 0.48, y: 0.51}
-      - {x: 0.21, y: 0.66999996}
-      - {x: 0.13, y: 0.69}
-      - {x: -0.19999999, y: 0.69}
-      - {x: -0.32999998, y: 0.65999997}
-      - {x: -0.45, y: 0.59}
-      - {x: -0.62, y: 0.41}
-      - {x: -0.68, y: 0.24}
-      - {x: -0.7, y: 0.17}
-      - {x: -0.7, y: -0.12}
-      - {x: -0.59999996, y: -0.35999998}
-      - {x: -0.42999998, y: -0.53999996}
-      - {x: -0.22999999, y: -0.65999997}
-      - {x: -0.099999994, y: -0.69}
-      - {x: 0.24, y: -0.69}
-      - {x: 0.32, y: -0.66999996}
-      - {x: 0.5, y: -0.56}
-      - {x: 0.63, y: -0.41}
   m_UseDelaunayMesh: 0
 --- !u!1 &956733666720717643
 GameObject:
@@ -2675,7 +2547,6 @@ GameObject:
   - component: {fileID: 1012363987442209971}
   - component: {fileID: 7440573369589838251}
   - component: {fileID: 2330870792142136214}
-  - component: {fileID: 4076850632666293212}
   m_Layer: 0
   m_Name: LionSpriteSheet_0009_1
   m_TagString: Untagged
@@ -2754,66 +2625,6 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!60 &2330870792142136214
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7064301570763025302}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8, y: 0.78}
-    newSize: {x: 0.8, y: 0.78}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.39, y: 0.195}
-      - {x: 0.25, y: 0.325}
-      - {x: 0.14, y: 0.39499998}
-      - {x: -0.19999999, y: 0.39499998}
-      - {x: -0.35, y: 0.275}
-      - {x: -0.39999998, y: 0.175}
-      - {x: -0.39999998, y: -0.13499999}
-      - {x: -0.35, y: -0.265}
-      - {x: -0.13, y: -0.39499998}
-      - {x: 0.21, y: -0.39499998}
-      - {x: 0.37, y: -0.255}
-      - {x: 0.39999998, y: -0.205}
-      - {x: 0.39999998, y: 0.114999995}
-  m_UseDelaunayMesh: 0
---- !u!60 &4076850632666293212
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3480,7 +3291,6 @@ GameObject:
   - component: {fileID: 670787266422381986}
   - component: {fileID: 8414859141388587850}
   - component: {fileID: 6070674437100425748}
-  - component: {fileID: 5930059226654975090}
   m_Layer: 0
   m_Name: LionSpriteSheet_0008_2
   m_TagString: Untagged
@@ -3559,75 +3369,6 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!60 &6070674437100425748
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8385663605476783144}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.4, y: 1.37}
-    newSize: {x: 1.39, y: 1.38}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.695, y: -0.19}
-      - {x: 0.695, y: 0.22999999}
-      - {x: 0.675, y: 0.31}
-      - {x: 0.585, y: 0.45}
-      - {x: 0.515, y: 0.53}
-      - {x: 0.375, y: 0.64}
-      - {x: 0.21499999, y: 0.69}
-      - {x: -0.13499999, y: 0.69}
-      - {x: -0.375, y: 0.59999996}
-      - {x: -0.53499997, y: 0.44}
-      - {x: -0.60499996, y: 0.32999998}
-      - {x: -0.66499996, y: 0.19999999}
-      - {x: -0.695, y: 0.11}
-      - {x: -0.695, y: -0.24}
-      - {x: -0.625, y: -0.41}
-      - {x: -0.48499998, y: -0.57}
-      - {x: -0.415, y: -0.61}
-      - {x: -0.24499999, y: -0.69}
-      - {x: 0.114999995, y: -0.69}
-      - {x: 0.235, y: -0.65}
-      - {x: 0.39499998, y: -0.56}
-      - {x: 0.53499997, y: -0.44}
-  m_UseDelaunayMesh: 0
---- !u!60 &5930059226654975090
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

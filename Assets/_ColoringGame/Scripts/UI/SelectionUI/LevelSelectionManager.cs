@@ -124,21 +124,15 @@ namespace ColorSwipeGame
         // Draw mode back
         public void BackToSelection()
         {
-            _loadingPanel.DOScale(1f, 0.25f).SetEase(Ease.InSine).OnComplete(() =>
-            {
-                if (_saveCoroutine != null) StopCoroutine(_saveCoroutine);
-                _saveCoroutine = StartCoroutine(SaveDrawing());
-            });
+            if (_saveCoroutine != null) StopCoroutine(_saveCoroutine);
+            _saveCoroutine = StartCoroutine(SaveDrawing());
         }
 
         // Coloring mode back
         public void GoBackToSelectionScene()
         {
-            _loadingPanel.DOScale(1f, .25f).SetEase(Ease.Linear).OnComplete(() =>
-            {
-                if (_saveCoroutine != null) StopCoroutine(_saveCoroutine);
-                _saveCoroutine = StartCoroutine(SaveTextures());
-            });
+            if (_saveCoroutine != null) StopCoroutine(_saveCoroutine);
+            _saveCoroutine = StartCoroutine(SaveTextures());
         }
 
         private IEnumerator SaveTextures()
@@ -149,22 +143,18 @@ namespace ColorSwipeGame
             if (_levelImageHandler != null)
                 _levelImageHandler.UpdateSprite(_currentLevelIndex);
 
-            _loadingPanel.DOScale(0f, 0.25f).SetEase(Ease.Linear).OnComplete(() =>
-            {
-                _saveManager?.SaveLevelsData();
-                _paintService.OnBackButtonPressed();
+            _saveManager?.SaveLevelsData();
+            _paintService.OnBackButtonPressed();
 
-                if (_saveManager != null && _saveManager.CheckAllLevelsCompleted())
-                    if (AudioManager.Instance != null)
-                        AudioManager.Instance.PlayGameEndAudio();
+            if (_currentLevel != null)
+                Destroy(_currentLevel);
 
-                if (_currentLevel != null)
-                    Destroy(_currentLevel);
+            _gameSceneRoot?.SetActive(false);
+            _selectionSceneCanvas?.SetActive(true);
 
-                // Return to selection
-                _gameSceneRoot?.SetActive(false);
-                _selectionSceneCanvas?.SetActive(true);
-            });
+            if (_saveManager != null && _saveManager.CheckAllLevelsCompleted())
+                if (AudioManager.Instance != null)
+                    AudioManager.Instance.PlayGameEndAudio();
         }
 
         private IEnumerator SaveDrawing()
@@ -179,16 +169,13 @@ namespace ColorSwipeGame
 
             yield return null;
 
-            _loadingPanel.DOScale(0f, 0.25f).SetEase(Ease.Linear).OnComplete(() =>
-            {
-                if (_paintService.IsDrawingEdited())
-                    _drawnSaveManager?.SaveDrawingsData();
+            if (_paintService.IsDrawingEdited())
+                _drawnSaveManager?.SaveDrawingsData();
 
-                _paintService.OnBackButtonPressed();
+            _paintService.OnBackButtonPressed();
 
-                _gameSceneRoot?.SetActive(false);
-                _selectionSceneCanvas?.SetActive(true);
-            });
+            _gameSceneRoot?.SetActive(false);
+            _selectionSceneCanvas?.SetActive(true);
         }
 
         private IEnumerator SaveLevelState()

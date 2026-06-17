@@ -49,7 +49,7 @@ namespace ColorSwipeGame.UI
         [SerializeField] private Vector2 _cellSize = new Vector2(161f, 161f);
         [SerializeField] private Vector2 _textureCellSize = new Vector2(161f, 161f);
         [SerializeField] private Vector2 _cellSpacing = new Vector2(10f, 10f);
-        [SerializeField] private RectOffset _gridPadding = new RectOffset(12, 12, 12, 12);
+     [SerializeField] private RectOffset _gridPadding;
         [SerializeField] private int _columnCount = 2;
         [SerializeField] private float _selectionOutlineSize = 8f; // px the outline extends beyond the button
         [SerializeField] private float _selectionRingYScale = 1f;  // tweak if ring overflows vertically
@@ -62,6 +62,11 @@ namespace ColorSwipeGame.UI
         private SelectedPenData SelectedPenData;
         private GridLayoutGroup _colorGrid;
 
+private void Awake()
+{
+    if (_gridPadding == null)
+        _gridPadding = new RectOffset(12, 12, 12, 12);
+}
         private void Start()
         {
             if (_colors == null || _colors.Length == 0)
@@ -108,6 +113,14 @@ namespace ColorSwipeGame.UI
             ApplyResponsiveCellSize();
             Canvas.ForceUpdateCanvases();
             ResetScrollToTop();
+
+            // Auto-select first color after all Start() calls have run
+            if (_colors.Length > 0 && SelectedPenData.ColoredPens[0] != null)
+            {
+                _paintService.SetColor(_colors[0]);
+                SelectedPenData.ColoredPenSelection(0);
+                SelectedPenData.ColoredPens[0].PenSelected();
+            }
         }
 
         // ── Grid Setup ──────────────────────────────────────────────────────────
@@ -248,10 +261,14 @@ namespace ColorSwipeGame.UI
             int prevIndex = _currentSelectedIndex;
             _currentSelectedIndex = ++_currentSelectedIndex % _maxLen;
 
-            if (_currentSelectedIndex % 2 != 0)
-                _paintService.SetDefaultTextureMode();
-            else
+            bool isColorTab = _currentSelectedIndex % 2 == 0;
+            if (isColorTab)
                 _paintService.SetDefaultColorMode();
+            else
+                _paintService.SetDefaultTextureMode();
+
+            if (_penSelectionHandler != null)
+                _penSelectionHandler.SetButtonTints(isColorTab);
 
             if (_scrollViewReference != null)
                 _scrollViewReference.content = _pencilParent.GetChild(_currentSelectedIndex) as RectTransform;

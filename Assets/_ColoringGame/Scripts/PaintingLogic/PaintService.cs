@@ -22,6 +22,8 @@ namespace ColorSwipeGame
         private Material[] _customMaterials;
 
         private PaintController _paintController;
+        private int _stationaryFrames = 0;
+        private const int StationaryStopFrames = 10; // ~10 frames of no movement before cutting audio
 
         [SerializeField] private Camera _mainCamera;
 
@@ -144,7 +146,7 @@ namespace ColorSwipeGame
         {
             if (CanPaint)
             {
-
+                _stationaryFrames = 0;
                 Vector2 worldPosition = _mainCamera.ScreenToWorldPoint(touchPosition);
                 _paintController.ContinueDrag(worldPosition);
 
@@ -161,16 +163,16 @@ namespace ColorSwipeGame
         {
             if (CanPaint)
             {
-
+                _stationaryFrames++;
+                if (_stationaryFrames >= StationaryStopFrames)
+                    AudioManager.Instance.StopPaintingSound();
             }
         }
 
         private void EndDrag()
         {
-            if (CanPaint)
-            {
-                _paintController.EndDrag();
-            }
+            _stationaryFrames = 0;
+            _paintController.EndDrag(); // Always clean up regardless of CanPaint — prevents stuck disabled colliders
         }
 
 

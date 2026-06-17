@@ -26,6 +26,7 @@ namespace ColorSwipeGame
         [Header("SFX, BG etc.")]
         [SerializeField] private AudioClip _bgMusic;
         [SerializeField] private AudioClip _cameraSFX, _btnClick;
+        [SerializeField] private AudioClip _colorSfx;
 
 
         private AudioSource _sfxSource;
@@ -102,32 +103,21 @@ namespace ColorSwipeGame
 
         public void PlayIntroAudio()
         {
-            //PlaySound(Sounds.GameIntro);
-
-            RuntimeAudioLoader.Instance.PlayRuntimeAudio(AudioMapper.Instance.GetRandomKeyFor(Sounds.GameIntro));
+            if (RuntimeAudioLoader.Instance != null && AudioMapper.Instance != null)
+                RuntimeAudioLoader.Instance.PlayRuntimeAudio(AudioMapper.Instance.GetRandomKeyFor(Sounds.GameIntro));
         }
 
         // Playing through Unity Events in Level Selection Manager's Level Load
         public void PlayGameStartAudio()
         {
-            //if (_sfxSource.isPlaying)
-            //{
-            //    _sfxSource.Stop();
-            //}
-            //PlaySound(Sounds.GameStart);
-
-            RuntimeAudioLoader.Instance.PlayRuntimeAudio(AudioMapper.Instance.GetRandomKeyFor(Sounds.GameStart));
-
+            if (RuntimeAudioLoader.Instance != null && AudioMapper.Instance != null)
+                RuntimeAudioLoader.Instance.PlayRuntimeAudio(AudioMapper.Instance.GetRandomKeyFor(Sounds.GameStart));
         }
 
         public void PlayCheeringAudio()
         {
-            //if (!_sfxSource.isPlaying)
-            //{
-            //    PlaySound(Sounds.Cheer);
-            //}
-
-            RuntimeAudioLoader.Instance.PlayRuntimeAudio(AudioMapper.Instance.GetRandomKeyFor(Sounds.Cheer));
+            if (RuntimeAudioLoader.Instance != null && AudioMapper.Instance != null)
+                RuntimeAudioLoader.Instance.PlayRuntimeAudio(AudioMapper.Instance.GetRandomKeyFor(Sounds.Cheer));
         }
 
         public void PlayBackgroundMusic()
@@ -153,7 +143,8 @@ namespace ColorSwipeGame
             {
                 _playOnceFlag = true;
                 //PlaySound(Sounds.GameEnd);
-                RuntimeAudioLoader.Instance.PlayRuntimeAudio(AudioMapper.Instance.GetRandomKeyFor(Sounds.GameEnd));
+                if (RuntimeAudioLoader.Instance != null && AudioMapper.Instance != null)
+                    RuntimeAudioLoader.Instance.PlayRuntimeAudio(AudioMapper.Instance.GetRandomKeyFor(Sounds.GameEnd));
             }
         }
 
@@ -178,15 +169,31 @@ namespace ColorSwipeGame
 
         public void PlayPaintingSound()
         {
-            if (_paintSFX.isPlaying)
+            if (_colorSfx != null)
             {
-                _paintSFX.Stop();
+                _paintSFX.clip = _colorSfx;
+                _paintSFX.loop = true;
             }
-            _paintSFX.Play();
+            if (!_paintSFX.isPlaying)
+                _paintSFX.Play();
         }
+
+        // Called every frame while actively dragging (any movement)
+        public void UpdatePaintingSound(float distance)
+        {
+            if (_colorSfx != null && _paintSFX.clip != _colorSfx)
+            {
+                _paintSFX.clip = _colorSfx;
+                _paintSFX.loop = true;
+            }
+
+            if (!_paintSFX.isPlaying)
+                _paintSFX.Play();
+        }
+
         public void StopPaintingSound()
         {
-            //_paintSFX.enabled = false;
+            _paintSFX.pitch = 1f;
             _paintSFX.Stop();
         }
 

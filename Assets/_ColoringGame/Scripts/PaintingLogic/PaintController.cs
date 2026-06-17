@@ -50,9 +50,16 @@ namespace ColorSwipeGame
         public void BeginDrag(Vector2 worldPosition)
         {
             _firstTouch = true;
-            _isDragging = false; // Reset to ensure new RenderTexture generation
+            _isDragging = false;
 
-            // Safeguard: If a previous touch was interrupted and dropped EndDrag, clean up the leaked RT
+            // Re-enable any collider left disabled by an interrupted drag (e.g. CanPaint toggled mid-stroke)
+            if (_currentCollider != null)
+            {
+                _currentCollider.enabled = true;
+                _currentCollider = null;
+            }
+            _currentSpriteRenderer = null;
+
             if (_currentRT != null)
             {
                 _currentRT.DiscardContents();
@@ -61,7 +68,6 @@ namespace ColorSwipeGame
             }
 
             RaycastSprites(worldPosition);
-            //AudioManager.Instance.PlayPaintingSound();
         }
 
         public void ContinueDrag(Vector2 worldPosition)
@@ -94,6 +100,7 @@ namespace ColorSwipeGame
                 //SaveTextureChanges(_currentRT);
                 _currentRT.DiscardContents();
                 RenderTexture.ReleaseTemporary(_currentRT);
+                _currentRT = null;
             }
 
             // SaveCurrentTextureState();
@@ -101,6 +108,21 @@ namespace ColorSwipeGame
 
         public void ClearMemory()
         {
+            // Flush any in-progress drag before destroying resources — prevents stale _currentCollider / _currentRT
+            _isDragging = false;
+            if (_currentCollider != null)
+            {
+                _currentCollider.enabled = true;
+                _currentCollider = null;
+            }
+            _currentSpriteRenderer = null;
+            if (_currentRT != null)
+            {
+                _currentRT.DiscardContents();
+                RenderTexture.ReleaseTemporary(_currentRT);
+                _currentRT = null;
+            }
+
             CleanupResources();
         }
 
@@ -236,9 +258,11 @@ namespace ColorSwipeGame
             _originalSprites = new();
             _isEdited = new();
             _editedTextures = new();
+            _editedSprites = new();
 
             foreach (Transform spriteTransform in _spritesParent)
             {
+                if (spriteTransform.GetComponent<PolygonCollider2D>() == null) continue; // skip Background_Canvas and non-painting sprites
                 InitializeSprite(spriteTransform.GetComponent<SpriteRenderer>());
             }
         }
@@ -249,8 +273,13 @@ namespace ColorSwipeGame
             _timeKeeper.StartTimer();
 
             _spritesParent = spritesParent;
+            _originalSprites = new();
+            _isEdited = new();
+            _editedTextures = new();
+            _editedSprites = new();
             foreach (Transform spriteTransform in _spritesParent)
             {
+                if (spriteTransform.GetComponent<PolygonCollider2D>() == null) continue; // skip Background_Canvas and non-painting sprites
                 InitializeSprite(spriteTransform.GetComponent<SpriteRenderer>(), levelTextures);
             }
         }
@@ -460,6 +489,7 @@ namespace ColorSwipeGame
 
             for (int i = 0; i < hitCount; i++)
             {
+                if (!(_hits[i].collider is PolygonCollider2D)) continue; // skip Background_Canvas (BoxCollider2D) and any non-painting colliders
                 if (!_hits[i].collider.TryGetComponent(out SpriteRenderer sr)) continue;
 
                 int sortingOrder = sr.sortingOrder;
@@ -470,7 +500,7 @@ namespace ColorSwipeGame
                 _currentSpriteRenderer = sr;
             }
 
-            if (topIndex == -1) return;
+            if (topIndex < 0) return;
 
             _currentCollider = _currentSpriteRenderer.GetComponent<Collider2D>();
             _currentCollider.enabled = false;
@@ -491,6 +521,7 @@ namespace ColorSwipeGame
             }
 
             float distance = Vector2.Distance(_lastTouchPosition, currentTouchPosition);
+            AudioManager.Instance.UpdatePaintingSound(distance);
             float baseStepSize = Mathf.Max(0.01f, _paintData.BrushSize * 0.5f);
 
             int requestedSteps = Mathf.CeilToInt(distance / baseStepSize);

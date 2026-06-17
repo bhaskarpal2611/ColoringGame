@@ -296,7 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c69e18acc67a34ad4b4e2feb4d5b5c78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bundleName: colorswipe
+  bundleName: swipetocolor
   isAndroid: 0
   uiCategorySelectionPrefab: {fileID: 1484856357378638875, guid: 94f46fece7edc46188412bb9deb2d2f7, type: 3}
   selectionCategoryHolder: {fileID: 1988174654}
@@ -1404,6 +1404,8 @@ MonoBehaviour:
   selectedLanguage: 0
   CurentSelectedLanguage: 
   CurrentCategoryName: 
+  _localTestingMode: 0
+  _localTestingCategory: identificationfruits
 --- !u!1 &700576200
 GameObject:
   m_ObjectHideFlags: 0
