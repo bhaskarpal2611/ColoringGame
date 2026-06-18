@@ -50,24 +50,19 @@ namespace ColorSwipeGame
         public void BeginDrag(Vector2 worldPosition)
         {
             _firstTouch = true;
-            _isDragging = false;
+            _isDragging = false; // Reset to ensure new RenderTexture generation
 
-            // Re-enable any collider left disabled by an interrupted drag (e.g. CanPaint toggled mid-stroke)
-            if (_currentCollider != null)
-            {
-                _currentCollider.enabled = true;
-                _currentCollider = null;
-            }
-            _currentSpriteRenderer = null;
-
+            // Safeguard: If a previous touch was interrupted and dropped EndDrag, clean up the leaked RT
             if (_currentRT != null)
             {
                 _currentRT.DiscardContents();
                 RenderTexture.ReleaseTemporary(_currentRT);
                 _currentRT = null;
             }
+            
 
             RaycastSprites(worldPosition);
+            //AudioManager.Instance.PlayPaintingSound();
         }
 
         public void ContinueDrag(Vector2 worldPosition)
@@ -100,7 +95,6 @@ namespace ColorSwipeGame
                 //SaveTextureChanges(_currentRT);
                 _currentRT.DiscardContents();
                 RenderTexture.ReleaseTemporary(_currentRT);
-                _currentRT = null;
             }
 
             // SaveCurrentTextureState();
@@ -108,21 +102,6 @@ namespace ColorSwipeGame
 
         public void ClearMemory()
         {
-            // Flush any in-progress drag before destroying resources — prevents stale _currentCollider / _currentRT
-            _isDragging = false;
-            if (_currentCollider != null)
-            {
-                _currentCollider.enabled = true;
-                _currentCollider = null;
-            }
-            _currentSpriteRenderer = null;
-            if (_currentRT != null)
-            {
-                _currentRT.DiscardContents();
-                RenderTexture.ReleaseTemporary(_currentRT);
-                _currentRT = null;
-            }
-
             CleanupResources();
         }
 
@@ -258,11 +237,9 @@ namespace ColorSwipeGame
             _originalSprites = new();
             _isEdited = new();
             _editedTextures = new();
-            _editedSprites = new();
 
             foreach (Transform spriteTransform in _spritesParent)
             {
-                if (spriteTransform.GetComponent<PolygonCollider2D>() == null) continue; // skip Background_Canvas and non-painting sprites
                 InitializeSprite(spriteTransform.GetComponent<SpriteRenderer>());
             }
         }
@@ -273,13 +250,8 @@ namespace ColorSwipeGame
             _timeKeeper.StartTimer();
 
             _spritesParent = spritesParent;
-            _originalSprites = new();
-            _isEdited = new();
-            _editedTextures = new();
-            _editedSprites = new();
             foreach (Transform spriteTransform in _spritesParent)
             {
-                if (spriteTransform.GetComponent<PolygonCollider2D>() == null) continue; // skip Background_Canvas and non-painting sprites
                 InitializeSprite(spriteTransform.GetComponent<SpriteRenderer>(), levelTextures);
             }
         }
@@ -349,7 +321,7 @@ namespace ColorSwipeGame
         private void InitializeSprite(int spriteIndex, Sprite originalSprite)
         {
             _drawingSR.sprite = originalSprite;
-            
+
             // Auto-Add Collider if missing
             if (_drawingSR.GetComponent<Collider2D>() == null)
             {
@@ -383,7 +355,7 @@ namespace ColorSwipeGame
             }
 
             _originalSprites[spriteIndex] = originalSprite;
-            
+
             _isEdited[spriteIndex] = false;
 
             _editedTextures[spriteIndex] = CreateReadableTexture(originalSprite.texture);
@@ -395,7 +367,7 @@ namespace ColorSwipeGame
             _currentSRIndex = spriteRenderer.transform.GetSiblingIndex();
             Sprite originalSprite = levelTextures.OriginalSprites[_currentSRIndex];
 
-             // Auto-Add Collider if missing
+            // Auto-Add Collider if missing
             if (spriteRenderer.GetComponent<Collider2D>() == null)
             {
                 Debug.Log($"[PaintController] Automatically adding PolygonCollider2D to {spriteRenderer.name}");
@@ -489,7 +461,6 @@ namespace ColorSwipeGame
 
             for (int i = 0; i < hitCount; i++)
             {
-                if (!(_hits[i].collider is PolygonCollider2D)) continue; // skip Background_Canvas (BoxCollider2D) and any non-painting colliders
                 if (!_hits[i].collider.TryGetComponent(out SpriteRenderer sr)) continue;
 
                 int sortingOrder = sr.sortingOrder;
@@ -500,7 +471,7 @@ namespace ColorSwipeGame
                 _currentSpriteRenderer = sr;
             }
 
-            if (topIndex < 0) return;
+            if (topIndex == -1) return;
 
             _currentCollider = _currentSpriteRenderer.GetComponent<Collider2D>();
             _currentCollider.enabled = false;
@@ -521,21 +492,20 @@ namespace ColorSwipeGame
             }
 
             float distance = Vector2.Distance(_lastTouchPosition, currentTouchPosition);
-            AudioManager.Instance.UpdatePaintingSound(distance);
             float baseStepSize = Mathf.Max(0.01f, _paintData.BrushSize * 0.5f);
 
             int requestedSteps = Mathf.CeilToInt(distance / baseStepSize);
-            
+
             // Limit absolute max steps per frame to protect the GPU
             // 40 steps per frame is high enough for a continuous line but safe for older iPhones
-            int maxSafeSteps = 40; 
+            int maxSafeSteps = 40;
             int actualSteps = Mathf.Min(requestedSteps, maxSafeSteps);
 
             if (actualSteps > 0)
             {
                 for (int i = 1; i <= actualSteps; i++)
                 {
-                    float t = i / (float)actualSteps; 
+                    float t = i / (float)actualSteps;
                     Vector2 interpolatedPoint = Vector2.Lerp(_lastTouchPosition, currentTouchPosition, t);
                     ColorSpriteAtPosition(interpolatedPoint);
                 }
@@ -569,7 +539,7 @@ namespace ColorSwipeGame
 
             if (!_isDragging)
             {
-                if (_currentRT != null) 
+                if (_currentRT != null)
                 {
                     RenderTexture.ReleaseTemporary(_currentRT);
                 }

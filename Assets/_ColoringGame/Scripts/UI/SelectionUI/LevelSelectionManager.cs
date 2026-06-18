@@ -138,12 +138,12 @@ namespace ColorSwipeGame
         private IEnumerator SaveTextures()
         {
             yield return null;
-            yield return SaveLevelState();
+            //yield return SaveLevelState();
 
             if (_levelImageHandler != null)
                 _levelImageHandler.UpdateSprite(_currentLevelIndex);
 
-            _saveManager?.SaveLevelsData();
+            //_saveManager?.SaveLevelsData();
             _paintService.OnBackButtonPressed();
 
             if (_currentLevel != null)
