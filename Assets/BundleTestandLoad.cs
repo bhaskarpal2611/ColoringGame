@@ -142,9 +142,9 @@ public class BundleTestandLoad : MonoBehaviour
             StartCoroutine(LoadSceneFromBundle(_sceneIndex));
         //DEBUG DELETE LATER
 
-//#if UNITY_EDITOR
+#if UNITY_EDITOR
         StartCoroutine(DEBUG_ReassingAllShaders());
-//#endif
+#endif
 
         //LoadSceneFromBundle(bundleName);
     }
@@ -240,6 +240,7 @@ public class BundleTestandLoad : MonoBehaviour
         //loadingObject.SetActive(false);
         //  loadingObject.SetActive(false);
     }*/
+
 
     private IEnumerator LoadSceneFromBundle(int sceneIndex) // MY LAODER WITH BUG FIX OF SHADER REASSIGNMENT AFTER SCENE LOAD
     {
