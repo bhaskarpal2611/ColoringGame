@@ -32,6 +32,7 @@ namespace ColorSwipeGame
 
         private int _touchCount = 0;
         private int _maxTouchCount = 0;
+        private bool _levelInitialized = false;
 
         public bool CanPaint { get; set; } = true;
 
@@ -56,7 +57,7 @@ namespace ColorSwipeGame
 
         private void Start()
         {
-            if (_loadOnStart)
+            if (_loadOnStart && !_levelInitialized)
                 OnLevelLoad();
         }
 
@@ -92,6 +93,7 @@ namespace ColorSwipeGame
 
         public void OnLevelLoad()
         {
+            _levelInitialized = true;
             try
             {
                 _paintController.InitializeLevel(_spritesContainer.GetChild(0).GetChild(0));
@@ -104,6 +106,7 @@ namespace ColorSwipeGame
 
         public void OnEditedLevelLoad(LevelTextures levelTextures)
         {
+            _levelInitialized = true;
             _paintController.InitializeLevel(_spritesContainer.GetChild(0).GetChild(0), levelTextures);
         }
 
@@ -213,7 +216,11 @@ namespace ColorSwipeGame
         public void ClearPainting() => _paintController.ClearPainting();
         public void ClearDrawing() => _paintController.ClearDrawing();
 
-        public void OnBackButtonPressed() => _paintController.ClearMemory();
+        public void OnBackButtonPressed()
+        {
+            _levelInitialized = false;
+            _paintController.ClearMemory();
+        }
 
         public bool IsDrawingEdited() => _paintController.IsDrawingEdited();
     }

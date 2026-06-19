@@ -102,6 +102,19 @@ namespace ColorSwipeGame
 
         public void ClearMemory()
         {
+            if (_currentCollider != null)
+            {
+                _currentCollider.enabled = true;
+                _currentCollider = null;
+            }
+            _currentSpriteRenderer = null;
+            _isDragging = false;
+            if (_currentRT != null)
+            {
+                _currentRT.DiscardContents();
+                RenderTexture.ReleaseTemporary(_currentRT);
+                _currentRT = null;
+            }
             CleanupResources();
         }
 
@@ -250,6 +263,8 @@ namespace ColorSwipeGame
             _timeKeeper.StartTimer();
 
             _spritesParent = spritesParent;
+            _isEdited = new();
+
             foreach (Transform spriteTransform in _spritesParent)
             {
                 InitializeSprite(spriteTransform.GetComponent<SpriteRenderer>(), levelTextures);
@@ -452,15 +467,16 @@ namespace ColorSwipeGame
         {
             _hits = Physics2D.RaycastAll(worldPosition, Vector2.zero);
 
-
             int hitCount = _hits.Length;
             if (hitCount <= 0) return;
 
-            int maxSortingLayer = -1000;
-            int topIndex = -1000;
+            int maxSortingLayer = int.MinValue;
+            int topIndex = -1;
 
             for (int i = 0; i < hitCount; i++)
             {
+                // Only paint on PolygonCollider2D sprites — ignore BoxCollider2D backgrounds etc.
+                if (!(_hits[i].collider is PolygonCollider2D)) continue;
                 if (!_hits[i].collider.TryGetComponent(out SpriteRenderer sr)) continue;
 
                 int sortingOrder = sr.sortingOrder;
@@ -471,7 +487,7 @@ namespace ColorSwipeGame
                 _currentSpriteRenderer = sr;
             }
 
-            if (topIndex == -1) return;
+            if (topIndex < 0) return;
 
             _currentCollider = _currentSpriteRenderer.GetComponent<Collider2D>();
             _currentCollider.enabled = false;
@@ -593,21 +609,18 @@ namespace ColorSwipeGame
             foreach (var texture in _editedTextures.Values)
             {
                 if (texture != null)
-                {
                     Object.Destroy(texture);
-                }
             }
             _editedTextures.Clear();
 
             foreach (var sprite in _editedSprites.Values)
             {
                 if (sprite != null)
-                {
                     Object.Destroy(sprite);
-                }
             }
             _editedSprites.Clear();
             _originalSprites.Clear();
+            _isEdited.Clear();
         }
 
 
