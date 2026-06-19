@@ -281,6 +281,15 @@ private void Awake()
             });
         }
 
+        public void AutoSelectFirstColor()
+        {
+            if (SelectedPenData.ColoredPens == null || SelectedPenData.ColoredPens[0] == null) return;
+
+            // Invoking the button fires OnPenSelected event → all other pens deselect themselves,
+            // eraser is unselected, and paint service color is set — same as a real tap.
+            SelectedPenData.ColoredPens[0].Button?.onClick.Invoke();
+        }
+
         public void UnselectAll()
         {
             if (SelectedPenData.CurrentSelectedColorPen != -1)

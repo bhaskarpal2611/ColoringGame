@@ -1,3 +1,4 @@
+using ColorSwipeGame.UI;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +8,7 @@ namespace ColorSwipeGame
     public class PenSelectionHandler : MonoBehaviour
     {
         [SerializeField] private PaintService _paintService;
+        [SerializeField] private PensHandler _pensHandler;
         [SerializeField] private RectTransform _mainPanel;
         [SerializeField] private float _mainPanelSlideTime = 0.25f;
         [SerializeField] private Transform _swapButton;
@@ -82,6 +84,11 @@ namespace ColorSwipeGame
             // Snap to hidden first so the slide-in always plays from a consistent position
             _mainPanel.anchoredPosition = new Vector2(_hiddenPosX, _mainPanel.anchoredPosition.y);
             _mainPanel.DOAnchorPosX(_visiblePosX, _mainPanelSlideTime);
+
+            // Always reset to color mode and auto-select the first color
+            _colorSelected = true;
+            SetButtonTints(true);
+            _pensHandler?.AutoSelectFirstColor();
         }
     }
 }
