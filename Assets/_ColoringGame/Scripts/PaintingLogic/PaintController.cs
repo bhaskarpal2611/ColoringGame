@@ -362,10 +362,14 @@ namespace ColorSwipeGame
             int spriteIndex = spriteRenderer.transform.GetSiblingIndex();
             Sprite originalSprite = spriteRenderer.sprite;
 
-            // Auto-Add Collider if missing
-            if (spriteRenderer.GetComponent<Collider2D>() == null)
+            // Re-enable any colliders that may have been left disabled from a previous session
+            foreach (var col in spriteRenderer.GetComponents<Collider2D>())
+                col.enabled = true;
+
+            // Ensure a PolygonCollider2D exists — check specifically for Polygon so that objects
+            // with only a BoxCollider2D (e.g. Background_Canvas) also get one added.
+            if (spriteRenderer.GetComponent<PolygonCollider2D>() == null)
             {
-                Debug.Log($"[PaintController] Automatically adding PolygonCollider2D to {spriteRenderer.name}");
                 spriteRenderer.gameObject.AddComponent<PolygonCollider2D>();
             }
 
@@ -382,12 +386,13 @@ namespace ColorSwipeGame
             _currentSRIndex = spriteRenderer.transform.GetSiblingIndex();
             Sprite originalSprite = levelTextures.OriginalSprites[_currentSRIndex];
 
-            // Auto-Add Collider if missing
-            if (spriteRenderer.GetComponent<Collider2D>() == null)
-            {
-                Debug.Log($"[PaintController] Automatically adding PolygonCollider2D to {spriteRenderer.name}");
+            // Re-enable any colliders left disabled from a previous session
+            foreach (var col in spriteRenderer.GetComponents<Collider2D>())
+                col.enabled = true;
+
+            // Ensure PolygonCollider2D exists — check specifically so BoxCollider2D-only objects also get one
+            if (spriteRenderer.GetComponent<PolygonCollider2D>() == null)
                 spriteRenderer.gameObject.AddComponent<PolygonCollider2D>();
-            }
 
             _originalSprites[_currentSRIndex] = originalSprite;
 

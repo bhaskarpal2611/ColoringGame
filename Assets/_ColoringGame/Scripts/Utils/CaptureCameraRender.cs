@@ -9,6 +9,8 @@ namespace ColorSwipeGame
     public class CaptureCameraRender : MonoBehaviour
     {
         [SerializeField] private RenderTexture _cameraRT;
+        [SerializeField] private string _captureOnlyLayerName = "Water";
+        [SerializeField] private float _frameMargin = 0f;
         [SerializeField] private AudioManager _audioManager;
         [SerializeField] private LeftPanelController _leftPanelController;
         [SerializeField] private ExpandButton _bottomLeftPanel;
@@ -23,24 +25,28 @@ namespace ColorSwipeGame
         [SerializeField] private Transform _cameraButton;
         [SerializeField] private Camera _captureCamera;
         [SerializeField] private SpriteRenderer _paintingArea;
-        [SerializeField] private float _capturePadding = 0.05f; // fraction of bounds size added as padding
 
         public Texture2D _texture;
         public Sprite _sprite;
         private Rect _rect;
 
         private string _filePath;
-
+        private int _captureOnlyLayer;
         private int counter = 0;
         private float _startTime;
         private byte[] _bytes;
 
         private void Start()
         {
+            _captureOnlyLayer = LayerMask.NameToLayer(_captureOnlyLayerName);
+            if (_captureOnlyLayer >= 0)
+                _captureCamera.cullingMask = 1 << _captureOnlyLayer;
+            else
+                Debug.LogWarning($"[CaptureCameraRender] Layer '{_captureOnlyLayerName}' not found — capture will render all layers.");
+
             InitializeTexture();
 
             _filePath = Path.Combine(Application.persistentDataPath, _albumName);
-
             if (!Directory.Exists(_filePath))
             {
                 Directory.CreateDirectory(_filePath);
@@ -66,37 +72,23 @@ namespace ColorSwipeGame
                 _paintToolPanel.DOLocalMoveX(1000f, .5f);
                 TakeSnap();
                 _bottomLeftPanel.PopOpen();
-
             });
         }
 
-
         public void SaveToGallery()
         {
-            #region ANDROID
 #if UNITY_ANDROID || UNITY_EDITOR
             string fileName = "ScreenShot_00" + ++counter + ".png";
             NativeGallery.SaveImageToGallery(_bytes, _albumName, fileName, (success, path) =>
             {
-                if (success)
-                {
-                    Debug.Log("saved success");
-                    Debug.Log(path);
-                }
-                else
-                {
-                    Debug.Log("failed saving");
-                }
+                Debug.Log(success ? $"Saved: {path}" : "Save failed");
             });
 #endif
-            #endregion
 
-            #region EDITOR
 #if UNITY_EDITOR
             string editorPath = Path.Combine(Application.dataPath, "SavedImage.png");
             File.WriteAllBytes(editorPath, _bytes);
 #endif
-            #endregion
 
             ClosePanel();
         }
@@ -106,39 +98,28 @@ namespace ColorSwipeGame
             if (_leftPanelController != null)
                 _leftPanelController.CloseSidePanel();
             _bottomLeftPanel.ForceCloseWindow();
-            // move back the panel
-
 
             _paintToolPanel.DOLocalMoveX(0f, .5f).OnComplete(() =>
             {
-                //_paintingArea.DOFade(1f, 0.25f);
                 _paintToolSelection.DOScale(1f, 0.25f);
                 _backButton.DOScale(1f, 0.25f).SetEase(Ease.InOutQuad);
                 _clearButton.DOScale(1f, 0.25f).SetEase(Ease.InOutQuad);
                 _cameraButton.DOScale(1f, 0.25f).SetEase(Ease.InOutQuad);
-
             });
-
         }
-
 
         public string SaveCopy(int index, int isDrawing = 0)
         {
-            AlignCameraToBoard();
+            AlignToPaintingArea();
+            _captureCamera.Render();
+
             RenderTexture.active = _cameraRT;
-
-            //_rect = new Rect(0, 0, _cameraRT.width, _cameraRT.height);
-            //_texture = new Texture2D(_cameraRT.width, _cameraRT.height, TextureFormat.ARGB32, false);
-
-            // Read pixels from the RenderTexture into the Texture2D
             _texture.ReadPixels(new Rect(0, 0, _cameraRT.width, _cameraRT.height), 0, 0);
             _texture.Apply();
-
             RenderTexture.active = null;
 
-            if (_sprite != null) Destroy(_sprite); 
+            if (_sprite != null) Destroy(_sprite);
 
-            // create a sprite from texture
             Sprite sprite = Sprite.Create(_texture, _rect, Vector2.one * 0.5f);
             _sprite = sprite;
             _referenceImage.sprite = sprite;
@@ -146,16 +127,7 @@ namespace ColorSwipeGame
 
             _bytes = _texture.EncodeToPNG();
 
-            string fileName;
-            if (isDrawing == 0)
-            {
-                fileName = "SavedLevelImage_00" + index;
-            }
-            else
-            {
-                fileName = "SavedDrawing_00" + index;
-            }
-
+            string fileName = isDrawing == 0 ? "SavedLevelImage_00" + index : "SavedDrawing_00" + index;
             string editorPath = Path.Combine(_filePath, fileName + ".png");
             System.Threading.Tasks.Task.Run(() => File.WriteAllBytes(editorPath, _bytes));
             return fileName;
@@ -163,18 +135,16 @@ namespace ColorSwipeGame
 
         private void TakeSnap()
         {
-            AlignCameraToBoard();
-            RenderTexture.active = _cameraRT;
+            AlignToPaintingArea();
+            _captureCamera.Render();
 
-            // Read pixels from the RenderTexture into the Texture2D
+            RenderTexture.active = _cameraRT;
             _texture.ReadPixels(new Rect(0, 0, _cameraRT.width, _cameraRT.height), 0, 0);
             _texture.Apply();
-
             RenderTexture.active = null;
 
             if (_referenceImage.sprite != null) Destroy(_referenceImage.sprite);
 
-            // create a sprite from texture
             Sprite sprite = Sprite.Create(_texture, _rect, Vector2.one * 0.5f);
             sprite.name = "Saved Image";
             _referenceImage.sprite = sprite;
@@ -183,23 +153,53 @@ namespace ColorSwipeGame
             _bytes = _texture.EncodeToPNG();
 
             CameraFlash();
-
-            // play camera click sound
             _audioManager.PlayCameraButtonSound();
-
-
         }
 
-        private void AlignCameraToBoard()
+        /// <summary>
+        /// Moves the painting area to the capture-only layer, then sizes and positions
+        /// the capture camera to tightly frame it. Uses BoxCollider2D bounds when available
+        /// so the crop stays consistent even when the sprite asset swaps.
+        /// </summary>
+        private void AlignToPaintingArea()
         {
-            if (_captureCamera == null || _paintingArea == null) return;
+            if (_paintingArea == null || _captureCamera == null) return;
 
-            Bounds b = _paintingArea.bounds;
-            _captureCamera.transform.position = new Vector3(b.center.x, b.center.y, -10f);
+            if (_captureOnlyLayer >= 0)
+                SetLayerRecursively(_paintingArea.transform, _captureOnlyLayer);
 
-            // RT is square (1024x1024) so aspect = 1 — orthoSize is half-height = half-width
-            float size = Mathf.Max(b.extents.x, b.extents.y);
-            _captureCamera.orthographicSize = size * (1f + _capturePadding);
+            Transform t = _paintingArea.transform;
+            Vector3 worldCenter, worldExtents;
+
+            BoxCollider2D box = _paintingArea.GetComponent<BoxCollider2D>();
+            if (box != null)
+            {
+                worldCenter  = t.TransformPoint(box.offset);
+                worldExtents = Vector3.Scale(new Vector3(box.size.x, box.size.y, 0f) * 0.5f, t.lossyScale);
+            }
+            else
+            {
+                Bounds localBounds = _paintingArea.sprite != null ? _paintingArea.sprite.bounds : _paintingArea.bounds;
+                worldCenter  = t.TransformPoint(localBounds.center);
+                worldExtents = Vector3.Scale(localBounds.extents, t.lossyScale);
+            }
+
+            _captureCamera.transform.position = new Vector3(worldCenter.x, worldCenter.y, _captureCamera.transform.position.z);
+
+            float halfH = Mathf.Abs(worldExtents.y) + _frameMargin;
+            float halfW = Mathf.Abs(worldExtents.x) + _frameMargin;
+
+            // Use RT dimensions rather than Camera.aspect — on the first capture Camera.aspect
+            // can still reflect the screen/game view instead of the RT, skewing the crop.
+            float rtAspect = _cameraRT != null ? (float)_cameraRT.width / _cameraRT.height : _captureCamera.aspect;
+            _captureCamera.orthographicSize = Mathf.Max(halfH, halfW / rtAspect);
+        }
+
+        private static void SetLayerRecursively(Transform root, int layer)
+        {
+            root.gameObject.layer = layer;
+            foreach (Transform child in root)
+                SetLayerRecursively(child, layer);
         }
 
         private void InitializeTexture()
@@ -210,47 +210,25 @@ namespace ColorSwipeGame
 
         private void CameraFlash()
         {
-            // initial color
             Color col = _flashImage.color;
-
-            // start time to fade over time
             _startTime = Time.time;
-
-
-            // start it as alpha = 1.0 (opaque)
             col.a = 1.0f;
-
-            // flash image start color
             _flashImage.color = col;
-
             StartCoroutine(FlashCoroutine());
         }
 
         private IEnumerator FlashCoroutine()
         {
             bool done = false;
-
             while (!done)
             {
-                float perc;
                 Color col = _flashImage.color;
-
-                perc = Time.time - _startTime;
-                perc = perc / _flashTimelength;
-
-                if (perc > 1.0f)
-                {
-                    perc = 1.0f;
-                    done = true;
-                }
-
-                col.a = Mathf.Lerp(1.0f, 0.0f, perc);
+                float perc = (Time.time - _startTime) / _flashTimelength;
+                if (perc > 1f) { perc = 1f; done = true; }
+                col.a = Mathf.Lerp(1f, 0f, perc);
                 _flashImage.color = col;
-
                 yield return null;
             }
-
-            yield break;
         }
     }
 }

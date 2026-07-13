@@ -28,14 +28,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Original:
-        m_Texture: {fileID: 2800000, guid: 4224c808eb2188e49bb04c628584820a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 954eef0f9120ed540812a3be1645121c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _BrushSize: 0.049999997
     m_Colors:
-    - _BrushColor: {r: 1, g: 0.1, b: 0.1, a: 1}
-    - _UVPosition: {r: 0.7630469, g: 0.4998302, b: 0, a: 0}
+    - _BrushColor: {r: 1, g: 0.84, b: 0, a: 1}
+    - _UVPosition: {r: 0.9325969, g: 0.54362494, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
