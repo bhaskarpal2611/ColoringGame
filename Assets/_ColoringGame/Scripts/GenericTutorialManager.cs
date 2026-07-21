@@ -5,9 +5,12 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+namespace ColorSwipeGame
+{
 // ── Enums ─────────────────────────────────────────────────────────────────────
 
-public enum TutorialInputType
+    
+    public enum TutorialInputType
 {
     Auto,              // advance after autoAdvanceDelay seconds
     Tap,               // any tap / click anywhere
@@ -267,6 +270,10 @@ public class GenericTutorialManager : MonoBehaviour
     private TutorialTarget resolvedDragStart;
     private TutorialTarget resolvedDragEnd;
 
+    [Header("Scene Context")]
+    [Tooltip("Assign the Game_Scene root GameObject. Back button during an active tutorial in this scene dismisses the tutorial.")]
+    [SerializeField] private GameObject gameSceneRoot;
+
     private Camera Cam => referenceCamera != null ? referenceCamera : Camera.main;
 
     // ── Lifecycle ──────────────────────────────────────────────────────────
@@ -287,6 +294,14 @@ public class GenericTutorialManager : MonoBehaviour
         if (!autoStartOnEnable) return;
         if (usePlayerPrefsGuard && PlayerPrefs.HasKey(playerPrefsKey)) return;
         StartTutorial();
+    }
+
+    private void Update()
+    {
+        if (!stepActive) return;
+        if (!Input.GetKeyDown(KeyCode.Escape)) return;
+        bool inGameScene = gameSceneRoot == null || gameSceneRoot.activeInHierarchy;
+        if (inGameScene) HideImmediately();
     }
 
     // ── Public API ─────────────────────────────────────────────────────────
@@ -1344,4 +1359,6 @@ private void ResetPanelImmediate()
         stepActive     = false;
         Time.timeScale = 1f;
     }
+}
+
 }
