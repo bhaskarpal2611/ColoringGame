@@ -1,0 +1,475 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1875036759525047500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2944369491082308673}
+  - component: {fileID: 8286132241686048656}
+  - component: {fileID: 8613256919936074332}
+  - component: {fileID: 2234731289263638299}
+  m_Layer: 0
+  m_Name: TutorialManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2944369491082308673
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875036759525047500}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8286132241686048656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875036759525047500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4af233409102c1e45afd0efac1363126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  steps:
+  - label: Tap First Drawing
+    bodyText: Tap this drawing to start!
+    voiceOverKey: TutorialSelectDrawing
+    typewriterSpeed: 0
+    showDialogue: 1
+    showCharacter: 0
+    characterSprite: {fileID: 0}
+    inputType: 1
+    autoAdvanceDelay: 2
+    dragMode: 0
+    dragStartObjectName: 
+    dragEndObjectName: 
+    dragStart:
+      uiElement: {fileID: 0}
+      worldObject: {fileID: 0}
+      fixedScreenPosition: {x: 0, y: 0}
+    dragEnd:
+      uiElement: {fileID: 0}
+      worldObject: {fileID: 0}
+      fixedScreenPosition: {x: 0, y: 0}
+    dragProximity: 120
+    showHandHint: 1
+    highlightTarget: {fileID: 0}
+    slideIn: 0
+    slideOut: 0
+    slowDownGame: 1
+    onStepBegin:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8613256919936074332}
+          m_TargetAssemblyTypeName: DrawingGame.TutorialHandPositioner, Assembly-CSharp
+          m_MethodName: PlaceAtFirstDrawing
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - label: Scroll Colors
+    bodyText: Swipe up or down to see more colors!
+    voiceOverKey: TutorialScrollColors
+    typewriterSpeed: 0
+    showDialogue: 1
+    showCharacter: 0
+    characterSprite: {fileID: 0}
+    inputType: 6
+    autoAdvanceDelay: 2
+    dragMode: 0
+    dragStartObjectName: 
+    dragEndObjectName: 
+    dragStart:
+      uiElement: {fileID: 0}
+      worldObject: {fileID: 0}
+      fixedScreenPosition: {x: 0, y: 0}
+    dragEnd:
+      uiElement: {fileID: 0}
+      worldObject: {fileID: 0}
+      fixedScreenPosition: {x: 0, y: 0}
+    dragProximity: 120
+    showHandHint: 1
+    highlightTarget: {fileID: 0}
+    slideIn: 0
+    slideOut: 0
+    slowDownGame: 1
+    onStepBegin:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8613256919936074332}
+          m_TargetAssemblyTypeName: DrawingGame.TutorialHandPositioner, Assembly-CSharp
+          m_MethodName: PlaceAtColorScroll
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - label: Pick a Color
+    bodyText: Tap a color to pick it!
+    voiceOverKey: TutorialPickColor
+    typewriterSpeed: 0
+    showDialogue: 1
+    showCharacter: 0
+    characterSprite: {fileID: 0}
+    inputType: 1
+    autoAdvanceDelay: 2
+    dragMode: 0
+    dragStartObjectName: 
+    dragEndObjectName: 
+    dragStart:
+      uiElement: {fileID: 0}
+      worldObject: {fileID: 0}
+      fixedScreenPosition: {x: 0, y: 0}
+    dragEnd:
+      uiElement: {fileID: 0}
+      worldObject: {fileID: 0}
+      fixedScreenPosition: {x: 0, y: 0}
+    dragProximity: 120
+    showHandHint: 1
+    highlightTarget: {fileID: 0}
+    slideIn: 0
+    slideOut: 0
+    slowDownGame: 1
+    onStepBegin:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8613256919936074332}
+          m_TargetAssemblyTypeName: DrawingGame.TutorialHandPositioner, Assembly-CSharp
+          m_MethodName: PlaceAtColorPen
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - label: Start Drawing
+    bodyText: Now scribble on the paper to paint!
+    voiceOverKey: TutorialStartDrawing
+    typewriterSpeed: 0
+    showDialogue: 0
+    showCharacter: 0
+    characterSprite: {fileID: 0}
+    inputType: 8
+    autoAdvanceDelay: 2
+    dragMode: 0
+    dragStartObjectName: 
+    dragEndObjectName: 
+    dragStart:
+      uiElement: {fileID: 0}
+      worldObject: {fileID: 0}
+      fixedScreenPosition: {x: 0, y: 0}
+    dragEnd:
+      uiElement: {fileID: 0}
+      worldObject: {fileID: 0}
+      fixedScreenPosition: {x: 0, y: 0}
+    dragProximity: 150
+    showHandHint: 1
+    highlightTarget: {fileID: 0}
+    slideIn: 0
+    slideOut: 0
+    slowDownGame: 0
+    onStepBegin:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8613256919936074332}
+          m_TargetAssemblyTypeName: DrawingGame.TutorialHandPositioner, Assembly-CSharp
+          m_MethodName: PlaceAtCanvas
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  autoStartOnEnable: 1
+  usePlayerPrefsGuard: 1
+  playerPrefsKey: TutorialDone
+  panel: {fileID: 0}
+  characterContainer: {fileID: 0}
+  characterImage: {fileID: 0}
+  bodyLabel: {fileID: 0}
+  bodyBackground: {fileID: 0}
+  handRect: {fileID: 0}
+  handImage: {fileID: 0}
+  skipButton: {fileID: 0}
+  referenceCamera: {fileID: 0}
+  charHiddenY: -500
+  charShownY: 0
+  charPopSpeed: 10
+  slowdownDuration: 1.5
+  resumeDuration: 0.6
+  handMoveDistance: 160
+  handMoveDuration: 0.65
+  handPauseDuration: 0.25
+  minSwipeDistance: 50
+  panelSlideTarget: {fileID: 0}
+  panelSlideDuration: 0.3
+  panelSlideInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panelSlideOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  darkOverlay: {fileID: 0}
+  tutorialContent: {fileID: 0}
+  spotlightAlpha: 0.8
+  spotlightFadeSpeed: 6
+  highlightPulseScale: 1.08
+  highlightPulseSpeed: 3
+  onTutorialStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  onTutorialEnded:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &8613256919936074332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875036759525047500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b33308342215b8f46adf67c09fa9a0a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _handRect: {fileID: 0}
+  _cam: {fileID: 0}
+  _firstDrawingTarget: {fileID: 0}
+  _colorScrollTarget: {fileID: 0}
+  _colorPenTarget: {fileID: 0}
+  _canvasTarget: {fileID: 0}
+  _colorScrollOffsetX: -100
+--- !u!114 &2234731289263638299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875036759525047500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14a5c18f60d413840b7c2a53b88e6090, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tutorialManager: {fileID: 8286132241686048656}
+  _idleThreshold: 10
+  _stepDuration: 3
+  _idleSteps:
+  - label: IDLE Scroll Colors
+    bodyText: 
+    voiceOverKey: 
+    typewriterSpeed: 0
+    showDialogue: 1
+    showCharacter: 0
+    characterSprite: {fileID: 0}
+    inputType: 6
+    autoAdvanceDelay: 3
+    dragMode: 0
+    dragStartObjectName: 
+    dragEndObjectName: 
+    dragStart:
+      uiElement: {fileID: 0}
+      worldObject: {fileID: 0}
+      fixedScreenPosition: {x: 0, y: 0}
+    dragEnd:
+      uiElement: {fileID: 0}
+      worldObject: {fileID: 0}
+      fixedScreenPosition: {x: 0, y: 0}
+    dragProximity: 120
+    showHandHint: 1
+    highlightTarget: {fileID: 0}
+    slideIn: 0
+    slideOut: 0
+    slowDownGame: 0
+    onStepBegin:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8613256919936074332}
+          m_TargetAssemblyTypeName: DrawingGame.TutorialHandPositioner, Assembly-CSharp
+          m_MethodName: PlaceAtColorScroll
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - label: IDLE Pick a Color
+    bodyText: 
+    voiceOverKey: 
+    typewriterSpeed: 0
+    showDialogue: 1
+    showCharacter: 0
+    characterSprite: {fileID: 0}
+    inputType: 0
+    autoAdvanceDelay: 3
+    dragMode: 0
+    dragStartObjectName: 
+    dragEndObjectName: 
+    dragStart:
+      uiElement: {fileID: 0}
+      worldObject: {fileID: 0}
+      fixedScreenPosition: {x: 0, y: 0}
+    dragEnd:
+      uiElement: {fileID: 0}
+      worldObject: {fileID: 0}
+      fixedScreenPosition: {x: 0, y: 0}
+    dragProximity: 120
+    showHandHint: 1
+    highlightTarget: {fileID: 0}
+    slideIn: 0
+    slideOut: 0
+    slowDownGame: 0
+    onStepBegin:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8613256919936074332}
+          m_TargetAssemblyTypeName: DrawingGame.TutorialHandPositioner, Assembly-CSharp
+          m_MethodName: PlaceAtColorPen
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  - label: IDLE Start Drawing
+    bodyText: 
+    voiceOverKey: 
+    typewriterSpeed: 0
+    showDialogue: 1
+    showCharacter: 0
+    characterSprite: {fileID: 0}
+    inputType: 5
+    autoAdvanceDelay: 3
+    dragMode: 0
+    dragStartObjectName: 
+    dragEndObjectName: 
+    dragStart:
+      uiElement: {fileID: 0}
+      worldObject: {fileID: 0}
+      fixedScreenPosition: {x: 0, y: 0}
+    dragEnd:
+      uiElement: {fileID: 0}
+      worldObject: {fileID: 0}
+      fixedScreenPosition: {x: 0, y: 0}
+    dragProximity: 150
+    showHandHint: 1
+    highlightTarget: {fileID: 0}
+    slideIn: 0
+    slideOut: 0
+    slowDownGame: 0
+    onStepBegin:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8613256919936074332}
+          m_TargetAssemblyTypeName: DrawingGame.TutorialHandPositioner, Assembly-CSharp
+          m_MethodName: PlaceAtCanvas
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    onStepComplete:
+      m_PersistentCalls:
+        m_Calls: []

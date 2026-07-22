@@ -1,0 +1,12 @@
+ManifestFileVersion: 0
+UnityVersion: 6000.0.58f2
+CRC: 3169216210
+HashAppended: 0
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: swipetocolor
+      Dependencies: {}
+    Info_1:
+      Name: swipetodraw
+      Dependencies: {}

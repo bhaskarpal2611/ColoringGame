@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d1849aa18b40e8479e62fc297df4918, type: 3}
+  m_Name: Hindi_Audio_SWIPETOCOLOR
+  m_EditorClassIdentifier: 
+  Audios:
+  - soundtype: 2
+    soundclips:
+    - {fileID: 8300000, guid: ec09e185e0b67734282f098fbe069663, type: 3}
+  - soundtype: 1
+    soundclips:
+    - {fileID: 8300000, guid: ddd9d3cb6822cf44e8f1169d4acace91, type: 3}
+  - soundtype: 6
+    soundclips:
+    - {fileID: 8300000, guid: 6bdcc533c61e10a46a9753cfa314ff1c, type: 3}
+  - soundtype: 7
+    soundclips:
+    - {fileID: 8300000, guid: a2e2160ee803d3043b77f99e73729efd, type: 3}
+    - {fileID: 8300000, guid: 75448e96f0a5f5e42992df00514d4a4c, type: 3}
+    - {fileID: 8300000, guid: 2f966697c83036a4aadc00636849cdd1, type: 3}
+  - soundtype: 9
+    soundclips:
+    - {fileID: 8300000, guid: 22e5b587b55385549a260986545ede7c, type: 3}
+  - soundtype: 8
+    soundclips:
+    - {fileID: 8300000, guid: 1e94630b7f81fea4ba3c92e22a08f726, type: 3}
+    - {fileID: 8300000, guid: a4edcd88f54c92b45a2b330ff106ac53, type: 3}
+    - {fileID: 8300000, guid: 11f5b5018d610854fb32f67b94a112af, type: 3}
+    - {fileID: 8300000, guid: 4adf72bdbb0598043b79887e3c2065da, type: 3}
+    - {fileID: 8300000, guid: 3b96a5663a6fc6340995181f3031cdc4, type: 3}
+    - {fileID: 8300000, guid: 32a6a9ad619725c479296d5877b1af1b, type: 3}
+    - {fileID: 8300000, guid: abe8c675da61ef84a86f72be11afcaf1, type: 3}
+    - {fileID: 8300000, guid: 5498cd9fe5dd33748a1e00ba9045ca7d, type: 3}
+    - {fileID: 8300000, guid: f8ea6f50174953b4095ff2f1620ef676, type: 3}
+    - {fileID: 8300000, guid: 183f58e46f916ce49ab6e7a071bcd050, type: 3}
+    - {fileID: 8300000, guid: 37447cf04063ed048b9bdb52abb8a70f, type: 3}
+    - {fileID: 8300000, guid: 0965d04e1c4392041929029724ac8371, type: 3}
+    - {fileID: 8300000, guid: 48d91ba58c317ec43b3a8dea896e34fa, type: 3}
+    - {fileID: 8300000, guid: 14ed6f64c6a569c48ba959df58902af4, type: 3}
+  - soundtype: 5
+    soundclips:
+    - {fileID: 8300000, guid: 785145031f8e2f34881ff01b85ece2ee, type: 3}

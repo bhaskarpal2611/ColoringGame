@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d1849aa18b40e8479e62fc297df4918, type: 3}
+  m_Name: Begali_Audio_SWIPETOCOLOR
+  m_EditorClassIdentifier: 
+  Audios:
+  - soundtype: 2
+    soundclips:
+    - {fileID: 8300000, guid: ec09e185e0b67734282f098fbe069663, type: 3}
+  - soundtype: 1
+    soundclips:
+    - {fileID: 8300000, guid: ddd9d3cb6822cf44e8f1169d4acace91, type: 3}
+  - soundtype: 6
+    soundclips:
+    - {fileID: 8300000, guid: bbeafeb68002b234d9bb5749835a7053, type: 3}
+  - soundtype: 7
+    soundclips:
+    - {fileID: 8300000, guid: 2beec79fea1464645bf08d2c59cf2e1b, type: 3}
+    - {fileID: 8300000, guid: b901bb12f3b40c2428ba4837bafd31e2, type: 3}
+    - {fileID: 8300000, guid: 92eb9afcebb9813469e9152e31253ec5, type: 3}
+  - soundtype: 9
+    soundclips:
+    - {fileID: 8300000, guid: a1bc613a1529a164fa918ea507966f65, type: 3}
+  - soundtype: 8
+    soundclips:
+    - {fileID: 8300000, guid: b80574c2783642f4db698892178b128d, type: 3}
+    - {fileID: 8300000, guid: 7207e18248398344e9b202ed8f82e7e2, type: 3}
+    - {fileID: 8300000, guid: 4469246663f57d846ae30a07ad09d3f5, type: 3}
+    - {fileID: 8300000, guid: 240672731f7307b409bd7a417f4dfa48, type: 3}
+    - {fileID: 8300000, guid: 8d824ac1fa416d14ab39ad0fd06aac3f, type: 3}
+    - {fileID: 8300000, guid: 175e4fc91a3364048bab31c5aeb56b60, type: 3}
+    - {fileID: 8300000, guid: a3f8af7b0745abc4fa5fc5b4369e3ffa, type: 3}
+    - {fileID: 8300000, guid: a1d52f8f095d6334089509400103641e, type: 3}
+    - {fileID: 8300000, guid: 68a243997c4032f42a9cfa230194a4b6, type: 3}
+    - {fileID: 8300000, guid: ecd9e68b5ec64f142989eb58afbdb91a, type: 3}
+    - {fileID: 8300000, guid: 6c2ba8fb4a3db344fa583642e5635c43, type: 3}
+    - {fileID: 8300000, guid: f4338c178f1e61544a07303e196e4cec, type: 3}
+    - {fileID: 8300000, guid: 2525434ff792e914fbaf493c694246ce, type: 3}
+    - {fileID: 8300000, guid: a8d14987237e2d84d848e792c5e8a9a2, type: 3}
+    - {fileID: 8300000, guid: 8160db78c3fa4fc4197ec65476cfdb4a, type: 3}
+    - {fileID: 8300000, guid: c7d62b553faa9654bb71127f255ffab2, type: 3}
+  - soundtype: 5
+    soundclips:
+    - {fileID: 8300000, guid: 785145031f8e2f34881ff01b85ece2ee, type: 3}

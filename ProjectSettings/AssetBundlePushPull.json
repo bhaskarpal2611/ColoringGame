@@ -1,0 +1,68 @@
+{
+    "items": [
+        {
+            "k": "ServerRoot",
+            "v": "\\\\NAS\\Gaming\\AssetBundlesStorage"
+        },
+        {
+            "k": "GameName",
+            "v": "swipetocolor"
+        },
+        {
+            "k": "AssetBundleFolder",
+            "v": "D:/UnityProjects/Bhaskar_Porjs/ColoringGame/AssetBundles"
+        },
+        {
+            "k": "ScriptList",
+            "v": "Assets/_ColoringGame/Scripts"
+        },
+        {
+            "k": "Sel_Phonic",
+            "v": "0"
+        },
+        {
+            "k": "Exp_Phonic",
+            "v": "0"
+        },
+        {
+            "k": "ABDest_Phonic",
+            "v": ""
+        },
+        {
+            "k": "PullAb_Phonic",
+            "v": "1"
+        },
+        {
+            "k": "ScrDest_Phonic",
+            "v": ""
+        },
+        {
+            "k": "PullScr_Phonic",
+            "v": "1"
+        },
+        {
+            "k": "Sel_swipetocolor",
+            "v": "0"
+        },
+        {
+            "k": "Exp_swipetocolor",
+            "v": "1"
+        },
+        {
+            "k": "ABDest_swipetocolor",
+            "v": ""
+        },
+        {
+            "k": "PullAb_swipetocolor",
+            "v": "1"
+        },
+        {
+            "k": "ScrDest_swipetocolor",
+            "v": ""
+        },
+        {
+            "k": "PullScr_swipetocolor",
+            "v": "1"
+        }
+    ]
+}

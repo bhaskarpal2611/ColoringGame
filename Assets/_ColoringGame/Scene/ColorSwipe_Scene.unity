@@ -7887,7 +7887,7 @@ MonoBehaviour:
   handPauseDuration: 0.25
   handZigZagStep: 55
   handZigZagRows: 3
-  minSwipeDistance: 50
+  minSwipeDistance: 10
   panelSlideTarget: {fileID: 0}
   panelSlideDuration: 0.3
   panelSlideInCurve:
@@ -7950,6 +7950,7 @@ MonoBehaviour:
   onTutorialEnded:
     m_PersistentCalls:
       m_Calls: []
+  gameSceneRoot: {fileID: 0}
 --- !u!114 &1931211623
 MonoBehaviour:
   m_ObjectHideFlags: 0

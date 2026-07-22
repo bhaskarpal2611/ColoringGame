@@ -89,8 +89,9 @@ public class RuntimeAudioLoader : MonoBehaviour
 
         CurentSelectedLanguage = selectedLanguage.ToString();
         Debug.Log("Enum as String: " + CurentSelectedLanguage);
-        yield return StartCoroutine(CheckDownloadExtract());
-        StartCoroutine(LoadAllAudio(isCommon));
+        if (!_localTestingMode)
+            yield return StartCoroutine(CheckDownloadExtract());
+        yield return StartCoroutine(LoadAllAudio(isCommon));
     }
 
     IEnumerator CheckDownloadExtract()
