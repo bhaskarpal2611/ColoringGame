@@ -46,6 +46,7 @@
   <Project Path="UnityEngine.Purchasing.csproj" />
   <Project Path="Unity.Services.Core.Editor.csproj" />
   <Project Path="Unity.Burst.CodeGen.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Unity.Services.Core.csproj" />
   <Project Path="Unity.VisualScripting.Flow.csproj" />
   <Project Path="Unity.PerformanceTesting.csproj" />
@@ -72,7 +73,6 @@
   <Project Path="UnityEngine.Purchasing.Codeless.csproj" />
   <Project Path="UnityEditor.UI.csproj" />
   <Project Path="Unity.Analytics.DataPrivacy.csproj" />
-  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Unity.AI.Navigation.Editor.csproj" />
   <Project Path="Unity.2D.PixelPerfect.Editor.csproj" />
   <Project Path="Unity.2D.Sprite.Editor.csproj" />

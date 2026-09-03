@@ -29,5 +29,11 @@ namespace ColorSwipeGame
                 _targetTransform.DOScale(0f, duration).SetEase(Ease.OutSine);
                 _isExpanded = false;
         }
+
+        public void ForceOpenWindow(float duration = 0.25f)
+        {
+                _targetTransform.DOScale(_targetScale, duration).SetEase(Ease.OutBack);
+                _isExpanded = true;
+        }
     }
 }

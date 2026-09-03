@@ -18,11 +18,7 @@ namespace ColorSwipeGame
         [SerializeField] private Image _flashImage;
         [SerializeField] private string _albumName = "SavedPhotos";
         [SerializeField] private float _flashTimelength = 0.25f;
-        [SerializeField] private Transform _paintToolSelection;
         [SerializeField] private RectTransform _paintToolPanel;
-        [SerializeField] private Transform _backButton;
-        [SerializeField] private Transform _clearButton;
-        [SerializeField] private Transform _cameraButton;
         [SerializeField] private Camera _captureCamera;
         [SerializeField] private SpriteRenderer _paintingArea;
 
@@ -35,6 +31,8 @@ namespace ColorSwipeGame
         private int counter = 0;
         private float _startTime;
         private byte[] _bytes;
+        private bool _isCapturing;
+        private Sprite _snapSprite;
 
         private void Start()
         {
@@ -60,19 +58,29 @@ namespace ColorSwipeGame
 
         public void TakePhoto()
         {
+            // Guards against a second tap on the camera button while the hide animation
+            // is still running: DOTween kills a tween's OnComplete (never invokes it) when
+            // a new tween is started on the same property, which would skip TakeSnap()/
+            // PopOpen() and leave the toolbar hidden with no Save/Cancel button to reach.
+            if (_isCapturing) return;
+            _isCapturing = true;
+
             if (_leftPanelController != null)
                 _leftPanelController.CompleteHidePanel();
 
-            _backButton.DOScale(0f, 0.25f).SetEase(Ease.InOutQuad);
-            _clearButton.DOScale(0f, 0.25f).SetEase(Ease.InOutQuad);
-            _cameraButton.DOScale(0f, 0.25f).SetEase(Ease.InOutQuad);
-
-            _paintToolSelection.DOScale(0f, 0.25f).OnComplete(() =>
+            _paintToolPanel.DOLocalMoveX(1000f, .5f);
+            try
             {
-                _paintToolPanel.DOLocalMoveX(1000f, .5f);
                 TakeSnap();
-                _bottomLeftPanel.PopOpen();
-            });
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"[CaptureCameraRender] TakeSnap failed: {ex}");
+            }
+            // Explicit open (not the PopOpen() toggle) — PopOpen would close the panel
+            // instead of opening it if _isExpanded was ever left desynced from a prior
+            // cycle, which would strand the review popup unreachable.
+            _bottomLeftPanel.ForceOpenWindow();
         }
 
         public void SaveToGallery()
@@ -95,17 +103,13 @@ namespace ColorSwipeGame
 
         public void ClosePanel()
         {
+            _isCapturing = false;
+
             if (_leftPanelController != null)
                 _leftPanelController.CloseSidePanel();
             _bottomLeftPanel.ForceCloseWindow();
 
-            _paintToolPanel.DOLocalMoveX(0f, .5f).OnComplete(() =>
-            {
-                _paintToolSelection.DOScale(1f, 0.25f);
-                _backButton.DOScale(1f, 0.25f).SetEase(Ease.InOutQuad);
-                _clearButton.DOScale(1f, 0.25f).SetEase(Ease.InOutQuad);
-                _cameraButton.DOScale(1f, 0.25f).SetEase(Ease.InOutQuad);
-            });
+            _paintToolPanel.DOLocalMoveX(0f, .5f);
         }
 
         public string SaveCopy(int index, int isDrawing = 0)
@@ -143,10 +147,14 @@ namespace ColorSwipeGame
             _texture.Apply();
             RenderTexture.active = null;
 
-            if (_referenceImage.sprite != null) Destroy(_referenceImage.sprite);
+            // Only destroy a sprite we created ourselves — the Inspector-assigned placeholder
+            // is a project asset, and Destroy() throws on those, which used to abort the rest
+            // of this callback (including the PopOpen() that reveals the Save/Cancel buttons).
+            if (_snapSprite != null) Destroy(_snapSprite);
 
             Sprite sprite = Sprite.Create(_texture, _rect, Vector2.one * 0.5f);
             sprite.name = "Saved Image";
+            _snapSprite = sprite;
             _referenceImage.sprite = sprite;
             _referenceImage.color = Color.white;
 

@@ -28,7 +28,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Original:
-        m_Texture: {fileID: 2800000, guid: 40060718712c6c046ad92fe91445c927, type: 3}
+        m_Texture: {fileID: 2800000, guid: c5dcff00974fd36499533c77efc0dafc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -36,6 +36,6 @@ Material:
     - _BrushSize: 0.049999997
     m_Colors:
     - _BrushColor: {r: 1, g: 0.1, b: 0.1, a: 1}
-    - _UVPosition: {r: 0.9556112, g: 0.7417616, b: 0, a: 0}
+    - _UVPosition: {r: 0.5734677, g: 0.41251326, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -13,8 +13,6 @@ namespace ColorSwipeGame
         [SerializeField] private float _startingDelayTime = 0.75f;
         private bool _isPanelOpen = false;
 
-        private void TogglePanelOpen() => _isPanelOpen = !_isPanelOpen;
-
         public void OnPointerClick(PointerEventData pointerEventData)
         {
             if (!_isPanelOpen) OpenSidePanel();
@@ -28,20 +26,20 @@ namespace ColorSwipeGame
         public void OpenSidePanel()
         {
             _rectTransform.DOAnchorPosY(YPOS_MAX, _sliderTime);
-            TogglePanelOpen();
+            _isPanelOpen = true;
         }
 
         public void CloseSidePanel()
         {
             _rectTransform.DOAnchorPosY(YPOS_MIN, _sliderTime);
-            TogglePanelOpen();
+            _isPanelOpen = false;
             _hintHelper.ForceCloseWindow(0.25f);
         }
 
         public void CompleteHidePanel()
         {
             _rectTransform.DOAnchorPosY(YPOS_MIN - 100f, _sliderTime);
-            TogglePanelOpen();
+            _isPanelOpen = false;
             _hintHelper.ForceCloseWindow(0.25f);
         }
 
